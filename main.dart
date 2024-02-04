@@ -1,72 +1,64 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(LoginApp());
+  runApp(const BodySelection());
 }
 
-class LoginApp extends StatelessWidget {
+class BodySelection extends StatelessWidget {
+  const BodySelection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Dress Me daily',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoginPage(),
-    );
-  }
-}
-
-class LoginPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-        backgroundColor: Colors.transparent,
-        elevation: 0, // Remove appbar shadow
-      ),
-      backgroundColor: Colors.transparent,
-      body: Container(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      home: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Username',
-                filled: true,
-                fillColor: Colors.white.withOpacity(0.5),
+            const Padding(
+              padding: EdgeInsets.only(top: 120.0),
+              child: Text(
+                'Select a body type',
+                style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(height: 20.0),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Password',
-                filled: true,
-                fillColor: Colors.white.withOpacity(0.5),
-              ),
-              obscureText: true,
-            ),
-            SizedBox(height: 20.0),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    // Perform login logic
-                  },
-                  child: Text('Login'),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 160.0),
+                  child: CustomButton(
+                      imagePath: 'images/type1.jpg',
+                      text: 'S',
+                      onPressed: () {}),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigate to registration page
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RegistrationPage()),
-                    );
-                  },
-                  child: Text('Register'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 110.0),
+                  child: CustomButton(
+                      imagePath: 'images/type2.jpg',
+                      text: 'M',
+                      onPressed: () {}),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 70.0),
+                  child: CustomButton(
+                      imagePath: 'images/type3.jpg',
+                      text: 'L',
+                      onPressed: () {}),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 110.0),
+                  child: CustomButton(
+                      imagePath: 'images/type4.jpg',
+                      text: 'XL',
+                      onPressed: () {}),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 160.0),
+                  child: CustomButton(
+                      imagePath: 'images/type5.jpeg',
+                      text: 'XXL+',
+                      onPressed: () {}),
                 ),
               ],
             ),
@@ -77,47 +69,35 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class RegistrationPage extends StatelessWidget {
+class CustomButton extends StatelessWidget {
+  final String imagePath;
+  final String text;
+  final VoidCallback onPressed;
+
+  const CustomButton(
+      {required this.imagePath,
+      required this.text,
+      required this.onPressed,
+      Key? key})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Register'),
-        backgroundColor: Colors.transparent,
-        elevation: 0, // Remove appbar shadow
-      ),
-      backgroundColor: Colors.transparent,
-      body: Container(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Username',
-                filled: true,
-                fillColor: Colors.white.withOpacity(0.5),
-              ),
-            ),
-            SizedBox(height: 20.0),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Password',
-                filled: true,
-                fillColor: Colors.white.withOpacity(0.5),
-              ),
-              obscureText: true,
-            ),
-            SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: () {
-                // Perform registration logic
-              },
-              child: Text('Register'),
-            ),
-          ],
+    return Column(
+      children: [
+        Image.asset(imagePath, width: 50.0, height: 160.0, fit: BoxFit.cover),
+        const SizedBox(height: 8.0), // Add spacing between image and text
+        TextButton(
+          onPressed: onPressed,
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.grey, // Change the background color here
+          ),
+          child: Text(
+            text,
+            style: const TextStyle(color: Colors.white),
+          ),
         ),
-      ),
+      ],
     );
   }
 }
