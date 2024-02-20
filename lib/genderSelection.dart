@@ -5,7 +5,7 @@ class GenderSelectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gender Selection'),
+        title: Text('Gender Selection Update'),
       ),
       body: Center(
         child: Column(
