@@ -18,7 +18,7 @@ class BodySelection extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.only(top: 120.0),
               child: Text(
-                'Select a body type',
+                'Selpe',
                 style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
               ),
             ),
