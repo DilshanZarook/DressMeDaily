@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/presentation/Gender_selection/gender_selection.dart';
 import 'package:sdgp_test01/presentation/frame_293_screen/frame_293_screen.dart';
-import '../Loading_page_2/loading_page_2.dart'; // Make sure the path is correct
+import 'package:sdgp_test01/presentation/Loading_page_2/loading_page_2.dart'; // Make sure the path is correct
 
 class Loading_page_2 extends StatefulWidget {
   const Loading_page_2({Key? key}) : super(key: key);

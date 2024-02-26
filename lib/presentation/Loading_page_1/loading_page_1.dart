@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/presentation/Signup_new_user/signup_new_user.dart';
-import '../Loading_page_1/loading_page_1.dart'; // Make sure the path is correct
+import 'package:sdgp_test01/presentation/Loading_page_1/loading_page_1.dart'; // Make sure the path is correct
 
 class Loading_page_1 extends StatefulWidget {
   const Loading_page_1({Key? key}) : super(key: key);
