@@ -10,6 +10,8 @@ class ImageConstant {
 
   static String imgUser = '$imagePath/img_user.svg';
 
+  static String logo = '$imagePath/logo_start.svg';
+
   // Frame FiftyNine images
   static String imgVuesaxOutlineArrowLeft =
       '$imagePath/img_vuesax_outline_arrow_left.svg';
@@ -126,6 +128,57 @@ class ImageConstant {
 
   // Frame 650 images
   static String imgEllipse22 = '$imagePath/img_ellipse_2_2.png';
+
+  static String female1 = '$imagePath/type1.png';
+
+  static String female2 = '$imagePath/type2.png';
+
+  static String female3 = '$imagePath/type3.png';
+
+  static String female4 = '$imagePath/type4.png';
+
+  static String female5 = '$imagePath/type5.png';
+
+  static String fe1 = '$imagePath/fe1.svg';
+
+  static String fe2 = '$imagePath/fe2.svg';
+
+  static String fe3 = '$imagePath/fe3.svg';
+
+  static String fe4 = '$imagePath/fe4.svg';
+
+  static String fe5 = '$imagePath/fe5.svg';
+
+  static String M1 = '$imagePath/1.svg';
+
+  static String M2 = '$imagePath/2.svg';
+
+  static String M3 = '$imagePath/3.svg';
+
+  static String M4 = '$imagePath/4.svg';
+
+  static String M5 = '$imagePath/5.svg';
+
+  static String M11 = '$imagePath/1.png';
+
+  static String M22 = '$imagePath/2.png';
+
+  static String M33 = '$imagePath/3.png';
+
+  static String M44 = '$imagePath/4.png';
+
+  static String M55 = '$imagePath/5.png';
+
+  static String bookmarkfooter = '$imagePath/bookmark_footer.svg';
+
+  static String camera_footer_1 = '$imagePath/camera_footer_1.svg';
+
+  static String home_footer_1 = '$imagePath/home_footer_1.svg';
+
+  static String profile_footer_1 = '$imagePath/profile_footer_1.svg';
+
+  static String wardrobe_footer_1 = '$imagePath/wardrobe_footer_1.svg';
+
 
 
   static String imgArrowDownGray90001 =

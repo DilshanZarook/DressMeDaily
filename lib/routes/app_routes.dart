@@ -43,6 +43,11 @@ import 'package:sdgp_test01/presentation/frame_651_dialog/frame_651_dialog.dart'
 import 'package:sdgp_test01/presentation/frame_652_dialog/frame_652_dialog.dart';
 import 'package:sdgp_test01/presentation/frame_653_dialog/frame_653_dialog.dart';
 import 'package:sdgp_test01/presentation/frame_675_screen/frame_675_screen.dart';
+import 'package:sdgp_test01/presentation/frame_390_screen/frame_390_screen.dart';
+import 'package:sdgp_test01/presentation/frame_395_page/frame_395_page.dart';
+
+import 'package:sdgp_test01/presentation/Loading_page_4(initialLoadingScreen)/loading_page_4.dart';
+import 'package:sdgp_test01/presentation/Body_selection_female/body_selection_female.dart';
 import 'package:sdgp_test01/presentation/app_navigation_screen/app_navigation_screen.dart';
 
 class AppRoutes {
@@ -50,9 +55,17 @@ class AppRoutes {
 
   static const String frame_624_draweritem = '/frame_624_draweritem';
 
+  static const String body_selection_female = '/body_selection_female';
+
   static const String loading_page_3 = '/loading_page_3';
 
   static const String frame_633_screen = '/frame_633_screen';
+
+  static const String loading_page_4 = '/loading_page_4';
+
+  static const String frame_390_screen = '/frame_390_screen';
+
+  static const String frame_395_page = '/frame_395_page';
 
   static const String frame_640_screen = '/frame_640_screen';
 
@@ -140,6 +153,10 @@ class AppRoutes {
 
     initial_loading_page: (context) => Initial_loading_page(),
     frame_624_draweritem: (context) => Frame624Screen(),
+    body_selection_female: (context) => Bodyselectionfemale(),
+    loading_page_4: (context) => Loading_page_4(),
+    frame_390_screen: (context) => Frame390screen(),
+    frame_395_page: (context) => Frame395Page(),
     frame_633_screen: (context) => Frame633Screen(),
     frame_629_screen: (context) => Frame629Screen(),
     frame_640_screen: (context) => Frame640Screen(),
