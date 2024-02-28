@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
 import '../Login_page_1/login_page_1.dart'; // Adjust the path as necessary
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,8 +10,7 @@ class Signup_other_options extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
             appBar: _buildAppBar(context),
             body: Container(
                 width: double.maxFinite,
@@ -24,7 +22,7 @@ class Signup_other_options extends StatelessWidget {
                      // Assuming the widget supports this property
                     leftIcon: Container(
 
-                      margin: EdgeInsets.only(right:42.h),
+                      margin: EdgeInsets.only(right:32.h),
                       child: CustomImageView(
                         imagePath: ImageConstant.imgOipremovebgpreview1,
                         height: 20.v,
@@ -44,8 +42,8 @@ class Signup_other_options extends StatelessWidget {
                     text: "Continue with Facebook",
                     leftIcon: Container(
                       padding: EdgeInsets.all(2.h),
-                      margin: EdgeInsets.only(right: 30.h),
-                      decoration: BoxDecoration(color: Colors.blue),
+                      margin: EdgeInsets.only(right: 20.h),
+                      decoration: const BoxDecoration(color: Colors.blue),
                       child: SvgPicture.asset(
                         'assets/images/img_facebook.svg', // Replace with your actual asset path
                         height: 20.adaptSize,
@@ -53,7 +51,7 @@ class Signup_other_options extends StatelessWidget {
                       ),
                     ),
                     buttonStyle: ElevatedButton.styleFrom(
-                      primary: Colors.blue, // Button color - blue
+                      backgroundColor: Colors.blue, // Button color - blue
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20), // BorderRadius of 20
                       ),
@@ -77,7 +75,7 @@ class Signup_other_options extends StatelessWidget {
                         onTapContinueWithEmail(context);
                       }),
                   SizedBox(height: 5.v)
-                ]))));
+                ])));
   }
 
   /// Section Widget
@@ -88,7 +86,7 @@ class Signup_other_options extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Login_page_1()),
+            MaterialPageRoute(builder: (context) => const Login_page_1()),
           );
         },
       ),

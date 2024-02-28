@@ -1,58 +1,88 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/frame_312_screen/frame_312_screen.dart';
+import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
 
 class Loading_page_3 extends StatefulWidget {
-  const Loading_page_3({Key? key})
-      : super(
-    key: key,
-  );
+  const Loading_page_3({Key? key}) : super(key: key);
+
   @override
   _Loading_page_3State createState() => _Loading_page_3State();
 }
 
-class _Loading_page_3State extends State<Loading_page_3> {
+class _Loading_page_3State extends State<Loading_page_3>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 1000), () {
-      Navigator.pushReplacement( // Use pushReplacement to replace current screen
+
+    _controller = AnimationController(
+      duration: const Duration(seconds: 3), // Duration of one rotation cycle
+      vsync: this,
+    )..repeat(); // Repeat the animation
+
+    _animation = Tween<double>(begin: 0, end: 2 * math.pi).animate(_controller)
+      ..addListener(() {
+        setState(() {});
+      });
+
+    Future.delayed(const Duration(seconds: 3), () {
+      _controller.dispose(); // Dispose the controller before navigating
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Frame312Screen()), // Navigate to Frame290Screen
+        MaterialPageRoute(builder: (context) => const LandingPage()),
       );
     });
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.only(top: 188.v),
-          child: Column(
-            children: [
-              Image.asset(
-                ImageConstant.img02182611,
-                height: 140.v,
-                width: 120.h,
+    return Scaffold(
+      body: Stack(
+        children: [
+          Center(
+            // Center the image within the Stack
+            child: Transform(
+              transform: Matrix4.identity()
+                ..setEntry(3, 2, 0.001) // perspective
+                ..rotateY(_animation.value), // rotation around Y-axis
+              alignment: Alignment.center,
+              child: SvgPicture.asset(
+                ImageConstant.logo,
+                height: 60.v,
+                width: 60.h,
               ),
-              SizedBox(height: 64.v),
-              SizedBox(
-                width: 250.h,
-                height: 200.h,
-                child: Text(
-                  "Prepare for a stylish\n adventure\n as you step into the\n world of fashion...",
-                  maxLines: 4,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.titleLarge,
-                ),
-              ),
-              SizedBox(height: 5.v),
-            ],
+            ),
           ),
-        ),
+          Positioned(
+            bottom: 50.v,
+            // Position the text 400px up from the bottom of the screen
+            left: 0,
+            right: 0,
+            child: const Text(
+              "STAY STICK WITH US.....",
+              textAlign: TextAlign.center,
+              // Ensure text is centered horizontally
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'BebasNeue',
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

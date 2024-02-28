@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Body_selection_male/body_selection_male.dart';
+import '../Body_selection_female/body_selection_female.dart';
+
 
 
 
@@ -83,12 +85,12 @@ class _Gender_selectionState extends State<Gender_selection> with TickerProvider
           child: Center(
             child: Column(
               children: [
-                SizedBox(height: 200),
-                Text(
+                const SizedBox(height: 200),
+                const Text(
                   "You are a ?", // Added text
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 200),
+                const SizedBox(height: 200),
                 Expanded(
                   child: Stack(
                     children: <Widget>[
@@ -174,12 +176,12 @@ class _Gender_selectionState extends State<Gender_selection> with TickerProvider
                           if (label == 'Boy') {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Body_selection_male()),
+                              MaterialPageRoute(builder: (context) => const Body_selection_male()),
                             );
                           } else if (label == 'Girl') {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Body_selection_male()),
+                              MaterialPageRoute(builder: (context) => const Bodyselectionfemale()),
                             );
                           }
                         });
@@ -202,7 +204,7 @@ class _Gender_selectionState extends State<Gender_selection> with TickerProvider
                         alignment: Alignment.center,
                         child: Text(
                           label,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontSize: 24,

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_leading_image.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
 import '../Starting_page/starting_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,8 +11,7 @@ class Starting_page_signup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
             appBar: _buildAppBar(context),
             body: Container(
                 width: double.maxFinite,
@@ -27,7 +24,7 @@ class Starting_page_signup extends StatelessWidget {
                           height: 70.v,
                           width: 300.v,
                           text: "Continue with Google",
-                          buttonTextStyle: TextStyle(
+                          buttonTextStyle: const TextStyle(
                             fontSize: 22,
                             color: Colors.black,
                             fontWeight: FontWeight.w300,
@@ -65,7 +62,7 @@ class Starting_page_signup extends StatelessWidget {
                           ],
                         ),
                       )
-                    ]))));
+                    ])));
   }
 
   /// Section Widget
@@ -76,7 +73,7 @@ class Starting_page_signup extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Starting_page()),
+            MaterialPageRoute(builder: (context) => const Starting_page()),
           );
         },
       ),
@@ -86,7 +83,7 @@ class Starting_page_signup extends StatelessWidget {
 
   /// Navigates to the frame287Screen when the action is triggered.
   onTapContinueWithGoogle(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.loading_page_2);
+    Navigator.pushNamed(context, AppRoutes.loading_page_3);
   }
 
   /// Navigates to the frame286Screen when the action is triggered.

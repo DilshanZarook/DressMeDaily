@@ -1,148 +1,126 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Profile_picture/profile_picture.dart';
-import 'package:sdgp_test01/presentation/frame_312_screen/frame_312_screen.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
-import 'package:sdgp_test01/presentation/Loading_page_3(BodyToLanding)/loading_page_3.dart' ;
-
+import 'package:sdgp_test01/presentation/Loading_page_3(BodyToLanding)/loading_page_3.dart';
 
 
 class Body_selection_male extends StatelessWidget {
-  const Body_selection_male({Key? key})
-      : super(
-          key: key,
-        );
+  const Body_selection_male({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _buildAppBar(context),
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(vertical: 62.v),
-          child: Column(
-            children: [
-              SizedBox(
-                width: 200.h,
-                child: Text(
-                  "Select a \nbody type",
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.bodyLarge,
+    return MaterialApp(
+      home: Scaffold(
+        appBar: _buildAppBar(context), // Add the AppBar here
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            const SizedBox( height:100),
+            const Padding(
+              padding: EdgeInsets.only(top: 20.0), // Adjust padding as needed
+              child: Text(
+                'Select a body type',
+                style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 50),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                // Update padding and other properties as needed
+                Padding(
+                  padding: const EdgeInsets.only(top: 160.0),
+                  child: CustomButton(
+                      imagePath: ImageConstant.M44,
+                      onPressed: () => navigateToLoadingPage3(context)),
                 ),
-              ),
-              Spacer(flex: 50),
-              _buildBodyTypeFrame(context),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Assuming imgFig3 should navigate to Frame241Screen
-                  _buildImageTapButton(context, ImageConstant.imgFig3, frameNumber: 241),
-                  // Assuming imgFrame324 should navigate to Frame242Screen
-                  _buildImageTapButton(context, ImageConstant.imgFrame324, leftMargin: 40.h, frameNumber: 242),
-                ],
-              ),
-              Spacer(flex: 49),
-            ],
-          ),
-        ),
-
-      ),
-    );
-  }
-
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return AppBar(
-      leading: IconButton(
-        icon: Image.asset('assets/images/Line arrow-left.png'), // Replace with your actual arrow image asset path
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-      ), // Replace with your screen's title
-      // You can add more AppBar properties if needed
-    );
-  }
-
-  Widget _buildImageTapButton(BuildContext context, String imagePath, {double leftMargin = 0, required int frameNumber}) {
-    return InkWell(
-      onTap: () => _navigateToFrame(context, frameNumber),
-      child: CustomImageView(
-        imagePath: imagePath,
-        height: 150.v,
-        width: 95.h,
-        margin: EdgeInsets.only(left: leftMargin),
-      ),
-    );
-  }
-  Widget CustomImageView({
-    required String imagePath,
-    required double height,
-    required double width,
-    EdgeInsets margin = EdgeInsets.zero,
-  }) {
-    return Container(
-      height: height,
-      width: width,
-      margin: margin,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(imagePath), // Assuming these are asset images
-          fit: BoxFit.cover,
+                Padding(
+                  padding: const EdgeInsets.only(top: 110.0),
+                  child: CustomButton(
+                      imagePath: ImageConstant.M11,
+                      onPressed: () => navigateToLoadingPage3(context)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 70.0),
+                  child: CustomButton(
+                      imagePath: ImageConstant.M22,
+                      onPressed: () => navigateToLoadingPage3(context)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 110.0),
+                  child: CustomButton(
+                      imagePath: ImageConstant.M33,
+                      onPressed: () => navigateToLoadingPage3(context)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 160.0),
+                  child: CustomButton(
+                      imagePath: ImageConstant.M55,
+                      onPressed: () => navigateToLoadingPage3(context)),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
-  }
-  /// Section Widget
-  Widget _buildBodyTypeFrame(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildAvatarButton(context, ImageConstant.imgFig1, frameNumber: 241),
-        _buildAvatarButton(context, ImageConstant.imgFig4, frameNumber: 242),
-        _buildAvatarButton(context, ImageConstant.imgFigurer2RemovebgPreview, frameNumber: 243),
-        // Add more avatars as needed, specifying the correct frame number
-      ],
-    );
-  }
-
-
-  Widget _buildAvatarButton(BuildContext context, String imagePath, {required int frameNumber}) {
-    return Expanded(
-      child: InkWell(
-        onTap: () => _navigateToFrame(context, frameNumber),
-        child: CustomImageView(
-          imagePath: imagePath,
-          height: 200.v,
-          width: 50.h,
-          margin: EdgeInsets.symmetric(horizontal: 16.h),
-        ),
-      ),
-    );
-  }
-  void _navigateToFrame(BuildContext context, int frameNumber) {
-    Widget frame;
-    switch (frameNumber) {
-      case 241:
-        frame = Loading_page_3(); // Replace with actual screen widget
-        break;
-      case 242:
-        frame = Loading_page_3(); // Replace with actual screen widget
-        break;
-      case 243:
-        frame = Loading_page_3(); // Replace with actual screen widget
-        break;
-      case 244:
-        frame = Loading_page_3(); // Replace with actual screen widget
-        break;
-      case 245:
-      default:
-        frame = Loading_page_3(); // Replace with actual screen widget
-        break;
-    }
-    Navigator.push(context, MaterialPageRoute(builder: (context) => frame));
   }
 }
 
+void navigateToLoadingPage3(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Loading_page_3()),
+  );
+}
+PreferredSizeWidget _buildAppBar(BuildContext context) {
+  return AppBar(
+    leading: IconButton(
+      icon: Image.asset('assets/images/Line arrow-left.png'), // Replace with your actual arrow image asset path
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    ), // Replace with your screen's title
+    // You can add more AppBar properties if needed
+  );
+}
+
+class CustomButton extends StatefulWidget {
+  final String imagePath;
+  final VoidCallback onPressed;
+
+  const CustomButton({required this.imagePath, required this.onPressed, Key? key})
+      : super(key: key);
+
+  @override
+  _CustomButtonState createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton> {
+  bool isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        setState(() {
+          isPressed = !isPressed;
+        });
+        widget.onPressed();
+      },
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.zero,
+        backgroundColor: isPressed ?  Colors.grey:Colors.white,
+        side:const BorderSide(
+          color: Colors.black,
+          width: 1.5,
+        ),
+      ),
+      child: Column(
+        children: [
+          Image.asset(widget.imagePath, width: 50.0, height: 160.0, fit: BoxFit.cover),
+        ],
+      ),
+    );
+  }
+}

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
 import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
 import '../Signin_other_options/signin_other_options.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 // ignore_for_file: must_be_immutable
 class Signup_old_user extends StatelessWidget {
@@ -16,8 +13,7 @@ class Signup_old_user extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: _buildAppBar(context),
             body: Container(
@@ -32,14 +28,14 @@ class Signup_old_user extends StatelessWidget {
                       Padding(
                           padding: EdgeInsets.only(left: 14.h),
                           child: Text("Username:",
-                              style: theme.textTheme.titleLarge)),
+                              style: theme.textTheme.bodyLarge)),
                       SizedBox(height: 10.v),
                       CustomTextFormField(controller: editTextController),
                       SizedBox(height: 37.v),
                       Padding(
                           padding: EdgeInsets.only(left: 13.h),
                           child: Text("Password:",
-                              style: theme.textTheme.titleLarge)),
+                              style: theme.textTheme.bodyLarge)),
                       SizedBox(height: 9.v),
                       CustomTextFormField(
                           controller: editTextController1,
@@ -57,7 +53,7 @@ class Signup_old_user extends StatelessWidget {
                                   child: Text("Forgot password..",
                                       style: CustomTextStyles
                                           .bodyMediumGray700)))),
-                      Spacer(),
+                      const Spacer(),
                       CustomOutlinedButton(
                           height: 40.v,
                           width: 100.h,
@@ -67,7 +63,7 @@ class Signup_old_user extends StatelessWidget {
                             onTapSubmit(context);
                           },
                           alignment: Alignment.center)
-                    ]))));
+                    ])));
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
@@ -77,7 +73,7 @@ class Signup_old_user extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Signin_other_options()),
+            MaterialPageRoute(builder: (context) => const Signin_other_options()),
           );
         },
       ),
@@ -104,11 +100,11 @@ class Signup_old_user extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Invalid Email"),
-            content: Text("Please enter a valid email address."),
+            title: const Text("Invalid Email"),
+            content: const Text("Please enter a valid email address."),
             actions: <Widget>[
               TextButton(
-                child: Text("Close"),
+                child: const Text("Close"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

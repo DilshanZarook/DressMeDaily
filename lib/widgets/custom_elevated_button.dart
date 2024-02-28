@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../core/app_export.dart';
-import 'base_button.dart';
+import '../core/app_export.dart';  // Ensure this import is correct and necessary
+import 'base_button.dart';  // Ensure this import is correct and necessary
 
 class CustomElevatedButton extends BaseButton {
-  CustomElevatedButton({
+  const CustomElevatedButton({
     Key? key,
     this.decoration,
     this.leftIcon,
@@ -17,8 +17,9 @@ class CustomElevatedButton extends BaseButton {
     double? height,
     double? width,
     required String text,
-    this.removeEffects = false, // Add this line
+    this.removeEffects = false,
   }) : super(
+    key: key,  // Added key to super constructor
     text: text,
     onPressed: onPressed,
     buttonStyle: buttonStyle,
@@ -33,42 +34,43 @@ class CustomElevatedButton extends BaseButton {
   final BoxDecoration? decoration;
   final Widget? leftIcon;
   final Widget? rightIcon;
-  final bool removeEffects; // Add this line
+  final bool removeEffects;
 
   static ButtonStyle _noShadowStyle() {
     return ElevatedButton.styleFrom(
-      elevation: 0, // Remove shadow
-      primary: Colors.white, // Keep background color white
+      elevation: 0, backgroundColor: Colors.white,
       // Add any other style adjustments here
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return alignment != null
-        ? Align(
+    // Simplified alignment check using null-coalescing operator
+    return Align(
       alignment: alignment ?? Alignment.center,
       child: buildElevatedButtonWidget,
-    )
-        : buildElevatedButtonWidget;
+    );
   }
 
   Widget get buildElevatedButtonWidget => Container(
-    height: this.height ?? 27.v,
-    width: this.width ?? double.maxFinite,
+    height: height ?? 27.v,
+    width: width ?? double.maxFinite,
     margin: margin,
     decoration: decoration,
     child: ElevatedButton(
-      style: removeEffects ? _noShadowStyle() : buttonStyle, // Use this line
+      style: removeEffects ? _noShadowStyle() : buttonStyle ?? ElevatedButton.styleFrom(),
       onPressed: isDisabled ?? false ? null : onPressed ?? () {},
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           leftIcon ?? const SizedBox.shrink(),
-          Text(
-            text,
-            style: buttonTextStyle ?? CustomTextStyles.bodySmallGray500,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8), // For spacing between text and icons
+            child: Text(
+              text,
+              style: buttonTextStyle ?? CustomTextStyles.bodySmallGray500,
+            ),
           ),
           rightIcon ?? const SizedBox.shrink(),
         ],

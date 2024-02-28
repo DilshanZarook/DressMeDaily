@@ -1,21 +1,29 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/scheduler.dart';
+
 import 'core/app_export.dart';
+import 'firebase_options.dart'; // Added from Code 2
 
 var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
-void main() {
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform, // From Code 2
+  );
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
 
-  ///Please update theme as per your need if required.
+  // Update theme as needed
   ThemeHelper().changeTheme('primary');
-  runApp(MyApp());
+  runApp(const MyApp()); // Using const constructor
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key); // const constructor from Code 1
+
   @override
   Widget build(BuildContext context) {
     return Sizer(

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
-import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
 import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
 
 // ignore_for_file: must_be_immutable
@@ -34,7 +32,7 @@ class Signup_new_user extends StatelessWidget {
                               backgroundColor: appTheme.black900,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   appTheme.lime400))),
-                  Spacer(),
+                  const Spacer(),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -106,16 +104,30 @@ class Signup_new_user extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildSubmitButton(BuildContext context) {
-    return CustomOutlinedButton(
-        height: 50.v,
-        width: 100.h,
-        text: "Submit",
-        buttonStyle: CustomButtonStyles.outlineBlackTL102,
+  Widget _buildSubmitButton(BuildContext context, {double borderRadius = 20.0}) {
+    return Container(
+      height: 50.v, // Height of the button
+      width: 100.h, // Width of the button
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(borderRadius), // Custom border radius
+        border: Border.all(color: Colors.black), // Border style
+        // Add other decoration properties if needed, like color, boxShadow
+      ),
+      child: TextButton(
         onPressed: () {
-          onTapSubmitButton(context);
-        });
+          onTapSubmitButton(context); // Your tap handler
+        },
+        child: const Text(
+          "Submit",
+          style: TextStyle(
+            color: Colors.black, // Text color
+            // Add other text styling properties if needed
+          ),
+        ),
+      ),
+    );
   }
+
 
   bool isValidEmail(String email) {
     final emailRegex = RegExp(r'^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
@@ -133,11 +145,11 @@ class Signup_new_user extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Invalid Email"),
-            content: Text("Please enter a valid email address."),
+            title: const Text("Invalid Email"),
+            content: const Text("Please enter a valid email address."),
             actions: <Widget>[
               TextButton(
-                child: Text("Close"),
+                child: const Text("Close"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

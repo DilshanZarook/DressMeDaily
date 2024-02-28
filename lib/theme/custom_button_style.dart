@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:flutter/material.dart';
 
@@ -20,19 +19,29 @@ class CustomButtonStyles {
         color: theme.colorScheme.secondaryContainer,
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(
+        offset: const Offset(
           0,
           4,
         ),
       ),
     ],
     gradient: LinearGradient(
-      begin: Alignment(-0.03, 0),
-      end: Alignment(1.0, 1),
+      begin: const Alignment(-0.03, 0),
+      end: const Alignment(1.0, 1),
       colors: [
         appTheme.amber400,
         appTheme.whiteA70000,
       ],
+    ),
+  );
+  static ButtonStyle get outlineBlackTL19 => OutlinedButton.styleFrom(
+    backgroundColor: Colors.transparent,
+    side: BorderSide(
+      color: appTheme.black900,
+      width: 1,
+    ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(19.h),
     ),
   );
   static BoxDecoration get gradientBlueGrayDfToBlueGrayDecoration =>
@@ -43,15 +52,15 @@ class CustomButtonStyles {
             color: theme.colorScheme.secondaryContainer,
             spreadRadius: 2.h,
             blurRadius: 2.h,
-            offset: Offset(
+            offset: const Offset(
               0,
               4,
             ),
           ),
         ],
         gradient: LinearGradient(
-          begin: Alignment(-0.17, 0),
-          end: Alignment(1.01, 0),
+          begin: const Alignment(-0.17, 0),
+          end: const Alignment(1.01, 0),
           colors: [
             appTheme.blueGray900Df,
             appTheme.blueGray90000,
@@ -65,15 +74,15 @@ class CustomButtonStyles {
         color: theme.colorScheme.secondaryContainer,
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(
+        offset: const Offset(
           0,
           4,
         ),
       ),
     ],
     gradient: LinearGradient(
-      begin: Alignment(-0.04, 0),
-      end: Alignment(0.96, 1),
+      begin: const Alignment(-0.04, 0),
+      end: const Alignment(0.96, 1),
       colors: [
         appTheme.lime40001,
         appTheme.black90000,

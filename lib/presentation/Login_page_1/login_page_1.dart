@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../Starting_page/starting_page.dart'; // Adjust the path as necessary
@@ -20,15 +19,18 @@ class Login_page_1 extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 18.v),
                       SizedBox(
-                          width: 195.h,
-                          child: Text("Plan your fashion life\nwith us",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                              style: theme.textTheme.bodyLarge)),
-                      Spacer(),
+                        width: 300.h, // Ensure .h is a valid extension method for your context
+                        child: Text(
+                          "Plan your fashion life\nwith us",
+                          maxLines: 2, // Adjusted to 2 for two lines of text
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: (theme.textTheme.bodyLarge?.copyWith(fontSize: 24.v)) ??
+                              TextStyle(fontSize: 24.v), // Provide a default style if bodyLarge is null
+                        ),
+                      ),
+                      const Spacer(),
                       CustomOutlinedButton(
                           text: "Continue with Google",
                           leftIcon: Container(
@@ -76,7 +78,7 @@ class Login_page_1 extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Starting_page()),
+            MaterialPageRoute(builder: (context) => const Starting_page()),
           );
         },
       ),

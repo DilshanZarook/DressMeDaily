@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 
 class Password_mail extends StatelessWidget {
   const Password_mail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         appBar: _buildAppBar(context),
         body: Column(
           children: [
@@ -25,7 +23,7 @@ class Password_mail extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  Spacer(flex: 39), // May adjust if more space is needed
+                  const Spacer(flex: 39), // May adjust if more space is needed
                   Container(
                     width: 260.h,
                     margin: EdgeInsets.symmetric(horizontal: 50.h),
@@ -34,10 +32,10 @@ class Password_mail extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      style: theme.textTheme.titleLarge,
+                      style: theme.textTheme.bodyLarge,
                     ),
                   ),
-                  Spacer(flex: 60), // Reduced flex value moves "Next" button up
+                  const Spacer(flex: 60), // Reduced flex value moves "Next" button up
                   Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
@@ -48,18 +46,18 @@ class Password_mail extends StatelessWidget {
                         padding: EdgeInsets.only(right: 50.h),
                         child: Text(
                           "Next",
-                          style: theme.textTheme.titleLarge,
+                          style: theme.textTheme.bodyLarge,
                         ),
                       ),
                     ),
                   ),
-                  Spacer(flex: 10), // Adjust flex to add space below if needed
+                  const Spacer(flex: 10), // Adjust flex to add space below if needed
                 ],
               ),
             ),
           ],
         ),
-      ),
+
     );
   }
 
@@ -81,6 +79,6 @@ class Password_mail extends StatelessWidget {
 
   /// Navigates to the frame287Screen when the action is triggered.
   onTapTxtNext(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.loading_page_2);
+    Navigator.pushNamed(context, AppRoutes.starting_page_signup);
   }
 }

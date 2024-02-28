@@ -11,7 +11,7 @@ class AppNavigationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0XFFFFFFFF),
+        backgroundColor: const Color(0XFFFFFFFF),
         body: SizedBox(
           width: 375.h,
           child: Column(
@@ -20,7 +20,7 @@ class AppNavigationScreen extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color(0XFFFFFFFF),
                     ),
                     child: Column(
@@ -29,7 +29,7 @@ class AppNavigationScreen extends StatelessWidget {
                           context,
                           screenTitle: "Landing_page",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame312Screen),
+                              context, AppRoutes.landing_page),
                         ),
                         _buildScreenTitle(
                           context,
@@ -123,15 +123,15 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "frame_629_screen",
+                          screenTitle: "bookmark_page",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_629_screen),
+                              context, AppRoutes.bookmark_page),
                         ),
                         _buildScreenTitle(
                           context,
                           screenTitle: "frame_624_draweritem",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_624_draweritem),
+                              context, AppRoutes.main_settings),
                         ),
                         _buildScreenTitle(
                           context,
@@ -141,27 +141,27 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "frame_629_screen",
+                          screenTitle: "notifications_page",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_629_screen),
+                              context, AppRoutes.notifications_page),
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "frame_633_screen",
+                          screenTitle: "settings",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_633_screen),
+                              context, AppRoutes.settings),
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "frame_636_screen",
+                          screenTitle: "themes_page",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_636_screen),
+                              context, AppRoutes.themes_page),
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "frame_634_dialog",
+                          screenTitle: "feedback_popup",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_634_dialog),
+                              context, AppRoutes.feedback_popup),
                         ),
                         _buildScreenTitle(
                           context,
@@ -171,9 +171,9 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "frame_638_screen",
+                          screenTitle: "notice_page",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_638_screen),
+                              context, AppRoutes.notice_page),
                         ),
                         _buildScreenTitle(
                           context,
@@ -183,9 +183,9 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "frame_640_screen",
+                          screenTitle: "subscription_page",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_640_screen),
+                              context, AppRoutes.subscription_page),
                         ),
                         _buildScreenTitle(
                           context,
@@ -201,21 +201,21 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "frame_644_screen",
+                          screenTitle: "feedback_popup",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_644_screen),
+                              context, AppRoutes.feedback_popup),
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "frame_645_dialog",
+                          screenTitle: "thank_popup",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_645_dialog),
+                              context, AppRoutes.thank_popup),
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "frame_646_dialog",
+                          screenTitle: "subscription_page_confirmation",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_646_dialog),
+                              context, AppRoutes.subscription_page_confirmation),
                         ),
                         _buildScreenTitle(
                           context,
@@ -261,9 +261,9 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "frame_674_screen",
+                          screenTitle: "invite_friends",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_674_screen),
+                              context, AppRoutes.invite_friends),
                         ),
                         _buildScreenTitle(
                           context,
@@ -272,9 +272,9 @@ class AppNavigationScreen extends StatelessWidget {
                               context, AppRoutes.frame_675_screen),
                         ),_buildScreenTitle(
                           context,
-                          screenTitle: "frame_680_screen",
+                          screenTitle: "subscription_after_purchase_page",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.frame_680_screen),
+                              context, AppRoutes.subscription_after_purchase_page),
                         ),
                       ],
                     ),
@@ -291,7 +291,7 @@ class AppNavigationScreen extends StatelessWidget {
   /// Section Widget
   Widget _buildAppNavigation(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color(0XFFFFFFFF),
       ),
       child: Column(
@@ -305,7 +305,7 @@ class AppNavigationScreen extends StatelessWidget {
                 "App Navigation",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Color(0XFF000000),
+                  color: const Color(0XFF000000),
                   fontSize: 20.fSize,
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.w400,
@@ -322,7 +322,7 @@ class AppNavigationScreen extends StatelessWidget {
                 "Check your app's UI from the below demo screens of your app.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Color(0XFF888888),
+                  color: const Color(0XFF888888),
                   fontSize: 16.fSize,
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.w400,
@@ -334,7 +334,7 @@ class AppNavigationScreen extends StatelessWidget {
           Divider(
             height: 1.v,
             thickness: 1.v,
-            color: Color(0XFF000000),
+            color: const Color(0XFF000000),
           ),
         ],
       ),
@@ -352,7 +352,7 @@ class AppNavigationScreen extends StatelessWidget {
         onTapScreenTitle!.call();
       },
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0XFFFFFFFF),
         ),
         child: Column(
@@ -366,7 +366,7 @@ class AppNavigationScreen extends StatelessWidget {
                   screenTitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color(0XFF000000),
+                    color: const Color(0XFF000000),
                     fontSize: 20.fSize,
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.w400,
@@ -379,7 +379,7 @@ class AppNavigationScreen extends StatelessWidget {
             Divider(
               height: 1.v,
               thickness: 1.v,
-              color: Color(0XFF888888),
+              color: const Color(0XFF888888),
             ),
           ],
         ),
