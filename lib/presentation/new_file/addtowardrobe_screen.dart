@@ -16,6 +16,7 @@ class AddtowardrobeScreen extends StatefulWidget {
 class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
   File? _selectedImage;
   String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+  String imageUrl = '';
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +90,8 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
                       iconSize: 50.0,
                       onPressed: () async {
                         pickImageFromGallery();
+
+                        if (_selectedImage == null) return;
                         //Get a referebce to storage root
                         Reference referenceRoot =
                             FirebaseStorage.instance.ref();
@@ -98,6 +101,18 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
                         //create a reference for the image to be stored
                         Reference referenceImageToUpload =
                             referenceDirImages.child(uniqueFileName);
+
+                        //handle errors/ success
+                        try {
+                          //store the file
+                          await referenceImageToUpload
+                              .putFile(File(_selectedImage!.path));
+                          //success: get the download URL
+                          imageUrl =
+                              await referenceImageToUpload.getDownloadURL();
+                        } catch (error) {
+                          //some error occured
+                        }
                       },
                     ),
                   ),
