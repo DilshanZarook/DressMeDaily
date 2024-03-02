@@ -72,8 +72,30 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
                     child: IconButton(
                       icon: Icon(Icons.camera_alt),
                       iconSize: 50.0,
-                      onPressed: () {
+                      onPressed: () async {
                         pickImageFromCamera();
+                        if (_selectedImage == null) return;
+                        //Get a referebce to storage root
+                        Reference referenceRoot =
+                            FirebaseStorage.instance.ref();
+                        Reference referenceDirImages =
+                            referenceRoot.child('wardrobe');
+
+                        //create a reference for the image to be stored
+                        Reference referenceImageToUpload =
+                            referenceDirImages.child(uniqueFileName);
+
+                        //handle errors/ success
+                        try {
+                          //store the file
+                          await referenceImageToUpload
+                              .putFile(File(_selectedImage!.path));
+                          //success: get the download URL
+                          imageUrl =
+                              await referenceImageToUpload.getDownloadURL();
+                        } catch (error) {
+                          //some error occured
+                        }
                       },
                     ),
                   ),
