@@ -12,7 +12,6 @@ class AddtowardrobeScreen extends StatefulWidget {
 
 class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
   File? _selectedImage;
-  String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
   String imageUrl = '';
 
   @override
@@ -27,17 +26,11 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
             children: [
               SizedBox(height: 60.0),
               _selectedImage != null
-                  ? Container(
+                  ? Image.network(
+                      imageUrl,
                       width: 400.0,
                       height: 400.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(20.0),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: FileImage(_selectedImage!),
-                        ),
-                      ),
+                      fit: BoxFit.cover,
                     )
                   : Container(
                       width: 300.0,
@@ -65,7 +58,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
                 ],
               ),
               SizedBox(height: 90.0),
-              // Your other widgets...
+              // Additional widgets can be added here
             ],
           ),
         ),
@@ -94,7 +87,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
         icon: Icon(Icons.arrow_back),
         iconSize: 40.0,
         onPressed: () {
-          Navigator.of(context, rootNavigator: true).pushNamed("/landing_page");
+          Navigator.of(context).pop();
         },
       ),
       // Rest of your AppBar properties...
@@ -114,24 +107,29 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
 
     if (pickedImage == null) return;
 
+    File imageFile = File(pickedImage.path);
+
     setState(() {
-      _selectedImage = File(pickedImage.path);
+      _selectedImage = imageFile;
     });
 
-    await _uploadImage();
+    await _uploadImage(imageFile);
   }
 
-  Future<void> _uploadImage() async {
-    if (_selectedImage == null) return;
+  Future<void> _uploadImage(File image) async {
+    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString() + '.jpg'; // Ensure file extension
 
     Reference referenceRoot = FirebaseStorage.instance.ref();
     Reference referenceDirImages = referenceRoot.child('wardrobe');
     Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
 
     try {
-      await referenceImageToUpload.putFile(_selectedImage!);
-      imageUrl = await referenceImageToUpload.getDownloadURL();
-      print("Image URL: $imageUrl");
+      await referenceImageToUpload.putFile(image, SettableMetadata(contentType: 'image/jpeg'));
+      String downloadUrl = await referenceImageToUpload.getDownloadURL();
+      setState(() {
+        imageUrl = downloadUrl;
+      });
+      print("Image URL: $downloadUrl");
     } catch (error) {
       print("Upload error: $error");
     }
