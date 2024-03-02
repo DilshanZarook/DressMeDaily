@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'dart:io';
-import 'package:sdgp_test01/presentation/Instructions_page/instructions_page.dart';
-import 'package:sdgp_test01/presentation/Gender_selection/gender_selection.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
 
 class AddtowardrobeScreen extends StatefulWidget {
   const AddtowardrobeScreen({Key? key}) : super(key: key);
@@ -31,8 +28,8 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
               SizedBox(height: 60.0),
               _selectedImage != null
                   ? Container(
-                      width: 400.0, // Increased width
-                      height: 400.0, // Increased height
+                      width: 400.0,
+                      height: 400.0,
                       decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.circular(20.0),
@@ -43,8 +40,8 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
                       ),
                     )
                   : Container(
-                      width: 300.0, // Width for the default case
-                      height: 300.0, // Height for the default case
+                      width: 300.0,
+                      height: 300.0,
                       decoration: BoxDecoration(
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(20.0),
@@ -62,113 +59,31 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(8.0), // Optional padding
-                    decoration: BoxDecoration(
-                      color: Colors.grey, // Set the color to gray
-                      borderRadius: BorderRadius.circular(
-                          20), // Set the border radius to 20
-                    ),
-                    child: IconButton(
-                      icon: Icon(Icons.camera_alt),
-                      iconSize: 50.0,
-                      onPressed: () async {
-                        pickImageFromCamera();
-                        if (_selectedImage == null) return;
-                        //Get a referebce to storage root
-                        Reference referenceRoot =
-                            FirebaseStorage.instance.ref();
-                        Reference referenceDirImages =
-                            referenceRoot.child('wardrobe');
-
-                        //create a reference for the image to be stored
-                        Reference referenceImageToUpload =
-                            referenceDirImages.child(uniqueFileName);
-
-                        //handle errors/ success
-                        try {
-                          //store the file
-                          await referenceImageToUpload
-                              .putFile(File(_selectedImage!.path));
-                          //success: get the download URL
-                          imageUrl =
-                              await referenceImageToUpload.getDownloadURL();
-                        } catch (error) {
-                          //some error occured
-                        }
-                      },
-                    ),
-                  ),
-                  SizedBox(width: 100.v), // Spacing between the buttons
-                  Container(
-                    padding: EdgeInsets.all(8.0), // Optional padding
-                    decoration: BoxDecoration(
-                      color: Colors.grey, // Set the color to gray
-                      borderRadius: BorderRadius.circular(
-                          20), // Set the border radius to 20
-                    ),
-                    child: IconButton(
-                      icon: Icon(Icons.photo_library),
-                      iconSize: 50.0,
-                      onPressed: () async {
-                        pickImageFromGallery();
-
-                        if (_selectedImage == null) return;
-                        //Get a referebce to storage root
-                        Reference referenceRoot =
-                            FirebaseStorage.instance.ref();
-                        Reference referenceDirImages =
-                            referenceRoot.child('wardrobe');
-
-                        //create a reference for the image to be stored
-                        Reference referenceImageToUpload =
-                            referenceDirImages.child(uniqueFileName);
-
-                        //handle errors/ success
-                        try {
-                          //store the file
-                          await referenceImageToUpload
-                              .putFile(File(_selectedImage!.path));
-                          //success: get the download URL
-                          imageUrl =
-                              await referenceImageToUpload.getDownloadURL();
-                        } catch (error) {
-                          //some error occured
-                        }
-                      },
-                    ),
-                  ),
+                  _buildIconButton(Icons.camera_alt, pickImageFromCamera),
+                  SizedBox(width: 100.0),
+                  _buildIconButton(Icons.photo_library, pickImageFromGallery),
                 ],
               ),
               SizedBox(height: 90.0),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 50.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      // Modified navigation logic
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Instructions_page()), // Replace Instructions_page with your actual widget class
-                      );
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize
-                          .min, // To keep the column size only as big as its children
-                      children: <Widget>[
-                        SizedBox(
-                            height: 260), // Keeping the SizedBox for spacing
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              // Your other widgets...
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildIconButton(IconData icon, Function onPressed) {
+    return Container(
+      padding: EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: IconButton(
+        icon: Icon(icon),
+        iconSize: 50.0,
+        onPressed: () => onPressed(),
       ),
     );
   }
@@ -177,34 +92,48 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
     return AppBar(
       leading: IconButton(
         icon: Icon(Icons.arrow_back),
-        iconSize: 40.0, // Increase the size as needed, here it's set to 30.0
+        iconSize: 40.0,
         onPressed: () {
           Navigator.of(context, rootNavigator: true).pushNamed("/landing_page");
         },
       ),
-      // Rest of your AppBar properties
+      // Rest of your AppBar properties...
     );
   }
 
   Future<void> pickImageFromGallery() async {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    if (pickedImage == null) return;
-
-    setState(() {
-      _selectedImage = File(pickedImage.path);
-    });
+    await _pickImage(ImageSource.gallery);
   }
 
   Future<void> pickImageFromCamera() async {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.camera);
+    await _pickImage(ImageSource.camera);
+  }
+
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedImage = await ImagePicker().pickImage(source: source);
 
     if (pickedImage == null) return;
 
     setState(() {
       _selectedImage = File(pickedImage.path);
     });
+
+    await _uploadImage();
+  }
+
+  Future<void> _uploadImage() async {
+    if (_selectedImage == null) return;
+
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImages = referenceRoot.child('wardrobe');
+    Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+
+    try {
+      await referenceImageToUpload.putFile(_selectedImage!);
+      imageUrl = await referenceImageToUpload.getDownloadURL();
+      print("Image URL: $imageUrl");
+    } catch (error) {
+      print("Upload error: $error");
+    }
   }
 }
