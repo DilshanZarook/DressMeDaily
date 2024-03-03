@@ -51,7 +51,7 @@ class Signin_other_options extends StatelessWidget {
                       ),
                     ),
                     buttonStyle: ElevatedButton.styleFrom(
-                      primary: Colors.blue, // Button color - blue
+                      backgroundColor: Colors.blue, // Button color - blue
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20), // BorderRadius of 20
                       ),

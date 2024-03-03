@@ -38,8 +38,7 @@ class CustomElevatedButton extends BaseButton {
 
   static ButtonStyle _noShadowStyle() {
     return ElevatedButton.styleFrom(
-      elevation: 0,
-      primary: Colors.white,
+      elevation: 0, backgroundColor: Colors.white,
       // Add any other style adjustments here
     );
   }
