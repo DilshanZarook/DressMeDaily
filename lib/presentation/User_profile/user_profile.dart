@@ -293,13 +293,70 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
   }
 
   /// Section Widget
+  // Widget _buildSave(BuildContext context) {
+  //   return CustomElevatedButton(
+  //     width: 64.h,
+  //     text: "Save",
+  //     alignment: Alignment.centerRight,
+  //   );
+  // }
+
+
   Widget _buildSave(BuildContext context) {
-    return CustomElevatedButton(
-      width: 64.h,
-      text: "Save",
-      alignment: Alignment.centerRight,
-    );
-  }
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      CustomElevatedButton(
+        width: 64.h,
+        text: "Save",
+        alignment: Alignment.centerRight,
+      ),
+      TextButton(
+        onPressed: () {
+          // Implement logout functionality here
+          // This example shows a simple alert dialog
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Log out'),
+                content: Text('Are you sure you want to log out?'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Perform logout actions (e.g., clear user data, navigate to login screen)
+                      Navigator.of(context).pop();
+                      Navigator.pushReplacementNamed(context, AppRoutes.starting_page); // Replace '/login' with your actual login route name
+                    },
+                    child: Text(
+                      'Log out',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+        },
+        child: Text(
+          "Log out",
+          style: TextStyle(color: Colors.red),
+        ),
+      ),
+    ],
+  );
+}
+
+  
 }
 
 Widget _buildBottomBar(BuildContext context) {
