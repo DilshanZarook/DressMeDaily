@@ -13,6 +13,7 @@ class AddtowardrobeScreen extends StatefulWidget {
 class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
   File? _selectedImage;
   String imageUrl = '';
+  bool isLoading = false; // New state variable
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +27,14 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
             children: [
               const SizedBox(height: 60.0),
               _selectedImage != null
-                  ? Image.network(
-                      imageUrl,
-                      width: 400.0,
-                      height: 400.0,
-                      fit: BoxFit.cover,
-                    )
+                  ? isLoading 
+                      ? Center(child: CircularProgressIndicator()) // Display a loading indicator
+                      : Image.network(
+                          imageUrl,
+                          width: 400.0,
+                          height: 400.0,
+                          fit: BoxFit.cover,
+                        )
                   : Container(
                       width: 300.0,
                       height: 300.0,
@@ -111,6 +114,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
 
     setState(() {
       _selectedImage = imageFile;
+      isLoading = true; // Set loading to true
     });
 
     await _uploadImage(imageFile);
@@ -128,6 +132,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
       String downloadUrl = await referenceImageToUpload.getDownloadURL();
       setState(() {
         imageUrl = downloadUrl;
+        isLoading = false; // Set loading to false
       });
       print("Image URL: $downloadUrl");
     } catch (error) {
