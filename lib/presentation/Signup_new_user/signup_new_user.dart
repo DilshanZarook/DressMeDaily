@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
-import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
 import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
 
 // ignore_for_file: must_be_immutable
@@ -34,7 +32,7 @@ class Signup_new_user extends StatelessWidget {
                               backgroundColor: appTheme.black900,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   appTheme.lime400))),
-                  Spacer(),
+                  const Spacer(),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -119,7 +117,7 @@ class Signup_new_user extends StatelessWidget {
         onPressed: () {
           onTapSubmitButton(context); // Your tap handler
         },
-        child: Text(
+        child: const Text(
           "Submit",
           style: TextStyle(
             color: Colors.black, // Text color
@@ -147,11 +145,11 @@ class Signup_new_user extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Invalid Email"),
-            content: Text("Please enter a valid email address."),
+            title: const Text("Invalid Email"),
+            content: const Text("Please enter a valid email address."),
             actions: <Widget>[
               TextButton(
-                child: Text("Close"),
+                child: const Text("Close"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

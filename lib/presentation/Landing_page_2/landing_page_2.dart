@@ -138,7 +138,7 @@ class Landing_page_2 extends StatelessWidget {
                       left: 20.h,
                       right: 19.h,
                     ),
-                    child: Text(
+                    child: const Text(
                       "Outfit styles which may go with your style",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -159,7 +159,7 @@ class Landing_page_2 extends StatelessWidget {
                       aspectRatio: 16 / 9,
                       autoPlayCurve: Curves.fastOutSlowIn,
                       enableInfiniteScroll: true,
-                      autoPlayAnimationDuration: Duration(milliseconds: 700),
+                      autoPlayAnimationDuration: const Duration(milliseconds: 700),
                       viewportFraction: 0.7,
                     ),
                     items: [
@@ -176,7 +176,7 @@ class Landing_page_2 extends StatelessWidget {
                                 .of(context)
                                 .size
                                 .width,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
+                            margin: const EdgeInsets.symmetric(horizontal: 5.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30.h),
                               // Adjust as needed
@@ -202,6 +202,8 @@ class Landing_page_2 extends StatelessWidget {
   }
 }
 class YourWidget extends StatelessWidget {
+  const YourWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
@@ -212,7 +214,7 @@ class YourWidget extends StatelessWidget {
         aspectRatio: 16/9,
         autoPlayCurve: Curves.fastOutSlowIn,
         enableInfiniteScroll: true,
-        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        autoPlayAnimationDuration: const Duration(milliseconds: 800),
         viewportFraction: 0.8,
       ),
       items: [
@@ -226,7 +228,7 @@ class YourWidget extends StatelessWidget {
           builder: (BuildContext context) {
             return Container(
               width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.h), // Adjust as needed
                 image: DecorationImage(

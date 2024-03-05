@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/Main_settings_page/main_settings.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title_image.dart';
 import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_drop_down.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,7 +10,7 @@ import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
 
 
 class FAQ_Page extends StatelessWidget {
-  FAQ_Page({Key? key})
+  const FAQ_Page({Key? key})
       : super(
           key: key,
         );
@@ -31,7 +29,7 @@ class FAQ_Page extends StatelessWidget {
               CustomDropDown(
                 icon: Container(
                   margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
+                  child: SizedBox(
                     height: 33.v,
                     width: 25.h,
                     child: Image.asset(
@@ -53,7 +51,7 @@ class FAQ_Page extends StatelessWidget {
               CustomDropDown(
                 icon: Container(
                   margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
+                  child: SizedBox(
                     height: 33.v,
                     width: 25.h,
                     child: Image.asset(
@@ -75,7 +73,7 @@ class FAQ_Page extends StatelessWidget {
               CustomDropDown(
                 icon: Container(
                   margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
+                  child: SizedBox(
                     height: 33.v,
                     width: 25.h,
                     child: Image.asset(
@@ -97,7 +95,7 @@ class FAQ_Page extends StatelessWidget {
               CustomDropDown(
                 icon: Container(
                   margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
+                  child: SizedBox(
                     height: 33.v,
                     width: 25.h,
                     child: Image.asset(
@@ -119,7 +117,7 @@ class FAQ_Page extends StatelessWidget {
               CustomDropDown(
                 icon: Container(
                   margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
+                  child: SizedBox(
                     height: 33.v,
                     width: 25.h,
                     child: Image.asset(
@@ -141,7 +139,7 @@ class FAQ_Page extends StatelessWidget {
               CustomDropDown(
                 icon: Container(
                   margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
+                  child: SizedBox(
                     height: 33.v,
                     width: 25.h,
                     child: Image.asset(
@@ -314,10 +312,10 @@ class FAQ_Page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()),
+                    MaterialPageRoute(builder: (context) => const Landing_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -334,7 +332,7 @@ class FAQ_Page extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -349,7 +347,7 @@ class FAQ_Page extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -364,7 +362,7 @@ class FAQ_Page extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -376,10 +374,10 @@ class FAQ_Page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => User_profile()),
+                    MaterialPageRoute(builder: (context) => const User_profile()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(

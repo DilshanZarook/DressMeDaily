@@ -21,10 +21,10 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(top: 35.0),
+          padding: const EdgeInsets.only(top: 35.0),
           child: Column(
             children: [
-              SizedBox(height: 60.0),
+              const SizedBox(height: 60.0),
               _selectedImage != null
                   ? Image.network(
                       imageUrl,
@@ -40,7 +40,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       alignment: Alignment.center,
-                      child: Text(
+                      child: const Text(
                         "Take a snap",
                         style: TextStyle(
                             fontSize: 20.0,
@@ -48,16 +48,16 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
                             color: Colors.white),
                       ),
                     ),
-              SizedBox(height: 150.0),
+              const SizedBox(height: 150.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _buildIconButton(Icons.camera_alt, pickImageFromCamera),
-                  SizedBox(width: 100.0),
+                  const SizedBox(width: 100.0),
                   _buildIconButton(Icons.photo_library, pickImageFromGallery),
                 ],
               ),
-              SizedBox(height: 90.0),
+              const SizedBox(height: 90.0),
               // Additional widgets can be added here
             ],
           ),
@@ -68,7 +68,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
 
   Widget _buildIconButton(IconData icon, Function onPressed) {
     return Container(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: Colors.grey,
         borderRadius: BorderRadius.circular(20),
@@ -84,7 +84,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Icon(Icons.arrow_back),
+        icon: const Icon(Icons.arrow_back),
         iconSize: 40.0,
         onPressed: () {
           Navigator.of(context).pop();
@@ -117,7 +117,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
   }
 
   Future<void> _uploadImage(File image) async {
-    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString() + '.jpg'; // Ensure file extension
+    String uniqueFileName = '${DateTime.now().millisecondsSinceEpoch}.jpg'; // Ensure file extension
 
     Reference referenceRoot = FirebaseStorage.instance.ref();
     Reference referenceDirImages = referenceRoot.child('wardrobe');

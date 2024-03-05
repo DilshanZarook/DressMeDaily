@@ -22,8 +22,8 @@ class AppDecoration {
   // Gradient decorations
   static BoxDecoration get gradientBlueGrayDfToBlueGray => BoxDecoration(
     gradient: LinearGradient(
-      begin: Alignment(0.01, -0.13),
-      end: Alignment(1, 0.98),
+      begin: const Alignment(0.01, -0.13),
+      end: const Alignment(1, 0.98),
       colors: [
         appTheme.blueGray900Df,
         appTheme.blueGray900A4,
@@ -33,8 +33,8 @@ class AppDecoration {
   );
   static BoxDecoration get gradientLimeToBlack => BoxDecoration(
     gradient: LinearGradient(
-      begin: Alignment(-0.04, 0.03),
-      end: Alignment(0.96, 1),
+      begin: const Alignment(-0.04, 0.03),
+      end: const Alignment(0.96, 1),
       colors: [
         appTheme.lime40001,
         appTheme.lime40001.withOpacity(0.92),
@@ -44,8 +44,8 @@ class AppDecoration {
   );
   static BoxDecoration get gradientYellowAToBlack => BoxDecoration(
     gradient: LinearGradient(
-      begin: Alignment(-0.04, 0.03),
-      end: Alignment(0.96, 1),
+      begin: const Alignment(-0.04, 0.03),
+      end: const Alignment(0.96, 1),
       colors: [
         appTheme.yellowA700,
         appTheme.lime90077,
@@ -69,7 +69,7 @@ class AppDecoration {
         color: theme.colorScheme.primary.withOpacity(0.25),
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(
+        offset: const Offset(
           2,
           5,
         ),
@@ -83,14 +83,14 @@ class AppDecoration {
         color: theme.colorScheme.primary.withOpacity(0.25),
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(
+        offset: const Offset(
           2,
           5,
         ),
       ),
     ],
   );
-  static BoxDecoration get outlinePrimary2 => BoxDecoration();
+  static BoxDecoration get outlinePrimary2 => const BoxDecoration();
   static BoxDecoration get outlinePrimary3 => BoxDecoration(
     color: appTheme.blueGray200,
     boxShadow: [
@@ -98,14 +98,14 @@ class AppDecoration {
         color: theme.colorScheme.primary.withOpacity(0.25),
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(
+        offset: const Offset(
           0,
           10,
         ),
       ),
     ],
   );
-  static BoxDecoration get outlinePrimary4 => BoxDecoration();
+  static BoxDecoration get outlinePrimary4 => const BoxDecoration();
   static BoxDecoration get outlinePrimary5 => BoxDecoration(
     border: Border.all(
       color: theme.colorScheme.primary.withOpacity(1),
@@ -140,7 +140,7 @@ class AppDecoration {
         color: appTheme.black900.withOpacity(0.25),
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(
+        offset: const Offset(
           2,
           5,
         ),
@@ -154,14 +154,14 @@ class AppDecoration {
         color: appTheme.black900.withOpacity(0.25),
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(
+        offset: const Offset(
           2,
           5,
         ),
       ),
     ],
   );
-  static BoxDecoration get outlineBlack9001 => BoxDecoration();
+  static BoxDecoration get outlineBlack9001 => const BoxDecoration();
   static BoxDecoration get outlineBlack9002 => BoxDecoration(
     color: appTheme.blueGray200,
     boxShadow: [
@@ -169,7 +169,7 @@ class AppDecoration {
         color: appTheme.black900.withOpacity(0.25),
         spreadRadius: 2.h,
         blurRadius: 2.h,
-        offset: Offset(
+        offset: const Offset(
           0,
           10,
         ),

@@ -36,12 +36,12 @@ class Starting_page extends StatelessWidget {
                     style: theme.textTheme.headlineLarge?.copyWith(
                       fontSize: 32, // Set the font size to 16
                       fontWeight: FontWeight.w600, // Set the font weight to 300
-                    ) ?? TextStyle(
+                    ) ?? const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w600,
                     ),),
                 ),
-                Spacer(),
+                const Spacer(),
                 CustomOutlinedButton(
                     height: 50.v,
                     width: 160.h,
@@ -78,7 +78,7 @@ class Starting_page extends StatelessWidget {
             style: theme.textTheme.bodyLarge?.copyWith(
               fontSize: 18, // Set the font size to 16
               fontWeight: FontWeight.w500, // Set the font weight to 300
-            ) ?? TextStyle(
+            ) ?? const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w400,
             ),

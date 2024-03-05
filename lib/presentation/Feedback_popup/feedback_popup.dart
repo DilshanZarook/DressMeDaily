@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/custom_elevated_button.dart';
 import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // ignore_for_file: must_be_immutable
@@ -37,12 +36,12 @@ class Feedback_popup extends StatelessWidget {
                       height: 50.v, // Increased height
                       width: 211.h,
                       hintText: "Type your thoughts...",
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         fontSize: 12,
                       ),
                       // Assuming you can pass decoration or border properties
                       // Remove or modify these properties as needed
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none, // Removes border
                         // Other decoration properties
                       ),
@@ -58,11 +57,11 @@ class Feedback_popup extends StatelessWidget {
                         width: 90.h,
                         height: 20.v,
                         alignment: Alignment.center, // To center the text inside the container
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white, // Assuming the button has a white background
                           // Add more styling as needed (e.g., borderRadius, boxShadow)
                         ),
-                        child: Text(
+                        child: const Text(
                           "Description",
                           style: TextStyle(
                             // Add your text style here
@@ -86,7 +85,7 @@ class Feedback_popup extends StatelessWidget {
             textInputType: TextInputType.emailAddress,
             borderDecoration: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10), // Set the border radius if needed
-              borderSide: BorderSide(color: Colors.black, width: 1), // Black border
+              borderSide: const BorderSide(color: Colors.black, width: 1), // Black border
             ),
           ),
           SizedBox(height: 18.v),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title_image.dart';
 import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
@@ -131,10 +130,10 @@ class Notice_page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()),
+                    MaterialPageRoute(builder: (context) => const Landing_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -151,7 +150,7 @@ class Notice_page extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -166,7 +165,7 @@ class Notice_page extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -181,7 +180,7 @@ class Notice_page extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -193,10 +192,10 @@ class Notice_page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => User_profile()),
+                    MaterialPageRoute(builder: (context) => const User_profile()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(

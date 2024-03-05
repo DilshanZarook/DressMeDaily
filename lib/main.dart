@@ -14,7 +14,7 @@ void main() async {
 
   // Rest of your code
   ThemeHelper().changeTheme('primary');
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

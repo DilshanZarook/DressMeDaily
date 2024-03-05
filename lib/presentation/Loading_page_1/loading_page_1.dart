@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Gender_selection/gender_selection.dart';
 import 'package:sdgp_test01/presentation/Signup_new_user/signup_new_user.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -29,7 +28,7 @@ class _Loading_page_1State extends State<Loading_page_1> with SingleTickerProvid
         setState(() {});
       });
 
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       _controller.dispose(); // Dispose the controller before navigating
       Navigator.pushReplacement(
         context,
@@ -66,7 +65,7 @@ class _Loading_page_1State extends State<Loading_page_1> with SingleTickerProvid
             bottom: 50.v, // Position the text 400px up from the bottom of the screen
             left: 0,
             right: 0,
-            child: Text(
+            child: const Text(
               "STAY STICK WITH US.....",
               textAlign: TextAlign.center, // Ensure text is centered horizontally
               style: TextStyle(

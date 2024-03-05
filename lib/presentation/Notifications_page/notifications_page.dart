@@ -106,7 +106,7 @@ class Notifications_page extends StatelessWidget {
                     top: 20.v,
                     bottom: 0.v,
                   ),
-                  child: Text(
+                  child: const Text(
                     "Save",
                     // You can add style to your text here if you want
                     style: TextStyle(fontSize: 18.0),
@@ -117,7 +117,7 @@ class Notifications_page extends StatelessWidget {
             ),
           ),
           SizedBox(height: 22.v),
-          SizedBox(
+          const SizedBox(
             width: double.maxFinite,
             child: Divider(),
           ),
@@ -217,10 +217,10 @@ class Notifications_page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()),
+                    MaterialPageRoute(builder: (context) => const Landing_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -237,7 +237,7 @@ class Notifications_page extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -252,7 +252,7 @@ class Notifications_page extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -267,7 +267,7 @@ class Notifications_page extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -279,10 +279,10 @@ class Notifications_page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => User_profile()),
+                    MaterialPageRoute(builder: (context) => const User_profile()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(

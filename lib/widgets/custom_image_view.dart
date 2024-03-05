@@ -20,7 +20,7 @@ class CustomImageView extends StatelessWidget {
 
   /// A [CustomImageView] can be used for showing any type of images.
   /// It will show the placeholder image if the image is not found or fails to load.
-  CustomImageView({
+  const CustomImageView({Key? key, 
     @required this.imagePath,
     this.height,
     this.width,
@@ -32,7 +32,7 @@ class CustomImageView extends StatelessWidget {
     this.margin,
     this.border,
     this.placeHolder = 'assets/images/image_not_found.png',
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class CustomImageView extends StatelessWidget {
             width: width,
             fit: fit,
             imageUrl: imagePath!,
-            placeholder: (context, url) => Container(
+            placeholder: (context, url) => const SizedBox(
               height: 30,
               width: 30,
               child: CircularProgressIndicator(),
@@ -127,17 +127,17 @@ class CustomImageView extends StatelessWidget {
           );
       }
     }
-    return SizedBox();
+    return const SizedBox();
   }
 }
 
 extension ImageTypeExtension on String {
   ImageType get imageType {
-    if (this.startsWith('http') || this.startsWith('https')) {
+    if (startsWith('http') || startsWith('https')) {
       return ImageType.network;
-    } else if (this.endsWith('.svg')) {
+    } else if (endsWith('.svg')) {
       return ImageType.svg;
-    } else if (this.startsWith('file://')) {
+    } else if (startsWith('file://')) {
       return ImageType.file;
     } else {
       return ImageType.png;

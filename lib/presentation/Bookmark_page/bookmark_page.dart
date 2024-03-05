@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
 import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_leading_image.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
 import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
-import 'package:sdgp_test01/widgets/custom_bottom_bar.dart';
 import 'package:sdgp_test01/presentation/frame_404_bottomsheet/frame_404_bottomsheet.dart';
 import 'package:sdgp_test01/presentation/frame_405_bottomsheet/frame_405_bottomsheet.dart';
 import 'package:sdgp_test01/presentation/frame_406_bottomsheet/frame_406_bottomsheet.dart';
@@ -29,7 +27,7 @@ class FramelistItemWidget extends StatelessWidget {
       height: size,
       alignment: Alignment.center, // Center the child widget
       decoration: BoxDecoration(
-        color: Color(0xFF424242), // Using the color #424242
+        color: const Color(0xFF424242), // Using the color #424242
         borderRadius: BorderRadius.circular(20), // Assuming 20 is the desired radius
       ),
       child: Text(
@@ -113,9 +111,9 @@ class Bookmark_page extends StatelessWidget {
   Widget _buildFrameList(BuildContext context) {
     List<String> titles = ['WORK WEAR', 'PARTY WEAR', 'CASUAL WEAR'];
     List<Widget> frames = [
-      Frame404Bottomsheet(), // Replace with your actual screen widget for frame_1
-      Frame405Bottomsheet(), // Replace with your actual screen widget for frame_2
-      Frame406Bottomsheet(), // Replace with your actual screen widget for frame_3
+      const Frame404Bottomsheet(), // Replace with your actual screen widget for frame_1
+      const Frame405Bottomsheet(), // Replace with your actual screen widget for frame_2
+      const Frame406Bottomsheet(), // Replace with your actual screen widget for frame_3
       // Add more frames if you have more categories
     ];
 
@@ -170,7 +168,7 @@ class Bookmark_page extends StatelessWidget {
                   // Navigate to the corresponding screen for imgUser1
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()), // Replace with your actual screen widget
+                    MaterialPageRoute(builder: (context) => const Landing_page()), // Replace with your actual screen widget
                   );
                 },
                 child: SvgPicture.asset(
@@ -201,7 +199,7 @@ class Bookmark_page extends StatelessWidget {
                   // Navigate to the corresponding screen for imgFrame373
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()), // Replace with your actual screen widget
+                    MaterialPageRoute(builder: (context) => const Landing_page()), // Replace with your actual screen widget
                   );
                 },
                 child: SvgPicture.asset(
@@ -216,7 +214,7 @@ class Bookmark_page extends StatelessWidget {
                   // Navigate to the corresponding screen for imgFrame373
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()), // Replace with your actual screen widget
+                    MaterialPageRoute(builder: (context) => const Landing_page()), // Replace with your actual screen widget
                   );
                 },
                 child: SvgPicture.asset(
@@ -231,7 +229,7 @@ class Bookmark_page extends StatelessWidget {
                   // Navigate to the corresponding screen for imgFrame373
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => User_profile()), // Replace with your actual screen widget
+                    MaterialPageRoute(builder: (context) => const User_profile()), // Replace with your actual screen widget
                   );
                 },
                 child: SvgPicture.asset(

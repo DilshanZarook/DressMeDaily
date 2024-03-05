@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField({
+  const CustomTextFormField({
     Key? key,
     this.alignment,
     this.width,
@@ -102,7 +102,7 @@ class CustomTextFormField extends StatelessWidget {
       suffixIcon: suffix,
       suffixIconConstraints: suffixConstraints,
       isDense: true,
-      contentPadding: contentPadding ?? EdgeInsets.all(8),
+      contentPadding: contentPadding ?? const EdgeInsets.all(8),
       fillColor: fillColor ?? theme.colorScheme.primary,
       filled: filled ?? true,
       border: borderDecoration ?? _defaultBorder(),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle_four.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title_image.dart';
 import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_radio_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,7 +10,7 @@ import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
 
 
 class Themes_page extends StatefulWidget {
-  Themes_page({Key? key}) : super(key: key);
+  const Themes_page({Key? key}) : super(key: key);
 
   @override
   _Themes_pageState createState() => _Themes_pageState();
@@ -32,7 +31,7 @@ class _Themes_pageState extends State<Themes_page> {
             children: [
               SizedBox(height: 84.v),
               _buildRadioGroup(context),
-              Spacer(),
+              const Spacer(),
             ],
           ),
         ),
@@ -153,10 +152,10 @@ class _Themes_pageState extends State<Themes_page> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()),
+                    MaterialPageRoute(builder: (context) => const Landing_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -173,7 +172,7 @@ class _Themes_pageState extends State<Themes_page> {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -188,7 +187,7 @@ class _Themes_pageState extends State<Themes_page> {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -203,7 +202,7 @@ class _Themes_pageState extends State<Themes_page> {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -215,10 +214,10 @@ class _Themes_pageState extends State<Themes_page> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => User_profile()),
+                    MaterialPageRoute(builder: (context) => const User_profile()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(

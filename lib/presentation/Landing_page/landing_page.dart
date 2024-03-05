@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Profile_picture/profile_picture.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
 import 'package:sdgp_test01/widgets/app_bar/custom_app_bar_1.dart';
 import 'package:sdgp_test01/widgets/custom_icon_button.dart';
@@ -26,7 +25,7 @@ class Landing_page extends StatelessWidget {
           scrollDirection: Axis.vertical,
           children: [
             _Landing_page1(context), // Your existing Frame325Screen content
-            Landing_page_2(), // Second screen to navigate to
+            const Landing_page_2(), // Second screen to navigate to
           ],
         ),
         bottomNavigationBar: _buildBottomBar(context), // Add bottomNavigationBar here
@@ -311,7 +310,7 @@ class Landing_page extends StatelessWidget {
                     width: 360.h,
                     // Width of the rectangle
                     decoration: BoxDecoration(
-                      color: Color(0xFF3D3D3D), // Rectangle color (dark grey)
+                      color: const Color(0xFF3D3D3D), // Rectangle color (dark grey)
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15.h), // Top left corner radius
                         topRight: Radius.circular(15.h), // Top right corner radius
@@ -335,7 +334,7 @@ class Landing_page extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       color: appTheme.blueGray200, // Retaining the background color from outlineBlack9002
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(50), // Applying a border radius of 50 to the top left corner
                         topRight: Radius.circular(50), // Applying a border radius of 50 to the top right corner
                         bottomLeft: Radius.circular(0), // Keeping the bottom left corner radius as 0
@@ -351,7 +350,7 @@ class Landing_page extends StatelessWidget {
                           // Add padding inside the SizedBox for the Text
                           vertical: 20.h, // Adjust this as needed for top and bottom padding of the text
                         ),
-                          child:Text(
+                          child:const Text(
                             "Trending local\nrecommendations",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -398,7 +397,7 @@ class Landing_page extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Main_settings()), // Replace Frame624 with the actual widget class for frame 624
+                      MaterialPageRoute(builder: (context) => const Main_settings()), // Replace Frame624 with the actual widget class for frame 624
                     );
                   },
                   child: Container(
@@ -414,7 +413,7 @@ class Landing_page extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Divider(
             thickness: 6.h,
             color: appTheme.black900,
@@ -452,7 +451,7 @@ class Landing_page extends StatelessWidget {
                   // Navigate to the corresponding screen for imgUser1
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()), // Replace with your actual screen widget
+                    MaterialPageRoute(builder: (context) => const Landing_page()), // Replace with your actual screen widget
                   );
                 },
                 child: CustomImageView(
@@ -483,7 +482,7 @@ class Landing_page extends StatelessWidget {
                   // Navigate to the corresponding screen for imgFrame373
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddtowardrobeScreen()), // Replace with your actual screen widget
+                    MaterialPageRoute(builder: (context) => const AddtowardrobeScreen()), // Replace with your actual screen widget
                   );
                 },
                 child: CustomImageView(
@@ -498,7 +497,7 @@ class Landing_page extends StatelessWidget {
                   // Navigate to the corresponding screen for imgFrame373
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()), // Replace with your actual screen widget
+                    MaterialPageRoute(builder: (context) => const Landing_page()), // Replace with your actual screen widget
                   );
                 },
                 child: CustomImageView(
@@ -513,7 +512,7 @@ class Landing_page extends StatelessWidget {
                   // Navigate to the corresponding screen for imgFrame373
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => User_profile()), // Replace with your actual screen widget
+                    MaterialPageRoute(builder: (context) => const User_profile()), // Replace with your actual screen widget
                   );
                 },
                 child: CustomImageView(
@@ -548,14 +547,14 @@ class CustomImageView extends StatelessWidget {
   final Alignment? alignment;
   final EdgeInsetsGeometry? margin;
 
-  CustomImageView({
+  const CustomImageView({Key? key, 
     required this.imagePath,
     this.height,
     this.width,
     this.fit,
     this.alignment,
     this.margin,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

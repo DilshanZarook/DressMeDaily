@@ -10,7 +10,7 @@ import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class User_profile extends StatefulWidget {
-  User_profile({Key? key}) : super(key: key);
+  const User_profile({Key? key}) : super(key: key);
 
   @override
   _User_profileState createState() => _User_profileState();
@@ -58,13 +58,13 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
     );
 
     _slideAnimation = Tween<Offset>(
-      begin: Offset(0, 1),
+      begin: const Offset(0, 1),
       end: Offset.zero,
     ).animate(CurvedAnimation(
       parent: _controller!,
       curve: Curves.easeOutQuad,
     ));
-    Future.delayed(Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 200), () {
       _controller!.forward();
     });
   }
@@ -132,7 +132,7 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
                   horizontal: 36.h,
                   vertical: 0.v,
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.lime,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(200),
@@ -327,7 +327,7 @@ Widget _buildBottomBar(BuildContext context) {
                 // Navigate to the corresponding screen for imgUser1
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Landing_page()), // Replace with your actual screen widget
+                  MaterialPageRoute(builder: (context) => const Landing_page()), // Replace with your actual screen widget
                 );
               },
               child: SvgPicture.asset(
@@ -358,7 +358,7 @@ Widget _buildBottomBar(BuildContext context) {
                 // Navigate to the corresponding screen for imgFrame373
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Landing_page()), // Replace with your actual screen widget
+                  MaterialPageRoute(builder: (context) => const Landing_page()), // Replace with your actual screen widget
                 );
               },
               child: SvgPicture.asset(
@@ -373,7 +373,7 @@ Widget _buildBottomBar(BuildContext context) {
                 // Navigate to the corresponding screen for imgFrame373
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Landing_page()), // Replace with your actual screen widget
+                  MaterialPageRoute(builder: (context) => const Landing_page()), // Replace with your actual screen widget
                 );
               },
               child: SvgPicture.asset(
@@ -388,7 +388,7 @@ Widget _buildBottomBar(BuildContext context) {
                 // Navigate to the corresponding screen for imgFrame373
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => User_profile()), // Replace with your actual screen widget
+                  MaterialPageRoute(builder: (context) => const User_profile()), // Replace with your actual screen widget
                 );
               },
               child: SvgPicture.asset(
@@ -425,7 +425,7 @@ class Frame395ContainerScreen extends StatelessWidget {
             onGenerateRoute: (routeSetting) => PageRouteBuilder(
                 pageBuilder: (ctx, ani, ani1) =>
                     getCurrentPage(routeSetting.name!),
-                transitionDuration: Duration(seconds: 0))),
+                transitionDuration: const Duration(seconds: 0))),
         bottomNavigationBar: _buildBottomBar(context));
   }
 
@@ -447,9 +447,9 @@ class Frame395ContainerScreen extends StatelessWidget {
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
       case AppRoutes.user_profile:
-        return User_profile();
+        return const User_profile();
       default:
-        return DefaultWidget();
+        return const DefaultWidget();
     }
   }
 }

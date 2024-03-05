@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Starting_page/starting_page.dart'; // Updated import
+// Updated import
 import 'package:sdgp_test01/presentation/Loading_page_4(initialLoadingScreen)/loading_page_4.dart';
 
 class Initial_loading_page extends StatefulWidget {
@@ -15,10 +15,10 @@ class _Initial_loading_pageState extends State<Initial_loading_page> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 3000), () {
+    Future.delayed(const Duration(milliseconds: 3000), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Loading_page_4()), // Navigate to StartingPage
+        MaterialPageRoute(builder: (context) => const Loading_page_4()), // Navigate to StartingPage
       );
     });
   }

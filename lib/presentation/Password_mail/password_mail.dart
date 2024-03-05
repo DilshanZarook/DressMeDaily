@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 
 class Password_mail extends StatelessWidget {
   const Password_mail({Key? key}) : super(key: key);
@@ -24,7 +23,7 @@ class Password_mail extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  Spacer(flex: 39), // May adjust if more space is needed
+                  const Spacer(flex: 39), // May adjust if more space is needed
                   Container(
                     width: 260.h,
                     margin: EdgeInsets.symmetric(horizontal: 50.h),
@@ -36,7 +35,7 @@ class Password_mail extends StatelessWidget {
                       style: theme.textTheme.bodyLarge,
                     ),
                   ),
-                  Spacer(flex: 60), // Reduced flex value moves "Next" button up
+                  const Spacer(flex: 60), // Reduced flex value moves "Next" button up
                   Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
@@ -52,7 +51,7 @@ class Password_mail extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Spacer(flex: 10), // Adjust flex to add space below if needed
+                  const Spacer(flex: 10), // Adjust flex to add space below if needed
                 ],
               ),
             ),

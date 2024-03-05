@@ -23,7 +23,7 @@ class Settings extends StatelessWidget {
                     children: [
                       _buildFrame(context),
                       SizedBox(height: 18.v),
-                      Divider(),
+                      const Divider(),
                       SizedBox(height: 18.v),
                       GestureDetector(
                           onTap: () {
@@ -32,7 +32,7 @@ class Settings extends StatelessWidget {
                           child: Padding(
                               padding: EdgeInsets.only(left: 15.h),
                               child: Row(children: [
-                                Container(
+                                SizedBox(
                                   height: 35.adaptSize,
                                   width: 35.adaptSize,
                                   child: SvgPicture.asset(
@@ -49,7 +49,7 @@ class Settings extends StatelessWidget {
                                         style: theme.textTheme.bodyLarge))
                               ]))),
                       SizedBox(height: 17.v),
-                      Divider(),
+                      const Divider(),
                       SizedBox(height: 12.v),
                       GestureDetector(
                           onTap: () {
@@ -58,7 +58,7 @@ class Settings extends StatelessWidget {
                           child: Padding(
                               padding: EdgeInsets.only(left: 16.h),
                               child: Row(children: [
-                                Container(
+                                SizedBox(
                                   height: 30.adaptSize,
                                   width: 30.adaptSize,
                                     child: SvgPicture.asset(
@@ -75,7 +75,7 @@ class Settings extends StatelessWidget {
                                         style: theme.textTheme.bodyLarge))
                               ]))),
                       SizedBox(height: 15.v),
-                      Divider(),
+                      const Divider(),
                       SizedBox(height: 15.v),
                       Padding(
                           padding: EdgeInsets.only(left: 20.h),
@@ -116,7 +116,7 @@ class Settings extends StatelessWidget {
                                         ]))
                               ])),
                       SizedBox(height: 21.v),
-                      Divider(),
+                      const Divider(),
                       SizedBox(height: 18.v),
                       Padding(
                           padding: EdgeInsets.only(left: 19.h),
@@ -191,7 +191,7 @@ class Settings extends StatelessWidget {
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 75.h, top: 5.v, bottom: 1.v, right: 1.v),
-                  child: Text(
+                  child: const Text(
                     "Settings",
                     style: TextStyle(
                       fontSize: 28, // Set font size to 18
@@ -207,7 +207,7 @@ class Settings extends StatelessWidget {
 
 
           SizedBox(height: 15.v),
-          Align(
+          const Align(
             alignment: Alignment.centerLeft,
             child: SizedBox(width: double.maxFinite, child: Divider()),
           ),
@@ -235,7 +235,7 @@ class Settings extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(left: 20.0), // Adjust the padding value as needed
+              padding: const EdgeInsets.only(left: 20.0), // Adjust the padding value as needed
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -287,10 +287,10 @@ class Settings extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()),
+                    MaterialPageRoute(builder: (context) => const Landing_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -307,7 +307,7 @@ class Settings extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -322,7 +322,7 @@ class Settings extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -337,7 +337,7 @@ class Settings extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -349,10 +349,10 @@ class Settings extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => User_profile()),
+                    MaterialPageRoute(builder: (context) => const User_profile()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(

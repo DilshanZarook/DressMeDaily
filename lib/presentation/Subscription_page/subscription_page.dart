@@ -20,17 +20,17 @@ class Subscription_page extends StatefulWidget {
 class _Subscription_pageState extends State<Subscription_page> {
   int _currentIndex = 0; // Variable to keep track of the current index
   final List<LinearGradient> buttonGradients = [
-    LinearGradient(
+    const LinearGradient(
       colors: [Color(0xFF3E4E5E), Color(0xFFDBDBDB)], // Corrected gradient colors
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
-    LinearGradient(
-      colors: [Color(0xFFCFDD53), Color(0xFFDADA9)], // Gradient for second item
+    const LinearGradient(
+      colors: [Color(0xFFCFDD53), Color(0x0ffdada9)], // Gradient for second item
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
-    LinearGradient(
+    const LinearGradient(
       colors: [Color(0xFFeecd16), Color(0xFFdbdbdb)], // Gradient for third item
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -65,7 +65,7 @@ class _Subscription_pageState extends State<Subscription_page> {
                       aspectRatio: 16 / 9,
                       autoPlayCurve: Curves.fastOutSlowIn,
                       enableInfiniteScroll: true,
-                      autoPlayAnimationDuration: Duration(milliseconds: 700),
+                      autoPlayAnimationDuration: const Duration(milliseconds: 700),
                       viewportFraction: 0.7,
                       onPageChanged: (index, reason) {
                         setState(() {
@@ -82,7 +82,7 @@ class _Subscription_pageState extends State<Subscription_page> {
                         builder: (BuildContext context) {
                           return Container(
                             width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
+                            margin: const EdgeInsets.symmetric(horizontal: 5.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30.h), // Adjust as needed
                               image: DecorationImage(
@@ -103,13 +103,13 @@ class _Subscription_pageState extends State<Subscription_page> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 28.h),
                     child: OutlineGradientButton(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         colors: [Colors.white, Colors.white], // Solid black gradient for the outline
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       strokeWidth: 2,
-                      radius: Radius.circular(40), // Set the border radius for the outline
+                      radius: const Radius.circular(40), // Set the border radius for the outline
                       padding: EdgeInsets.zero,
                       child: GestureDetector(
                         onTap: () => onTapSubscribe(context), // Call the onTapSubscribe function when the Container is tapped
@@ -198,10 +198,10 @@ class _Subscription_pageState extends State<Subscription_page> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()),
+                    MaterialPageRoute(builder: (context) => const Landing_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -218,7 +218,7 @@ class _Subscription_pageState extends State<Subscription_page> {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -233,7 +233,7 @@ class _Subscription_pageState extends State<Subscription_page> {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -248,7 +248,7 @@ class _Subscription_pageState extends State<Subscription_page> {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -260,10 +260,10 @@ class _Subscription_pageState extends State<Subscription_page> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => User_profile()),
+                    MaterialPageRoute(builder: (context) => const User_profile()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -292,11 +292,11 @@ class _Subscription_pageState extends State<Subscription_page> {
   void onTapSubscribe(BuildContext context) {
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
+      builder: (_) => const AlertDialog(
         content: Thank_popup(),
         backgroundColor: Colors.transparent,
         contentPadding: EdgeInsets.zero,
-        insetPadding: const EdgeInsets.only(left: 0),
+        insetPadding: EdgeInsets.only(left: 0),
       ),
     ).then((_) {
       // This code is executed after the dialog is closed
@@ -306,6 +306,8 @@ class _Subscription_pageState extends State<Subscription_page> {
 
 }
 class YourWidget extends StatelessWidget {
+  const YourWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
@@ -316,7 +318,7 @@ class YourWidget extends StatelessWidget {
         aspectRatio: 16/9,
         autoPlayCurve: Curves.fastOutSlowIn,
         enableInfiniteScroll: true,
-        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        autoPlayAnimationDuration: const Duration(milliseconds: 800),
         viewportFraction: 0.8,
       ),
       items: [
@@ -328,7 +330,7 @@ class YourWidget extends StatelessWidget {
           builder: (BuildContext context) {
             return Container(
               width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.h), // Adjust as needed
                 image: DecorationImage(
