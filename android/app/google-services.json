@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "62543235071",
+    "project_id": "dressmedaily-e8e0c",
+    "storage_bucket": "dressmedaily-e8e0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62543235071:android:0f7857de1d1edf3b6989ca",
+        "android_client_info": {
+          "package_name": "com.sdgptest.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrkPvAvBI-jGnsAOZ8Eg5Wi6oNWbfQE0E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
