@@ -4,7 +4,6 @@ import 'package:sdgp_test01/widgets/base_button.dart';
 
 class CustomOutlinedButton extends BaseButton {
   const CustomOutlinedButton({Key? key, 
-    Key? key,
     this.decoration,
     this.leftIcon,
     this.rightIcon,
