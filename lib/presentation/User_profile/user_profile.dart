@@ -110,50 +110,56 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
-
     return Scaffold(
       key: _scaffoldKey,
       resizeToAvoidBottomInset: true, // This is important
       appBar: _buildAppBar(context),
       body: SizedBox(
-        height: 700.v, // Adjust height as needed
+        height: 750.v, // Adjust height as needed
         width: double.maxFinite,
-        child: Stack(
-          alignment: Alignment.topCenter,
+        child: Column(
           children: [
-            SlideTransition(
-              position: _slideAnimation!,
-              child: Container(
-                margin: EdgeInsets.only(
-                  top: isKeyboardVisible ? 0 : 200.v, // Adjust top margin when keyboard is visible
-                  left: 0.h,
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 36.h,
-                  vertical: 0.v,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.lime,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(200),
-                    topRight: Radius.circular(200),
+            Expanded(
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  SlideTransition(
+                    position: _slideAnimation!,
+                    child: Container(
+                      margin: EdgeInsets.only(
+                        top: isKeyboardVisible ? 0 : 160.v, // Adjust top margin when keyboard is visible
+                        left: 0.h,
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 36.h,
+                        vertical: 0.v,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.lime,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(200),
+                          topRight: Radius.circular(200),
+                        ),
+                      ),
+                      child: _buildUserProfileForm(context),
+                    ),
                   ),
-                ),
-                child: _buildUserProfileForm(context),
+                  Positioned(
+                    top: isKeyboardVisible ? -120.v : 30.v, // Adjust this value as needed
+                    child: Container(
+                      height: 120.v,
+                      width: 120.h,
+                      decoration: BoxDecoration(
+                        color: appTheme.gray800,
+                        borderRadius: BorderRadius.circular(60.h), // Adjust radius as needed
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Positioned(
-              top: isKeyboardVisible ? -200.v : 30.v, // Push the profile image up when keyboard is visible
-              right: MediaQuery.of(context).size.width / 2 - 80.h,
-              child: Container(
-                height: 160.v,
-                width: 160.h,
-                decoration: BoxDecoration(
-                  color: appTheme.gray800,
-                  borderRadius: BorderRadius.circular(90.h),
-                ),
-              ),
-            ),
+            _buildLogout(context),
+            SizedBox(height: isKeyboardOpen ? 5.5.v : 20.v), // Ensure this is outside the Stack
           ],
         ),
       ),
@@ -161,23 +167,22 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
     );
   }
 
+
   Widget _buildUserProfileForm(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 20.v),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: isKeyboardVisible ? [
-            GestureDetector(
+        if (isKeyboardVisible) // Display the close button only when keyboard is visible
+          Center(
+            child: GestureDetector(
               onTap: () {
                 // Dismiss the keyboard if it is open
                 FocusScope.of(context).unfocus();
               },
               child: Container(
-                height: 20.adaptSize,
-                width: 20.adaptSize,
+                height: 35.adaptSize,
+                width: 35.adaptSize,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(ImageConstant.imgClose), // Path to your image
@@ -186,23 +191,22 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
                 ),
               ),
             ),
-          ] : [],
-        ),
-        SizedBox(height: 20.v),
+          ),
+        SizedBox(height: isKeyboardVisible ? 10.v : 35.v),
         _buildLabel(context, "Name"),
-        SizedBox(height: 11.v),
+        SizedBox(height: 5.v),
         _buildName(context),
-        SizedBox(height: 10.v),
+        SizedBox(height: 5.v),
         _buildLabel(context, "Age"),
-        SizedBox(height: 9.v),
+        SizedBox(height: 5.v),
         _buildAge(context),
-        SizedBox(height: 8.v),
+        SizedBox(height: 5.v),
         _buildLabel(context, "BIO"),
-        SizedBox(height: 11.v),
+        SizedBox(height: 5.v),
         _buildBio(context),
-        SizedBox(height: 22.v),
+        SizedBox(height: 25.v),
         _buildSave(context),
-        SizedBox(height: isKeyboardOpen ? 30.5.v : 38.v),
+        SizedBox(height: isKeyboardOpen ? 14.5.v : 20.v),
       ],
     );
   }
@@ -241,7 +245,7 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
             // ),
             // centerTitle: true,
             title: Padding(
-              padding: EdgeInsets.only(bottom: 25.v), // Add padding above the title
+              padding: EdgeInsets.only(bottom: 25.v,left: 120.v), // Add padding above the title
               child: AppbarTitle(text: "User Profile"),
             ),
           ),
@@ -292,71 +296,76 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
     );
   }
 
-  /// Section Widget
-  // Widget _buildSave(BuildContext context) {
-  //   return CustomElevatedButton(
-  //     width: 64.h,
-  //     text: "Save",
-  //     alignment: Alignment.centerRight,
-  //   );
-  // }
-
-
   Widget _buildSave(BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      CustomElevatedButton(
-        width: 64.h,
-        text: "Save",
-        alignment: Alignment.centerRight,
-      ),
-      TextButton(
-        onPressed: () {
-          // Implement logout functionality here
-          // This example shows a simple alert dialog
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text('Log out'),
-                content: Text('Are you sure you want to log out?'),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      // Perform logout actions (e.g., clear user data, navigate to login screen)
-                      Navigator.of(context).pop();
-                      Navigator.pushReplacementNamed(context, AppRoutes.starting_page); // Replace '/login' with your actual login route name
-                    },
-                    child: Text(
-                      'Log out',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ],
-              );
-            },
-          );
-        },
-        child: Text(
-          "Log out",
-          style: TextStyle(color: Colors.red),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        CustomElevatedButton(
+          width: 64.h,
+          text: "Save",
+          alignment: Alignment.centerRight,
         ),
-      ),
-    ],
-  );
-}
+      ],
+    );
+  }
 
-  
+  Widget _buildLogout(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextButton(
+          onPressed: () {
+            // Implement logout functionality here
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Log out'),
+                  content: Text('Are you sure you want to log out?'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text(
+                        'Cancel',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // Perform logout actions (e.g., clear user data, navigate to login screen)
+                        Navigator.of(context).pop();
+                        Navigator.pushReplacementNamed(context, '/login'); // Replace '/login' with your actual login route name
+                      },
+                      child: Text(
+                        'Log out',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Text(
+              'Log out',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16.0,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+
 }
 
 Widget _buildBottomBar(BuildContext context) {
