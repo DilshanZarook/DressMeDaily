@@ -97,7 +97,7 @@ class _Gender_selectionState extends State<Gender_selection> with TickerProvider
                       // Original blue rectangle
                       Positioned(
                         top: 35,
-                        left: 80,
+                        left: 40,
                         child: Container(
                           width: _rectangleWidth,
                           height: _rectangleHeight,
@@ -194,7 +194,7 @@ class _Gender_selectionState extends State<Gender_selection> with TickerProvider
                         width: _rectangleWidth,
                         height: _rectangleHeight,
                         decoration: BoxDecoration(
-                          color: isClicked.value ? Colors.greenAccent[400] : color, // Change color on click
+                          color: isClicked.value ? Color.fromARGB(255, 148, 255, 26) : color, // Change color on click
                           borderRadius: BorderRadius.circular(40),
                           border: Border.all(
                             color: Colors.black, // Color of the border

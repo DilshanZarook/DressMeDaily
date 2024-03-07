@@ -31,7 +31,7 @@ class _Loading_page_3State extends State<Loading_page_3> with SingleTickerProvid
       });
 
     Future.delayed(Duration(seconds: 3), () {
-      _controller.dispose(); // Dispose the controller before navigating
+      // _controller.dispose(); // Dispose the controller before navigating
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => Landing_page()),
@@ -82,10 +82,4 @@ class _Loading_page_3State extends State<Loading_page_3> with SingleTickerProvid
       ),
     );
   }
-
-
-
-
-
-
 }
