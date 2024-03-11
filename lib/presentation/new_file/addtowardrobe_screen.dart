@@ -13,6 +13,7 @@ class AddtowardrobeScreen extends StatefulWidget {
 }
 
 class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
+  String? wearType; // Define wearType at the class level
   File? _selectedImage;
   String imageUrl = '';
   String imageLabel = ''; // Variable to hold the label name
@@ -76,82 +77,150 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
     double probability = topPrediction['probability'] * 100;
     TextEditingController customLabelController = TextEditingController();
 
-    void askUserForLabel() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text("Enter Custom Label"),
-            content: TextField(
-              controller: customLabelController,
-              decoration: const InputDecoration(hintText: "Enter correct label"),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text("Save"),
-                onPressed: () {
+  void askUserForLabel() {
+  TextEditingController customLabelController = TextEditingController();
+  String? wearType;
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Enter Custom Label"),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              TextField(
+                controller: customLabelController,
+                decoration: InputDecoration(hintText: "Enter correct label"),
+              ),
+              DropdownButton<String>(
+                value: wearType, // This should be the currently selected category
+                onChanged: (String? newValue) {
                   setState(() {
-                    imageLabel = customLabelController.text;
+                    wearType = newValue; // Update the state with the new value
                   });
-                  Navigator.of(context).pop();
-                  uploadToFirebase(_selectedImage!);
                 },
+                items: <String>['work-wear', 'party-wear', 'casual-wear']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                hint: Text("Select Category"),
               ),
             ],
-          );
-        },
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text("Save"),
+            onPressed: () {
+              if (wearType == null || customLabelController.text.isEmpty) {
+                // Prompt user to select a category and enter a label
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Missing Information'),
+                      content: Text('Please select a category and enter a label.'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text('OK'),
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the prompt dialog
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else {
+                String finalLabel = "${customLabelController.text}_$wearType";
+                setState(() { imageLabel = finalLabel; });
+                Navigator.of(context).pop(); // Close the original dialog
+                uploadToFirebase(_selectedImage!);
+              }
+            },
+          ),
+        ],
       );
-    }
+    },
+  );
+}
+
     
-                  
+   void showDialogForClassification(String message, String label, double probability) {
+  TextEditingController customLabelController = TextEditingController();
+  String? wearType;
 
-
-    void showDialogForClassification() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text("Classification Results"),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text(message),
-                  Text(
-                    "Is it a ${topPrediction['label']}?",
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  Text(
-                    "Probability: ${probability.toStringAsFixed(2)}%",
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ],
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(message),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(
+                "Is it a $label?",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text("Yes, it's correct"),
-                onPressed: () {
+              Text(
+                "Probability: ${probability.toStringAsFixed(2)}%",
+                style: TextStyle(fontSize: 16),
+              ),
+               DropdownButton<String>(
+                value: wearType, // This should be the currently selected category
+                onChanged: (String? newValue) {
                   setState(() {
-                    imageLabel = topPrediction['label']; // Set label from AI prediction
+                    wearType = newValue; // Update the state with the new value
                   });
-                  Navigator.of(context).pop();
-                  uploadToFirebase(_selectedImage!); // Trigger upload with AI prediction label
                 },
-              ),
-              TextButton(
-                child: const Text("No, it's not"),
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close the current dialog
-                  askUserForLabel(); // Show the dialog for custom label entry
-                },
+                items: <String>['work-wear', 'party-wear', 'casual-wear']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                hint: Text("Select Category"),
               ),
             ],
-          );
-        },
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text("Confirm"),
+            onPressed: () {
+              String finalLabel;
+              if (wearType != null) {
+                finalLabel = "${label}_${wearType}";
+              } else {
+                finalLabel = label;
+              }
+              setState(() {
+                imageLabel = finalLabel;
+              });
+              Navigator.of(context).pop();
+              uploadToFirebase(_selectedImage!);
+            },
+          ),
+          TextButton(
+            child: Text("No, it's not correct"),
+            onPressed: () {
+              Navigator.of(context).pop();
+              askUserForLabel();
+            },
+          ),
+        ],
       );
-    }
+    },
+  );
+}
 
-    showDialogForClassification();
+
+    showDialogForClassification(message, topPrediction['label'], probability);
   }
 
   Future<void> uploadToFirebase(File image) async {
