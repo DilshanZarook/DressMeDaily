@@ -51,7 +51,6 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
         var responseData = await response.stream.toBytes();
         var responseString = String.fromCharCodes(responseData);
         var jsonResponse = jsonDecode(responseString);
-        print("Success: $jsonResponse");
 
         String message = jsonResponse['message'];
         List<dynamic> predictions = jsonResponse['top_predictions'];
@@ -60,7 +59,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
         print('Error: Server responded with status code: ${response.statusCode}');
       }
     } catch (e) {
-      print('Exception caught: $e');
+      showSnackBar('Exception caught during image processing: $e');
     }
   }
 
@@ -95,7 +94,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
                     imageLabel = customLabelController.text;
                   });
                   Navigator.of(context).pop();
-                  uploadToFirebase(_selectedImage!); // Trigger upload with user-provided label
+                  uploadToFirebase(_selectedImage!);
                 },
               ),
             ],
@@ -103,6 +102,9 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
         },
       );
     }
+    
+                  
+
 
     void showDialogForClassification() {
       showDialog(
