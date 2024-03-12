@@ -334,7 +334,7 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
                       onPressed: () {
                         // Perform logout actions (e.g., clear user data, navigate to login screen)
                         Navigator.of(context).pop();
-                        Navigator.pushReplacementNamed(context, '/login'); // Replace '/login' with your actual login route name
+                        Navigator.pushReplacementNamed(context, AppRoutes.starting_page); // Replace your start screen route
                       },
                       child: Text(
                         'Log out',
