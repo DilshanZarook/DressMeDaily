@@ -328,8 +328,7 @@ class _Frame1010ScreenState extends State<Frame1010Screen> {
                       return ElevatedButton(
                         onPressed: () => setState(() => customTimeUnit = unit), // Update the unit and rebuild
                         style: ElevatedButton.styleFrom(
-                          primary: customTimeUnit == unit ? Colors.lightGreenAccent : null, // Change color if selected
-                          onPrimary: Colors.white, // Text color
+                          foregroundColor: Colors.white, backgroundColor: customTimeUnit == unit ? Colors.lightGreenAccent : null, // Text color
                         ),
                         child: Text(unit),
                       );
