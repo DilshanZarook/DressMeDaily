@@ -205,5 +205,64 @@ class ImageConstant {
   static String imgArrowDownGray90001 =
       '$imagePath/img_arrow_down_gray_900_01.png';
 
+  static String imgRectangle364 = '$imagePath/img_rectangle_364.png';
 
+  static String imgFrame841 = '$imagePath/img_frame_841.svg';
+
+  // Frame 1010 images
+  static String imgVector7 = '$imagePath/img_vector_7.svg';
+
+  // Frame 1038 images
+  static String imgClock = '$imagePath/img_clock.svg';
+
+  // Frame 881 images
+  static String imgFrame877 = '$imagePath/img_frame_877.svg';
+
+  // Frame 926 images
+
+  static String imgFrame899 = '$imagePath/img_frame_899.svg';
+
+  static String greentick = '$imagePath/Vector.png';
+
+  static String redcross = '$imagePath/Frame898.png';
+
+
+  static String f811 = '$imagePath/Frame810.png';
+
+  static String f810 = '$imagePath/Frame810.png';
+  // Common images
+
+  static String imgFrame374 = '$imagePath/img_frame_374.svg';
+
+  static String imgFilledAppointmentReminders =
+      '$imagePath/img_filled_appointment_reminders.png';
+
+  static String imgFrame114 = '$imagePath/img_frame_114.svg';
+
+  static String imgSearchnormal = '$imagePath/img_searchnormal.svg';
+
+  static String imgUserGray50001 = '$imagePath/img_user_gray_500_01.svg';
+
+  static String imgUserGray5000155x56 =
+      '$imagePath/img_user_gray_500_01_55x56.svg';
+
+  static String imgAlarm = '$imagePath/img_alarm.svg';
+
+  static String imgOip1 = '$imagePath/img_oip_1.png';
+
+  static String imgImage1 = '$imagePath/img_image_1.png';
+
+  static String imgFrame1042 = '$imagePath/img_frame_1042.svg';
+
+  static String imgOip2 = '$imagePath/img_oip_2.png';
+
+  static String imgFrame682 = '$imagePath/img_frame_682.png';
+
+  static String imgThumbsUp = '$imagePath/img_thumbs_up.svg';
+
+  static String imgVideoCamera = '$imagePath/img_video_camera.svg';
+
+  static String img_plus = '$imagePath/img_plus.svg';
+
+  static String imgPolygon3 = '$imagePath/img_polygon_3.svg';
 }

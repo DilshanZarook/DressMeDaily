@@ -34,6 +34,16 @@ class CustomButtonStyles {
       ],
     ),
   );
+  static ButtonStyle get outlineBlackTL19 => OutlinedButton.styleFrom(
+    backgroundColor: Colors.transparent,
+    side: BorderSide(
+      color: appTheme.black900,
+      width: 1,
+    ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(19.h),
+    ),
+  );
   static BoxDecoration get gradientBlueGrayDfToBlueGrayDecoration =>
       BoxDecoration(
         borderRadius: BorderRadius.circular(30.h),

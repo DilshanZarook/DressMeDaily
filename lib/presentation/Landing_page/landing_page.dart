@@ -10,7 +10,8 @@ import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
 import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
 import 'package:sdgp_test01/presentation/new_file/addtowardrobe_screen.dart';
 import 'package:sdgp_test01/presentation/Landing_page_2/landing_page_2.dart';
-
+import 'package:sdgp_test01/presentation/frame_851_tab_container_screen/frame_851_tab_container_screen.dart';
+import 'package:sdgp_test01/presentation/Searchbar_page/Searchbar_page.dart';
 class Landing_page extends StatelessWidget {
   const Landing_page({Key? key})
       : super(
@@ -467,7 +468,7 @@ class Landing_page extends StatelessWidget {
                   // Navigate to the corresponding screen for imgFrame373
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Bookmark_page()), // Replace with your actual screen widget
+                    MaterialPageRoute(builder: (context) => Searchbar_page()), // Replace with your actual screen widget
                   );
                 },
                 child: CustomImageView(
@@ -497,7 +498,7 @@ class Landing_page extends StatelessWidget {
                   // Navigate to the corresponding screen for imgFrame373
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Landing_page()), // Replace with your actual screen widget
+                    MaterialPageRoute(builder: (context) => const Frame851TabContainerScreen()), // Replace with your actual screen widget
                   );
                 },
                 child: CustomImageView(

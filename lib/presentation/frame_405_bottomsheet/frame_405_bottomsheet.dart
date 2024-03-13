@@ -19,8 +19,8 @@ class _Frame405BottomsheetState extends State<Frame405Bottomsheet> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: 700.h,
-        margin: const EdgeInsets.only(top: 200),
-        decoration: const BoxDecoration(
+        margin: EdgeInsets.only(top: 200),
+        decoration: BoxDecoration(
           color: Color(0xFF8B7B7B),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(80),
@@ -32,8 +32,9 @@ class _Frame405BottomsheetState extends State<Frame405Bottomsheet> {
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
+            // Enlarged GestureDetector for better dragging experience
             Positioned(
-              top: 30,
+              top: 0,  // Starts from the very top of the container
               child: GestureDetector(
                 onVerticalDragUpdate: (details) {
                   if (details.delta.dy > 20) {
@@ -41,17 +42,22 @@ class _Frame405BottomsheetState extends State<Frame405Bottomsheet> {
                   }
                 },
                 child: Container(
-                  width: 150,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: Colors.brown,
-                    borderRadius: BorderRadius.circular(50),
+                  width: MediaQuery.of(context).size.width, // Full width of the container
+                  height: 60, // Increased height for easier drag
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    width: 150,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.brown,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 80),
+              padding: EdgeInsets.only(top: 80),
               child: SingleChildScrollView(
                 child: Wrap(
                   spacing: 40,
@@ -61,7 +67,7 @@ class _Frame405BottomsheetState extends State<Frame405Bottomsheet> {
                     return Container(
                       width: 120,
                       height: 120,
-                      margin: const EdgeInsets.all(20),
+                      margin: EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
@@ -70,7 +76,7 @@ class _Frame405BottomsheetState extends State<Frame405Bottomsheet> {
                           ? SvgPicture.asset('assets/images/clothing_add.svg') // Update path as needed
                           : (item.imageUrl != null)
                           ? Image.network(item.imageUrl!, fit: BoxFit.cover)
-                          : const Center(child: Text('No Image')),
+                          : Center(child: Text('No Image')),
                     );
                   }).toList(),
                 ),

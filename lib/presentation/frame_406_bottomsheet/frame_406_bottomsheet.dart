@@ -16,12 +16,13 @@ class _Frame406BottomsheetState extends State<Frame406Bottomsheet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent, // Set the background color of the scaffold to transparent
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: 700.h,
-        margin: const EdgeInsets.only(top: 200),
-        decoration: const BoxDecoration(
-          color: Color(0xFF8B7B7B),
+        margin: EdgeInsets.only(top: 200),
+        decoration: BoxDecoration(
+          color: Color(0xFF8B7B7B), // Keep the main container with brown color
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(80),
             topRight: Radius.circular(80),
@@ -52,7 +53,7 @@ class _Frame406BottomsheetState extends State<Frame406Bottomsheet> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 80),
+              padding: EdgeInsets.only(top: 80),
               child: SingleChildScrollView(
                 child: Wrap(
                   spacing: 40,
@@ -62,7 +63,7 @@ class _Frame406BottomsheetState extends State<Frame406Bottomsheet> {
                     return Container(
                       width: 120,
                       height: 120,
-                      margin: const EdgeInsets.all(20),
+                      margin: EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
@@ -71,7 +72,7 @@ class _Frame406BottomsheetState extends State<Frame406Bottomsheet> {
                           ? SvgPicture.asset('assets/images/clothing_add.svg') // Update path as needed
                           : (item.imageUrl != null)
                           ? Image.network(item.imageUrl!, fit: BoxFit.cover)
-                          : const Center(child: Text('No Image')),
+                          : Center(child: Text('No Image')),
                     );
                   }).toList(),
                 ),

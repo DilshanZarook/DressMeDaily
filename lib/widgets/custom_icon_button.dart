@@ -59,3 +59,13 @@ class CustomIconButton extends StatelessWidget {
         ),
       );
 }
+extension IconButtonStyleHelper on CustomIconButton {
+  static BoxDecoration get fillGray => BoxDecoration(
+    color: appTheme.gray600,
+    borderRadius: BorderRadius.circular(22.h),
+  );
+  static BoxDecoration get fillWhiteA => BoxDecoration(
+    color: appTheme.whiteA700,
+    borderRadius: BorderRadius.circular(10.h),
+  );
+}

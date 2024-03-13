@@ -125,3 +125,13 @@ class CustomTextFormField extends StatelessWidget {
     );
   }
 }
+extension TextFormFieldStyleHelper on CustomTextFormField {
+  static OutlineInputBorder get fillGray => OutlineInputBorder(
+    borderRadius: BorderRadius.vertical(
+      top: Radius.circular(
+        20.h,
+      ),
+    ),
+    borderSide: BorderSide.none,
+  );
+}

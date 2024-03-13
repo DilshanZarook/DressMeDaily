@@ -141,6 +141,13 @@ class TextThemes {
       fontFamily: 'Inter',
       fontWeight: FontWeight.w500,
     ),
+    headlineLarge: TextStyle(
+      color: appTheme.black900,
+      fontSize: 32.fSize,
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w400,
+    ),
+
   );
 }
 
@@ -170,7 +177,7 @@ class PrimaryColors {
   // Black
   Color get black900 => const Color(0XFF040000);
   Color get black90000 => const Color(0X00040500);
-
+  Color get black990 => Color(0XFF000000);
   // BlueGray
   Color get blueGray100 => const Color(0XFFD9D9D9);
   Color get blueGray200 => const Color(0XFFADAFB7);
@@ -192,6 +199,7 @@ class PrimaryColors {
 
   Color get FB => const Color(0XFF3b5998);
   // Gray3b5998
+  Color get gray200 => Color(0XFFF6EFEF);
   Color get gray300 => const Color(0XFFDDDDDD);
   Color get gray400 => const Color(0XFFBDBEBF);
   Color get gray40001 => const Color(0XFFC1AFAF);
@@ -221,12 +229,18 @@ class PrimaryColors {
   // Grayd
   Color get gray9001d => const Color(0X1D1E2009);
 
+  // Green
+  Color get greenA700 => Color(0XFF11DA11);
+  Color get lightGreenA200 => Color(0XFFCEFE4A);
+
   // LightGreena
   Color get lightGreen9004a => const Color(0X4A444917);
 
   // LightGreen
   Color get lightGreen90067 => const Color(0X675D6420);
 
+  // Pure White
+  Color get whiteA700 => Color(0XFFFFFFFF);
   // Lime
   Color get lime400 => const Color(0XFFCEFD4A);
   Color get lime40001 => const Color(0XFFCEDD4A);

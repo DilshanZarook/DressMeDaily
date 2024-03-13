@@ -8,6 +8,119 @@ import 'package:sdgp_test01/presentation/frame_404_bottomsheet/frame_404_bottoms
 import 'package:sdgp_test01/presentation/frame_405_bottomsheet/frame_405_bottomsheet.dart';
 import 'package:sdgp_test01/presentation/frame_406_bottomsheet/frame_406_bottomsheet.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
+import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
+import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
+import 'package:sdgp_test01/presentation/new_file/addtowardrobe_screen.dart';
+
+
+
+
+Widget _buildBottomBar(BuildContext context) {
+  return Container(
+    margin: EdgeInsets.only(left: 0.h),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: 360.h,
+          height: 1.h,
+          child: Divider(
+            color: appTheme.black900,
+            thickness: 4.h,
+          ),
+        ),
+        SizedBox(height: 16.v),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Adjusted for even spacing
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image button 1
+            InkWell(
+              onTap: () {
+                // Navigate to the corresponding screen for imgUser1
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Landing_page()), // Replace with your actual screen widget
+                );
+              },
+              child: SvgPicture.asset(
+                ImageConstant.home_footer_1,
+                height: 30.0, // Adjust the height as needed
+                width: 30.0, // Adjust the width as needed
+                fit: BoxFit.cover,
+              ),
+            ),
+            // Image button 2
+            InkWell(
+              onTap: () {
+                // Navigate to the corresponding screen for imgFrame373
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Bookmark_page()), // Replace with your actual screen widget
+                );
+              },
+              child: SvgPicture.asset(
+                ImageConstant.bookmarkfooter,
+                height:30.0, // Adjust the height as needed
+                width: 30.0, // Adjust the width as needed
+                fit: BoxFit.cover,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                // Navigate to the corresponding screen for imgFrame373
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Landing_page()), // Replace with your actual screen widget
+                );
+              },
+              child: SvgPicture.asset(
+                ImageConstant.camera_footer_1,
+                height: 30.0, // Adjust the height as needed
+                width: 30.0, // Adjust the width as needed
+                fit: BoxFit.cover,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                // Navigate to the corresponding screen for imgFrame373
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Landing_page()), // Replace with your actual screen widget
+                );
+              },
+              child: SvgPicture.asset(
+                ImageConstant.wardrobe_footer_1,
+                height: 30.0, // Adjust the height as needed
+                width: 30.0, // Adjust the width as needed
+                fit: BoxFit.cover,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                // Navigate to the corresponding screen for imgFrame373
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const User_profile()), // Replace with your actual screen widget
+                );
+              },
+              child: SvgPicture.asset(
+                ImageConstant.profile_footer_1,
+                height: 30.0, // Adjust the height as needed
+                width: 30.0, // Adjust the width as needed
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            // Add more buttons if needed
+          ],
+        ),
+        SizedBox(height: 10.v),
+      ],
+    ),
+  );
+}
 
 class FramelistItemWidget extends StatelessWidget {
   final String title;

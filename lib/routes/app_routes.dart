@@ -41,12 +41,37 @@ import 'package:sdgp_test01/presentation/app_navigation_screen/app_navigation_sc
 import 'package:sdgp_test01/presentation/frame_404_bottomsheet/frame_404_bottomsheet.dart';
 import 'package:sdgp_test01/presentation/frame_405_bottomsheet/frame_405_bottomsheet.dart';
 import 'package:sdgp_test01/presentation/frame_406_bottomsheet/frame_406_bottomsheet.dart';
-
+import '../presentation/frame_851_tab_container_screen/frame_851_tab_container_screen.dart';
+import '../presentation/frame_981_screen/frame_981_screen.dart';
+import '../presentation/frame_1038_screen/frame_1038_screen.dart';
+import '../presentation/frame_1010_screen/frame_1010_screen.dart';
+import '../presentation/frame_1061_page/frame_1061_page.dart';
+import '../presentation/frame_1061_container_screen/frame_1061_container_screen.dart';
 
 class AppRoutes {
   static const String initial_loading_page = '/initial_loading_page';
 
   static const String main_settings = '/main_settings';
+
+  static const String frame851Page = '/frame_851_page';
+
+  static const String frame851TabContainerScreen = '/frame_851_tab_container_screen';
+
+  static const String frame981Screen = '/frame_981_screen';
+
+  static const String frame1010Screen = '/frame_1010_screen';
+
+  static const String frame1038Screen = '/frame_1038_screen';
+
+  static const String frame881Page = '/frame_881_page';
+
+  static const String frame926Page = '/frame_926_page';
+
+  static const String frame941Page = '/frame_941_page';
+
+  static const String frame1061ContainerScreen = '/frame_1061_container_screen';
+
+  static const String frame1061Page = '/frame_1061_page';
 
   static const String body_selection_female = '/body_selection_female';
 
@@ -157,6 +182,11 @@ class AppRoutes {
     addtowardrobe_screen: (context) => const AddtowardrobeScreen(),
     initial_loading_page: (context) => const Initial_loading_page(),
     main_settings: (context) => const Main_settings(),
+    frame851TabContainerScreen: (context) => Frame851TabContainerScreen(),
+    frame981Screen: (context) => Frame981Screen(),
+    frame1061Page: (context) => Frame1061Page(),
+    frame1010Screen: (context) => Frame1010Screen(selectedDate: DateTime.now()), // This will need to be changed when navigating
+    frame1038Screen: (context) => Frame1038Screen(),
     body_selection_female: (context) => const Bodyselectionfemale(),
     loading_page_4: (context) => const Loading_page_4(),
     bookmark_page: (context) => Bookmark_page(),
