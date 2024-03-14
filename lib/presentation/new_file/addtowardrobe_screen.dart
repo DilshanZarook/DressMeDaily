@@ -74,150 +74,195 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
     }
 
     var topPrediction = predictions.first;
-    double probability = topPrediction['probability'] * 100;
+    double probability = topPrediction['probability'];
     TextEditingController customLabelController = TextEditingController();
 
   void askUserForLabel() {
-  TextEditingController customLabelController = TextEditingController();
-  String? wearType;
+    TextEditingController customLabelController = TextEditingController();
+    String dropdownValue = 'work-wear'; // Default value
 
   showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text("Enter Custom Label"),
-        content: SingleChildScrollView(
+ context: context,
+ builder: (BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Color(0xFF575757),
+      title: Text("Enter Custom Label", style: TextStyle(color: Color(0xFF98FF60))),
+      content: SizedBox(
+        width: 300,
+        height: 120,
+        child: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
               TextField(
                 controller: customLabelController,
-                decoration: InputDecoration(hintText: "Enter correct label"),
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                 hintText: "Enter correct label", 
+                 hintStyle: TextStyle(color: const Color.fromRGBO(255, 255, 255, 1)),
+                ),
               ),
-              DropdownButton<String>(
-                value: wearType, // This should be the currently selected category
-                onChanged: (String? newValue) {
-                  setState(() {
-                    wearType = newValue; // Update the state with the new value
-                  });
-                },
-                items: <String>['work-wear', 'party-wear', 'casual-wear']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                hint: Text("Select Category"),
+              Theme(
+                data: Theme.of(context).copyWith(
+                 focusColor: Colors.transparent, // Remove focus highlight
+                 hoverColor: Colors.transparent, // Remove hover highlight
+                ),
+                child: DropdownButtonFormField<String>(
+                 value: dropdownValue,
+                 decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    fillColor: Color(0xFF474747),
+                    filled: true,
+                 ),
+                 style: TextStyle(color: Colors.white),
+                 dropdownColor: Color(0xFF474747), // Set dropdown menu color
+                 items: <String>['work-wear', 'party-wear', 'casual-wear']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value, style: TextStyle(color: Colors.white)),
+                    );
+                 }).toList(),
+                 onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                 },
+                ),
               ),
             ],
           ),
         ),
-        actions: <Widget>[
-          TextButton(
-            child: Text("Save"),
-            onPressed: () {
-              if (wearType == null || customLabelController.text.isEmpty) {
-                // Prompt user to select a category and enter a label
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Missing Information'),
-                      content: Text('Please select a category and enter a label.'),
-                      actions: <Widget>[
-                        TextButton(
-                          child: Text('OK'),
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Close the prompt dialog
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
-              } else {
-                String finalLabel = "${customLabelController.text}_$wearType";
-                setState(() { imageLabel = finalLabel; });
-                Navigator.of(context).pop(); // Close the original dialog
-                uploadToFirebase(_selectedImage!);
-              }
-            },
-          ),
-        ],
-      );
-    },
-  );
+      ),
+      actions: <Widget>[
+        TextButton(
+          child: Text("Save", style: TextStyle(color: Color(0xFF98FF60))),
+          onPressed: () {
+            if (dropdownValue == null || customLabelController.text.isEmpty) {
+              // Prompt user to select a category and enter a label
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                 return AlertDialog(
+                    backgroundColor: Color(0xFF575757),
+                    title: Text('Missing Information', style: TextStyle(color: Color(0xFF98FF60))),
+                    content: Text('Please select a category and enter a label.', style: TextStyle(color: Color(0xFF98FF60))),
+                    actions: <Widget>[
+                      TextButton(
+                        child: Text('OK', style: TextStyle(color: Color(0xFF98FF60))),
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Close the prompt dialog
+                        },
+                      ),
+                    ],
+                 );
+                },
+              );
+            } else {
+              String finalLabel = "${customLabelController.text}_$dropdownValue";
+              setState(() { imageLabel = finalLabel; });
+              Navigator.of(context).pop(); // Close the original dialog
+              uploadToFirebase(_selectedImage!);
+            }
+          },
+        ),
+      ],
+    );
+ },
+);
+
 }
 
     
-   void showDialogForClassification(String message, String label, double probability) {
-  TextEditingController customLabelController = TextEditingController();
-  String? wearType;
+void showDialogForClassification(String message, String label, double probability) {
+ TextEditingController customLabelController = TextEditingController();
+ String dropdownValue = 'work-wear'; // Default value
+ 
 
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(message),
-        content: SingleChildScrollView(
+ showDialog(
+ context: context,
+ builder: (BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Color(0xFF575757),
+      title: Text(message, style: TextStyle(color: Colors.white)),
+      content: SizedBox(
+        width: 300,
+        height: 120,
+        child: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
               Text(
                 "Is it a $label?",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFF98FF60)),
               ),
               Text(
                 "Probability: ${probability.toStringAsFixed(2)}%",
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16, color: Color(0xFF98FF60)),
               ),
-               DropdownButton<String>(
-                value: wearType, // This should be the currently selected category
-                onChanged: (String? newValue) {
-                  setState(() {
-                    wearType = newValue; // Update the state with the new value
-                  });
-                },
-                items: <String>['work-wear', 'party-wear', 'casual-wear']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                hint: Text("Select Category"),
+              Theme(
+                data: Theme.of(context).copyWith(
+                 focusColor: Colors.transparent, // Remove focus highlight
+                 hoverColor: Colors.transparent, // Remove hover highlight
+                ),
+                child: DropdownButtonFormField<String>(
+                 value: dropdownValue,
+                 decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+
+                    fillColor: Color(0xFF474747),
+                    filled: true,
+                 ),
+                 style: TextStyle(color: Colors.white),
+                 dropdownColor: Color(0xFF474747), // Set dropdown menu color
+            
+                 items: <String>['work-wear', 'party-wear', 'casual-wear']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value, style: TextStyle(color: Colors.white)),
+                    );
+                 }).toList(),
+                 onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                 },
+                ),
               ),
             ],
           ),
         ),
-        actions: <Widget>[
-          TextButton(
-            child: Text("Confirm"),
-            onPressed: () {
-              String finalLabel;
-              if (wearType != null) {
-                finalLabel = "${label}_${wearType}";
-              } else {
-                finalLabel = label;
-              }
-              setState(() {
-                imageLabel = finalLabel;
-              });
-              Navigator.of(context).pop();
-              uploadToFirebase(_selectedImage!);
-            },
-          ),
-          TextButton(
-            child: Text("No, it's not correct"),
-            onPressed: () {
-              Navigator.of(context).pop();
-              askUserForLabel();
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
+      ),
+      actions: <Widget>[
+        TextButton(
+          child: Text("Confirm", style: TextStyle(color: Color(0xFF98FF60))),
+          onPressed: () {
+            String finalLabel;
+            if (dropdownValue != null) {
+              finalLabel = "${label}_${dropdownValue}";
+            } else {
+              finalLabel = label;
+            }
+            setState(() {
+              imageLabel = finalLabel;
+            });
+            Navigator.of(context).pop();
+            uploadToFirebase(_selectedImage!);
+          },
+        ),
+        TextButton(
+          child: Text("No, it's not correct", style: TextStyle(color: Color(0xFF98FF60))),
+          onPressed: () {
+            Navigator.of(context).pop();
+            askUserForLabel();
+          },
+        ),
+      ],
+    );
+ },
+);
+  }
+
+
 
 
     showDialogForClassification(message, topPrediction['label'], probability);
@@ -239,6 +284,9 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
     }
   }
 
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -252,14 +300,14 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: 300.0,
-                child: Image.file(_selectedImage!, fit: BoxFit.cover),
+                child: Image.file(_selectedImage!,),
               ),
             if (_selectedImage == null)
               Container(
                 width: 300.0,
                 height: 300.0,
                 decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: Color(0xFF9E9E9E),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 alignment: Alignment.center,
