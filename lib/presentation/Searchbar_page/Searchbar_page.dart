@@ -15,18 +15,23 @@ class Searchbar_page extends StatefulWidget {
 class _Searchbar_pageState extends State<Searchbar_page> with TickerProviderStateMixin {
   late TabController tabviewController;
   TextEditingController _searchController = TextEditingController();
+  Timer? _debounce;
+  int _selectedIndex = 1;
 
   @override
   void initState() {
     super.initState();
     tabviewController = TabController(length: 3, vsync: this);
+    _searchController.addListener(_onSearchChanged);
   }
 
-  @override
-  void dispose() {
-    _searchController.dispose();
-    tabviewController.dispose(); // Don't forget to dispose the controller
-    super.dispose();
+  void _onSearchChanged() {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      if (_searchController.text.isNotEmpty) {
+        _navigateToBottomSheet(context, _searchController.text);
+      }
+    });
   }
 
   void _navigateToBottomSheet(BuildContext context, String imageName) {
@@ -35,13 +40,26 @@ class _Searchbar_pageState extends State<Searchbar_page> with TickerProviderStat
     );
   }
 
-  AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      title: Text('Search Bar'),
-    );
+  @override
+  void dispose() {
+    _searchController.dispose();
+    tabviewController.dispose();
+    _debounce?.cancel();
+    super.dispose();
   }
 
-  @override
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(title: Text('Search Bar'));
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    // Navigate based on index if needed
+  }
+
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
