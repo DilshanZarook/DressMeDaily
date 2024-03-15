@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/presentation/Outfit_classification/Carouselpopup_outfit.dart';
@@ -30,9 +31,25 @@ class Frame720PageState extends State<Frame720Page>
       duration: const Duration(seconds: 5), // Adjust the duration as needed
       vsync: this,
     );
+    // Fetch the count of items from Firebase Storage
+  _fetchItemCountFromFirebase().then((count) {
+    setState(() {
+      itemCount = count;
+    });
+  });
+}
+
+Future<int> _fetchItemCountFromFirebase() async {
+  String folderPath = "wardrobe";
+  firebase_storage.ListResult result = await firebase_storage
+      .FirebaseStorage.instance
+      .ref(folderPath)
+      .listAll();
+  return result.items.length;
+}
     // If you need to start the animation right away, uncomment the following line:
     // _animationController.forward();
-  }
+  
 
   //
   // Future<Map<String, dynamic>> fetchWashingDataFromBackend() async {
