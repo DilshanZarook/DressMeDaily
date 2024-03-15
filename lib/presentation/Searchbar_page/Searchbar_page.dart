@@ -26,12 +26,13 @@ class _Searchbar_pageState extends State<Searchbar_page> with TickerProviderStat
   }
 
   void _onSearchChanged() {
-    if (_debounce?.isActive ?? false) _debounce?.cancel();
-    _debounce = Timer(const Duration(milliseconds: 500), () {
-      if (_searchController.text.isNotEmpty) {
-        _navigateToBottomSheet(context, _searchController.text);
-      }
-    });
+    // Logic for debounce if needed, but removed automatic navigation
+  }
+
+  void _performSearch() {
+    if (_searchController.text.isNotEmpty) {
+      _navigateToBottomSheet(context, _searchController.text);
+    }
   }
 
   void _navigateToBottomSheet(BuildContext context, String imageName) {
@@ -59,7 +60,7 @@ class _Searchbar_pageState extends State<Searchbar_page> with TickerProviderStat
     // Navigate based on index if needed
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
@@ -73,12 +74,13 @@ class _Searchbar_pageState extends State<Searchbar_page> with TickerProviderStat
                 labelText: "Search",
                 suffixIcon: IconButton(
                   icon: Icon(Icons.search),
-                  onPressed: () => _navigateToBottomSheet(context, _searchController.text),
+                  onPressed: _performSearch,
                 ),
               ),
-              onSubmitted: (value) => _navigateToBottomSheet(context, value),
+              onSubmitted: (value) => _performSearch(),
             ),
           ),
+          // Additional widget code if necessary...
         ],
       ),
       bottomNavigationBar: _buildBottomBar(context),
@@ -86,8 +88,7 @@ class _Searchbar_pageState extends State<Searchbar_page> with TickerProviderStat
   }
 
   Widget _buildBottomBar(BuildContext context) {
-    // Add the implementation of the bottom bar here
-    // This is a placeholder, replace with your actual bottom bar code
+    // Your existing bottom bar implementation...
     return BottomAppBar(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
