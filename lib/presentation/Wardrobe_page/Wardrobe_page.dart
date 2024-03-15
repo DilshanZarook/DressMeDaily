@@ -1,10 +1,9 @@
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
 import 'package:sdgp_test01/presentation/Outfit_classification/Carouselpopup_outfit.dart';
 import 'package:sdgp_test01/presentation/frame_406_bottomsheet/frame_406_bottomsheet.dart';
+import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
 
 class Wardrobe_page extends StatefulWidget {
   const Wardrobe_page({Key? key}) : super(key: key);
@@ -32,42 +31,29 @@ class Wardrobe_pageState extends State<Wardrobe_page>
       duration: const Duration(seconds: 5), // Adjust the duration as needed
       vsync: this,
     );
-    // If you need to start the animation right away, uncomment the following line:
-    // _animationController.forward();
+    // Fetch the count of items from Firebase Storage
+    _fetchItemCountFromFirebase().then((count) {
+      setState(() {
+        itemCount = count;
+      });
+    });
   }
 
-  //
-  // Future<Map<String, dynamic>> fetchWashingDataFromBackend() async {
-  //   var snapshot = await firestore.collection('washing_collection').doc('washing_doc').get();
-  //   return snapshot.data() as Map<String, dynamic>; // Ensure the data exists and is cast to the correct type.
-  // }
-  //
-  // Future<Map<String, dynamic>> fetchAllDataFromBackend() async {
-  //   var snapshot = await firestore.collection('your_collection').doc('your_doc').get();
-  //   return snapshot.data() as Map<String, dynamic>;
-  // }
-
+  Future<int> _fetchItemCountFromFirebase() async {
+    String folderPath = "wardrobe";
+    firebase_storage.ListResult result = await firebase_storage
+        .FirebaseStorage.instance
+        .ref(folderPath)
+        .listAll();
+    return result.items.length;
+  }
   @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
   }
 
-  // void updateContentForWashing() async {
-  //   var data = await fetchWashingDataFromBackend();
-  //   setState(() {
-  //     itemCount = data['count'];
-  //     itemText = "Washing";
-  //   });
-  // }
-  //
-  // void updateContentForAll() async {
-  //   var data = await fetchAllDataFromBackend();
-  //   setState(() {
-  //     itemCount = data['count'];
-  //     itemText = "Clothes";
-  //   });
-  // }
+
   @override
   Widget build(BuildContext context) {
     super.build(context); // Required when using AutomaticKeepAliveClientMixin
@@ -100,7 +86,7 @@ class Wardrobe_pageState extends State<Wardrobe_page>
       context: context,
       pageBuilder: (BuildContext buildContext, Animation<double> animation,
           Animation<double> secondaryAnimation) {
-        return Frame406Bottomsheet();
+        return const Frame406Bottomsheet();
       },
       barrierDismissible: true,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
@@ -131,11 +117,11 @@ class Wardrobe_pageState extends State<Wardrobe_page>
             pageBuilder: (BuildContext buildContext,
                 Animation<double> animation,
                 Animation<double> secondaryAnimation) {
-              return Frame406Bottomsheet();
+              return const Frame406Bottomsheet();
             },
             barrierDismissible: true,
             barrierLabel:
-                MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
             transitionDuration: const Duration(milliseconds: 600),
             transitionBuilder: (BuildContext context,
                 Animation<double> animation,
@@ -159,7 +145,7 @@ class Wardrobe_pageState extends State<Wardrobe_page>
             color: Colors.blueAccent,
             borderRadius: BorderRadius.circular(40),
           ),
-          child: Text(
+          child: const Text(
             "Archive",
             style: TextStyle(
               color: Colors.white,
@@ -191,12 +177,12 @@ class Wardrobe_pageState extends State<Wardrobe_page>
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color(0xFFd8d8d8), // Peach color
+                    color: const Color(0xFFd8d8d8), // Peach color
                     borderRadius:
-                        BorderRadius.circular(20), // Border radius of 20
+                    BorderRadius.circular(20), // Border radius of 20
                   ),
-                  child: Container(
-                    child: Image.asset(ImageConstant.imgFrame682),
+                  child: CustomImageView(
+                    imagePath: ImageConstant.imgFrame682,
                     height: 140.adaptSize,
                     width: 140.adaptSize,
                   ),
@@ -219,15 +205,15 @@ class Wardrobe_pageState extends State<Wardrobe_page>
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Color(0xFFd8d8d8), // Gray color (not Peach)
+                      color: const Color(0xFFd8d8d8), // Gray color (not Peach)
                       borderRadius:
-                          BorderRadius.circular(20), // Border radius of 20
+                      BorderRadius.circular(20), // Border radius of 20
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       // Clip the child with the same radius
-                      child: Container(
-                        child: Image.asset(ImageConstant.outfit_AI),
+                      child: CustomImageView(
+                        imagePath: ImageConstant.outfit_AI,
                         height: 140.adaptSize,
                         width: 140.adaptSize,
                       ),
@@ -269,36 +255,36 @@ class Wardrobe_pageState extends State<Wardrobe_page>
 
   /// Section Widget
 
-  // void _showWardrobeNamePopup(BuildContext context) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         title: Text('Name of the wardrobe'),
-  //         content: TextField(
-  //           controller: wardrobeNameController,
-  //           decoration: InputDecoration(hintText: "Enter wardrobe name"),
-  //         ),
-  //         actions: <Widget>[
-  //           IconButton(
-  //             icon: Icon(Icons.arrow_back),
-  //             onPressed: () {
-  //               Navigator.of(context).pop(); // Close the dialog
-  //             },
-  //           ),
-  //           TextButton(
-  //             child: Text('Submit'),
-  //             onPressed: () {
-  //               // Handle the submission here
-  //               print('Wardrobe Name: ${wardrobeNameController.text}');
-  //               Navigator.of(context).pop(); // Close the dialog
-  //             },
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
+  void _showWardrobeNamePopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Name of the wardrobe'),
+          content: TextField(
+            controller: wardrobeNameController,
+            decoration: const InputDecoration(hintText: "Enter wardrobe name"),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            TextButton(
+              child: const Text('Submit'),
+              onPressed: () {
+                // Handle the submission here
+                print('Wardrobe Name: ${wardrobeNameController.text}');
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   Widget _buildCombinedFrame(BuildContext context) {
     return Container(
@@ -340,29 +326,29 @@ class Wardrobe_pageState extends State<Wardrobe_page>
                             turns: _animationController,
                             child: Container(
                               margin: EdgeInsets.symmetric(
-                                  horizontal: 20.h, vertical: 12.h),
-                              padding: EdgeInsets.all(13.h),
+                                  horizontal: 20.h, vertical: 20.h),
+                              padding: EdgeInsets.all(11.h),
                               decoration:
-                                  AppDecoration.outlineLightGreenA.copyWith(
+                              AppDecoration.outlineLightGreenA.copyWith(
                                 borderRadius: BorderRadiusStyle.circleBorder105,
                               ),
                               child: Container(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 18.h,
-                                  vertical: 20.v,
+                                  vertical: 18.v,
                                 ),
                                 decoration: AppDecoration.fillGray.copyWith(
                                   borderRadius:
-                                      BorderRadiusStyle.circleBorder90,
+                                  BorderRadiusStyle.circleBorder90,
                                 ),
                                 child: Container(
                                   padding: EdgeInsets.symmetric(
-                                    horizontal: 65.v,
+                                    horizontal: 55.v,
                                     vertical: 45.v,
                                   ),
                                   decoration:
-                                      AppDecoration.fillGray300.copyWith(
-                                    borderRadius: BorderRadius.circular(100),
+                                  AppDecoration.fillGray300.copyWith(
+                                    borderRadius: BorderRadius.circular(200),
                                   ),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -382,24 +368,13 @@ class Wardrobe_pageState extends State<Wardrobe_page>
                             ),
                           ),
                         ),
-                        Container(
+                        CustomImageView(
+                          imagePath: ImageConstant.imgPolygon3,
                           height: 70.v,
                           width: 62.h,
-                          decoration: BoxDecoration(
-                            // Apply the border radius here
-                            borderRadius: BorderRadius.circular(10.h),
-                          ),
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            // Align the child widget
-                            child: SvgPicture.asset(
-                              ImageConstant.imgPolygon3,
-                              // Make sure this path is correct
-                              // Fit can be added if needed
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        )
+                          radius: BorderRadius.circular(10.h),
+                          alignment: Alignment.bottomCenter,
+                        ),
                       ],
                     ),
                   ),
@@ -417,7 +392,7 @@ class Wardrobe_pageState extends State<Wardrobe_page>
               ),
             ),
           ),
-          SizedBox(height: 40), // Spacer
+          const SizedBox(height: 40), // Spacer
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -428,7 +403,8 @@ class Wardrobe_pageState extends State<Wardrobe_page>
                   // Navigation logic for "All" button
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LandingPage()),
+                    MaterialPageRoute(
+                        builder: (context) =>  Main_wardrobe()),
                   );
                 },
                 child: Container(
@@ -441,7 +417,7 @@ class Wardrobe_pageState extends State<Wardrobe_page>
                     // Border radius of 40
                     border: Border.all(color: Colors.white), // Border color
                   ),
-                  child: Text(
+                  child: const Text(
                     "All",
                     style: TextStyle(
                       color: Colors.white, // Text color white
@@ -450,14 +426,15 @@ class Wardrobe_pageState extends State<Wardrobe_page>
                   ),
                 ),
               ),
-              SizedBox(width: 40), // Spacer
+              const SizedBox(width: 40), // Spacer
               GestureDetector(
                 onTap: () {
                   // updateContentForWashing();
                   // Navigation logic for "Washing" button
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Main_wardrobe()),
+                    MaterialPageRoute(
+                        builder: (context) =>  Main_wardrobe()),
                   );
                 },
                 child: Container(
@@ -471,7 +448,7 @@ class Wardrobe_pageState extends State<Wardrobe_page>
                     // Border radius of 40
                     border: Border.all(color: Colors.white), // Border color
                   ),
-                  child: Text(
+                  child: const Text(
                     "Washing",
                     style: TextStyle(
                       color: Colors.white, // Text color white
@@ -480,7 +457,7 @@ class Wardrobe_pageState extends State<Wardrobe_page>
                   ),
                 ),
               ),
-              SizedBox(width: 40), // Spacer
+              const SizedBox(width: 40), // Spacer
               Container(
                 height: 25.v,
                 width: 66.h,
@@ -491,10 +468,10 @@ class Wardrobe_pageState extends State<Wardrobe_page>
                 decoration: BoxDecoration(
                   color: Colors.grey[500], // Background color
                   borderRadius:
-                      BorderRadius.circular(40), // Border radius of 40
+                  BorderRadius.circular(40), // Border radius of 40
                 ),
-                child: Container(
-                  child: SvgPicture.asset(ImageConstant.img_plus),
+                child: CustomImageView(
+                  imagePath: ImageConstant.img_plus,
                   height: 19.adaptSize,
                   width: 19.adaptSize,
                   alignment: Alignment.center,
@@ -502,7 +479,7 @@ class Wardrobe_pageState extends State<Wardrobe_page>
               ),
             ],
           ),
-          SizedBox(height: 60), // Spacer
+          const SizedBox(height: 60), // Spacer
         ],
       ),
     );

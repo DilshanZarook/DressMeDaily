@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 
 class Top_wear_Selection extends StatefulWidget {
@@ -18,9 +17,17 @@ class ItemModel {
 }
 
 class _Top_wear_SelectionState extends State<Top_wear_Selection> {
-  List<ItemModel> items = List.generate(20, (_) => ItemModel());
+  // Simulate the images being added manually by updating the imageUrl for each item
+  List<ItemModel> items = [
+    ItemModel(isPlaceholder: false, imageUrl: 'assets/images/1.png'), // Image for first item
+    ItemModel(isPlaceholder: false, imageUrl: 'assets/images/2.png'), // Image for second item
+    ItemModel(isPlaceholder: false, imageUrl: 'assets/images/3.png'), // Image for third item
+    ItemModel(isPlaceholder: false, imageUrl: 'assets/images/4.png'), // Image for fourth item
+    ItemModel(isPlaceholder: false, imageUrl: 'assets/images/5.png'), // Image for fifth item
+    // Assuming that the rest are placeholders or other images
+    ...List.generate(15, (_) => ItemModel(isPlaceholder: true)),
+  ];
   int? selectedBoxIndex;
-
   Widget _buildItemBox(ItemModel item, int index) {
     bool isSelected = selectedBoxIndex == index;
 
@@ -49,12 +56,10 @@ class _Top_wear_SelectionState extends State<Top_wear_Selection> {
                   )
                 : null,
           ),
-          child: item.isPlaceholder
-              ? SvgPicture.asset('assets/images/1.svg') // Placeholder SVG asset
-              : item.imageUrl != null
-                  ? Image.network(item.imageUrl!,
-                      fit: BoxFit.cover) // Network image
-                  : Center(child: Text('No Image')), // Fallback text
+          child: item.imageUrl != null
+              ? Image.asset(item.imageUrl!,
+              fit: BoxFit.cover) // Local image
+              : Center(child: Text('No Image')), // Fallback text
         ),
       ),
     );
@@ -64,13 +69,12 @@ class _Top_wear_SelectionState extends State<Top_wear_Selection> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      // Set the background color of the scaffold to transparent
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: 700.h,
         margin: EdgeInsets.only(top: 200),
         decoration: BoxDecoration(
-          color: Color(0xFF8B7B7B), // Keep the main container with brown color
+          color: Color(0xFF8B7B7B),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(80),
             topRight: Radius.circular(80),

@@ -5,6 +5,7 @@ import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
 import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
 import 'package:sdgp_test01/presentation/new_file/addtowardrobe_screen.dart';
+import 'package:sdgp_test01/presentation/Searchbar_page/Searchbar_page.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
 import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_bottom_bar.dart';
@@ -366,7 +367,7 @@ Widget _buildBottomBar(BuildContext context) {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          Bookmark_page()), // Replace with your actual screen widget
+                          Searchbar_page()), // Replace with your actual screen widget
                 );
               },
               child: SvgPicture.asset(

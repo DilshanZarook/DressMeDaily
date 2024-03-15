@@ -94,7 +94,7 @@ class Plan_pageState extends State<Plan_page> {
             SizedBox(height: 46),
             _buildDateCarousel(weekDays, specificCurrentDate),
             SizedBox(height: 46),
-            _buildSyncCalendarEventsSection(),
+            // _buildSyncCalendarEventsSection(),
             SizedBox(height: 56),
             _buildOutfitSection(
                 topClothingImageUrl, bottomClothingImageUrl, outfitNumber),
@@ -193,50 +193,50 @@ class Plan_pageState extends State<Plan_page> {
       },
     );
   }
-
-  Widget _buildSyncCalendarEventsSection() {
-    if (!shouldShowSyncSection) return SizedBox();
-    return Container(
-      margin: EdgeInsets.only(left: 0.h, right: 0.h),
-      padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 11.v),
-      decoration: AppDecoration.fillBlueGray
-          .copyWith(borderRadius: BorderRadiusStyle.roundedBorder12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            child: SvgPicture.asset(
-              'assets/images/img_phone.svg', // Adjust asset path if necessary
-              // Increase the size by 30 units
-              width: 50.0, // Assuming the original width was 30.0
-              height: 50.0, // Assuming the original height was 30.0
-            ),
-          ),
-          Padding(
-              padding: EdgeInsets.only(left: 17.h, top: 4.v, bottom: 3.v),
-              child: Text("Sync calendar events from device?",
-                  style: theme.textTheme.bodySmall)),
-          SizedBox(width: 10),
-          GestureDetector(
-            onTap: () {
-              _showConfirmationDialog(context);
-              // If 'Keep' was chosen or dialog was dismissed, do nothing
-            },
-            child: Image.asset(
-              ImageConstant.redcross,
-              // Replace with your red cross icon asset path
-              height: 10.v,
-              width: 10.h,
-            ),
-          ),
-          SizedBox(width: 10),
-          _buildGoogleSignIn(context),
-          // This replaces the previous CustomImageView for the green tick icon
-        ],
-      ),
-    );
-  }
+  //
+  // Widget _buildSyncCalendarEventsSection() {
+  //   if (!shouldShowSyncSection) return SizedBox();
+  //   return Container(
+  //     margin: EdgeInsets.only(left: 0.h, right: 0.h),
+  //     padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 11.v),
+  //     decoration: AppDecoration.fillBlueGray
+  //         .copyWith(borderRadius: BorderRadiusStyle.roundedBorder12),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       mainAxisSize: MainAxisSize.min,
+  //       children: [
+  //         Container(
+  //           child: SvgPicture.asset(
+  //             'assets/images/img_phone.svg', // Adjust asset path if necessary
+  //             // Increase the size by 30 units
+  //             width: 50.0, // Assuming the original width was 30.0
+  //             height: 50.0, // Assuming the original height was 30.0
+  //           ),
+  //         ),
+  //         Padding(
+  //             padding: EdgeInsets.only(left: 17.h, top: 4.v, bottom: 3.v),
+  //             child: Text("Sync calendar events from device?",
+  //                 style: theme.textTheme.bodySmall)),
+  //         SizedBox(width: 10),
+  //         GestureDetector(
+  //           onTap: () {
+  //             _showConfirmationDialog(context);
+  //             // If 'Keep' was chosen or dialog was dismissed, do nothing
+  //           },
+  //           child: Image.asset(
+  //             ImageConstant.redcross,
+  //             // Replace with your red cross icon asset path
+  //             height: 10.v,
+  //             width: 10.h,
+  //           ),
+  //         ),
+  //         SizedBox(width: 10),
+  //         _buildGoogleSignIn(context),
+  //         // This replaces the previous CustomImageView for the green tick icon
+  //       ],
+  //     ),
+  //   );
+  // }
 
 // And here is the _buildGoogleSignIn method as before
   Widget _buildGoogleSignIn(BuildContext context) {

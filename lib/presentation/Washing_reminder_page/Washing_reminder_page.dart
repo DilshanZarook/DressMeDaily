@@ -35,14 +35,14 @@ class Washing_reminder_page extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomOutlinedButton(
-                  height: 38.v,
-                  width: 199.h,
-                  text: "Search",
-                  buttonStyle: CustomButtonStyles.outlineBlackTL19,
-                  buttonTextStyle: theme.textTheme.headlineSmall!,
-                  alignment: Alignment.center,
-                ),
+                // CustomOutlinedButton(
+                //   height: 38.v,
+                //   width: 199.h,
+                //   text: "Search",
+                //   buttonStyle: CustomButtonStyles.outlineBlackTL19,
+                //   buttonTextStyle: theme.textTheme.headlineSmall!,
+                //   alignment: Alignment.center,
+                // ),
                 SizedBox(height: 30.v),
                 Divider(
                   color: appTheme.black900,

@@ -7,8 +7,6 @@ import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
 import 'package:sdgp_test01/presentation/Washing_reminder_page/Washing_reminder_page.dart';
 import 'package:sdgp_test01/presentation/frame_405_bottomsheet/frame_405_bottomsheet.dart';
 import 'package:sdgp_test01/widgets/custom_switch.dart';
-import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
-
 class Event_day_page extends StatefulWidget {
   final DateTime selectedDate;
   final GlobalKey<NavigatorState> navigatorKey;
@@ -127,35 +125,35 @@ class _Event_day_pageState extends State<Event_day_page> {
                             SizedBox(height: 15.v),
                             Divider(),
                             SizedBox(height: 27.v),
-                            Padding(
-                                padding:
-                                    EdgeInsets.only(left: 20.h, right: 25.h),
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 2.v),
-                                          child: CustomTextFormField(
-                                              width: 240.h,
-                                              controller:
-                                                  searchnormalController,
-                                              hintText:
-                                                  "Search your clothing..",
-                                              textInputAction:
-                                                  TextInputAction.done,
-                                              suffix: Container(
-                                                  margin: EdgeInsets.fromLTRB(
-                                                      26.h, 3.v, 5.h, 3.v),
-                                                  child: Container(
-                                                      child: SvgPicture.asset(
-                                                          ImageConstant
-                                                              .imgSearchnormal),
-                                                      height: 18.v,
-                                                      width: 13.h)),
-                                              suffixConstraints: BoxConstraints(
-                                                  maxHeight: 24.v))),
+                            // Padding(
+                            //     padding:
+                            //         EdgeInsets.only(left: 20.h, right: 25.h),
+                            //     child: Row(
+                            //         mainAxisAlignment:
+                            //             MainAxisAlignment.spaceBetween,
+                            //         children: [
+                            //           Padding(
+                            //               padding: EdgeInsets.symmetric(
+                            //                   vertical: 2.v),
+                            //               child: CustomTextFormField(
+                            //                   width: 240.h,
+                            //                   controller:
+                            //                       searchnormalController,
+                            //                   hintText:
+                            //                       "Search your clothing..",
+                            //                   textInputAction:
+                            //                       TextInputAction.done,
+                            //                   suffix: Container(
+                            //                       margin: EdgeInsets.fromLTRB(
+                            //                           26.h, 3.v, 5.h, 3.v),
+                            //                       child: Container(
+                            //                           child: SvgPicture.asset(
+                            //                               ImageConstant
+                            //                                   .imgSearchnormal),
+                            //                           height: 18.v,
+                            //                           width: 13.h)),
+                            //                   suffixConstraints: BoxConstraints(
+                            //                       maxHeight: 24.v))),
                                       // CustomSwitch(
                                       //   margin: EdgeInsets.symmetric(vertical: 3.v), // Make sure 'v' is defined or replace with actual value
                                       //   value: isSelectedSwitch1,
@@ -165,7 +163,7 @@ class _Event_day_pageState extends State<Event_day_page> {
                                       //     });
                                       //   },
                                       // ),
-                                    ])),
+                                    // ])),
                             SizedBox(height: 17.v),
                             SizedBox(height: 10.v),
                             _buildFrame5(context),

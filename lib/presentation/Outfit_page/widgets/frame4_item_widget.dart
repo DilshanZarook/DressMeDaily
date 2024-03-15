@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 
 class Frame4ItemWidget extends StatefulWidget {
+  final Function(String) onSelectionChanged;
+
+  Frame4ItemWidget({Key? key, required this.onSelectionChanged}) : super(key: key);
+
   @override
   _Frame4ItemWidgetState createState() => _Frame4ItemWidgetState();
 }
@@ -9,25 +13,12 @@ class Frame4ItemWidget extends StatefulWidget {
 class _Frame4ItemWidgetState extends State<Frame4ItemWidget> {
   String selectedAllClothes = 'All Clothes';
 
-  // String selectedSeason = 'Season';
-  String selectedOccasion = 'Occasion';
-
-  // String selectedCategory = 'Category';
 
   final allClothesOptions = [
     'All Clothes',
-    'Jeans',
-    'Shirt',
-    'Tops',
-    'Bottoms',
-    'Outerwear',
-    'Accessories'
+    'Casual', 'Work', 'Party'
   ];
 
-  // final seasonOptions = ['Season', 'Spring', 'Summer', 'Fall', 'Winter'];
-  final occasionOptions = ['Occasion', 'Casual', 'Formal', 'Party'];
-
-  // final categoryOptions = ['Category', 'Tops', 'Bottoms', 'Outerwear', 'Accessories'];
 
   @override
   Widget build(BuildContext context) {
@@ -35,24 +26,12 @@ class _Frame4ItemWidgetState extends State<Frame4ItemWidget> {
       data: ThemeData(
         canvasColor: Colors.transparent,
       ),
-      child: Wrap(
-        spacing: 8.0, // Space between chips
-        children: [
-          createDropdownButton(
-              "All Clothes", selectedAllClothes, allClothesOptions),
-          SizedBox(width: 5.v),
-          // createDropdownButton("Season", selectedSeason, seasonOptions),
-          SizedBox(width: 5.v),
-          createDropdownButton("Occasion", selectedOccasion, occasionOptions),
-          SizedBox(width: 5.v),
-          // createDropdownButton("Category", selectedCategory, categoryOptions),
-        ],
-      ),
+      child: createDropdownButton("All Clothes", selectedAllClothes, allClothesOptions),
+
     );
   }
 
-  Widget createDropdownButton(
-      String label, String selectedValue, List<String> options) {
+  Widget createDropdownButton(String label, String selectedValue, List<String> options) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5.v, vertical: 2.v),
       margin: EdgeInsets.symmetric(vertical: 5.h),
@@ -66,22 +45,11 @@ class _Frame4ItemWidgetState extends State<Frame4ItemWidget> {
           value: selectedValue,
           onChanged: (String? newValue) {
             setState(() {
-              switch (label) {
-                case 'All Clothes':
-                  selectedAllClothes = newValue!;
-                  break;
-                // case 'Season':
-                //   selectedSeason = newValue!;
-                //   break;
-                case 'Occasion':
-                  selectedOccasion = newValue!;
-                  break;
-                // case 'Category':
-                //   selectedCategory = newValue!;
-                //   break;
-              }
+              selectedAllClothes = newValue!;
+              widget.onSelectionChanged(newValue); // Calling the callback
             });
           },
+
           items: options.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,

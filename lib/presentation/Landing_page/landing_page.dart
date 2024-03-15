@@ -9,7 +9,7 @@ import 'package:sdgp_test01/presentation/Calendar_page/Calendar_page.dart';
 import 'package:sdgp_test01/presentation/Landing_page_2/landing_page_2.dart';
 import 'package:sdgp_test01/presentation/Main_settings_page/main_settings.dart';
 import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
-import 'package:sdgp_test01/presentation/Parallax_bg_1/parallax_image_item.dart';
+import 'package:sdgp_test01/presentation/Searchbar_page/Searchbar_page.dart';
 import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
 import 'package:sdgp_test01/presentation/new_file/addtowardrobe_screen.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
@@ -224,7 +224,7 @@ class _Landing_pageState extends State<LandingPage> {
                                       Padding(
                                         padding: EdgeInsets.only(bottom: 4.v),
                                         child: Text(
-                                          "29 / 20",
+                                          roundedTemp,
                                           style: theme.textTheme.bodyMedium,
                                         ),
                                       ),
@@ -589,7 +589,7 @@ class _Landing_pageState extends State<LandingPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            ExampleParallax()), // Replace with your actual screen widget
+                            Searchbar_page()), // Replace with your actual screen widget
                   );
                 },
                 child: Container(

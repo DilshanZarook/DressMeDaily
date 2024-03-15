@@ -5,7 +5,9 @@ import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
 import 'package:sdgp_test01/presentation/Outfit_page/Outfit_page.dart';
 import 'package:sdgp_test01/presentation/Plan_Page/Plan_page.dart';
+import 'package:sdgp_test01/presentation/Searchbar_page/Searchbar_page.dart';
 import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
+import 'package:sdgp_test01/presentation/Main_settings_page/Main_settings.dart';
 import 'package:sdgp_test01/presentation/Wardrobe_page/Wardrobe_page.dart';
 import 'package:sdgp_test01/presentation/new_file/addtowardrobe_screen.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
@@ -105,19 +107,6 @@ class _Main_wardrobeState extends State<Main_wardrobe>
     }
   }
 
-  void _updateSuggestions(String query) {
-    if (query.isEmpty) {
-      setState(() {
-        _suggestions.clear();
-      });
-    } else {
-      setState(() {
-        _suggestions = _allItems
-            .where((item) => item.toLowerCase().contains(query.toLowerCase()))
-            .toList();
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,46 +118,8 @@ class _Main_wardrobeState extends State<Main_wardrobe>
           child: Container(
             child: Column(
               children: [
-                Autocomplete<String>(
-                  optionsBuilder: (TextEditingValue textEditingValue) {
-                    return _suggestions.where((String option) {
-                      return option
-                          .contains(textEditingValue.text.toLowerCase());
-                    });
-                  },
-                  onSelected: (String selection) {
-                    debugPrint('You just selected $selection');
-                  },
-                  fieldViewBuilder: (BuildContext context,
-                      TextEditingController fieldTextEditingController,
-                      FocusNode fieldFocusNode,
-                      VoidCallback onFieldSubmitted) {
-                    return Container(
-                      width: 200.h,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 15.h, vertical: 3.v),
-                      decoration: AppDecoration.outlineBlack.copyWith(
-                        borderRadius: BorderRadiusStyle.roundedBorder12,
-                      ),
-                      child: TextField(
-                        controller: fieldTextEditingController,
-                        focusNode: fieldFocusNode,
-                        decoration: InputDecoration(
-                          hintText: "Search",
-                          border: InputBorder.none,
-                          isDense: true,
-                        ),
-                        style: theme.textTheme.bodyLarge,
-                        onChanged: _updateSuggestions,
-                      ),
-                    );
-                  },
-                ),
+
                 SizedBox(height: 14.v),
-                Divider(
-                  color: appTheme.black990,
-                  thickness: 2.h,
-                ),
                 SizedBox(height: 51.v),
                 _buildTabview(context),
                 SizedBox(
@@ -197,22 +148,57 @@ class _Main_wardrobeState extends State<Main_wardrobe>
   /// Section Widget
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
-      height: 71.v,
-      title: AppbarTitle(
-        text: "DMD",
-        margin: EdgeInsets.only(left: 43.h),
-      ),
-      actions: [
-        AppbarTrailingImage(
-          imagePath: ImageConstant.imgMegaphone,
-          margin: EdgeInsets.symmetric(
-            horizontal: 44.h,
-            vertical: 12.v,
+      centerTitle: true,
+      height: 60.h,
+      title: Column(
+        children: [
+          SizedBox(height: 0.v),
+          Padding(
+            padding: EdgeInsets.only(
+              left: 25.h,
+              right: 25.h,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // This will position the children at the start and end of the row
+              children: [
+                AppbarTitle(
+                  text: "DMD",
+                  margin: EdgeInsets.only(bottom: 10.v),
+                ),
+                GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const Main_settings()), // Replace Frame624 with the actual widget class for frame 624
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 10.0),
+                      // Bottom margin of 10
+                      child: SvgPicture.asset(
+                        ImageConstant.imgMegaphone,
+                        // Add appropriate height and width if needed
+                      ),
+                    ))
+              ],
+            ),
           ),
-        ),
-      ],
+          const SizedBox(height: 30),
+          Divider(
+            thickness: 6.h,
+            color: appTheme.black900,
+            indent: 0,
+            endIndent: 0,
+          ),
+          // Additional content can go here
+        ],
+      ),
     );
   }
+
 
   Widget _buildTabview(BuildContext context) {
     return Container(
@@ -307,7 +293,7 @@ class _Main_wardrobeState extends State<Main_wardrobe>
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            Bookmark_page()), // Replace with your actual screen widget
+                            Searchbar_page()), // Replace with your actual screen widget
                   );
                 },
                 child: SvgPicture.asset(
