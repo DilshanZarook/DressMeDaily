@@ -22,9 +22,12 @@ class LandingPage extends StatefulWidget {
       : super(
           key: key,
         );
+  
+  // ignore: library_private_types_in_public_api
   _Landing_pageState createState() => _Landing_pageState();
 }
 
+// ignore: camel_case_types
 class _Landing_pageState extends State<LandingPage> {
   late String currentDay;
   late String currentMonth;
@@ -40,8 +43,8 @@ class _Landing_pageState extends State<LandingPage> {
   }
 
   Future<void> _fetchWeatherData(date) async {
-    final apiKey = "629de998a0f95d7b9dfdcd1dc96656ee";
-    final apiUrl =
+    const apiKey = "629de998a0f95d7b9dfdcd1dc96656ee";
+    const apiUrl =
         "https://api.openweathermap.org/data/2.5/weather?q=Colombo&appid=$apiKey";
 
     try {
@@ -69,7 +72,7 @@ class _Landing_pageState extends State<LandingPage> {
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365)),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
     );
     if (date != null && date != selectedDate) {
       setState(() {
@@ -89,7 +92,7 @@ class _Landing_pageState extends State<LandingPage> {
         scrollDirection: Axis.vertical,
         children: [
           _Landing_page1(context), // Your existing Frame325Screen content
-          Landing_page_2(), // Second screen to navigate to
+          const Landing_page_2(), // Second screen to navigate to
         ],
       ),
       bottomNavigationBar:
@@ -97,6 +100,7 @@ class _Landing_pageState extends State<LandingPage> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget _Landing_page1(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -199,12 +203,7 @@ class _Landing_pageState extends State<LandingPage> {
                                                 .circleBorder10,
                                           ),
                                           child: Text(
-                                            " " +
-                                                selectedDate.day.toString() +
-                                                "/" +
-                                                selectedDate.month.toString() +
-                                                "/" +
-                                                selectedDate.year.toString(),
+                                            " ${selectedDate.day}/${selectedDate.month}/${selectedDate.year}",
                                             style: CustomTextStyles
                                                 .bodySmallBlack900,
                                           ),
@@ -380,7 +379,7 @@ class _Landing_pageState extends State<LandingPage> {
                     width: 360.h,
                     // Width of the rectangle
                     decoration: BoxDecoration(
-                      color: Color(0xFF3D3D3D), // Rectangle color (dark grey)
+                      color: const Color(0xFF3D3D3D), // Rectangle color (dark grey)
                       borderRadius: BorderRadius.only(
                         topLeft:
                             Radius.circular(15.h), // Top left corner radius
@@ -407,7 +406,7 @@ class _Landing_pageState extends State<LandingPage> {
                     decoration: BoxDecoration(
                       color: appTheme
                           .blueGray200, // Retaining the background color from outlineBlack9002
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(
                             50), // Applying a border radius of 50 to the top left corner
                         topRight: Radius.circular(
@@ -427,7 +426,7 @@ class _Landing_pageState extends State<LandingPage> {
                           vertical: 20
                               .h, // Adjust this as needed for top and bottom padding of the text
                         ),
-                        child: Text(
+                        child: const Text(
                           "Trending local\nrecommendations",
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -478,7 +477,7 @@ class _Landing_pageState extends State<LandingPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                Main_settings()), // Replace Frame624 with the actual widget class for frame 624
+                                const Main_settings()), // Replace Frame624 with the actual widget class for frame 624
                       );
                     },
                     child: Container(
@@ -492,7 +491,7 @@ class _Landing_pageState extends State<LandingPage> {
               ],
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Divider(
             thickness: 6.h,
             color: appTheme.black900,
@@ -533,7 +532,7 @@ class _Landing_pageState extends State<LandingPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            LandingPage()), // Replace with your actual screen widget
+                            const LandingPage()), // Replace with your actual screen widget
                   );
                 },
                 child: CustomImageView(
@@ -568,7 +567,7 @@ class _Landing_pageState extends State<LandingPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            AddtowardrobeScreen()), // Replace with your actual screen widget
+                            const AddtowardrobeScreen()), // Replace with your actual screen widget
                   );
                 },
                 child: CustomImageView(
@@ -585,7 +584,7 @@ class _Landing_pageState extends State<LandingPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            LandingPage()), // Replace with your actual screen widget
+                            const LandingPage()), // Replace with your actual screen widget
                   );
                 },
                 child: CustomImageView(
@@ -602,7 +601,7 @@ class _Landing_pageState extends State<LandingPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            User_profile()), // Replace with your actual screen widget
+                            const User_profile()), // Replace with your actual screen widget
                   );
                 },
                 child: CustomImageView(
@@ -633,7 +632,7 @@ class CustomImageView extends StatelessWidget {
   final Alignment? alignment;
   final EdgeInsetsGeometry? margin;
 
-  CustomImageView({
+  const CustomImageView({
     required this.imagePath,
     this.height,
     this.width,
