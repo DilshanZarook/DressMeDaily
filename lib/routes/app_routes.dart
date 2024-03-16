@@ -50,11 +50,14 @@ import '../presentation/frame_1061_container_screen/frame_1061_container_screen.
 import '../presentation/Contact_Us/contact_us.dart';
 
 class AppRoutes {
+  // ignore: constant_identifier_names
   static const String initial_loading_page = '/initial_loading_page';
 
+  // ignore: constant_identifier_names
   static const String main_settings = '/main_settings';
 
   static const String frame851Page = '/frame_851_page';
+  // ignore: constant_identifier_names
   static const String contact_us = '/contact_us';
 
   static const String frame851TabContainerScreen = '/frame_851_tab_container_screen';
