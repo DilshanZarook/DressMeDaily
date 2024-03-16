@@ -14,18 +14,20 @@ class Search_output extends StatefulWidget {
 class _Search_outputState extends State<Search_output> {
   bool _showOnlineShops = false;
 
-  Future<List<Map<String, dynamic>>> _searchImages() async {
-    var collection = FirebaseFirestore.instance.collection('wardrobe');
-    String searchKey = widget.imageName;
-    String nextString = searchKey.substring(0, searchKey.length - 1) +
-        String.fromCharCode(searchKey.codeUnitAt(searchKey.length - 1) + 1);
+  Future<List<String>> _searchImages() async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    ListResult result = await storage.ref('wardrobe').listAll();
+    List<String> imageUrls = [];
 
-    var querySnapshot = await collection
-        .where('imageName', isGreaterThanOrEqualTo: searchKey)
-        .where('imageName', isLessThan: nextString)
-        .get();
+    String searchKey = widget.imageName.toLowerCase();
+    for (var ref in result.items) {
+      if (ref.name.toLowerCase().contains(searchKey)) {
+        String url = await ref.getDownloadURL();
+        imageUrls.add(url);
+      }
+    }
 
-    return querySnapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+    return imageUrls;
   }
 
   Future<List<String>> _fetchImagesFromStorage() async {
@@ -33,9 +35,7 @@ class _Search_outputState extends State<Search_output> {
     ListResult result = await storage.ref('Online_Shops').listAll();
     List<String> imageUrls = [];
 
-    // Search keyword from the widget
     String searchKey = widget.imageName.toLowerCase();
-
     for (var ref in result.items) {
       if (ref.name.toLowerCase().contains(searchKey)) {
         String url = await ref.getDownloadURL();
@@ -52,7 +52,7 @@ class _Search_outputState extends State<Search_output> {
       builder: (context) {
         return AlertDialog(
           title: Text('Outfit Not Found!'),
-          content: Text('Would you like to continue to Online the Shops?'),
+          content: Text('Would you like to continue to Online Shops?'),
           actions: [
             TextButton(
               child: Text('Go to the shop!'),
@@ -99,7 +99,7 @@ class _Search_outputState extends State<Search_output> {
               }
             },
           )
-        : FutureBuilder<List<Map<String, dynamic>>>(
+        : FutureBuilder<List<String>>(
             future: _searchImages(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -112,12 +112,12 @@ class _Search_outputState extends State<Search_output> {
                 });
                 return SizedBox.shrink();
               } else {
-                var searchResults = snapshot.data!;
+                var imageUrls = snapshot.data!;
                 return GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                  itemCount: searchResults.length,
+                  itemCount: imageUrls.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Image.network(searchResults[index]['imageUrl'], fit: BoxFit.cover);
+                    return Image.network(imageUrls[index], fit: BoxFit.cover);
                   },
                 );
               }
