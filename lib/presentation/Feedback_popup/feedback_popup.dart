@@ -3,6 +3,7 @@ import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // ignore_for_file: must_be_immutable
+// ignore: camel_case_types
 class Feedback_popup extends StatelessWidget {
   Feedback_popup({Key? key}) : super(key: key);
 
@@ -123,6 +124,7 @@ class Feedback_popup extends StatelessWidget {
       'email': emailController.text,
       'thoughts': thoughtController.text,
     });
+    // ignore: use_build_context_synchronously
     Navigator.pushNamed(context, AppRoutes.settings);
   }
 }
