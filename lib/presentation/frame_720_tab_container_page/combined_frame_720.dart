@@ -47,42 +47,13 @@ Future<int> _fetchItemCountFromFirebase() async {
       .listAll();
   return result.items.length;
 }
-    // If you need to start the animation right away, uncomment the following line:
-    // _animationController.forward();
-  
-
-  //
-  // Future<Map<String, dynamic>> fetchWashingDataFromBackend() async {
-  //   var snapshot = await firestore.collection('washing_collection').doc('washing_doc').get();
-  //   return snapshot.data() as Map<String, dynamic>; // Ensure the data exists and is cast to the correct type.
-  // }
-  //
-  // Future<Map<String, dynamic>> fetchAllDataFromBackend() async {
-  //   var snapshot = await firestore.collection('your_collection').doc('your_doc').get();
-  //   return snapshot.data() as Map<String, dynamic>;
-  // }
-
   @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
   }
 
-  // void updateContentForWashing() async {
-  //   var data = await fetchWashingDataFromBackend();
-  //   setState(() {
-  //     itemCount = data['count'];
-  //     itemText = "Washing";
-  //   });
-  // }
-  //
-  // void updateContentForAll() async {
-  //   var data = await fetchAllDataFromBackend();
-  //   setState(() {
-  //     itemCount = data['count'];
-  //     itemText = "Clothes";
-  //   });
-  // }
+  
   @override
   Widget build(BuildContext context) {
     super.build(context); // Required when using AutomaticKeepAliveClientMixin
@@ -115,7 +86,7 @@ Future<int> _fetchItemCountFromFirebase() async {
       context: context,
       pageBuilder: (BuildContext buildContext, Animation<double> animation,
           Animation<double> secondaryAnimation) {
-        return Frame406Bottomsheet();
+        return const Frame406Bottomsheet();
       },
       barrierDismissible: true,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
@@ -146,7 +117,7 @@ Future<int> _fetchItemCountFromFirebase() async {
             pageBuilder: (BuildContext buildContext,
                 Animation<double> animation,
                 Animation<double> secondaryAnimation) {
-              return Frame406Bottomsheet();
+              return const Frame406Bottomsheet();
             },
             barrierDismissible: true,
             barrierLabel:
@@ -174,7 +145,7 @@ Future<int> _fetchItemCountFromFirebase() async {
             color: Colors.blueAccent,
             borderRadius: BorderRadius.circular(40),
           ),
-          child: Text(
+          child: const Text(
             "Archive",
             style: TextStyle(
               color: Colors.white,
@@ -206,7 +177,7 @@ Future<int> _fetchItemCountFromFirebase() async {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color(0xFFd8d8d8), // Peach color
+                    color: const Color(0xFFd8d8d8), // Peach color
                     borderRadius:
                         BorderRadius.circular(20), // Border radius of 20
                   ),
@@ -234,7 +205,7 @@ Future<int> _fetchItemCountFromFirebase() async {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Color(0xFFd8d8d8), // Gray color (not Peach)
+                      color: const Color(0xFFd8d8d8), // Gray color (not Peach)
                       borderRadius:
                           BorderRadius.circular(20), // Border radius of 20
                     ),
@@ -289,20 +260,20 @@ Future<int> _fetchItemCountFromFirebase() async {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Name of the wardrobe'),
+          title: const Text('Name of the wardrobe'),
           content: TextField(
             controller: wardrobeNameController,
-            decoration: InputDecoration(hintText: "Enter wardrobe name"),
+            decoration: const InputDecoration(hintText: "Enter wardrobe name"),
           ),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
             ),
             TextButton(
-              child: Text('Submit'),
+              child: const Text('Submit'),
               onPressed: () {
                 // Handle the submission here
                 print('Wardrobe Name: ${wardrobeNameController.text}');
@@ -421,7 +392,7 @@ Future<int> _fetchItemCountFromFirebase() async {
               ),
             ),
           ),
-          SizedBox(height: 40), // Spacer
+          const SizedBox(height: 40), // Spacer
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -433,7 +404,7 @@ Future<int> _fetchItemCountFromFirebase() async {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Frame851TabContainerScreen()),
+                        builder: (context) => const Frame851TabContainerScreen()),
                   );
                 },
                 child: Container(
@@ -446,7 +417,7 @@ Future<int> _fetchItemCountFromFirebase() async {
                     // Border radius of 40
                     border: Border.all(color: Colors.white), // Border color
                   ),
-                  child: Text(
+                  child: const Text(
                     "All",
                     style: TextStyle(
                       color: Colors.white, // Text color white
@@ -455,7 +426,7 @@ Future<int> _fetchItemCountFromFirebase() async {
                   ),
                 ),
               ),
-              SizedBox(width: 40), // Spacer
+              const SizedBox(width: 40), // Spacer
               GestureDetector(
                 onTap: () {
                   // updateContentForWashing();
@@ -463,7 +434,7 @@ Future<int> _fetchItemCountFromFirebase() async {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Frame851TabContainerScreen()),
+                        builder: (context) => const Frame851TabContainerScreen()),
                   );
                 },
                 child: Container(
@@ -477,7 +448,7 @@ Future<int> _fetchItemCountFromFirebase() async {
                     // Border radius of 40
                     border: Border.all(color: Colors.white), // Border color
                   ),
-                  child: Text(
+                  child: const Text(
                     "Washing",
                     style: TextStyle(
                       color: Colors.white, // Text color white
@@ -486,7 +457,7 @@ Future<int> _fetchItemCountFromFirebase() async {
                   ),
                 ),
               ),
-              SizedBox(width: 40), // Spacer
+              const SizedBox(width: 40), // Spacer
               Container(
                 height: 25.v,
                 width: 66.h,
@@ -508,7 +479,7 @@ Future<int> _fetchItemCountFromFirebase() async {
               ),
             ],
           ),
-          SizedBox(height: 60), // Spacer
+          const SizedBox(height: 60), // Spacer
         ],
       ),
     );
