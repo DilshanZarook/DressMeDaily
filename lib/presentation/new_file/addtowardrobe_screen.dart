@@ -57,12 +57,16 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
         List<dynamic> predictions = jsonResponse['top_predictions'];
         showClassificationResults(message, predictions);
       } else {
-        print('Error: Server responded with status code: ${response.statusCode}');
+      String errorMessage = 'An error occurred.';
+      if (response.statusCode == 500) {
+        // Check for specific error message (same approach as before)
       }
-    } catch (e) {
-      showSnackBar('Exception caught during image processing: $e');
+      showSnackBar(errorMessage);
     }
+  } catch (e) {
+    showSnackBar('An unexpected error occurred. Please try again later.');
   }
+}
 
   void showClassificationResults(String message, List<dynamic> predictions) {
     if (predictions.isEmpty) {
