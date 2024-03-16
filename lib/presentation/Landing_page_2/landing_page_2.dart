@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
+// ignore: camel_case_types
 class Landing_page_2 extends StatelessWidget {
   const Landing_page_2({Key? key})
       : super(
@@ -40,7 +41,7 @@ class Landing_page_2 extends StatelessWidget {
       future: getFirebaseImages(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
@@ -137,7 +138,7 @@ class Landing_page_2 extends StatelessWidget {
                                     autoPlayCurve: Curves.fastOutSlowIn,
                                     enableInfiniteScroll: true,
                                     autoPlayAnimationDuration:
-                                        Duration(milliseconds: 400),
+                                        const Duration(milliseconds: 400),
                                     viewportFraction: 0.7,
                                   ),
                                   items:
@@ -153,7 +154,7 @@ class Landing_page_2 extends StatelessWidget {
                                               width: MediaQuery.of(context)
                                                   .size
                                                   .width,
-                                              margin: EdgeInsets.symmetric(
+                                              margin: const EdgeInsets.symmetric(
                                                   horizontal: 5.0),
                                               decoration: BoxDecoration(
                                                 borderRadius:
@@ -185,7 +186,7 @@ class Landing_page_2 extends StatelessWidget {
                             left: 20.h,
                             right: 19.h,
                           ),
-                          child: Text(
+                          child: const Text(
                             "Outfit styles which may go with your style",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -208,7 +209,7 @@ class Landing_page_2 extends StatelessWidget {
                             autoPlayCurve: Curves.fastOutSlowIn,
                             enableInfiniteScroll: true,
                             autoPlayAnimationDuration:
-                                Duration(milliseconds: 700),
+                                const Duration(milliseconds: 700),
                             viewportFraction: 0.7,
                           ),
                           items: imageUrls.map((downloadedURL) {
@@ -221,7 +222,7 @@ class Landing_page_2 extends StatelessWidget {
                                             },
                                 child:  Container(
                                   width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30.h),
                                     // Adjust as needed
@@ -263,7 +264,7 @@ class YourWidget extends StatelessWidget {
   }
 
 
-  YourWidget({required this.imageUrls}); // Add this constructor
+  const YourWidget({required this.imageUrls}); // Add this constructor
 
   @override
   Widget build(BuildContext context) {
@@ -275,7 +276,7 @@ class YourWidget extends StatelessWidget {
         aspectRatio: 16 / 9,
         autoPlayCurve: Curves.fastOutSlowIn,
         enableInfiniteScroll: true,
-        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        autoPlayAnimationDuration: const Duration(milliseconds: 800),
         viewportFraction: 0.8,
       ),
       items: imageUrls.map((downloadedURL) {
@@ -287,7 +288,7 @@ class YourWidget extends StatelessWidget {
               },
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30.h), // Adjust as needed
                   image: DecorationImage(
