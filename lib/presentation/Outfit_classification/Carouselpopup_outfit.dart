@@ -17,7 +17,7 @@ void showCarouselDialog(BuildContext context) {
     return GestureDetector(
       onTap: () => navigateToPage(context, index + 1),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5),
+        margin: const EdgeInsets.symmetric(horizontal: 5),
         // Add some space between items
         decoration: BoxDecoration(
           color: index == 0
@@ -28,7 +28,7 @@ void showCarouselDialog(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           text,
-          style: TextStyle(fontSize: 24, color: Colors.white),
+          style: const TextStyle(fontSize: 24, color: Colors.white),
         ),
       ),
     );
@@ -55,13 +55,13 @@ void navigateToPage(BuildContext context, int index) {
   Widget page;
   switch (index) {
     case 1:
-      page = Casual_wear_page();
+      page = const Casual_wear_page();
       break;
     case 2:
-      page = Work_wear_page();
+      page = const Work_wear_page();
       break;
     case 3:
-      page = Party_wear_page();
+      page = const Party_wear_page();
       break;
     default:
       return;
@@ -71,7 +71,7 @@ void navigateToPage(BuildContext context, int index) {
     PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        var begin = Offset(0.0, 1.0);
+        var begin = const Offset(0.0, 1.0);
         var end = Offset.zero;
         var curve = Curves.ease;
 
@@ -84,7 +84,7 @@ void navigateToPage(BuildContext context, int index) {
           child: child,
         );
       },
-      transitionDuration: Duration(milliseconds: 600),
+      transitionDuration: const Duration(milliseconds: 600),
     ),
   );
 }
