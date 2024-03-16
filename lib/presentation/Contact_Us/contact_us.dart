@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// ignore: camel_case_types
 class Contact_us extends StatefulWidget {
+  const Contact_us({Key? key}) : super(key: key);
+
   @override
+  // ignore: library_private_types_in_public_api
   _ContactUsPageState createState() => _ContactUsPageState();
 }
 
@@ -15,50 +19,50 @@ class _ContactUsPageState extends State<Contact_us> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Contact Us',
+          title: const Text('Contact Us',
            style: TextStyle(fontSize: 25.0,color: Colors.black),
         ),
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text(
+                const Text(
                   'Feel free to contact us!',
                   style: TextStyle(fontSize: 25.0,color: Colors.black),
                 ),
-                Text(
+                const Text(
                   'We will get back to you as soon as possible.',
                   style: TextStyle(fontSize: 20.0),
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 TextField(
                   controller: nameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Name',
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 TextField(
                   controller: emailController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Email',
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 TextField(
                   controller: problemController,
                   maxLines: 3,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Describe your problem',
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 ElevatedButton(
                   onPressed: () {
                     // Handle the send button click
@@ -66,9 +70,9 @@ class _ContactUsPageState extends State<Contact_us> {
                   },
                   style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black, 
-                  minimumSize: Size(double.infinity, 50),
+                  minimumSize: const Size(double.infinity, 50),
                 ),
-                child: Text('Send', style: TextStyle(color: Colors.white)),
+                child: const Text('Send', style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),
@@ -84,9 +88,7 @@ class _ContactUsPageState extends State<Contact_us> {
         'Problem': problemController.text,
       });
 
-      // Form successfully submitted to Firebase Realtime Database
-      print('Form submitted successfully');
-      // You can add additional logic here, such as showing a confirmation message
+      
     } catch (error) {
       // An error occurred during the form submission
       print('Error during form submission: $error');
