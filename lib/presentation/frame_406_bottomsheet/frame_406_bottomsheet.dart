@@ -3,9 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:googleapis/connectors/v1.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/core/Data_model/item_model.dart'; // Replace with the actual path of your ItemModel file
+import 'package:sdgp_test01/core/Data_model/item_model.dart'; 
 
 class Frame406Bottomsheet extends StatefulWidget {
   const Frame406Bottomsheet({Key? key}) : super(key: key);
@@ -52,6 +51,7 @@ class _Frame406BottomsheetState extends State<Frame406Bottomsheet> {
       'Image url': url,
       'timestamp': FieldValue.serverTimestamp(),
     });
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Added to favourites'),
