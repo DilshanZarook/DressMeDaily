@@ -1,10 +1,7 @@
-import torch
 from torchvision import models, transforms
-from PIL import Image
-import json
 import requests
 from PIL import Image
-from flask import request,Flask
+from flask import request, Flask
 from transformers import AutoModelForImageClassification
 from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms
@@ -18,17 +15,14 @@ app = Flask(__name__)
 
 @app.route('/classify', methods=['POST'])
 def identify_classify():
+    try:
         img = request.files["img"]
 
-        # Download ImageNet class index
+        # Download ImageNet class index (optional, if needed for output labels)
         class_idx_url = 'https://raw.githubusercontent.com/anishathalye/imagenet-simple-labels/master/imagenet-simple-labels.json'
         class_idx = requests.get(class_idx_url).json()
 
-        # Load the pre-trained model
-        model = models.resnet50(weights='ResNet50_Weights.IMAGENET1K_V1')
-        model.eval()
-
-        # Define a transform to preprocess the image
+        # Define a transform for image preprocessing
         transform = transforms.Compose([
             transforms.Resize(256),
             transforms.CenterCrop(224),
@@ -36,45 +30,57 @@ def identify_classify():
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ])
 
-        # Load an image
-        image_path = img  # Update this path to your image file
-        image = Image.open(image_path)
+        # Load an image from the request
+        image = Image.open(img.stream)  # Ensure image is read from stream
 
         # Convert PIL Image to PyTorch tensor and add batch dimension
         image_tensor = transform(image).unsqueeze(0)
 
-        # Check for number of channels
-        if image_tensor.shape[0] != 3:
+        # Check for number of channels (more robust check)
+        if image_tensor.shape[1] != 3:
             print("Image has unexpected number of channels. Converting to RGB")
-            image_tensor = transforms.functional.to_pil_image(image_tensor).convert('RGB')
-            image_tensor = transforms.ToTensor()(image_tensor)
+            image = transforms.functional.to_pil_image(image_tensor).convert('RGB')
+            image_tensor = transforms.ToTensor()(image)
+            image_tensor = image_tensor.unsqueeze(0)
 
-        # Add batch dimension
-        image_tensor = image_tensor.unsqueeze(0)
+        # Load a pre-trained model (consider alternatives based on dataset size and task)
+        model = models.resnet50(weights='ResNet50_Weights.IMAGENET1K_V1')
+        model.eval()  # Set to evaluation mode
 
         # Predict with the model
-        model.eval()  # Set the model to evaluation mode
         with torch.no_grad():
             outputs = model(image_tensor)
             probabilities = torch.nn.functional.softmax(outputs[0], dim=0)
 
-        # Get top 5 probabilities and indices
-        top5_prob, top5_catid = torch.topk(probabilities, 5)
+        # Get top 5 probabilities and indices (if using ImageNet classes)
+        if class_idx:
+            top5_prob, top5_catid = torch.topk(probabilities, 5)
+            top_predictions = [
+                {"label": class_idx[top5_catid[i].item()], "probability": top5_prob[i].item() * 100}
+                for i in range(top5_prob.size(0))
+            ]
+        else:
+            # Provide a more generic response if class labels aren't available
+            top_predictions = [{"probability": p.item() * 100} for p in probabilities]
+
+
         for i in range(top5_prob.size(0)):
             print(f"{class_idx[top5_catid[i].item()]}: {top5_prob[i].item() * 100:.2f}%")
 
-            # Prepare your response data
-            response_data = {
-                "message": "Image processed successfully",
-                "top_predictions": [
-                    {"label": class_idx[top5_catid[i].item()], "probability": top5_prob[i].item() * 100}
-                    for i in range(top5_prob.size(0))
-                ],
-                # Include additional data as needed
-            }
+        # Prepare the response data
+        response_data = {
+            "message": "Image processed successfully",
+            "top_predictions": [
+                {"label": class_idx[top5_catid[i].item()], "probability": top5_prob[i].item() * 100}
+                for i in range(top5_prob.size(0))
+            ],
+            # Include additional data as needed
+        }
 
-            # Return the JSON response
-            return jsonify(response_data)
+        return jsonify(response_data)
+    except Exception as e:
+        print(f"Error processing image: {e}")
+        return jsonify({"error": "An error occurred while processing the image."}), 500
 
 @app.route('/reclassify', methods=['POST'])
 def reclassify_image(imagePath=True):
