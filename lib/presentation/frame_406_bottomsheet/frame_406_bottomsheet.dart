@@ -47,6 +47,18 @@ class _Frame406BottomsheetState extends State<Frame406Bottomsheet> {
     }
   }
 
+  Future<void> addToFavos(String url) async {
+    await FirebaseFirestore.instance.collection('favourites').add({
+      'Image url': url,
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Added to favourites'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -112,6 +124,7 @@ class _Frame406BottomsheetState extends State<Frame406Bottomsheet> {
                                 : imageUrls.map((downloadedURL) {
                                     return GestureDetector(
                                       onTap: () => _launchURL(downloadedURL),
+                                      onDoubleTap: () => addToFavos(downloadedURL),
                                       child: Container(
                                         width: 120,
                                         height: 120,
