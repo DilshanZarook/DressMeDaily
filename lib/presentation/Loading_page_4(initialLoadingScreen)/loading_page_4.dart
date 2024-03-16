@@ -39,11 +39,11 @@ class _Loading_page_4State extends State<Loading_page_4> with SingleTickerProvid
     });
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _controller.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

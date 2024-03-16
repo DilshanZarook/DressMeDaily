@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/widgets/custom_elevated_button.dart';
 import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 // ignore_for_file: must_be_immutable
 class Feedback_popup extends StatelessWidget {
   Feedback_popup({Key? key}) : super(key: key);
 
   TextEditingController emailController = TextEditingController();
-  TextEditingController thoughtController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -115,15 +115,11 @@ class Feedback_popup extends StatelessWidget {
 
   /// Navigates to the frame633Screen when the action is triggered.
   onTapTxtCancel(BuildContext context) {
-    Navigator.pop(context);
+    Navigator.pushNamed(context, AppRoutes.settings);
   }
 
   /// Navigates to the frame675Screen when the action is triggered.
-  onTapTxtSend(BuildContext context) async {
-    await FirebaseFirestore.instance.collection('feedback').add({
-      'email': emailController.text,
-      'thoughts': thoughtController.text,
-    });
+  onTapTxtSend(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.settings);
   }
 }
