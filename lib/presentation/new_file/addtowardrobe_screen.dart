@@ -42,7 +42,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
 
   Future<void> _uploadImage(File image) async {
     try {
-      var uri = Uri.parse('http://127.0.0.1:5000/classify');
+      var uri = Uri.parse('https://dressmedaily-umlonkv2sa-as.a.run.app/classify');
       var request = http.MultipartRequest('POST', uri)
         ..files.add(await http.MultipartFile.fromPath('img', image.path));
 
