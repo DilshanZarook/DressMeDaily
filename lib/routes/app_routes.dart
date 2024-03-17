@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sdgp_test01/Services/auth_service.dart';
+import 'package:sdgp_test01/pages/auth_page.dart';
 import 'package:sdgp_test01/presentation/Initial_loading_page/initial_loading_page.dart';
 import 'package:sdgp_test01/presentation/Starting_page/starting_page.dart';
 import 'package:sdgp_test01/presentation/Loading_page_1/loading_page_1.dart';
@@ -152,6 +155,10 @@ class AppRoutes {
 
   static const String appNavigationScreen = '/app_navigation_screen';
 
+  static const String google_sign_in = '/google_sign_in';
+
+  static const String auth_page = '/auth_page';
+
   static Map<String, WidgetBuilder> routes = {
 
     addtowardrobe_screen: (context) => AddtowardrobeScreen(),
@@ -195,6 +202,8 @@ class AppRoutes {
     signup_old_user: (context) => Signup_old_user(),
     password_change: (context) => Password_change(),
     password_mail: (context) => Password_mail(),
-    appNavigationScreen: (context) => AppNavigationScreen()
+    appNavigationScreen: (context) => AppNavigationScreen(),
+    google_sign_in: (context) => AuthService().signInWithGoogle(),
+    auth_page: (context) => AuthPage(),
   };
 }

@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
+import 'package:sdgp_test01/pages/auth_page.dart';
 import 'package:sdgp_test01/presentation/Gender_selection/gender_selection.dart';
 import 'package:sdgp_test01/presentation/Signup_new_user/signup_new_user.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,7 +35,7 @@ class _Loading_page_4State extends State<Loading_page_4> with SingleTickerProvid
       _controller.dispose(); // Dispose the controller before navigating
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Starting_page()),
+        MaterialPageRoute(builder: (context) => AuthPage()),
       );
     });
   }

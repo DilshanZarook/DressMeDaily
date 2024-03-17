@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
@@ -29,6 +30,11 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
   late FocusNode ageFocusNode;
   late FocusNode bioFocusNode;
   bool isKeyboardOpen = false;
+
+  // sign user out method
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
 
   @override
   void initState() {

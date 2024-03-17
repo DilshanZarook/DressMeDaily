@@ -12,7 +12,20 @@
           "package_name": "com.sdgptest.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "62543235071-j2fnt56q1k1lf34o3nsn4nb3b37nl264.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sdgptest.app",
+            "certificate_hash": "20f3d3ac40f5ed5f5a5f521bf7836417ce878df0"
+          }
+        },
+        {
+          "client_id": "62543235071-8ad0pr2gdv6naa533fka3nirttjunnq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDrkPvAvBI-jGnsAOZ8Eg5Wi6oNWbfQE0E"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62543235071-8ad0pr2gdv6naa533fka3nirttjunnq8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "62543235071-95njt8asi031omtcajtmh6fg0hvhm828.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firstly.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }
