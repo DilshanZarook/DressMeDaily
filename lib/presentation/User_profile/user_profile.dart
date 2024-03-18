@@ -32,7 +32,7 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
   bool isKeyboardOpen = false;
 
   // sign user out method
-  void signUserOut() {
+  Future<void> signUserOut() async {
     FirebaseAuth.instance.signOut();
   }
 
@@ -338,9 +338,7 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
                     ),
                     TextButton(
                       onPressed: () {
-                        // Perform logout actions (e.g., clear user data, navigate to login screen)
-                        Navigator.of(context).pop();
-                        Navigator.pushReplacementNamed(context, AppRoutes.starting_page); // Replace your start screen route
+                        signUserOut();
                       },
                       child: Text(
                         'Log out',
@@ -356,7 +354,7 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
             padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
             decoration: BoxDecoration(
               color: Colors.red,
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
               'Log out',

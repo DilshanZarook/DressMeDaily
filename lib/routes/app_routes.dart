@@ -5,15 +5,13 @@ import 'package:sdgp_test01/pages/auth_page.dart';
 import 'package:sdgp_test01/presentation/Initial_loading_page/initial_loading_page.dart';
 import 'package:sdgp_test01/presentation/Starting_page/starting_page.dart';
 import 'package:sdgp_test01/presentation/Loading_page_1/loading_page_1.dart';
-import 'package:sdgp_test01/presentation/Login_page_1/login_page_1.dart';
+import 'package:sdgp_test01/presentation/Register_New_User/register_new_user.dart';
 import 'package:sdgp_test01/presentation/Loading_page_2/loading_page_2.dart';
-import 'package:sdgp_test01/presentation/Signup_other_options/signup_other_options.dart';
 import 'package:sdgp_test01/presentation/Signup_new_user/signup_new_user.dart';
 import 'package:sdgp_test01/presentation/Profile_picture/profile_picture.dart';
 import 'package:sdgp_test01/presentation/Instructions_page/instructions_page.dart';
 import 'package:sdgp_test01/presentation/frame_293_screen/frame_293_screen.dart';
-import 'package:sdgp_test01/presentation/starting_page_signup/starting_page_signup.dart';
-import 'package:sdgp_test01/presentation/Signin_other_options/signin_other_options.dart';
+import 'package:sdgp_test01/presentation/Old_User_Signin/old_user_signin.dart';
 import 'package:sdgp_test01/presentation/Signup_old_user/signup_old_user.dart';
 import 'package:sdgp_test01/presentation/Password_change/password_change.dart';
 import 'package:sdgp_test01/presentation/Password_mail/password_mail.dart';
@@ -131,11 +129,11 @@ class AppRoutes {
 
   static const String loading_page_1 = '/loading_page_1';
 
-  static const String login_page_1 = '/login_page_1';
+  static const String register_new_user = '/register_new_user';
 
   static const String loading_page_2 = '/loading_page_2';
 
-  static const String signup_other_options = '/signup_other_options';
+  static const String old_user_signin = '/old_user_signin';
 
   static const String signup_new_user = '/signup_new_user';
 
@@ -190,15 +188,13 @@ class AppRoutes {
     gender_selection: (context) => Gender_selection(),
     starting_page: (context) => Starting_page(),
     loading_page_1: (context) => Loading_page_1(),
-    login_page_1: (context) => Login_page_1(),
+    register_new_user: (context) => RegisterNewUser(),
     loading_page_2: (context) => Loading_page_2(),
-    signup_other_options: (context) => Signup_other_options(),
     signup_new_user: (context) => Signup_new_user(),
     profile_picture: (context) => Profile_picture(),
     instructions_page: (context) => Instructions_page(),
     frame293Screen: (context) => Frame293Screen(),
-    starting_page_signup: (context) => Starting_page_signup(),
-    signin_other_options: (context) => Signin_other_options(),
+    old_user_signin: (context) => OldUserSignin(),
     signup_old_user: (context) => Signup_old_user(),
     password_change: (context) => Password_change(),
     password_mail: (context) => Password_mail(),

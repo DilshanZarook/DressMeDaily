@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Profile_picture/profile_picture.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
 import 'package:sdgp_test01/widgets/app_bar/custom_app_bar_1.dart';
 import 'package:sdgp_test01/widgets/custom_icon_button.dart';
@@ -268,7 +267,7 @@ class Landing_page extends StatelessWidget {
 
                                       height: 40.h,
                                       width: 110.h,
-                                      text: "Plan",
+                                      text: "Plan", borderRadius: BorderRadius.circular(20.0),
 
                                     ),
                                     SizedBox(height: 25.v),
@@ -276,13 +275,13 @@ class Landing_page extends StatelessWidget {
 
                                       height: 40.h,
                                       width: 110.h,
-                                      text: "Weather",
+                                      text: "Weather", borderRadius: BorderRadius.circular(20.0),
                                     ),
                                     SizedBox(height: 25.v),
                                     CustomOutlinedButton(
                                       height: 40.h,
                                       width: 110.h,
-                                      text: "Avatar",
+                                      text: "Avatar", borderRadius: BorderRadius.circular(20.0),
 
                                     ),
                                   ],

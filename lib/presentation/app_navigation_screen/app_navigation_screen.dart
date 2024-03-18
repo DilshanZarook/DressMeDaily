@@ -51,9 +51,9 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "Login_page_1",
+                          screenTitle: "Register_new_user",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.login_page_1),
+                              context, AppRoutes.register_new_user),
                         ),
                         _buildScreenTitle(
                           context,
@@ -63,9 +63,9 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
-                          screenTitle: "Signup_other_options",
+                          screenTitle: "Old_user_signin",
                           onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.signup_other_options),
+                              context, AppRoutes.old_user_signin),
                         ),
                         _buildScreenTitle(
                           context,

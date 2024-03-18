@@ -31,9 +31,9 @@ class ImageConstant {
 
   static String imgVector_1 = '$imagePath/img_vector_1.svg';
 
-
-  static String imgOipremovebgpreview1 =
-      '$imagePath/img_oipremovebgpreview_1.png';
+  static String imgEmail = '$imagePath/mail_icon.png';
+  
+  static String imgGoogle = '$imagePath/img_oipremovebgpreview_1.png';
 
   static String imgFacebook = '$imagePath/img_facebook.svg';
 

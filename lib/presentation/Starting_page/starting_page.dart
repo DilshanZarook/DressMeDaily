@@ -23,7 +23,7 @@ class Starting_page extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 16.v),
+                SizedBox(height: 20.v),
                 Container(
                   height: 400.v,
                   width: 360.v,
@@ -36,12 +36,13 @@ class Starting_page extends StatelessWidget {
                     style: theme.textTheme.headlineLarge?.copyWith(
                       fontSize: 32, // Set the font size to 16
                       fontWeight: FontWeight.w600, // Set the font weight to 300
-                    ) ?? TextStyle(
+                    ) ?? const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w600,
-                    ),),
+                    ),
+                  ),
                 ),
-                Spacer(),
+                const Spacer(),
                 CustomOutlinedButton(
                     height: 50.v,
                     width: 160.h,
@@ -53,7 +54,7 @@ class Starting_page extends StatelessWidget {
                     ),
                     onPressed: () {
                       onTapContinue(context);
-                    }
+                    }, borderRadius: BorderRadius.circular(20.0),
                 ),
 
                 SizedBox(height: 37.v),
@@ -78,9 +79,6 @@ class Starting_page extends StatelessWidget {
             style: theme.textTheme.bodyLarge?.copyWith(
               fontSize: 18, // Set the font size to 16
               fontWeight: FontWeight.w500, // Set the font weight to 300
-            ) ?? TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w400,
             ),
           ),
         ),
@@ -93,22 +91,20 @@ class Starting_page extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 4.h, vertical: 3.v),
             decoration: AppDecoration.outlineBlack.copyWith(
               color: Colors.blue, // Set the container background color to blue
-              borderRadius: BorderRadius.circular(17.v), // Apply the border radius
+              borderRadius: BorderRadius.circular(8.v), // Apply the border radius
               // If AppDecoration.outlineBlack already has a border, this will keep it, while also setting the color to blue.
             ),
-            child: Text(
-              "sign in",
-              style: CustomTextStyles.titleLargeWhiteA700?.copyWith(
-                color: Colors.white,
-                fontSize: 14.v, // Set the font size
-                fontWeight: FontWeight.w400, // Set the font weight
-              ) ?? TextStyle(
-                fontSize: 16.v,
-                fontWeight: FontWeight.w300,
+            child: Center(
+              child: Text(
+                "SIGN IN",
+                style: CustomTextStyles.titleLargeWhiteA700?.copyWith(
+                  color: Colors.white,
+                  fontSize: 11.v, // Set the font size
+                  fontWeight: FontWeight.w400, // Set the font weight
+                ),
               ),
             ),
           ),
-
         ),
       ],
     );
@@ -117,11 +113,11 @@ class Starting_page extends StatelessWidget {
 
   /// Navigates to the frame243Screen when the action is triggered.
   onTapContinue(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.login_page_1);
+    Navigator.pushNamed(context, AppRoutes.register_new_user);
   }
 
   /// Navigates to the frameFiftynineScreen when the action is triggered.
   onTapTxtSignup(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.starting_page_signup);
+    Navigator.pushNamed(context, AppRoutes.old_user_signin);
   }
 }

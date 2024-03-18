@@ -52,7 +52,7 @@ class Password_change extends StatelessWidget {
                       buttonStyle: CustomButtonStyles.outlineBlackTL103,
                       onPressed: () {
                         onTapSubmit(context);
-                      }),
+                      }, borderRadius: BorderRadius.circular(20.0),),
                   Spacer(flex: 43)
                 ]))));
   }
