@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
+import 'package:sdgp_test01/presentation/All_clothes_outfit_page/All_clothes_outfit.dart';
 import 'package:sdgp_test01/presentation/My_selection_Top_wear/Top_wear_Selection.dart';
-
+import 'package:sdgp_test01/presentation/frame_405_bottomsheet/frame_405_bottomsheet.dart';
 import '../frame_881_page/widgets/frame4_item_widget.dart';
 
 // ignore_for_file: must_be_immutable
-class Frame881Page extends StatefulWidget {
-  Frame881Page({Key? key}) : super(key: key);
+class Outfit_page extends StatefulWidget {
+  Outfit_page({Key? key}) : super(key: key);
 
   @override
-  Frame881PageState createState() => Frame881PageState();
+  Outfit_pageState createState() => Outfit_pageState();
 }
 
-class Frame881PageState extends State<Frame881Page> {
+class Outfit_pageState extends State<Outfit_page> {
   bool isButton1Selected = false;
   bool isSelected2 = false;
   bool isSelected3 = false;
   final Color darkBoxColor = Colors.brown; // Example color for dark boxes
   final Color lightBoxColor = Colors.grey[300]!;
+  String? selectedImageUrl; // Variable to hold the selected image URL
+  bool isDarkBoxSelected = false;
+  bool isDarkBoxSelected_1 = false;
 
   @override
   bool get wantKeepAlive => true;
   int selectedIndex = 0;
 
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,9 +44,9 @@ class Frame881PageState extends State<Frame881Page> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      buildButton(context, 0, "My Selection"),
-                      buildButton(context, 1, "AI Selection"),
-                      // buildButton(context, 2, "Favorites"),
+                      buildButton1(context),
+                      buildButton2(context),
+                      buildButton3(context),
                     ],
                   ),
                   SizedBox(height: 25.v),
@@ -56,32 +59,43 @@ class Frame881PageState extends State<Frame881Page> {
                     children: [
                       // Container for dark boxes with greater height
                       Container(
-                        height: 400,
-                        width: 250,
+                        height: 490,
+                        width: 320,
                         decoration: BoxDecoration(
                           color: Colors.yellow,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Column(
                           children: <Widget>[
-                            const SizedBox(height: 20),
+                            SizedBox(height: 20),
                             _buildDarkBoxSection(),
-                            const SizedBox(height: 20), // Space between the boxes
-                            _buildDarkBoxSection(),
+                            SizedBox(height: 20), // Space between the boxes
+                            _buildDarkBoxSection1(),
                           ],
                         ),
                       ),
                       // Column for light boxes without an additional container
-                      Column(
-                        children: <Widget>[
-                          _buildLightBoxSection(),
-                          const SizedBox(height: 50), // Space between the boxes
-                          _buildLightBoxSection(),
-                        ],
-                      ),
+
+
                     ],
                   ),
-                  SizedBox(height: 80.v),
+                  SizedBox(height: 30.h),
+                  CustomContainerSection(onImageSelected: (String url) {
+                    if (isDarkBoxSelected  ){
+                      setState(() {
+                        selectedImageUrl = url;
+                        isDarkBoxSelected = false; // Reset the flag
+                      });
+                    }
+                    else if ( isDarkBoxSelected_1){
+                      setState(() {
+                        selectedImageUrl = url;
+                        isDarkBoxSelected_1 = false; // Reset the flag
+                      });
+                    }
+                  }),
+
+                  SizedBox(height: 20.v),
                   // Use appropriate value or context variable
                   // This space is to account for the floating button's space
                 ],
@@ -96,99 +110,54 @@ class Frame881PageState extends State<Frame881Page> {
   }
 
   Widget _buildDarkBoxSection() {
-    return Container(
-      width: 150.v, // Replace .v with actual values or calculations if needed
-      height: 125.v, // Replace .v with actual values or calculations if needed
-      decoration: BoxDecoration(
-        color: darkBoxColor,
-        borderRadius: BorderRadius.circular(20), // Set border radius here
-      ),
-    );
-  }
-
-  Widget _buildLightBoxSection() {
     return GestureDetector(
       onTap: () {
-        showGeneralDialog(
-          context: context,
-          pageBuilder: (BuildContext buildContext, Animation<double> animation,
-              Animation<double> secondaryAnimation) {
-            return const Top_wear_Selection();
-          },
-          barrierDismissible: true,
-          barrierLabel:
-              MaterialLocalizations.of(context).modalBarrierDismissLabel,
-          transitionDuration: const Duration(milliseconds: 600),
-          transitionBuilder: (BuildContext context, Animation<double> animation,
-              Animation<double> secondaryAnimation, Widget child) {
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(0, 1),
-                end: Offset.zero,
-              ).animate(animation),
-              child: child,
-            );
-          },
-        );
+        setState(() {
+          isDarkBoxSelected = true;
+        });
       },
       child: Container(
-        width: 120, // Adjust the width if needed
-        height: 120, // Adjust the height if needed
+        width: 200.v, // Replace .v with actual values or calculations if needed
+        height: 160.v, // Replace .v with actual values or calculations if needed
         decoration: BoxDecoration(
-          color: lightBoxColor,
+          color: darkBoxColor,
           borderRadius: BorderRadius.circular(20), // Set border radius here
+          image: selectedImageUrl != null ? DecorationImage(
+            image: NetworkImage(selectedImageUrl!),
+            fit: BoxFit.cover,
+          ) : null,
         ),
+        child: selectedImageUrl == null
+            ? Center(child: Text('Select a Topwaer')) // Prompt to select image
+            : null,
+      ),
+    );
+  }
+  Widget _buildDarkBoxSection1() {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isDarkBoxSelected_1 = true;
+        });
+      },
+      child: Container(
+        width: 200.v, // Replace .v with actual values or calculations if needed
+        height: 160.v, // Replace .v with actual values or calculations if needed
+        decoration: BoxDecoration(
+          color: darkBoxColor,
+          borderRadius: BorderRadius.circular(20), // Set border radius here
+          image: selectedImageUrl != null ? DecorationImage(
+            image: NetworkImage(selectedImageUrl!),
+            fit: BoxFit.cover,
+          ) : null,
+        ),
+        child: selectedImageUrl == null
+            ? Center(child: Text('Select a bottomwear')) // Prompt to select image
+            : null,
       ),
     );
   }
 
-  // Section Widget
-  // Widget _buildStickyCustomIconButtonTop(BuildContext context) {
-  //   return Positioned(
-  //     top: 220.0,  // Top offset
-  //     right: 50.0, // Right offset
-  //     child: GestureDetector(
-  //       onTap: () {
-  //         // Using the showGeneralDialog method with the SlideTransition animation
-  //         showGeneralDialog(
-  //           context: context,
-  //           pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
-  //             return Frame406Bottomsheet();
-  //           },
-  //           barrierDismissible: true,
-  //           barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-  //           transitionDuration: const Duration(milliseconds: 600),
-  //           transitionBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-  //             return SlideTransition(
-  //               position: Tween<Offset>(
-  //                 begin: const Offset(0, 1),
-  //                 end: Offset.zero,
-  //               ).animate(animation),
-  //               child: child,
-  //             );
-  //           },
-  //         );
-  //       },
-  //       child: Container(
-  //         height: 35.adaptSize,
-  //         width: 80.adaptSize,
-  //         padding: EdgeInsets.all(6.h),
-  //         decoration: BoxDecoration(
-  //           color: Colors.blueAccent,
-  //           borderRadius: BorderRadius.circular(40),
-  //         ),
-  //         child: Text(
-  //           "Archive",
-  //           style: TextStyle(
-  //             color: Colors.white,
-  //             fontSize: 16,
-  //           ),
-  //           textAlign: TextAlign.center,
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget buildButton(BuildContext context, int index, String text) {
     return InkWell(
@@ -240,7 +209,7 @@ class Frame881PageState extends State<Frame881Page> {
         await Future.delayed(Duration(milliseconds: 200));
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Frame881Page()),
+          MaterialPageRoute(builder: (context) => Outfit_page()),
         );
 
         // Reset the state if needed
@@ -277,7 +246,7 @@ class Frame881PageState extends State<Frame881Page> {
         await Future.delayed(Duration(milliseconds: 200));
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Frame881Page()),
+          MaterialPageRoute(builder: (context) => Outfit_page()),
         );
 
         // Reset the state if needed
@@ -305,42 +274,42 @@ class Frame881PageState extends State<Frame881Page> {
     );
   }
 
-// Widget buildButton3(BuildContext context) {
-//   return InkWell(
-//     onTap: () async {
-//       setState(() {
-//         isSelected3 = true;
-//       });
-//       await Future.delayed(Duration(milliseconds: 200));
-//       Navigator.push(
-//         context,
-//         MaterialPageRoute(builder: (context) => Bookmark_page()),
-//       );
-//
-//       // Reset the state if needed
-//       setState(() {
-//         isSelected3 = false;
-//       });
-//     },
-//     child: Container(
-//       padding: EdgeInsets.symmetric(horizontal: 9.h, vertical: 10.v),
-//       decoration: BoxDecoration(
-//         color: isSelected3 ? appTheme.lime400 : appTheme.blueGray100,
-//         borderRadius: BorderRadius.circular(17.h),
-//       ),
-//       child: Text(
-//         "Favorites",
-//         style: TextStyle(
-//           color: isSelected3 ? Colors.white : appTheme.black900,
-//           // Change text color based on selection
-//           fontSize: 10.fSize,
-//           fontFamily: 'Inter',
-//           fontWeight: FontWeight.w400,
-//         ),
-//       ),
-//     ),
-//   );
-// }
+Widget buildButton3(BuildContext context) {
+  return InkWell(
+    onTap: () async {
+      setState(() {
+        isSelected3 = true;
+      });
+      await Future.delayed(Duration(milliseconds: 200));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Frame405Bottomsheet()),
+      );
+
+      // Reset the state if needed
+      setState(() {
+        isSelected3 = false;
+      });
+    },
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 9.h, vertical: 10.v),
+      decoration: BoxDecoration(
+        color: isSelected3 ? appTheme.lime400 : appTheme.blueGray100,
+        borderRadius: BorderRadius.circular(17.h),
+      ),
+      child: Text(
+        "Favorites",
+        style: TextStyle(
+          color: isSelected3 ? Colors.white : appTheme.black900,
+          // Change text color based on selection
+          fontSize: 10.fSize,
+          fontFamily: 'Inter',
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+    ),
+  );
+}
 
   /// Section Widget
 }
