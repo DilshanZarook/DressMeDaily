@@ -10,22 +10,17 @@ class _Frame4ItemWidgetState extends State<Frame4ItemWidget> {
   String selectedAllClothes = 'All Clothes';
 
   // String selectedSeason = 'Season';
-  String selectedOccasion = 'Occasion';
+
 
   // String selectedCategory = 'Category';
 
   final allClothesOptions = [
     'All Clothes',
-    'Jeans',
-    'Shirt',
-    'Tops',
-    'Bottoms',
-    'Outerwear',
-    'Accessories'
+    'Casual', 'Formal', 'Party'
   ];
 
   // final seasonOptions = ['Season', 'Spring', 'Summer', 'Fall', 'Winter'];
-  final occasionOptions = ['Occasion', 'Casual', 'Formal', 'Party'];
+
 
   // final categoryOptions = ['Category', 'Tops', 'Bottoms', 'Outerwear', 'Accessories'];
 
@@ -42,9 +37,6 @@ class _Frame4ItemWidgetState extends State<Frame4ItemWidget> {
               "All Clothes", selectedAllClothes, allClothesOptions),
           SizedBox(width: 5.v),
           // createDropdownButton("Season", selectedSeason, seasonOptions),
-          SizedBox(width: 5.v),
-          createDropdownButton("Occasion", selectedOccasion, occasionOptions),
-          SizedBox(width: 5.v),
           // createDropdownButton("Category", selectedCategory, categoryOptions),
         ],
       ),
@@ -73,9 +65,9 @@ class _Frame4ItemWidgetState extends State<Frame4ItemWidget> {
                 // case 'Season':
                 //   selectedSeason = newValue!;
                 //   break;
-                case 'Occasion':
-                  selectedOccasion = newValue!;
-                  break;
+                // case 'Occasion':
+                //   selectedOccasion = newValue!;
+                //   break;
                 // case 'Category':
                 //   selectedCategory = newValue!;
                 //   break;

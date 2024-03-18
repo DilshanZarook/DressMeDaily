@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sdgp_test01/presentation/All_clothes_outfit_page/All_clothes_outfit.dart';
 import 'package:sdgp_test01/presentation/Initial_loading_page/initial_loading_page.dart';
 import 'package:sdgp_test01/presentation/Starting_page/starting_page.dart';
 import 'package:sdgp_test01/presentation/Loading_page_1/loading_page_1.dart';
@@ -9,6 +10,7 @@ import 'package:sdgp_test01/presentation/Signup_new_user/signup_new_user.dart';
 import 'package:sdgp_test01/presentation/Profile_picture/profile_picture.dart';
 import 'package:sdgp_test01/presentation/Instructions_page/instructions_page.dart';
 import 'package:sdgp_test01/presentation/frame_293_screen/frame_293_screen.dart';
+import 'package:sdgp_test01/presentation/frame_881_page/widgets/AISelection.dart';
 import 'package:sdgp_test01/presentation/starting_page_signup/starting_page_signup.dart';
 import 'package:sdgp_test01/presentation/Signin_other_options/signin_other_options.dart';
 import 'package:sdgp_test01/presentation/Signup_old_user/signup_old_user.dart';
@@ -42,6 +44,9 @@ import 'package:sdgp_test01/presentation/frame_404_bottomsheet/frame_404_bottoms
 import 'package:sdgp_test01/presentation/frame_405_bottomsheet/frame_405_bottomsheet.dart';
 import 'package:sdgp_test01/presentation/frame_406_bottomsheet/frame_406_bottomsheet.dart';
 import '../presentation/frame_851_tab_container_screen/frame_851_tab_container_screen.dart';
+import '../presentation/frame_881_page/frame_881_page.dart';
+import '../presentation/frame_881_page/widgets/Favourites.dart';
+import '../presentation/frame_881_page/widgets/frame4_item_widget.dart';
 import '../presentation/frame_981_screen/frame_981_screen.dart';
 import '../presentation/frame_1038_screen/frame_1038_screen.dart';
 import '../presentation/frame_1010_screen/frame_1010_screen.dart';
@@ -52,6 +57,16 @@ import '../presentation/Contact_Us/contact_us.dart';
 class AppRoutes {
   // ignore: constant_identifier_names
   static const String initial_loading_page = '/initial_loading_page';
+
+  static const String frame881Page = '/frame_881_page';
+  // ignore: constant_identifier_names
+  static const String AISelection = '/AISelection';
+  // ignore: constant_identifier_names
+  static const String Favourites = '/Favourites';
+  static const String AllClothesOutfit = '/AllClothesOutfit';
+
+  // ignore: constant_identifier_names
+  static const String frame4_item_widget = '/frame4_item_widget';
 
   // ignore: constant_identifier_names
   static const String main_settings = '/main_settings';
@@ -67,8 +82,6 @@ class AppRoutes {
   static const String frame1010Screen = '/frame_1010_screen';
 
   static const String frame1038Screen = '/frame_1038_screen';
-
-  static const String frame881Page = '/frame_881_page';
 
   static const String frame926Page = '/frame_926_page';
 
@@ -122,6 +135,7 @@ class AppRoutes {
 
   static const String frame_648_screen = '/frame_648_screen';
 
+  // ignore: constant_identifier_names
   static const String frame_649_screen = '/frame_649_screen';
 
   static const String frame_650_screen = '/frame_650_screen';
@@ -187,21 +201,25 @@ class AppRoutes {
     addtowardrobe_screen: (context) => const AddtowardrobeScreen(),
     initial_loading_page: (context) => const Initial_loading_page(),
     main_settings: (context) => const Main_settings(),
-    frame851TabContainerScreen: (context) => Frame851TabContainerScreen(),
+    frame851TabContainerScreen: (context) => const Frame851TabContainerScreen(),
     frame981Screen: (context) => Frame981Screen(),
-    frame1061Page: (context) => Frame1061Page(),
+    AllClothesOutfit: (context) => const CustomContainerSection(),
+    frame1061Page: (context) => const Frame1061Page(),
+    frame4_item_widget: (context) => Frame4ItemWidget(),
+    frame881Page: (context) => Outfit_page(),
+    Favourites: (context) => const Favorites(),
     frame1010Screen: (context) => Frame1010Screen(selectedDate: DateTime.now()), // This will need to be changed when navigating
     frame1038Screen: (context) => Frame1038Screen(),
     body_selection_female: (context) => const Bodyselectionfemale(),
     loading_page_4: (context) => const Loading_page_4(),
     bookmark_page: (context) => Bookmark_page(),
-    contact_us: (context) =>  Contact_us(),
+    contact_us: (context) =>  const Contact_us(),
     user_profile: (context) => const User_profile(),
     frame_404_bottomsheet: (context) => const Frame404Bottomsheet(),
     frame_405_bottomsheet: (context) => const Frame405Bottomsheet(),
     frame_406_bottomsheet: (context) => const Frame406Bottomsheet(),
     settings: (context) => const Settings(),
-    notifications_page: (context) => Notifications_page(),
+    notifications_page: (context) => const Notifications_page(),
     subscription_page: (context) => const Subscription_page(),
     subscription_after_purchase_page: (context) => const Subscription_after_purchase(),
     notice_page: (context) => const Notice_page(),
