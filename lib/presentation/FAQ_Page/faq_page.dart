@@ -1,242 +1,239 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sdgp_test01/core/app_export.dart';
+import 'package:sdgp_test01/new_file/addtowardrobe_screen.dart';
+import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/Main_settings_page/main_settings.dart';
+import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
+import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title_image.dart';
 import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_drop_down.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-
 
 class FAQ_Page extends StatelessWidget {
-  FAQ_Page({Key? key})
+  const FAQ_Page({Key? key})
       : super(
           key: key,
         );
 
-
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        appBar: _buildAppBar(context),
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(horizontal: 54.h),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
-                    height: 33.v,
-                    width: 25.h,
-                    child: Image.asset(
-                      ImageConstant.imgCheckmarkGray90001,
-                      color: Colors.black,
-                      fit: BoxFit.cover,
-                    ),
+    return Scaffold(
+      appBar: _buildAppBar(context),
+      body: Container(
+        width: double.maxFinite,
+        padding: EdgeInsets.symmetric(horizontal: 54.h),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomDropDown(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
+                child: SizedBox(
+                  height: 33.v,
+                  width: 25.h,
+                  child: Image.asset(
+                    ImageConstant.imgCheckmarkGray90001,
+                    color: Colors.black,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                hintText: "What is DressMeDaily ?",
-                contentPadding: EdgeInsets.only(
-                  left: 11.h,
-                  top: 17.v,
-                  bottom: 17.v,
-                ),
-                onChanged: (value) {},
               ),
-              SizedBox(height: 15.v),
-              CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
-                    height: 33.v,
-                    width: 25.h,
-                    child: Image.asset(
-                      ImageConstant.imgCheckmarkGray90001,
-                      color: Colors.black,
-                      fit: BoxFit.cover,
-                    ),
+              hintText: "What is DressMeDaily ?",
+              contentPadding: EdgeInsets.only(
+                left: 11.h,
+                top: 17.v,
+                bottom: 17.v,
+              ),
+              onChanged: (value) {},
+            ),
+            SizedBox(height: 15.v),
+            CustomDropDown(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
+                child: SizedBox(
+                  height: 33.v,
+                  width: 25.h,
+                  child: Image.asset(
+                    ImageConstant.imgCheckmarkGray90001,
+                    color: Colors.black,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                hintText: "What is DressMeDaily ?",
-                contentPadding: EdgeInsets.only(
-                  left: 11.h,
-                  top: 17.v,
-                  bottom: 17.v,
-                ),
-                onChanged: (value) {},
               ),
-              SizedBox(height: 15.v),
-              CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
-                    height: 33.v,
-                    width: 25.h,
-                    child: Image.asset(
-                      ImageConstant.imgCheckmarkGray90001,
-                      color: Colors.black,
-                      fit: BoxFit.cover,
-                    ),
+              hintText: "What is DressMeDaily ?",
+              contentPadding: EdgeInsets.only(
+                left: 11.h,
+                top: 17.v,
+                bottom: 17.v,
+              ),
+              onChanged: (value) {},
+            ),
+            SizedBox(height: 15.v),
+            CustomDropDown(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
+                child: SizedBox(
+                  height: 33.v,
+                  width: 25.h,
+                  child: Image.asset(
+                    ImageConstant.imgCheckmarkGray90001,
+                    color: Colors.black,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                hintText: "What is DressMeDaily ?",
-                contentPadding: EdgeInsets.only(
-                  left: 11.h,
-                  top: 17.v,
-                  bottom: 17.v,
-                ),
-                onChanged: (value) {},
               ),
-              SizedBox(height: 15.v),
-              CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
-                    height: 33.v,
-                    width: 25.h,
-                    child: Image.asset(
-                      ImageConstant.imgCheckmarkGray90001,
-                      color: Colors.black,
-                      fit: BoxFit.cover,
-                    ),
+              hintText: "What is DressMeDaily ?",
+              contentPadding: EdgeInsets.only(
+                left: 11.h,
+                top: 17.v,
+                bottom: 17.v,
+              ),
+              onChanged: (value) {},
+            ),
+            SizedBox(height: 15.v),
+            CustomDropDown(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
+                child: SizedBox(
+                  height: 33.v,
+                  width: 25.h,
+                  child: Image.asset(
+                    ImageConstant.imgCheckmarkGray90001,
+                    color: Colors.black,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                hintText: "What is DressMeDaily ?",
-                contentPadding: EdgeInsets.only(
-                  left: 11.h,
-                  top: 17.v,
-                  bottom: 17.v,
-                ),
-                onChanged: (value) {},
               ),
-              SizedBox(height: 14.v),
-              CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
-                    height: 33.v,
-                    width: 25.h,
-                    child: Image.asset(
-                      ImageConstant.imgCheckmarkGray90001,
-                      color: Colors.black,
-                      fit: BoxFit.cover,
-                    ),
+              hintText: "What is DressMeDaily ?",
+              contentPadding: EdgeInsets.only(
+                left: 11.h,
+                top: 17.v,
+                bottom: 17.v,
+              ),
+              onChanged: (value) {},
+            ),
+            SizedBox(height: 14.v),
+            CustomDropDown(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
+                child: SizedBox(
+                  height: 33.v,
+                  width: 25.h,
+                  child: Image.asset(
+                    ImageConstant.imgCheckmarkGray90001,
+                    color: Colors.black,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                hintText: "What is DressMeDaily ?",
-                contentPadding: EdgeInsets.only(
-                  left: 11.h,
-                  top: 17.v,
-                  bottom: 17.v,
-                ),
-                onChanged: (value) {},
               ),
-              SizedBox(height: 15.v),
-              CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
-                    height: 33.v,
-                    width: 25.h,
-                    child: Image.asset(
-                      ImageConstant.imgCheckmarkGray90001,
-                      color: Colors.black,
-                      fit: BoxFit.cover,
-                    ),
+              hintText: "What is DressMeDaily ?",
+              contentPadding: EdgeInsets.only(
+                left: 11.h,
+                top: 17.v,
+                bottom: 17.v,
+              ),
+              onChanged: (value) {},
+            ),
+            SizedBox(height: 15.v),
+            CustomDropDown(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
+                child: SizedBox(
+                  height: 33.v,
+                  width: 25.h,
+                  child: Image.asset(
+                    ImageConstant.imgCheckmarkGray90001,
+                    color: Colors.black,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                hintText: "What is DressMeDaily ?",
-                contentPadding: EdgeInsets.only(
-                  left: 11.h,
-                  top: 17.v,
-                  bottom: 17.v,
-                ),
-                onChanged: (value) {},
               ),
-              SizedBox(height: 15.v),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.h,
-                  vertical: 7.v,
-                ),
-                decoration: AppDecoration.outlinePrimary5.copyWith(
-                  borderRadius: BorderRadiusStyle.roundedBorder20,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        width: 186.h,
-                        margin: EdgeInsets.symmetric(vertical: 1.v),
-                        child: Text(
-                          "Can I use the application without an internet connection?",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodySmall,
-                        ),
+              hintText: "What is DressMeDaily ?",
+              contentPadding: EdgeInsets.only(
+                left: 11.h,
+                top: 17.v,
+                bottom: 17.v,
+              ),
+              onChanged: (value) {},
+            ),
+            SizedBox(height: 15.v),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.h,
+                vertical: 7.v,
+              ),
+              decoration: AppDecoration.outlinePrimary5.copyWith(
+                borderRadius: BorderRadiusStyle.roundedBorder20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: 186.h,
+                      margin: EdgeInsets.symmetric(vertical: 1.v),
+                      child: Text(
+                        "Can I use the application without an internet connection?",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall,
                       ),
                     ),
-                    Container(
-                      height: 33.v,
-                      width: 25.h,
-                      margin: EdgeInsets.only(left: 17.h),
-                      child: Image.asset(
-                        ImageConstant.imgCheckmarkGray90001,
-                        fit: BoxFit.cover,
-                      ),
+                  ),
+                  Container(
+                    height: 33.v,
+                    width: 25.h,
+                    margin: EdgeInsets.only(left: 17.h),
+                    child: Image.asset(
+                      ImageConstant.imgCheckmarkGray90001,
+                      fit: BoxFit.cover,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              SizedBox(height: 15.v),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.h,
-                  vertical: 7.v,
-                ),
-                decoration: AppDecoration.outlinePrimary5.copyWith(
-                  borderRadius: BorderRadiusStyle.roundedBorder20,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        width: 186.h,
-                        margin: EdgeInsets.symmetric(vertical: 1.v),
-                        child: Text(
-                          "Can I use the application without an internet connection?",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodySmall,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 33.v,
-                      width: 25.h,
-                      margin: EdgeInsets.only(left: 17.h),
-                      child: Image.asset(
-                        ImageConstant.imgCheckmarkGray90001,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ],
-                ),
+            ),
+            SizedBox(height: 15.v),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.h,
+                vertical: 7.v,
               ),
-              SizedBox(height: 5.v),
-            ],
-          ),
+              decoration: AppDecoration.outlinePrimary5.copyWith(
+                borderRadius: BorderRadiusStyle.roundedBorder20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: 186.h,
+                      margin: EdgeInsets.symmetric(vertical: 1.v),
+                      child: Text(
+                        "Can I use the application without an internet connection?",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 33.v,
+                    width: 25.h,
+                    margin: EdgeInsets.only(left: 17.h),
+                    child: Image.asset(
+                      ImageConstant.imgCheckmarkGray90001,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 5.v),
+          ],
         ),
-        bottomNavigationBar: _buildBottomBar(context),
-
+      ),
+      bottomNavigationBar: _buildBottomBar(context),
     );
   }
 
@@ -255,19 +252,22 @@ class FAQ_Page extends StatelessWidget {
                   margin: EdgeInsets.only(top: 20.v),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pop(context); // Navigate back to the previous screen
+                      Navigator.pop(
+                          context); // Navigate back to the previous screen
                     },
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 20.v, right: 0.h, left: 15.v), // Adjust the margin as needed
+                      margin:
+                          EdgeInsets.only(bottom: 20.v, right: 0.h, left: 15.v),
+                      // Adjust the margin as needed
                       child: SvgPicture.asset(
-                        ImageConstant.imgArrowDown, // Make sure this points to the correct SVG asset
+                        ImageConstant.imgArrowDown,
+                        // Make sure this points to the correct SVG asset
                         height: 25.v,
                         width: 25.h,
                       ),
                     ),
                   ),
                 ),
-
                 AppbarSubtitle(
                   text: "FAQ",
                   margin: EdgeInsets.only(left: 110.h),
@@ -314,10 +314,11 @@ class FAQ_Page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()),
+                    MaterialPageRoute(
+                        builder: (context) => const LandingPage()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -334,7 +335,7 @@ class FAQ_Page extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -342,14 +343,16 @@ class FAQ_Page extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),InkWell(
+              ),
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Bookmark_page()),
+                    MaterialPageRoute(
+                        builder: (context) => AddtowardrobeScreen()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -357,14 +360,15 @@ class FAQ_Page extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),InkWell(
+              ),
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Bookmark_page()),
+                    MaterialPageRoute(builder: (context) => Main_wardrobe()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -372,14 +376,16 @@ class FAQ_Page extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),InkWell(
+              ),
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => User_profile()),
+                    MaterialPageRoute(
+                        builder: (context) => const User_profile()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -393,7 +399,6 @@ class FAQ_Page extends StatelessWidget {
             ],
           ),
           SizedBox(height: 10.v),
-
         ],
       ),
     );

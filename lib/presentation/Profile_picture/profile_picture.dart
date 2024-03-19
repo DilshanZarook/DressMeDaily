@@ -21,7 +21,7 @@ class _Profile_pictureState extends State<Profile_picture> {
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(top: 35.0),
+            padding: const EdgeInsets.only(top: 35.0),
             child: Column(
               children: [
                 Container(
@@ -34,13 +34,13 @@ class _Profile_pictureState extends State<Profile_picture> {
                         backgroundColor: appTheme.black900,
                         valueColor: AlwaysStoppedAnimation<Color>(
                             appTheme.lime400))),
-                SizedBox(height: 60.0),
+                const SizedBox(height: 60.0),
                 _selectedImage != null
                     ? CircleAvatar(
                   radius: 115.0, // Adjust the size as needed
                   backgroundImage: FileImage(_selectedImage!),
                 )
-                    : CircleAvatar(
+                    : const CircleAvatar(
                   radius: 115.0, // Adjust the size as needed
                   backgroundColor: Colors.grey, // Default color
                   child: Text(
@@ -49,10 +49,10 @@ class _Profile_pictureState extends State<Profile_picture> {
 
                   ),
                 ),
-                SizedBox(height: 50.0),
+                const SizedBox(height: 50.0),
                 Container(
                   width: 160,
-                  padding: EdgeInsets.all(8.0), // Optional padding
+                  padding: const EdgeInsets.all(8.0), // Optional padding
                   decoration: BoxDecoration(
                     color: Colors.grey, // Set the color to gray
                     borderRadius: BorderRadius.circular(20), // Set the border radius to 20
@@ -61,7 +61,7 @@ class _Profile_pictureState extends State<Profile_picture> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(
-                        icon: Icon(Icons.camera_alt),
+                        icon: const Icon(Icons.camera_alt),
                         iconSize: 50.0,
                         onPressed: () {
                           pickImageFromCamera();
@@ -69,7 +69,7 @@ class _Profile_pictureState extends State<Profile_picture> {
                       ),
 
                       IconButton(
-                        icon: Icon(Icons.photo_library),
+                        icon: const Icon(Icons.photo_library),
                         iconSize: 50.0,
                         onPressed: () {
                           pickImageFromGallery();
@@ -78,26 +78,26 @@ class _Profile_pictureState extends State<Profile_picture> {
                     ],
                   ),
                 ),
-                SizedBox(height: 90.0),
+                const SizedBox(height: 90.0),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
-                    padding: EdgeInsets.only(right: 50.0),
+                    padding: const EdgeInsets.only(right: 50.0),
                     child: GestureDetector(
                       onTap: () {
                         // Modified navigation logic
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Instructions_page()), // Replace Instructions_page with your actual widget class
+                          MaterialPageRoute(builder: (context) => const Instructions_page()), // Replace Instructions_page with your actual widget class
                         );
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.min, // To keep the column size only as big as its children
                         children: <Widget>[
-                          SizedBox(height: 260), // Keeping the SizedBox for spacing
+                          const SizedBox(height: 260), // Keeping the SizedBox for spacing
                           Container(
-                            margin: EdgeInsets.only(right: 20.0), // Adjust the margin value as needed
-                            child: Text(
+                            margin: const EdgeInsets.only(right: 20.0), // Adjust the margin value as needed
+                            child: const Text(
                               "Next",
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -124,7 +124,7 @@ class _Profile_pictureState extends State<Profile_picture> {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Icon(Icons.arrow_back),
+        icon: const Icon(Icons.arrow_back),
         iconSize: 40.0, // Increase the size as needed, here it's set to 30.0
         onPressed: () {
           Navigator.of(context).pop();
@@ -136,10 +136,10 @@ class _Profile_pictureState extends State<Profile_picture> {
             // Navigate to GenderSelectionScreen
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Gender_selection()), // Replace with the actual name of your GenderSelectionScreen widget
+              MaterialPageRoute(builder: (context) => const Gender_selection()), // Replace with the actual name of your GenderSelectionScreen widget
             );
           },
-          child: Text(
+          child: const Text(
             "Skip",
             style: TextStyle(
               color: Colors.black, // Text color set to black

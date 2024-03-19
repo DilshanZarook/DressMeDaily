@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
 import '../Starting_page_signup/starting_page_signup.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -43,7 +42,7 @@ class Signin_other_options extends StatelessWidget {
                     leftIcon: Container(
                       padding: EdgeInsets.all(2.h),
                       margin: EdgeInsets.only(right: 20.h),
-                      decoration: BoxDecoration(color: Colors.blue),
+                      decoration: const BoxDecoration(color: Colors.blue),
                       child: SvgPicture.asset(
                         'assets/images/img_facebook.svg', // Replace with your actual asset path
                         height: 20.adaptSize,
@@ -84,7 +83,7 @@ class Signin_other_options extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Starting_page_signup()),
+            MaterialPageRoute(builder: (context) => const Starting_page_signup()),
           );
         },
       ),

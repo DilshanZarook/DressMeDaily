@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField({
+  const CustomTextFormField({
     Key? key,
     this.alignment,
     this.width,
@@ -31,9 +31,11 @@ class CustomTextFormField extends StatelessWidget {
     this.labelText,
     this.labelStyle,
     this.errorStyle,
+    this.style,
     this.decoration, // Rename this if it's causing a conflict
   }) : super(key: key);
 
+  final TextStyle? style;
   final InputDecoration? decoration;
   final Alignment? alignment;
   final double? width;
@@ -75,53 +77,69 @@ class CustomTextFormField extends StatelessWidget {
   }
 
   Widget textFormFieldWidget(BuildContext context) => SizedBox(
-    width: width ?? double.maxFinite,
-    height: height,
-    child: TextFormField(
-      controller: controller,
-      focusNode: focusNode ?? FocusNode(),
-      autofocus: autofocus ?? true,
-      style: TextStyle(fontSize: fontSize),
-      obscureText: obscureText ?? false,
-      textInputAction: textInputAction,
-      keyboardType: textInputType,
-      maxLines: maxLines ?? 1,
-      validator: validator,
-      decoration: getInputDecoration(), // Use the renamed getter
-    ),
-  );
+        width: width ?? double.maxFinite,
+        height: height,
+        child: TextFormField(
+          controller: controller,
+          focusNode: focusNode ?? FocusNode(),
+          autofocus: autofocus ?? true,
+          style: style,
+          obscureText: obscureText ?? false,
+          textInputAction: textInputAction,
+          keyboardType: textInputType,
+          maxLines: maxLines ?? 1,
+          validator: validator,
+          decoration: getInputDecoration(), // Use the renamed getter
+        ),
+      );
 
-  InputDecoration getInputDecoration() { // Renamed getter
-    return decoration ?? InputDecoration(
-      hintText: hintText ?? "",
-      hintStyle: hintStyle,
-      labelText: labelText,
-      labelStyle: labelStyle,
-      prefixIcon: prefix,
-      prefixIconConstraints: prefixConstraints,
-      suffixIcon: suffix,
-      suffixIconConstraints: suffixConstraints,
-      isDense: true,
-      contentPadding: contentPadding ?? EdgeInsets.all(8),
-      fillColor: fillColor ?? theme.colorScheme.primary,
-      filled: filled ?? true,
-      border: borderDecoration ?? _defaultBorder(),
-      enabledBorder: borderDecoration ?? _defaultBorder(),
-      focusedBorder: borderDecoration ?? _defaultBorder(focus: true),
-      errorBorder: borderDecoration ?? _defaultBorder(error: true),
-      focusedErrorBorder: borderDecoration ?? _defaultBorder(focus: true, error: true),
-      errorStyle: errorStyle,
-    );
+  InputDecoration getInputDecoration() {
+    // Renamed getter
+    return decoration ??
+        InputDecoration(
+          hintText: hintText ?? "",
+          hintStyle: hintStyle,
+          labelText: labelText,
+          labelStyle: labelStyle,
+          prefixIcon: prefix,
+          prefixIconConstraints: prefixConstraints,
+          suffixIcon: suffix,
+          suffixIconConstraints: suffixConstraints,
+          isDense: true,
+          contentPadding: contentPadding ?? const EdgeInsets.all(8),
+          fillColor: fillColor ?? theme.colorScheme.primary,
+          filled: filled ?? true,
+          border: borderDecoration ?? _defaultBorder(),
+          enabledBorder: borderDecoration ?? _defaultBorder(),
+          focusedBorder: borderDecoration ?? _defaultBorder(focus: true),
+          errorBorder: borderDecoration ?? _defaultBorder(error: true),
+          focusedErrorBorder:
+              borderDecoration ?? _defaultBorder(focus: true, error: true),
+          errorStyle: errorStyle,
+        );
   }
 
   OutlineInputBorder _defaultBorder({bool focus = false, bool error = false}) {
-    Color borderColor = focus ? theme.colorScheme.primary
-        : error ? Colors.red
-        : appTheme.black900;
+    Color borderColor = focus
+        ? theme.colorScheme.primary
+        : error
+            ? Colors.red
+            : appTheme.black900;
 
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(borderRadius ?? 10),
       borderSide: BorderSide(color: borderColor, width: 1),
     );
   }
+}
+
+extension TextFormFieldStyleHelper on CustomTextFormField {
+  static OutlineInputBorder get fillGray => OutlineInputBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(
+            20.h,
+          ),
+        ),
+        borderSide: BorderSide.none,
+      );
 }

@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/amanjanee/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/amanjanee/Desktop/APP/DressMeDaily"
+export "FLUTTER_ROOT=C:\flutter"
+export "FLUTTER_APPLICATION_PATH=C:\Users\RLG Revo\Downloads\New folder (61)\DressMeDaily-Zameeh-FrontEnd"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"

@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sdgp_test01/core/app_export.dart';
+import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
+import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
+import 'package:sdgp_test01/presentation/new_file/addtowardrobe_screen.dart';
+import 'package:sdgp_test01/presentation/Searchbar_page/Searchbar_page.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
 import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
+import 'package:sdgp_test01/widgets/custom_bottom_bar.dart';
 import 'package:sdgp_test01/widgets/custom_elevated_button.dart';
 import 'package:sdgp_test01/widgets/custom_text_form_field_1.dart';
-import 'package:sdgp_test01/widgets/custom_bottom_bar.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class User_profile extends StatefulWidget {
-  User_profile({Key? key}) : super(key: key);
+  const User_profile({Key? key}) : super(key: key);
 
   @override
   _User_profileState createState() => _User_profileState();
 }
-class _User_profileState extends State<User_profile> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(); // Moved inside the class
+
+class _User_profileState extends State<User_profile>
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+  final GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>(); // Moved inside the class
   TextEditingController nameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController bioController = TextEditingController();
@@ -58,22 +64,26 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
     );
 
     _slideAnimation = Tween<Offset>(
-      begin: Offset(0, 1),
+      begin: const Offset(0, 1),
       end: Offset.zero,
     ).animate(CurvedAnimation(
       parent: _controller!,
       curve: Curves.easeOutQuad,
     ));
-    Future.delayed(Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 200), () {
       _controller!.forward();
     });
   }
 
   void _onTextChange() {
-    if (nameController.text.isNotEmpty || ageController.text.isNotEmpty || bioController.text.isNotEmpty) {
-      setState(() => profileImageOffsetX = 0); // Move right if any text field has input
+    if (nameController.text.isNotEmpty ||
+        ageController.text.isNotEmpty ||
+        bioController.text.isNotEmpty) {
+      setState(() =>
+          profileImageOffsetX = 0); // Move right if any text field has input
     } else {
-      setState(() => profileImageOffsetX = 100); // Move back to original position if no input
+      setState(() => profileImageOffsetX =
+          100); // Move back to original position if no input
     }
   }
 
@@ -113,7 +123,8 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
 
     return Scaffold(
       key: _scaffoldKey,
-      resizeToAvoidBottomInset: true, // This is important
+      resizeToAvoidBottomInset: true,
+      // This is important
       appBar: _buildAppBar(context),
       body: SizedBox(
         height: 700.v, // Adjust height as needed
@@ -125,14 +136,15 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
               position: _slideAnimation!,
               child: Container(
                 margin: EdgeInsets.only(
-                  top: isKeyboardVisible ? 0 : 200.v, // Adjust top margin when keyboard is visible
+                  top: isKeyboardVisible ? 0 : 200.v,
+                  // Adjust top margin when keyboard is visible
                   left: 0.h,
                 ),
                 padding: EdgeInsets.symmetric(
                   horizontal: 36.h,
                   vertical: 0.v,
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.lime,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(200),
@@ -143,7 +155,8 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
               ),
             ),
             Positioned(
-              top: isKeyboardVisible ? -200.v : 30.v, // Push the profile image up when keyboard is visible
+              top: isKeyboardVisible ? -200.v : 30.v,
+              // Push the profile image up when keyboard is visible
               right: MediaQuery.of(context).size.width / 2 - 80.h,
               child: Container(
                 height: 160.v,
@@ -169,24 +182,28 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
         SizedBox(height: 20.v),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: isKeyboardVisible ? [
-            GestureDetector(
-              onTap: () {
-                // Dismiss the keyboard if it is open
-                FocusScope.of(context).unfocus();
-              },
-              child: Container(
-                height: 20.adaptSize,
-                width: 20.adaptSize,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(ImageConstant.imgClose), // Path to your image
-                    fit: BoxFit.cover, // Adjusts the image to fit into the container
+          children: isKeyboardVisible
+              ? [
+                  GestureDetector(
+                    onTap: () {
+                      // Dismiss the keyboard if it is open
+                      FocusScope.of(context).unfocus();
+                    },
+                    child: Container(
+                      height: 20.adaptSize,
+                      width: 20.adaptSize,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(ImageConstant.imgClose),
+                          // Path to your image
+                          fit: BoxFit
+                              .cover, // Adjusts the image to fit into the container
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-          ] : [],
+                ]
+              : [],
         ),
         SizedBox(height: 20.v),
         _buildLabel(context, "Name"),
@@ -202,7 +219,7 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
         _buildBio(context),
         SizedBox(height: 22.v),
         _buildSave(context),
-        SizedBox(height: isKeyboardOpen ? 30.5.v : 38.v),
+        SizedBox(height: isKeyboardOpen ? 15.5.v : 25.v),
       ],
     );
   }
@@ -220,7 +237,8 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
   /// Section Widget
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(kToolbarHeight + 20.h), // Adjust the height as needed
+      preferredSize: Size.fromHeight(kToolbarHeight + 20.h),
+      // Adjust the height as needed
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -241,7 +259,8 @@ class _User_profileState extends State<User_profile> with SingleTickerProviderSt
             // ),
             // centerTitle: true,
             title: Padding(
-              padding: EdgeInsets.only(bottom: 25.v), // Add padding above the title
+              padding: EdgeInsets.only(bottom: 25.v),
+              // Add padding above the title
               child: AppbarTitle(text: "User Profile"),
             ),
           ),
@@ -312,13 +331,14 @@ Widget _buildBottomBar(BuildContext context) {
           width: 360.h,
           height: 1.h,
           child: Divider(
-            color: appTheme.black900,
-            thickness: 4.h,
+            color: appTheme.black990,
+            thickness: 2.h,
           ),
         ),
         SizedBox(height: 16.v),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Adjusted for even spacing
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // Adjusted for even spacing
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image button 1
@@ -327,13 +347,15 @@ Widget _buildBottomBar(BuildContext context) {
                 // Navigate to the corresponding screen for imgUser1
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Landing_page()), // Replace with your actual screen widget
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const LandingPage()), // Replace with your actual screen widget
                 );
               },
               child: SvgPicture.asset(
-                ImageConstant.home_footer_1,
-                height: 30.0, // Adjust the height as needed
-                width: 30.0, // Adjust the width as needed
+                ImageConstant.Home_footer_Unselected_101,
+                height: 35.v, // Adjust the height as needed
+                width: 35.v, // Adjust the width as needed
                 fit: BoxFit.cover,
               ),
             ),
@@ -343,13 +365,15 @@ Widget _buildBottomBar(BuildContext context) {
                 // Navigate to the corresponding screen for imgFrame373
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Bookmark_page()), // Replace with your actual screen widget
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Searchbar_page()), // Replace with your actual screen widget
                 );
               },
               child: SvgPicture.asset(
-                ImageConstant.bookmarkfooter,
-                height:30.0, // Adjust the height as needed
-                width: 30.0, // Adjust the width as needed
+                ImageConstant.Search_footer,
+                height: 35.v, // Adjust the height as needed
+                width: 35.v, // Adjust the width as needed
                 fit: BoxFit.cover,
               ),
             ),
@@ -358,13 +382,15 @@ Widget _buildBottomBar(BuildContext context) {
                 // Navigate to the corresponding screen for imgFrame373
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Landing_page()), // Replace with your actual screen widget
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const AddtowardrobeScreen()), // Replace with your actual screen widget
                 );
               },
               child: SvgPicture.asset(
-                ImageConstant.camera_footer_1,
-                height: 30.0, // Adjust the height as needed
-                width: 30.0, // Adjust the width as needed
+                ImageConstant.Camera_footer_101,
+                height: 30.v, // Adjust the height as needed
+                width: 30.v, // Adjust the width as needed
                 fit: BoxFit.cover,
               ),
             ),
@@ -373,13 +399,15 @@ Widget _buildBottomBar(BuildContext context) {
                 // Navigate to the corresponding screen for imgFrame373
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Landing_page()), // Replace with your actual screen widget
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Main_wardrobe()), // Replace with your actual screen widget
                 );
               },
               child: SvgPicture.asset(
-                ImageConstant.wardrobe_footer_1,
-                height: 30.0, // Adjust the height as needed
-                width: 30.0, // Adjust the width as needed
+                ImageConstant.Wardrobe_footer_unselected_1,
+                height: 35.v, // Adjust the height as needed
+                width: 35.v, // Adjust the width as needed
                 fit: BoxFit.cover,
               ),
             ),
@@ -388,13 +416,15 @@ Widget _buildBottomBar(BuildContext context) {
                 // Navigate to the corresponding screen for imgFrame373
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => User_profile()), // Replace with your actual screen widget
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const User_profile()), // Replace with your actual screen widget
                 );
               },
               child: SvgPicture.asset(
-                ImageConstant.profile_footer_1,
-                height: 30.0, // Adjust the height as needed
-                width: 30.0, // Adjust the width as needed
+                ImageConstant.User_footer_final,
+                height: 35.v, // Adjust the height as needed
+                width: 35.v, // Adjust the width as needed
                 fit: BoxFit.cover,
               ),
             ),
@@ -407,8 +437,6 @@ Widget _buildBottomBar(BuildContext context) {
     ),
   );
 }
-
-
 
 // ignore_for_file: must_be_immutable
 class Frame395ContainerScreen extends StatelessWidget {
@@ -425,7 +453,7 @@ class Frame395ContainerScreen extends StatelessWidget {
             onGenerateRoute: (routeSetting) => PageRouteBuilder(
                 pageBuilder: (ctx, ani, ani1) =>
                     getCurrentPage(routeSetting.name!),
-                transitionDuration: Duration(seconds: 0))),
+                transitionDuration: const Duration(seconds: 0))),
         bottomNavigationBar: _buildBottomBar(context));
   }
 
@@ -447,9 +475,9 @@ class Frame395ContainerScreen extends StatelessWidget {
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
       case AppRoutes.user_profile:
-        return User_profile();
+        return const User_profile();
       default:
-        return DefaultWidget();
+        return const DefaultWidget();
     }
   }
 }

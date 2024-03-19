@@ -1,18 +1,19 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Gender_selection/gender_selection.dart';
-import 'package:sdgp_test01/presentation/Signup_new_user/signup_new_user.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
 
 class Loading_page_3 extends StatefulWidget {
   const Loading_page_3({Key? key}) : super(key: key);
+
   @override
   _Loading_page_3State createState() => _Loading_page_3State();
 }
 
-class _Loading_page_3State extends State<Loading_page_3> with SingleTickerProviderStateMixin {
+class _Loading_page_3State extends State<Loading_page_3>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -30,11 +31,11 @@ class _Loading_page_3State extends State<Loading_page_3> with SingleTickerProvid
         setState(() {});
       });
 
-    Future.delayed(Duration(seconds: 3), () {
-      // _controller.dispose(); // Dispose the controller before navigating
+    Future.delayed(const Duration(seconds: 3), () {
+      _controller.dispose(); // Dispose the controller before navigating
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Landing_page()),
+        MaterialPageRoute(builder: (context) => const LandingPage()),
       );
     });
   }
@@ -50,7 +51,8 @@ class _Loading_page_3State extends State<Loading_page_3> with SingleTickerProvid
     return Scaffold(
       body: Stack(
         children: [
-          Center( // Center the image within the Stack
+          Center(
+            // Center the image within the Stack
             child: Transform(
               transform: Matrix4.identity()
                 ..setEntry(3, 2, 0.001) // perspective
@@ -64,12 +66,14 @@ class _Loading_page_3State extends State<Loading_page_3> with SingleTickerProvid
             ),
           ),
           Positioned(
-            bottom: 50.v, // Position the text 400px up from the bottom of the screen
+            bottom: 50.v,
+            // Position the text 400px up from the bottom of the screen
             left: 0,
             right: 0,
-            child: Text(
+            child: const Text(
               "STAY STICK WITH US.....",
-              textAlign: TextAlign.center, // Ensure text is centered horizontally
+              textAlign: TextAlign.center,
+              // Ensure text is centered horizontally
               style: TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.bold,

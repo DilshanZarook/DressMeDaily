@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title_image.dart';
 import '/../widgets/app_bar/custom_app_bar.dart';
 
 class Invite_friends extends StatelessWidget {
@@ -30,7 +29,7 @@ class Invite_friends extends StatelessWidget {
                             Padding(
                                 padding: EdgeInsets.only(
                                     left: 25.h, top: 10.v, bottom: 2.v),
-                              child: Text(
+                              child: const Text(
                                 "Invite friends by email",
                                 style: TextStyle(
                                   fontSize: 18,
@@ -50,7 +49,7 @@ class Invite_friends extends StatelessWidget {
                             Padding(
                                 padding: EdgeInsets.only(
                                     left: 20.h, top: 5.v, bottom: 4.v),
-                              child: Text(
+                              child: const Text(
                                 "Invite friends by SMS",
                                 style: TextStyle(
                                   fontSize: 18,
@@ -67,7 +66,7 @@ class Invite_friends extends StatelessWidget {
                             width: 21.h),
                         Padding(
                             padding: EdgeInsets.only(left: 35.h, bottom: 3.v,top: 5.v),
-                          child: Text(
+                          child: const Text(
                             "Invite friends by",
                             style: TextStyle(
                               fontSize: 18,
@@ -97,7 +96,7 @@ class Invite_friends extends StatelessWidget {
                     margin: EdgeInsets.only(left: 65.h, top: 2.v, bottom: 3.v))
               ])),
           SizedBox(height: 12.v),
-          Align(
+          const Align(
               alignment: Alignment.centerLeft,
               child: SizedBox(width: double.maxFinite, child: Divider()))
         ]),
@@ -111,7 +110,7 @@ class Invite_friends extends StatelessWidget {
           imagePath: ImageConstant.imgVolume, height: 36.v, width: 33.h),
       Padding(
         padding: EdgeInsets.only(left: 25.h, top: 9.v, bottom: 5.v),
-        child: Text(
+        child: const Text(
           "Invite friends by WhatsApp",
           style: TextStyle(
             fontSize: 18,

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title_image.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
 import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle.dart';
+import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 
 class Notice_page extends StatelessWidget {
   const Notice_page({Key? key})
@@ -17,43 +16,42 @@ class Notice_page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _buildAppBar(context),
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(
-            horizontal: 7.h,
-            vertical: 33.v,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 340.h,
-                margin: EdgeInsets.symmetric(horizontal: 10.h),
-                child: Text(
-                  "Greetings!, This is the initial stage of our application. (Version 1.0)",
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: CustomTextStyles.bodyLarge16,
-                ),
-              ),
-              SizedBox(height: 15.v),
-              Container(
-                width: 286.h,
-                margin: EdgeInsets.symmetric(horizontal: 10.h),
-                child: Text(
-                  "There are multiple features which are being added in the future of our application. Stay tuned~",
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: CustomTextStyles.bodyMediumGray70002,
-                ),
-              ),
-              SizedBox(height: 5.v),
-            ],
-          ),
+      appBar: _buildAppBar(context),
+      body: Container(
+        width: double.maxFinite,
+        padding: EdgeInsets.symmetric(
+          horizontal: 7.h,
+          vertical: 33.v,
         ),
-        bottomNavigationBar: _buildBottomBar(context),
-
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 340.h,
+              margin: EdgeInsets.symmetric(horizontal: 10.h),
+              child: Text(
+                "Greetings!, This is the initial stage of our application. (Version 1.0)",
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: CustomTextStyles.bodyLarge16,
+              ),
+            ),
+            SizedBox(height: 15.v),
+            Container(
+              width: 286.h,
+              margin: EdgeInsets.symmetric(horizontal: 10.h),
+              child: Text(
+                "There are multiple features which are being added in the future of our application. Stay tuned~",
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: CustomTextStyles.bodyMediumGray70002,
+              ),
+            ),
+            SizedBox(height: 5.v),
+          ],
+        ),
+      ),
+      bottomNavigationBar: _buildBottomBar(context),
     );
   }
 
@@ -72,19 +70,22 @@ class Notice_page extends StatelessWidget {
                   margin: EdgeInsets.only(top: 20.v),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pop(context); // Navigate back to the previous screen
+                      Navigator.pop(
+                          context); // Navigate back to the previous screen
                     },
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 20.v, right: 0.h, left: 15.v), // Adjust the margin as needed
+                      margin:
+                          EdgeInsets.only(bottom: 20.v, right: 0.h, left: 15.v),
+                      // Adjust the margin as needed
                       child: SvgPicture.asset(
-                        ImageConstant.imgArrowDown, // Make sure this points to the correct SVG asset
+                        ImageConstant.imgArrowDown,
+                        // Make sure this points to the correct SVG asset
                         height: 25.v,
                         width: 25.h,
                       ),
                     ),
                   ),
                 ),
-
                 AppbarSubtitle(
                   text: "Notice",
                   margin: EdgeInsets.only(left: 100.h),
@@ -131,10 +132,11 @@ class Notice_page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()),
+                    MaterialPageRoute(
+                        builder: (context) => const LandingPage()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -151,7 +153,7 @@ class Notice_page extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -159,14 +161,15 @@ class Notice_page extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),InkWell(
+              ),
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -174,14 +177,15 @@ class Notice_page extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),InkWell(
+              ),
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -189,14 +193,16 @@ class Notice_page extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),InkWell(
+              ),
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => User_profile()),
+                    MaterialPageRoute(
+                        builder: (context) => const User_profile()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -210,7 +216,6 @@ class Notice_page extends StatelessWidget {
             ],
           ),
           SizedBox(height: 10.v),
-
         ],
       ),
     );

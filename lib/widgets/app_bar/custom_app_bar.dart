@@ -3,7 +3,7 @@ import 'package:sdgp_test01/core/app_export.dart';
 
 // ignore: must_be_immutable
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  CustomAppBar({
+  const CustomAppBar({
     Key? key,
     this.height,
     this.styleType,
@@ -81,7 +81,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             Container(
               height: 53.v,
               width: double.maxFinite,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
             ),
             Container(
               height: 1.v,
@@ -109,7 +109,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 color: theme.colorScheme.primary.withOpacity(0.25),
                 spreadRadius: 2.h,
                 blurRadius: 2.h,
-                offset: Offset(
+                offset: const Offset(
                   0,
                   4,
                 ),

@@ -19,8 +19,8 @@ class _Frame404BottomsheetState extends State<Frame404Bottomsheet> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: 700.h,
-        margin: EdgeInsets.only(top: 200),
-        decoration: BoxDecoration(
+        margin: const EdgeInsets.only(top: 200),
+        decoration: const BoxDecoration(
           color: Color(0xFF8B7B7B),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(80),
@@ -51,7 +51,7 @@ class _Frame404BottomsheetState extends State<Frame404Bottomsheet> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 80),
+              padding: const EdgeInsets.only(top: 80),
               child: SingleChildScrollView(
                 child: Wrap(
                   spacing: 40,
@@ -61,7 +61,7 @@ class _Frame404BottomsheetState extends State<Frame404Bottomsheet> {
                     return Container(
                       width: 120,
                       height: 120,
-                      margin: EdgeInsets.all(20),
+                      margin: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
@@ -70,7 +70,7 @@ class _Frame404BottomsheetState extends State<Frame404Bottomsheet> {
                           ? SvgPicture.asset('assets/images/clothing_add.svg') // Update path as needed
                           : (item.imageUrl != null)
                           ? Image.network(item.imageUrl!, fit: BoxFit.cover)
-                          : Center(child: Text('No Image')),
+                          : const Center(child: Text('No Image')),
                     );
                   }).toList(),
                 ),

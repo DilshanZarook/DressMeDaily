@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
 
 class BaseButton extends StatelessWidget {
-  BaseButton({
+  const BaseButton({
     Key? key,
     required this.text,
     this.onPressed,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 
 class CustomBottomBar extends StatefulWidget {
-  CustomBottomBar({this.onChanged});
+  CustomBottomBar({Key? key, this.onChanged}) : super(key: key);
 
   Function(BottomBarEnum)? onChanged;
 
@@ -31,7 +31,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
+        const SizedBox(
           width: double.maxFinite,
           child: Divider(),
         ),
@@ -106,12 +106,14 @@ class BottomMenuModel {
 }
 
 class DefaultWidget extends StatelessWidget {
+  const DefaultWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xffffffff),
-      padding: EdgeInsets.all(10),
-      child: Center(
+      color: const Color(0xffffffff),
+      padding: const EdgeInsets.all(10),
+      child: const Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,

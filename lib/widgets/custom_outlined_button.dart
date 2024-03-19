@@ -3,8 +3,7 @@ import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/widgets/base_button.dart';
 
 class CustomOutlinedButton extends BaseButton {
-  CustomOutlinedButton({
-    Key? key,
+  const CustomOutlinedButton({Key? key, 
     this.decoration,
     this.leftIcon,
     this.rightIcon,
@@ -19,7 +18,7 @@ class CustomOutlinedButton extends BaseButton {
     EdgeInsets? margin,
     required String text,
   }) : super(
-          text: text,
+          key: key, text: text,
           onPressed: onPressed,
           buttonStyle: buttonStyle,
           isDisabled: isDisabled,
@@ -49,8 +48,8 @@ class CustomOutlinedButton extends BaseButton {
   }
 
   Widget get buildOutlinedButtonWidget => Container(
-        height: this.height ?? 65.v,
-        width: this.width ?? double.maxFinite,
+        height: height ?? 65.v,
+        width: width ?? double.maxFinite,
         margin: margin,
         decoration: decoration,
         child: OutlinedButton(

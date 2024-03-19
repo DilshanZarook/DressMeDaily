@@ -9,3 +9,7 @@ class ItemModel {
     isPlaceholder = false;
   }
 }
+
+ItemModel item1 = ItemModel(
+    imageUrl:
+        'https://ih1.redbubble.net/image.4727395.7933/ssrco,slim_fit_t_shirt,two_model,fafafa:ca443f4786,front,tall_portrait,750x1000.webp');
