@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/widgets/custom_outlined_button.dart';
 import '../Starting_page/starting_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 // Adjust the path as necessary
@@ -47,7 +47,7 @@ class Starting_page_signup extends StatelessWidget {
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center, // Aligns the icon vertically with the text
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               "Other options",
@@ -55,9 +55,9 @@ class Starting_page_signup extends StatelessWidget {
                               style: CustomTextStyles.titleLargeGray70002,
                             ),
                             SvgPicture.asset(
-                              'assets/images/img_arrow_right.svg', // Use your actual asset path
-                              height: theme.textTheme.titleLarge!.fontSize, // Match the text size
-                              width: theme.textTheme.titleLarge!.fontSize, // Match the text size
+                              'assets/images/img_arrow_right.svg',
+                              height: theme.textTheme.titleLarge!.fontSize,
+                              width: theme.textTheme.titleLarge!.fontSize,
                             ),
                           ],
                         ),
@@ -69,7 +69,7 @@ class Starting_page_signup extends StatelessWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Image.asset('assets/images/Line arrow-left.png'), // Adjust the path to your asset
+        icon: Image.asset('assets/images/Line arrow-left.png'),
         onPressed: () {
           Navigator.push(
             context,
@@ -77,7 +77,6 @@ class Starting_page_signup extends StatelessWidget {
           );
         },
       ),
-      // Rest of your AppBar properties...
     );
   }
 

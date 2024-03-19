@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/Feedback_popup/feedback_popup.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Bookmark_page/bookmark_page.dart';
+import 'package:DressMeDaily/presentation/Feedback_popup/feedback_popup.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/widgets/app_bar/custom_app_bar.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -150,7 +150,7 @@ class Settings extends StatelessWidget {
                       ])),
               SizedBox(height: 5.v)
             ])),
-        bottomNavigationBar: _buildBottomBar(context));
+      );
   }
 
   /// Section Widget
@@ -168,14 +168,12 @@ class Settings extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context,
-                        '/main_settings'); // Replace '/frame624' with your actual route name
+                        '/main_settings');
                   },
                   child: Container(
                     margin: EdgeInsets.only(top: 5.v, right: 10.h, left: 15.v),
-                    // Adjust the margin as needed
                     child: SvgPicture.asset(
                       ImageConstant.imgArrowDown,
-                      // Make sure this points to the correct SVG asset
                       height: 25.v,
                       width: 25.h,
                     ),
@@ -187,8 +185,7 @@ class Settings extends StatelessWidget {
                   child: Text(
                     "Settings",
                     style: TextStyle(
-                      fontSize: 28, // Set font size to 18
-                      // Include other styling properties if necessary
+                      fontSize: 28,
                     ),
                   ),
                 )
@@ -215,21 +212,20 @@ class Settings extends StatelessWidget {
               width: 25.adaptSize,
               margin: EdgeInsets.only(bottom: 25.v),
               child: SvgPicture.asset(
-                ImageConstant.imgSend, // Path to your SVG asset
+                ImageConstant.imgSend,
                 height: 35.adaptSize,
                 width: 35.adaptSize,
               )),
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(left: 20.0),
-              // Adjust the padding value as needed
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(context,
-                          '/invite_friends'); // Replace with the actual route name
+                          '/invite_friends');
                     },
                     child: Text(
                       "Invite friends",
@@ -350,8 +346,6 @@ class Settings extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // Add more buttons if needed
             ],
           ),
           SizedBox(height: 10.v),

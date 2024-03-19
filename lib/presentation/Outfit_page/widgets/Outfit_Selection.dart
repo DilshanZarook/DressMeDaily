@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
 
 class Outfit_Selection extends StatefulWidget {
   final Function(String)? onImageSelected; // Callback for image selection
@@ -75,7 +75,7 @@ class _Outfit_SelectionState extends State<Outfit_Selection> {
               width: 400.h, // Set width to 200
               height: 300.h, // Set height to 100
               decoration: BoxDecoration(
-                color: Color(0xFF8B7B7B), // Brown color
+                color: Color(0xFF9d9d9d), // Brown color
                 borderRadius: BorderRadius.circular(
                     20), // Border radius of 20 for the entire container
               ),
@@ -108,10 +108,13 @@ class _Outfit_SelectionState extends State<Outfit_Selection> {
                           borderRadius:
                           BorderRadius.circular(20),
                         ),
+                    child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
                         child: Image.network(
                           downloadedURL,
                           fit: BoxFit.cover,
                         ),
+                    ),
                       ),
                     );
                   }).toList(),

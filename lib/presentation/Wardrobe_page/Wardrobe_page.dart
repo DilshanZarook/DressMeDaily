@@ -1,11 +1,15 @@
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Outfit_classification/Carouselpopup_outfit.dart';
-import 'package:sdgp_test01/presentation/frame_406_bottomsheet/frame_406_bottomsheet.dart';
-import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Outfit_classification/Carouselpopup_outfit.dart';
+import 'package:DressMeDaily/presentation/frame_406_bottomsheet/frame_406_bottomsheet.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/widgets.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:DressMeDaily/presentation/Nagiavation_animation/Page_animation.dart';
 
 class Wardrobe_page extends StatefulWidget {
+
   const Wardrobe_page({Key? key}) : super(key: key);
 
   @override
@@ -18,8 +22,19 @@ class Wardrobe_pageState extends State<Wardrobe_page>
         SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   TextEditingController wardrobeNameController = TextEditingController();
+
+  int casualWearItemCount = 0;
+  int WorkWearCount = 0;
+  int PartyWearCount = 0;
   int itemCount = 0;
-  String itemText = "";
+  int itemCountForCategory = 0;
+  static const int allClothes = 0;
+  static const int workWear = 1;
+  static const int casualWear = 2;
+  static const int partyWear = 3;
+  int selectedCategory = allClothes;
+  List<int> categoryItemCounts = [0, 0, 0, 0];
+  String currentCategoryText = "All clothes";
 
   @override
   bool get wantKeepAlive => true;
@@ -27,16 +42,78 @@ class Wardrobe_pageState extends State<Wardrobe_page>
   @override
   void initState() {
     super.initState();
+    _updateItemCountForCategory(allClothes);
     _animationController = AnimationController(
-      duration: const Duration(seconds: 5), // Adjust the duration as needed
+      duration: const Duration(seconds: 5),
       vsync: this,
     );
-    // Fetch the count of items from Firebase Storage
     _fetchItemCountFromFirebase().then((count) {
       setState(() {
         itemCount = count;
       });
     });
+    fetchCasualWearItemCount().then((count) {
+      setState(() {
+        casualWearItemCount = count;
+      });
+    }).catchError((error) {
+      print('Error fetching casual wear item count: $error');
+    });
+    fetchWorkWearItemCount().then((count) {
+      setState(() {
+        WorkWearCount = count;
+      });
+    }).catchError((error) {
+      print('Error fetching casual wear item count: $error');
+    });
+    fetchPartyWearItemCount().then((count) {
+      setState(() {
+        PartyWearCount = count;
+      });
+    }).catchError((error) {
+      print('Error fetching casual wear item count: $error');
+    });
+  }
+
+  void _updateItemCountForCategory(int category) {
+    switch (category) {
+      case allClothes:
+        _fetchItemCountFromFirebase().then((count) {
+          setState(() {
+            categoryItemCounts[allClothes] = count;
+            selectedCategory = allClothes;
+            currentCategoryText = "All clothes";
+          });
+        });
+        break;
+      case workWear:
+        fetchWorkWearItemCount().then((count) {
+          setState(() {
+            categoryItemCounts[workWear] = count;
+            selectedCategory = workWear;
+            currentCategoryText = "Work wear";
+          });
+        });
+        break;
+      case casualWear:
+        fetchCasualWearItemCount().then((count) {
+          setState(() {
+            categoryItemCounts[casualWear] = count;
+            selectedCategory = casualWear;
+            currentCategoryText = "Casual wear";
+          });
+        });
+        break;
+      case partyWear:
+        fetchPartyWearItemCount().then((count) {
+          setState(() {
+            categoryItemCounts[partyWear] = count;
+            selectedCategory = partyWear;
+            currentCategoryText = "Party wear";
+          });
+        });
+        break;
+    }
   }
 
   Future<int> _fetchItemCountFromFirebase() async {
@@ -47,6 +124,32 @@ class Wardrobe_pageState extends State<Wardrobe_page>
         .listAll();
     return result.items.length;
   }
+
+  Future<int> fetchCasualWearItemCount() async {
+    firebase_storage.Reference ref =
+    firebase_storage.FirebaseStorage.instance.ref().child('wardrobe');
+
+    firebase_storage.ListResult result = await ref.listAll();
+    return result.items.where((ref) => ref.name.contains('casual-wear')).length;
+  }
+
+  Future<int> fetchWorkWearItemCount() async {
+    firebase_storage.Reference ref =
+    firebase_storage.FirebaseStorage.instance.ref().child('wardrobe');
+
+    firebase_storage.ListResult result = await ref.listAll();
+    return result.items.where((ref) => ref.name.contains('work-wear')).length;
+  }
+
+  Future<int> fetchPartyWearItemCount() async {
+    firebase_storage.Reference ref =
+    firebase_storage.FirebaseStorage.instance.ref().child('wardrobe');
+
+    firebase_storage.ListResult result = await ref.listAll();
+    return result.items.where((ref) => ref.name.contains('party-wear')).length;
+  }
+
+
   @override
   void dispose() {
     _animationController.dispose();
@@ -68,91 +171,14 @@ class Wardrobe_pageState extends State<Wardrobe_page>
                 children: [
                   SizedBox(height: 51.v),
                   _buildFrame(context),
-                  SizedBox(height: 24.v),
+                  SizedBox(height: 0.v),
                   _buildCombinedFrame(context),
-                  SizedBox(height: 24.v),
+                  SizedBox(height: 0.v),
                 ],
               ),
             ),
-            // _buildStickyCustomIconButtonTop(context),
+
           ],
-        ),
-      ),
-    );
-  }
-
-  void _showAllClothesPopup(BuildContext context) {
-    showGeneralDialog(
-      context: context,
-      pageBuilder: (BuildContext buildContext, Animation<double> animation,
-          Animation<double> secondaryAnimation) {
-        return const Frame406Bottomsheet();
-      },
-      barrierDismissible: true,
-      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-      transitionDuration: const Duration(milliseconds: 600),
-      transitionBuilder: (BuildContext context, Animation<double> animation,
-          Animation<double> secondaryAnimation, Widget child) {
-        return SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(0, 1),
-            end: Offset.zero,
-          ).animate(animation),
-          child: child,
-        );
-      },
-    );
-  }
-
-  //
-  Widget _buildStickyCustomIconButtonTop(BuildContext context) {
-    return Positioned(
-      top: 50.0, // Top offset
-      right: 50.0, // Right offset
-      child: GestureDetector(
-        onTap: () {
-          // Using the showGeneralDialog method with the SlideTransition animation
-          showGeneralDialog(
-            context: context,
-            pageBuilder: (BuildContext buildContext,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation) {
-              return const Frame406Bottomsheet();
-            },
-            barrierDismissible: true,
-            barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-            transitionDuration: const Duration(milliseconds: 600),
-            transitionBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              return SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(0, 1),
-                  end: Offset.zero,
-                ).animate(animation),
-                child: child,
-              );
-            },
-          );
-        },
-        child: Container(
-          height: 35.adaptSize,
-          width: 80.adaptSize,
-          padding: EdgeInsets.all(6.h),
-          decoration: BoxDecoration(
-            color: Colors.blueAccent,
-            borderRadius: BorderRadius.circular(40),
-          ),
-          child: const Text(
-            "Archive",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-            ),
-            textAlign: TextAlign.center,
-          ),
         ),
       ),
     );
@@ -173,7 +199,16 @@ class Wardrobe_pageState extends State<Wardrobe_page>
             children: [
               GestureDetector(
                 onTap: () {
-                  _showAllClothesPopup(context);
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
+                  Navigator.push(
+                    context,
+                    RadialRevealRoute(
+                      page:  Frame406Bottomsheet(),
+                      origin: position & size,
+                    ),
+                  );
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -255,36 +290,6 @@ class Wardrobe_pageState extends State<Wardrobe_page>
 
   /// Section Widget
 
-  void _showWardrobeNamePopup(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Name of the wardrobe'),
-          content: TextField(
-            controller: wardrobeNameController,
-            decoration: const InputDecoration(hintText: "Enter wardrobe name"),
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-            ),
-            TextButton(
-              child: const Text('Submit'),
-              onPressed: () {
-                // Handle the submission here
-                print('Wardrobe Name: ${wardrobeNameController.text}');
-                Navigator.of(context).pop(); // Close the dialog
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   Widget _buildCombinedFrame(BuildContext context) {
     return Container(
@@ -297,7 +302,7 @@ class Wardrobe_pageState extends State<Wardrobe_page>
         children: [
           _buildFrame1(context),
           SizedBox(
-            height: 280.v,
+            height: 270.v,
             width: double.maxFinite,
             child: Stack(
               alignment: Alignment.bottomCenter,
@@ -312,80 +317,78 @@ class Wardrobe_pageState extends State<Wardrobe_page>
                     ),
                   ),
                 ),
+
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    height: 270.v,
-                    width: 270.h,
-                    child: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: RotationTransition(
-                            turns: _animationController,
-                            child: Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 20.h, vertical: 20.h),
-                              padding: EdgeInsets.all(11.h),
-                              decoration:
-                              AppDecoration.outlineLightGreenA.copyWith(
-                                borderRadius: BorderRadiusStyle.circleBorder105,
-                              ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20), // Border radius of 20
+                    ),
+                    child: SizedBox(
+                      height: 240.v,
+                      width: 270.h,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: RotationTransition(
+                              turns: _animationController,
                               child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 18.h,
-                                  vertical: 18.v,
-                                ),
-                                decoration: AppDecoration.fillGray.copyWith(
-                                  borderRadius:
-                                  BorderRadiusStyle.circleBorder90,
+                                margin: EdgeInsets.symmetric(horizontal: 20.h, vertical: 5.h),
+                                padding: EdgeInsets.all(10.h),
+                                decoration: AppDecoration.outlineLightGreenA.copyWith(
+                                  borderRadius: BorderRadiusStyle.circleBorder105,
                                 ),
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 55.v,
-                                    vertical: 45.v,
+                                  padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 18.v),
+                                  decoration: AppDecoration.fillGray300.copyWith(
+                                    borderRadius: BorderRadiusStyle.circleBorder90,
                                   ),
-                                  decoration:
-                                  AppDecoration.fillGray300.copyWith(
-                                    borderRadius: BorderRadius.circular(200),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        "$itemCount",
-                                        style: theme.textTheme.headlineSmall,
-                                      ),
-                                      Text(
-                                        itemText,
-                                        style: CustomTextStyles.bodySmall10,
-                                      ),
-                                    ],
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(horizontal: 45.v, vertical: 45.v),
+                                    decoration: AppDecoration.fillGray100.copyWith(
+                                      borderRadius: BorderRadius.circular(200),
+                                    ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "${categoryItemCounts[selectedCategory]}",
+                                          style: theme.textTheme.headlineSmall,
+                                        ),
+                                        Text(
+                                          currentCategoryText,
+                                          style: theme.textTheme.bodySmall,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        CustomImageView(
-                          imagePath: ImageConstant.imgPolygon3,
-                          height: 70.v,
-                          width: 62.h,
-                          radius: BorderRadius.circular(10.h),
-                          alignment: Alignment.bottomCenter,
-                        ),
-                      ],
+                          CustomImageView(
+                            imagePath: ImageConstant.imgPolygon3,
+                            height: 60.v,
+                            width: 50.h,
+                            radius: BorderRadius.circular(0.h),
+                            alignment: Alignment.bottomCenter,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
+
               ],
             ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 20.v,
+              height: 30.v,
               width: double.maxFinite,
               decoration: BoxDecoration(
                 color: appTheme.blueGray100,
@@ -397,88 +400,109 @@ class Wardrobe_pageState extends State<Wardrobe_page>
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(width: 30), // Spacer
               GestureDetector(
                 onTap: () {
-                  // updateContentForAll();
-                  // Navigation logic for "All" button
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>  Main_wardrobe()),
-                  );
+                  _updateItemCountForCategory(Wardrobe_pageState.allClothes);
                 },
                 child: Container(
-                  width: 68.h,
+                  width: 90.h,
+                  height: 30.v,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Colors.grey[500],
-                    // Background color
+                    color: selectedCategory == Wardrobe_pageState.allClothes ? Color(0xFF575757) : Color(0xFF9d9d9d),
                     borderRadius: BorderRadius.circular(40),
-                    // Border radius of 40
-                    border: Border.all(color: Colors.white), // Border color
+                    border: Border.all(color: Colors.white),
                   ),
-                  child: const Text(
-                    "All",
+                  child: Text(
+                    "All clothes",
                     style: TextStyle(
-                      color: Colors.white, // Text color white
-                      fontSize: 16, // Font size 16
+                      color: Colors.white,
+                      fontSize: 16,
                     ),
                   ),
                 ),
               ),
-              const SizedBox(width: 40), // Spacer
+              const SizedBox(width: 20), // Spacer
               GestureDetector(
                 onTap: () {
-                  // updateContentForWashing();
-                  // Navigation logic for "Washing" button
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>  Main_wardrobe()),
-                  );
+                  _updateItemCountForCategory(Wardrobe_pageState.workWear);
                 },
                 child: Container(
-                  height: 25.v,
-                  width: 71.h,
+                  width: 90.h,
+                  height: 30.v,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Colors.grey[500],
-                    // Background color
+                    color: selectedCategory == Wardrobe_pageState.workWear ? Color(0xFF575757) : Color(0xFF9d9d9d),
                     borderRadius: BorderRadius.circular(40),
-                    // Border radius of 40
-                    border: Border.all(color: Colors.white), // Border color
+                    border: Border.all(color: Colors.white),
                   ),
-                  child: const Text(
-                    "Washing",
+                  child: Text(
+                    "Work wear",
                     style: TextStyle(
-                      color: Colors.white, // Text color white
-                      fontSize: 16, // Font size 16
+                      color: Colors.white,
+                      fontSize: 16,
                     ),
                   ),
                 ),
               ),
-              const SizedBox(width: 40), // Spacer
-              Container(
-                height: 25.v,
-                width: 66.h,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 23.h,
-                  vertical: 3.v,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.grey[500], // Background color
-                  borderRadius:
-                  BorderRadius.circular(40), // Border radius of 40
-                ),
-                child: CustomImageView(
-                  imagePath: ImageConstant.img_plus,
-                  height: 19.adaptSize,
-                  width: 19.adaptSize,
+              const SizedBox(width: 20),
+              GestureDetector(
+                onTap: () {
+                  _updateItemCountForCategory(Wardrobe_pageState.casualWear);
+                },
+                child: Container(
+                  width: 90.h,
+                  height: 30.v,
                   alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: selectedCategory == Wardrobe_pageState.casualWear ? Color(0xFF575757) : Color(0xFF9d9d9d),
+                    borderRadius: BorderRadius.circular(40),
+                    border: Border.all(color: Colors.white),
+                  ),
+                  child: Text(
+                    "Casual wear",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               ),
+              const SizedBox(width: 20),
             ],
           ),
+          const SizedBox(height: 40), // Spacer
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(width: 40), // Spacer
+              GestureDetector(
+                onTap: () {
+                  _updateItemCountForCategory(Wardrobe_pageState.partyWear);
+                },
+                child: Container(
+                  width: 90.h,
+                  height: 30.v,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: selectedCategory == Wardrobe_pageState.partyWear ? Color(0xFF575757) : Color(0xFF9d9d9d),
+                    borderRadius: BorderRadius.circular(40),
+                    border: Border.all(color: Colors.white),
+                  ),
+                  child: Text(
+                    "Party wear",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 30), // Spacer
+            ],
+          ),
+
           const SizedBox(height: 60), // Spacer
         ],
       ),

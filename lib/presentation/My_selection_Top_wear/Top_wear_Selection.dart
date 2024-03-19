@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
 
 class Top_wear_Selection extends StatefulWidget {
   const Top_wear_Selection({Key? key}) : super(key: key);

@@ -3,7 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Firebase_loader/firebase_loader.dart';
 
 class CustomContainerSection extends StatefulWidget {
   final Function(String)? onImageSelected; // Callback for image selection
@@ -58,24 +59,23 @@ class _CustomContainerSectionState extends State<CustomContainerSection> {
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: getFirebaseImages(),
-    builder: (context, snapshot) {
-    if (snapshot.connectionState == ConnectionState.waiting) {
-    return const CircularProgressIndicator();
-    } else if (snapshot.hasError) {
-    return Text('Error: ${snapshot.error}');
-    } else {
-    List<String> imageUrls = snapshot.data as List<String>;
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // Replace CircularProgressIndicator with SpinningLogo
+            return Center(child: SpinningLogo());
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            List<String> imageUrls = snapshot.data as List<String>;
     return Container(
       width: 280.h, // Set width to 200
       height: 170.h, // Set height to 100
       decoration: BoxDecoration(
-        color: Color(0xFF8B7B7B), // Brown color
+        color: Color(0xFF9d9d9d),// Brown color
         borderRadius: BorderRadius.circular(
             20), // Border radius of 20 for the entire container
       ),
@@ -108,10 +108,13 @@ class _CustomContainerSectionState extends State<CustomContainerSection> {
     borderRadius:
     BorderRadius.circular(20),
     ),
+      child: ClipRRect(
+      borderRadius: BorderRadius.circular(20),
     child: Image.network(
     downloadedURL,
     fit: BoxFit.cover,
     ),
+      ),
     ),
     );
     }).toList(),

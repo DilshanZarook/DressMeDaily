@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
 // Updated import
-import 'package:sdgp_test01/presentation/Loading_page_4(initialLoadingScreen)/loading_page_4.dart';
+import 'package:DressMeDaily/presentation/Loading_page_4(initialLoadingScreen)/loading_page_4.dart';
 
 class Initial_loading_page extends StatefulWidget {
   const Initial_loading_page({Key? key}) : super(key: key);
@@ -26,6 +26,7 @@ class _Initial_loading_pageState extends State<Initial_loading_page> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: Colors.white,
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(

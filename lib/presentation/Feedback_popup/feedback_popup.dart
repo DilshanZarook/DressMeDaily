@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/widgets/custom_text_form_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // ignore_for_file: must_be_immutable
 class Feedback_popup extends StatelessWidget {
@@ -13,7 +13,7 @@ class Feedback_popup extends StatelessWidget {
     return Container(
         width: 247.h,
         padding: EdgeInsets.symmetric(horizontal: 18.h, vertical: 13.v),
-        decoration: AppDecoration.fillGray
+        decoration: AppDecoration.fillWhiteA
             .copyWith(borderRadius: BorderRadiusStyle.roundedBorder20),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text("Please provide us your feedback",

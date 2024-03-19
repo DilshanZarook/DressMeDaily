@@ -1,8 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:DressMeDaily/presentation/Firebase_loader/firebase_loader.dart';
 
 class Landing_page_2 extends StatelessWidget {
   const Landing_page_2({Key? key})
@@ -38,7 +39,8 @@ class Landing_page_2 extends StatelessWidget {
       future: getFirebaseImages(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          // Replace CircularProgressIndicator with SpinningLogo
+          return Center(child: SpinningLogo());
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {

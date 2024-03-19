@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/Outfit_page/Outfit_page.dart';
-import 'package:sdgp_test01/presentation/Plan_Page/Plan_page.dart';
-import 'package:sdgp_test01/presentation/Searchbar_page/Searchbar_page.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/presentation/Main_settings_page/Main_settings.dart';
-import 'package:sdgp_test01/presentation/Wardrobe_page/Wardrobe_page.dart';
-import 'package:sdgp_test01/presentation/new_file/addtowardrobe_screen.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_trailing_image.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Bookmark_page/bookmark_page.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/presentation/Outfit_page/Outfit_page.dart';
+import 'package:DressMeDaily/presentation/Plan_Page/Plan_page.dart';
+import 'package:DressMeDaily/presentation/Searchbar_page/Searchbar_page.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/presentation/Main_settings_page/Main_settings.dart';
+import 'package:DressMeDaily/presentation/Wardrobe_page/Wardrobe_page.dart';
+import 'package:DressMeDaily/presentation/new_file/addtowardrobe_screen.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_title.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_trailing_image.dart';
+import 'package:DressMeDaily/widgets/app_bar/custom_app_bar.dart';
+import 'package:DressMeDaily/presentation/Nagiavation_animation/Page_animation.dart';
 
 class Main_wardrobe extends StatefulWidget {
   final int initialTabIndex;
@@ -188,7 +189,7 @@ class _Main_wardrobeState extends State<Main_wardrobe>
           ),
           const SizedBox(height: 30),
           Divider(
-            thickness: 6.h,
+            thickness: 3.h,
             color: appTheme.black900,
             indent: 0,
             endIndent: 0,
@@ -261,96 +262,105 @@ class _Main_wardrobeState extends State<Main_wardrobe>
               thickness: 2.h,
             ),
           ),
-          SizedBox(height: 16.v),
+          SizedBox(height: 10.v),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            // Adjusted for even spacing
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Image button 1
               InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgUser1
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const LandingPage()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page: const LandingPage(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.Home_footer_Unselected_101,
-                  height: 35.v, // Adjust the height as needed
-                  width: 35.v, // Adjust the width as needed
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              // Image button 2
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Searchbar_page()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  Searchbar_page(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.Search_footer,
-                  height: 35.v, // Adjust the height as needed
-                  width: 35.v, // Adjust the width as needed
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const AddtowardrobeScreen()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  AddtowardrobeScreen(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.Camera_footer_101,
-                  height: 30.v, // Adjust the height as needed
-                  width: 30.v, // Adjust the width as needed
+                  height: 30.v,
+                  width: 30.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Main_wardrobe()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  Main_wardrobe(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.Wardrobe_selected_footer_101,
-                  height: 32.v, // Adjust the height as needed
-                  width: 32.v, // Adjust the width as needed
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const User_profile()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  User_profile(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.User_Footer_Unselected_101,
-                  height: 35.v, // Adjust the height as needed
-                  width: 35.v, // Adjust the width as needed
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
               ),

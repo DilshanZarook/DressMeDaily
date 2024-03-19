@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
 
 class Frame293Screen extends StatelessWidget {
   const Frame293Screen({Key? key})

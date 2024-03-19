@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/presentation/Loading_page_3(BodyToLanding)/loading_page_3.dart';
-
+import 'package:DressMeDaily/presentation/Loading_page_3(BodyToLanding)/loading_page_3.dart';
 
 class Bodyselectionfemale extends StatelessWidget {
   const Bodyselectionfemale({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Ensure that only a Scaffold is returned if this screen is part of a bigger app
     return MaterialApp(
       home: Scaffold(
-        appBar: _buildAppBar(context), // Add the AppBar here
+        appBar: _buildAppBar(context),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const SizedBox( height:100),
+            const SizedBox(height: 100),
             const Padding(
-              padding: EdgeInsets.only(top: 20.0), // Adjust padding as needed
+              padding: EdgeInsets.only(top: 20.0),
               child: Text(
                 'Select a body type',
                 style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
               ),
             ),
-          const SizedBox(height: 50),
-          Row(
+            const SizedBox(height: 50),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-          // Update padding and other properties as needed
+                // Check if these padding values are giving the desired layout
                 Padding(
-                    padding: const EdgeInsets.only(top: 160.0),
-                    child: CustomButton(
-                imagePath: 'assets/images/type1.png',
-                onPressed: () => navigateToLoadingPage3(context)),
-                      ),
+                  padding: const EdgeInsets.only(top: 160.0),
+                  child: CustomButton(
+                      imagePath: 'assets/images/type1.png',
+                      onPressed: () => navigateToLoadingPage3(context)),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 110.0),
                   child: CustomButton(
@@ -62,6 +62,7 @@ class Bodyselectionfemale extends StatelessWidget {
           ],
         ),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

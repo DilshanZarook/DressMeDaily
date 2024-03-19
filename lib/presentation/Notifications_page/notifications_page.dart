@@ -1,24 +1,56 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/new_file/addtowardrobe_screen.dart';
+import 'package:DressMeDaily/presentation/Bookmark_page/bookmark_page.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/presentation/Main_wardrobe/Main_wardrobe.dart';
+import 'package:DressMeDaily/presentation/Searchbar_page/Searchbar_page.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_subtitle_three.dart';
+import 'package:DressMeDaily/widgets/app_bar/custom_app_bar.dart';
+import 'package:DressMeDaily/widgets/custom_switch.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle_three.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
-import 'package:sdgp_test01/widgets/custom_switch.dart';
 
-class Notifications_page extends StatelessWidget {
-  Notifications_page({Key? key})
+// ignore: camel_case_types
+class Notifications_page extends StatefulWidget {
+  const Notifications_page({Key? key})
       : super(
-          key: key,
-        );
+    key: key,
+  );
 
+  @override
+  // ignore: library_private_types_in_public_api
+  _Notifications_pageState createState() => _Notifications_pageState();
+}
+
+// ignore: camel_case_types
+class _Notifications_pageState extends State<Notifications_page> {
   bool isSelectedSwitch = false;
 
   bool isSelectedSwitch1 = false;
 
   bool isSelectedSwitch2 = false;
+  final String userName = 'Dilshan zarook';//need to be changed
+
+  @override
+  void initState() {
+    super.initState();
+    saveNotiStatus(userName);
+  }
+
+  Future<void> saveNotiStatus(
+      String userName) async {
+    // Save the notification status
+    final firesstore = FirebaseFirestore.instance;
+    await firesstore.collection('notification status').add({
+      'userName': userName,
+      'calendarNotificationAccess': isSelectedSwitch,
+      'applicationUpdatesEnabled': isSelectedSwitch1,
+      'fashionTrendUpdatesEnabled': isSelectedSwitch2,
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,72 +90,71 @@ class Notifications_page extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomBar(context),
+
     );
   }
 
   /// Section Widget
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
+      height: 66.v,
       centerTitle: true,
       title: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(
-              left: 13.h,
-              right: 19.h,
-            ),
+            padding: EdgeInsets.only(right: 0.h),
             child: Row(
               children: [
-                Container(
-                  margin: EdgeInsets.only(top: 20.v),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pop(
-                          context); // Navigate back to the previous screen
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(top: 0.v, right: 0.h, left: 5.v),
-                      // Adjust the margin as needed
-                      child: SvgPicture.asset(
-                        ImageConstant.imgArrowDown,
-                        // Make sure this points to the correct SVG asset
-                        height: 25.v,
-                        width: 25.h,
-                      ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context,
+                        '/main_settings');
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(top: 5.v, right: 10.h, left: 15.v),
+                    child: SvgPicture.asset(
+                      ImageConstant.imgArrowDown,
+                      height: 25.v,
+                      width: 25.h,
                     ),
                   ),
                 ),
-                AppbarSubtitleThree(
-                  text: "Notifications",
+                Container(
                   margin: EdgeInsets.only(
-                    left: 71.h,
-                    top: 20.v,
+                      left: 75.h, top: 5.v, bottom: 1.v, right: 1.v),
+                  child: Text(
+                    "Settings",
+                    style: TextStyle(
+                      fontSize: 28,
+                    ),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(
                     left: 65.h,
-                    top: 20.v,
+                    top: 0.v,
                     bottom: 0.v,
-                  ),
+                  ),   child: TextButton( // Change to TextButton
+                  onPressed: () {
+                    // Call function to save notification status
+                    saveNotiStatus('John Doe'); // Replace with the user's name
+                  },
                   child: const Text(
                     "Save",
-                    // You can add style to your text here if you want
-                    style: TextStyle(fontSize: 18.0),
+                    style: TextStyle(fontSize: 18.0,color: Color.fromARGB(255, 0, 0, 0)),
                   ),
                 ),
+                )
               ],
             ),
           ),
-          SizedBox(height: 22.v),
-          const SizedBox(
-            width: double.maxFinite,
-            child: Divider(),
+          SizedBox(height: 15.v),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: SizedBox(width: double.maxFinite, child: Divider()),
           ),
         ],
       ),
-      styleType: Style.bgFill_1,
     );
   }
 
@@ -142,9 +173,12 @@ class Notifications_page extends StatelessWidget {
           ),
         ),
         CustomSwitch(
-          value: isSelectedSwitch,
+          margin: EdgeInsets.symmetric(vertical: 3.v), // Make sure 'v' is defined or replace with actual value
+          value: isSelectedSwitch1,
           onChange: (value) {
-            isSelectedSwitch = value;
+            setState(() {
+              isSelectedSwitch1 = value; // Update the state when the switch is tapped
+            });
           },
         ),
       ],
@@ -162,9 +196,12 @@ class Notifications_page extends StatelessWidget {
               .copyWith(fontSize: 20.0), // Changed fontSize to a double
         ),
         CustomSwitch(
+          margin: EdgeInsets.symmetric(vertical: 3.v), // Make sure 'v' is defined or replace with actual value
           value: isSelectedSwitch2,
           onChange: (value) {
-            isSelectedSwitch2 = value;
+            setState(() {
+              isSelectedSwitch2 = value; // Update the state when the switch is tapped
+            });
           },
         ),
       ],
@@ -182,9 +219,12 @@ class Notifications_page extends StatelessWidget {
               .copyWith(fontSize: 20.0), // Changed fontSize to a double
         ),
         CustomSwitch(
-          value: isSelectedSwitch2,
+          margin: EdgeInsets.symmetric(vertical: 3.v), // Make sure 'v' is defined or replace with actual value
+          value: isSelectedSwitch,
           onChange: (value) {
-            isSelectedSwitch2 = value;
+            setState(() {
+              isSelectedSwitch = value; // Update the state when the switch is tapped
+            });
           },
         ),
       ],
@@ -234,7 +274,7 @@ class Notifications_page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Bookmark_page()),
+                    MaterialPageRoute(builder: (context) => Searchbar_page()),
                   );
                 },
                 child: SizedBox(
@@ -250,7 +290,7 @@ class Notifications_page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Bookmark_page()),
+                    MaterialPageRoute(builder: (context) => AddtowardrobeScreen()),
                   );
                 },
                 child: SizedBox(
@@ -266,7 +306,9 @@ class Notifications_page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Bookmark_page()),
+                    MaterialPageRoute(builder: (context) => Main_wardrobe(
+
+                    )),
                   );
                 },
                 child: SizedBox(
@@ -283,7 +325,7 @@ class Notifications_page extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const User_profile()),
+                        builder: (context) =>  User_profile()),
                   );
                 },
                 child: SizedBox(

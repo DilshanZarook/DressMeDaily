@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return MaterialApp(
           theme: theme,
-          title: 'sdgp_test01',
+          title: 'DressMeDaily',
           debugShowCheckedModeBanner: false,
           initialRoute: AppRoutes.initial_loading_page,
           routes: AppRoutes.routes,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/base_button.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/widgets/base_button.dart';
 
 class CustomOutlinedButton extends BaseButton {
   const CustomOutlinedButton({Key? key, 

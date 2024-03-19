@@ -2,13 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/Subscription_page_confirmation/subscription_page_confirmation.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle_four.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Bookmark_page/bookmark_page.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/presentation/Subscription_page_confirmation/subscription_page_confirmation.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_subtitle_four.dart';
+import 'package:DressMeDaily/widgets/app_bar/custom_app_bar.dart';
 
 class Subscription_after_purchase extends StatefulWidget {
   const Subscription_after_purchase({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class Subscription_after_purchase extends StatefulWidget {
 
 class _Subscription_after_purchaseState
     extends State<Subscription_after_purchase> {
-  int _currentIndex = 0; // Variable to keep track of the current index
+  int _currentIndex = 0;
   final List<LinearGradient> buttonGradients = [
     const LinearGradient(
       colors: [Color(0xFF3E4E5E), Color(0xFFDBDBDB)],
@@ -35,11 +35,10 @@ class _Subscription_after_purchaseState
       end: Alignment.bottomRight,
     ),
     const LinearGradient(
-      colors: [Color(0xFFeecd16), Color(0xFFdbdbdb)], // Gradient for third item
+      colors: [Color(0xFFeecd16), Color(0xFFdbdbdb)],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
-    // Add more gradients if there are more items in the carousel
   ];
 
   @override
@@ -48,7 +47,6 @@ class _Subscription_after_purchaseState
       "Subscribe to Plan 1",
       "Subscribe to Plan 2",
       "Subscribe to Plan 3",
-      // Add more button texts corresponding to each carousel item
     ];
 
     return Scaffold(
@@ -72,7 +70,7 @@ class _Subscription_after_purchaseState
                   viewportFraction: 0.7,
                   onPageChanged: (index, reason) {
                     setState(() {
-                      _currentIndex = index; // Update the current index
+                      _currentIndex = index;
                     });
                   },
                 ),
@@ -110,30 +108,27 @@ class _Subscription_after_purchaseState
                 child: OutlineGradientButton(
                   gradient: const LinearGradient(
                     colors: [Colors.white, Colors.white],
-                    // Solid black gradient for the outline
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   strokeWidth: 2,
                   radius: const Radius.circular(40),
-                  // Set the border radius for the outline
                   padding: EdgeInsets.zero,
                   child: GestureDetector(
                     onTap: () => onTapSubscribe(context),
-                    // Call the onTapSubscribe function when the Container is tapped
                     child: Container(
                       height: 60.v,
                       decoration: BoxDecoration(
                         gradient: buttonGradients[_currentIndex],
                         // Use the gradient for the button interior
                         borderRadius: BorderRadius.circular(
-                            40), // Set the border radius for the button
+                            40),
                       ),
                       alignment: Alignment.center,
                       child: Text(
                         "Cancel",
                         style: CustomTextStyles
-                            .bodySmallOnError, // Apply your text style here
+                            .bodySmallOnError,
                       ),
                     ),
                   ),
@@ -158,10 +153,8 @@ class _Subscription_after_purchaseState
                 },
                 child: Container(
                   margin: EdgeInsets.only(top: 10.v, right: 10.h, left: 15.v),
-                  // Adjust the margin as needed
                   child: SvgPicture.asset(
                     ImageConstant.imgArrowDown,
-                    // Replace with your SVG asset path
                     height: 25.v,
                     width: 25.h,
                   ),
@@ -186,7 +179,6 @@ class _Subscription_after_purchaseState
 
   /// Section Widget
 
-  /// Section Widget
   Widget _buildBottomBar(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 0.h),
@@ -278,7 +270,7 @@ class _Subscription_after_purchaseState
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const User_profile()),
+                        builder: (context) =>  User_profile()),
                   );
                 },
                 child: SizedBox(
@@ -348,11 +340,10 @@ class YourWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30.h), // Adjust as needed
                 image: DecorationImage(
                   image: AssetImage(i),
-                  // Assuming 'i' is the path to the image asset
-                  fit: BoxFit.cover, // Adjust the fit as needed
+                  fit: BoxFit.cover,
                 ),
               ),
-              height: 226.v, // Adjust the width as needed
+              height: 226.v,
             );
           },
         );

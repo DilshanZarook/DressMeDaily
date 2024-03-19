@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/presentation/new_file/addtowardrobe_screen.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_trailing_image.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
-import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Bookmark_page/bookmark_page.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/presentation/Main_wardrobe/Main_wardrobe.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/presentation/new_file/addtowardrobe_screen.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_title.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_trailing_image.dart';
+import 'package:DressMeDaily/widgets/app_bar/custom_app_bar.dart';
+import 'package:DressMeDaily/widgets/custom_outlined_button.dart';
 
 import 'widgets/thirtyseven_item_widget.dart';
 
@@ -191,7 +191,7 @@ class Washing_reminder_page extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            const User_profile()), // Replace with your actual screen widget
+                             User_profile()), // Replace with your actual screen widget
                   );
                 },
                 child: SvgPicture.asset(

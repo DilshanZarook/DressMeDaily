@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle_four.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
-import 'package:sdgp_test01/widgets/custom_radio_button.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Bookmark_page/bookmark_page.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_subtitle_four.dart';
+import 'package:DressMeDaily/widgets/app_bar/custom_app_bar.dart';
+import 'package:DressMeDaily/widgets/custom_radio_button.dart';
 
 class Themes_page extends StatefulWidget {
   const Themes_page({Key? key}) : super(key: key);
@@ -37,7 +37,6 @@ class _Themes_pageState extends State<Themes_page> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomBar(context),
     );
   }
 
@@ -53,14 +52,12 @@ class _Themes_pageState extends State<Themes_page> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.pop(context); // Navigate back when tapped
+                    Navigator.pop(context);
                   },
                   child: Container(
                     margin: EdgeInsets.only(top: 10.v, right: 10.h, left: 25.v),
-                    // Adjust the margin as needed
                     child: SvgPicture.asset(
                       ImageConstant.imgArrowDown,
-                      // Replace with your SVG asset path
                       height: 25.v,
                       width: 25.h,
                     ),
@@ -222,7 +219,7 @@ class _Themes_pageState extends State<Themes_page> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const User_profile()),
+                        builder: (context) =>  User_profile()),
                   );
                 },
                 child: SizedBox(
@@ -234,8 +231,6 @@ class _Themes_pageState extends State<Themes_page> {
                   ),
                 ),
               ),
-
-              // Add more buttons if needed
             ],
           ),
           SizedBox(height: 10.v),

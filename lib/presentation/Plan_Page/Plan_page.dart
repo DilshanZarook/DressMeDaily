@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:googleapis/calendar/v3.dart' as cal;
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Calendar_page/Calendar_page.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Calendar_page/Calendar_page.dart';
+import 'dart:convert';
+import 'package:DressMeDaily/presentation/Plan_Page/widgets/video_player.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Plan_page extends StatefulWidget {
   const Plan_page({Key? key}) : super(key: key);
@@ -15,27 +16,84 @@ class Plan_page extends StatefulWidget {
 }
 
 class Plan_pageState extends State<Plan_page> {
-  final GoogleSignIn _googleSignIn =
-      GoogleSignIn(scopes: ['https://www.googleapis.com/auth/calendar']);
-  List<cal.Event> _calendarEvents = [];
   TextEditingController monController = TextEditingController();
   ScrollController scrollController = ScrollController();
-  DateTime specificCurrentDate = DateTime(2024, 3, 12);
-  List<String> weekDays = _getCurrentWeekDays();
   String currentDate = DateFormat('MM/dd/yyyy').format(DateTime.now());
-  String topClothingImageUrl =
-      ''; // Initially empty, to be fetched from backend
-  String bottomClothingImageUrl =
-      ''; // Initially empty, to be fetched from backend
+  String TopWearImageUrl = '';
+  String BottomWearImageUrl = '';
   String outfitNumber = 'Outfit 01';
   bool shouldShowSyncSection = true;
+  late String currentDay;
+  late String currentMonth;
+  double? roundedTemp; // Make it nullable// Initialize with a default value, e.g., 0
+  late DateTime selectedDate;
+  DateTime specificCurrentDate = DateTime.now(); // Set this to your specific date
+  List<String> weekDays = [];
+  String eventDate = '';
+  String outfitName = '';
+  double imageWidth = 100.0;
+  double imageHeight = 100.0;
+  String eventDescription = '';
 
   @override
   void initState() {
     super.initState();
+    weekDays = _getCurrentWeekDays();
     WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToCurrentDate());
-    _fetchOutfitData();
+    currentDay = DateFormat('EEE').format(DateTime.now());
+    currentMonth = DateFormat('MMM').format(DateTime.now());
+    _fetchWeatherData(selectedDate = DateTime.now());
+    _fetchOutfitDataForDate(DateTime.now());
+    _fetchOutfitData(DateTime.now());
+    _getUserEventDetails(); // Fetch user event details
   }
+
+  List<String> _getCurrentWeekDays() {
+    List<String> weekDays = [];
+    DateTime today = DateTime.now();
+    DateTime startOfWeek = today.subtract(Duration(days: today.weekday - 1));
+    for (int i = 0; i < 7; i++) {
+      weekDays.add(DateFormat('EEE').format(startOfWeek.add(Duration(days: i))));
+    }
+    return weekDays;
+  }
+
+  void _getUserEventDetails() async {
+    try {
+      QuerySnapshot snapshot = (await FirebaseFirestore.instance
+          .collection('UserEventDetails')
+          .get());
+
+      if (snapshot.docs.isNotEmpty) {
+        Map<String, dynamic> data =
+        snapshot.docs.first.data() as Map<String, dynamic>;
+        setState(() {
+          eventDate = data['EventDate'] ?? '';
+          eventDescription = data['EventDescription'] ?? '';
+          TopWearImageUrl = data['topWear'] ?? '';
+          BottomWearImageUrl = data['bottomWear'] ?? '';
+          outfitName = data['outfitName'] ?? '';
+        });
+      } else {
+        setState(() {
+          eventDate = 'No event available';
+          eventDescription = 'None';
+          TopWearImageUrl = '';
+          BottomWearImageUrl = '';
+          outfitName = '';
+        });
+      }
+    } catch (error) {
+      print('Error fetching user event details: $error');
+      setState(() {
+        eventDate = 'Error fetching event details';
+        TopWearImageUrl = '';
+        BottomWearImageUrl = '';
+        outfitName = '';
+      });
+    }
+  }
+
 
   void _scrollToCurrentDate() {
     int currentDayIndex = specificCurrentDate.weekday -
@@ -49,39 +107,81 @@ class Plan_pageState extends State<Plan_page> {
     );
   }
 
+  void _fetchOutfitData(DateTime date) async {
+    FirebaseFirestore.instance
+        .collection('UserEventDetails')
+        .where('Date', isEqualTo: DateFormat('MM/dd/yyyy').format(date))
+        .limit(1)
+        .get()
+        .then((snapshot) {
+      if (snapshot.docs.isNotEmpty) {
+        var doc = snapshot.docs.first;
+        setState(() {
+          TopWearImageUrl = doc['TopClothingImageUrl'] ?? '';
+          BottomWearImageUrl = doc['BottomClothingImageUrl'] ?? '';
+          outfitNumber = doc['OutfitNumber'] ?? 'Outfit 01';
+        });
+      }
+    })
+        .catchError((error) {
+      print("Error fetching outfit data: $error");
+    });
+  }
+
+  void _fetchOutfitDataForDate(DateTime date) async {
+    var formattedDate = DateFormat('MM/dd/yyyy').format(date);
+    var snapshot = await FirebaseFirestore.instance
+        .collection('UserEventDetails')
+        .where('EventDate', isEqualTo: formattedDate)
+        .limit(1)
+        .get();
+
+    if (snapshot.docs.isNotEmpty) {
+      var doc = snapshot.docs.first;
+      setState(() {
+        TopWearImageUrl = doc['TopWearImageUrl'] ?? '';
+        BottomWearImageUrl = doc['BottomWearImageUrl'] ?? '';
+        // Update other necessary fields if required
+      });
+    } else {
+      // Handle the scenario when there are no outfits for the selected date
+      setState(() {
+        TopWearImageUrl = ''; // Default or placeholder image
+        BottomWearImageUrl = ''; // Default or placeholder image
+      });
+    }
+  }
+
+  Future<void> _fetchWeatherData(DateTime date) async {
+    final apiKey = "629de998a0f95d7b9dfdcd1dc96656ee"; // Make sure the API key is valid
+    final apiUrl =
+        "https://api.openweathermap.org/data/2.5/weather?q=Colombo&appid=$apiKey";
+
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+      if (response.statusCode == 200) {
+        final weatherData = json.decode(response.body);
+        setState(() {
+          selectedDate = date;
+          currentDay = DateFormat('EEE').format(date);
+          currentMonth = DateFormat('MMM').format(date);
+          final temp = weatherData['main']['temp'];
+          final tempCelsius = temp - 273.15; // Convert Kelvin to Celsius
+          roundedTemp = tempCelsius.round().toDouble(); // Update the roundedTemp state
+        });
+      } else {
+        print('Failed to load weather data: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Failed to load weather data: $e');
+    }
+  }
+
   @override
   void dispose() {
     monController.dispose();
     scrollController.dispose();
     super.dispose();
-  }
-
-  void _fetchOutfitData() async {
-    // Placeholder for your backend data fetching logic
-    // After fetching the data, you would set the state of the widget with the new data:
-    setState(() {
-      topClothingImageUrl =
-          'assets/images/img_filled_appointment_reminders.png';
-      bottomClothingImageUrl =
-          'assets/images/img_filled_appointment_reminders.png';
-      outfitNumber = 'Outfit 01';
-    });
-  }
-
-  void _syncCalendar() async {
-    try {
-      final GoogleSignInAccount? account = await _googleSignIn.signIn();
-      final authHeaders = await account!.authHeaders;
-      final httpClient = GoogleHttpClient(authHeaders);
-      final cal.CalendarApi calendarApi = cal.CalendarApi(httpClient);
-      final cal.Events events = await calendarApi.events.list("primary");
-      setState(() {
-        _calendarEvents =
-            events.items ?? []; // Provide an empty list as default value
-      });
-    } catch (error) {
-      print("Error syncing calendar: $error");
-    }
   }
 
   @override
@@ -94,31 +194,29 @@ class Plan_pageState extends State<Plan_page> {
             SizedBox(height: 46),
             _buildDateCarousel(weekDays, specificCurrentDate),
             SizedBox(height: 46),
-            // _buildSyncCalendarEventsSection(),
-            SizedBox(height: 56),
-            _buildOutfitSection(
-                topClothingImageUrl, bottomClothingImageUrl, outfitNumber),
-            SizedBox(height: 19),
             _buildBottomContainer(),
+            SizedBox(height: 56),
+            _buildOutfitSection(TopWearImageUrl, BottomWearImageUrl,
+                outfitName, eventDate),
+            SizedBox(height: 19),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildDateCarousel(
-      List<String> weekDays, DateTime specificCurrentDate) {
+  Widget _buildDateCarousel(List<String> weekDays, DateTime specificCurrentDate) {
+    DateTime today = DateTime.now();
+    DateTime startOfWeek = today.subtract(Duration(days: today.weekday - 1));
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: weekDays.asMap().entries.map((entry) {
           int index = entry.key;
-          String day = entry.value;
-          DateTime dayDate = specificCurrentDate
-              .add(Duration(days: index - specificCurrentDate.weekday + 1));
+          DateTime dayDate = startOfWeek.add(Duration(days: index));
+          String dayOfWeek = DateFormat('EEE').format(dayDate);
           return Padding(
-            padding: EdgeInsets.only(
-                right: index < weekDays.length - 1 ? 15.0 : 0.0),
+            padding: EdgeInsets.only(right: index < weekDays.length - 1 ? 15.0 : 0.0),
             child: Column(children: [
               Container(
                 width: 64.h,
@@ -132,10 +230,10 @@ class Plan_pageState extends State<Plan_page> {
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  day,
+                  dayOfWeek,
                   style: TextStyle(
-                    color: Colors.black, // Setting text color to black
-                    fontSize: 16, // Font size 16
+                    color: Colors.black,
+                    fontSize: 16,
                   ),
                 ),
               ),
@@ -146,12 +244,12 @@ class Plan_pageState extends State<Plan_page> {
                     .copyWith(borderRadius: BorderRadiusStyle.customBorderBL20),
                 alignment: Alignment.center,
                 child: Text(
-                  dayDate.isAtSameMomentAs(specificCurrentDate)
+                  DateFormat('MM/dd/yyyy').format(dayDate) == DateFormat('MM/dd/yyyy').format(today)
                       ? "Today"
                       : dayDate.day.toString(),
                   style: TextStyle(
-                    color: Colors.black, // Setting text color to black
-                    fontSize: 16, // Font size 16
+                    color: Colors.black,
+                    fontSize: 16,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -163,141 +261,144 @@ class Plan_pageState extends State<Plan_page> {
     );
   }
 
-  void _showConfirmationDialog(BuildContext context) {
+  Widget getRecommendation() {
+    if (roundedTemp == null) {
+      return SizedBox.shrink(); // Return an empty widget if roundedTemp is null
+    } else {
+      String recommendation;
+      if (roundedTemp! >= 30) {
+        recommendation = "It's hot outside. Wear light clothing!";
+      } else if (roundedTemp! >= 20 && roundedTemp! < 30) {
+        recommendation = "It's a bit warm. Perfect for summer wear!";
+      } else if (roundedTemp! >= 10 && roundedTemp! < 20) {
+        recommendation = "Cool weather. How about a light jacket?";
+      } else if (roundedTemp! >= 0 && roundedTemp! < 10) {
+        recommendation = "Quite cold. You should wear a winter jacket!";
+      } else {
+        recommendation = "It's freezing! Stay warm and bundled up!";
+      }
+
+      return Text(
+        recommendation,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 14,
+          color: Colors.black,
+        ),
+      );
+    }
+  }
+
+  Widget getTemperatureWidget() {
+    if (roundedTemp == null) {
+      return Text("Loading...");
+    } else {
+      return Text(
+        "${roundedTemp!.toStringAsFixed(1)}°C",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 14,
+          color: Colors.black,
+        ),
+      );
+    }
+  }
+  void _showEventDetailsDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (BuildContext dialogContext) {
+      builder: (BuildContext context) {
+        // Calculate the size based on the screen width
+        var size = MediaQuery.of(context).size;
+        final double imageWidth = size.width * 0.35; // 50% of the screen width for images
+        final double imageHeight = size.width * 0.5; // keeping the image square
+
+        // Define the image widgets
+        Widget topClothingImageWidget = TopWearImageUrl.isNotEmpty
+            ? Image.network(TopWearImageUrl, width: imageWidth, height: imageHeight, fit: BoxFit.cover)
+            : SvgPicture.asset('assets/images/default_top_clothing.svg', width: imageWidth, height: imageHeight, fit: BoxFit.cover); // Replace with actual default image path
+
+        Widget bottomClothingImageWidget = BottomWearImageUrl.isNotEmpty
+            ? Image.network(BottomWearImageUrl, width: imageWidth, height: imageHeight, fit: BoxFit.cover)
+            : SvgPicture.asset('assets/images/default_bottom_clothing.svg', width: imageWidth, height: imageHeight, fit: BoxFit.cover); // Replace with actual default image path
+
         return AlertDialog(
-          title: Text('Sync Calendar'),
-          content: Text(
-              'Do you want to keep or stop syncing calendar events from this device?'),
+          title: Center(child: Text('Event Details')),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Center(child: Text('Event Date: $eventDate')),
+                SizedBox(height: 10),
+                Center(child: Text('Event Title: $outfitName')),
+// Centering the event description
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Use spaceEvenly for even spacing
+                  children: <Widget>[
+                    // ConstrainedBox ensures the image does not exceed the screen width
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: imageWidth,
+                        maxHeight: imageHeight,
+                      ),
+                      child: topClothingImageWidget,
+                    ),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: imageWidth,
+                        maxHeight: imageHeight,
+                      ),
+                      child: bottomClothingImageWidget,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Center(child: Text('Outfit Name: $outfitName')),
+                SizedBox(height: 10),
+                Center(child: Text('Event Description: $eventDescription')), // Centering the outfit name text
+              ],
+            ),
+          ),
           actions: <Widget>[
             TextButton(
+              child: Text('Close', textAlign: TextAlign.center), // Centering the 'Close' button text
               onPressed: () {
-                Navigator.pop(dialogContext);
-                setState(() {
-                  shouldShowSyncSection =
-                      false; // Do not sync and hide the section
-                });
+                Navigator.of(context).pop();
               },
-              child: Text('Do Not Sync'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(dialogContext); // Keep the section and do nothing
-              },
-              child: Text('Keep'),
             ),
           ],
         );
       },
     );
   }
-  //
-  // Widget _buildSyncCalendarEventsSection() {
-  //   if (!shouldShowSyncSection) return SizedBox();
-  //   return Container(
-  //     margin: EdgeInsets.only(left: 0.h, right: 0.h),
-  //     padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 11.v),
-  //     decoration: AppDecoration.fillBlueGray
-  //         .copyWith(borderRadius: BorderRadiusStyle.roundedBorder12),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       mainAxisSize: MainAxisSize.min,
-  //       children: [
-  //         Container(
-  //           child: SvgPicture.asset(
-  //             'assets/images/img_phone.svg', // Adjust asset path if necessary
-  //             // Increase the size by 30 units
-  //             width: 50.0, // Assuming the original width was 30.0
-  //             height: 50.0, // Assuming the original height was 30.0
-  //           ),
-  //         ),
-  //         Padding(
-  //             padding: EdgeInsets.only(left: 17.h, top: 4.v, bottom: 3.v),
-  //             child: Text("Sync calendar events from device?",
-  //                 style: theme.textTheme.bodySmall)),
-  //         SizedBox(width: 10),
-  //         GestureDetector(
-  //           onTap: () {
-  //             _showConfirmationDialog(context);
-  //             // If 'Keep' was chosen or dialog was dismissed, do nothing
-  //           },
-  //           child: Image.asset(
-  //             ImageConstant.redcross,
-  //             // Replace with your red cross icon asset path
-  //             height: 10.v,
-  //             width: 10.h,
-  //           ),
-  //         ),
-  //         SizedBox(width: 10),
-  //         _buildGoogleSignIn(context),
-  //         // This replaces the previous CustomImageView for the green tick icon
-  //       ],
-  //     ),
-  //   );
-  // }
 
-// And here is the _buildGoogleSignIn method as before
-  Widget _buildGoogleSignIn(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        try {
-          final GoogleSignInAccount? account = await _googleSignIn.signIn();
-          if (account != null) {
-            final authHeaders = await account.authHeaders;
-            final httpClient = GoogleHttpClient(authHeaders);
-            final cal.CalendarApi calendarApi = cal.CalendarApi(httpClient);
-            final cal.Events events = await calendarApi.events.list("primary");
-            setState(() {
-              _calendarEvents =
-                  events.items ?? []; // Provide an empty list as default value
-            });
-          }
-        } catch (error) {
-          print("Error syncing calendar: $error");
-        }
-      },
-      child: Image.asset(
-        ImageConstant.greentick, // Replace with your green tick icon asset path
-        height: 20.v, // Adjust the size accordingly
-        width: 20.h, // Adjust the size accordingly
-      ),
-    );
-  }
 
-  Widget _buildOutfitSection(String topClothingImageUrl,
-      String bottomClothingImageUrl, String outfitNumber) {
-    // Format the current date to a string
-    String currentDate = DateFormat('MM/dd/yyyy').format(DateTime.now());
 
-    // Check if URLs are valid
-    bool isTopImageUrlValid =
-        Uri.tryParse(topClothingImageUrl)?.hasAbsolutePath ?? false;
-    bool isBottomImageUrlValid =
-        Uri.tryParse(bottomClothingImageUrl)?.hasAbsolutePath ?? false;
+
+  Widget _buildOutfitSection(String topClothingImageUrl, String bottomClothingImageUrl, String outfitName, String eventDate) {
+    String displayEventDate = eventDate.isNotEmpty ? eventDate : "Loading date...";
+
+    bool isTopImageUrlValid = Uri.tryParse(topClothingImageUrl)?.hasAbsolutePath ?? false;
+    bool isBottomImageUrlValid = Uri.tryParse(bottomClothingImageUrl)?.hasAbsolutePath ?? false;
 
     Widget topClothingImageWidget = isTopImageUrlValid
         ? Image.network(topClothingImageUrl, fit: BoxFit.cover)
-        : Image.asset('assets/images/img_filled_appointment_reminders.png',
-            fit: BoxFit.cover); // Using a local asset as a placeholder
+        : SvgPicture.asset('assets/images/img_user_gray_500_01.svg', fit: BoxFit.cover);
 
     Widget bottomClothingImageWidget = isBottomImageUrlValid
         ? Image.network(bottomClothingImageUrl, fit: BoxFit.cover)
-        : Image.asset('assets/images/img_filled_appointment_reminders.png',
-            fit: BoxFit.cover); // Using a local asset as a placeholder
+        : SvgPicture.asset('assets/images/socks_plan.svg', fit: BoxFit.cover);
 
-    // If outfitNumber is empty, provide a default value or a placeholder
-    String displayOutfitNumber =
-        outfitNumber.isNotEmpty ? outfitNumber : "Loading outfit...";
+    String displayOutfitName = outfitName.isNotEmpty ? outfitName : "None";
 
-    return Container(
+    return GestureDetector(
+        onTap: () => _showEventDetailsDialog(context),
+    child: Container(
       height: 300.v,
-      width: 270.h,
+      width: 300.h,
       margin: EdgeInsets.only(left: 30.h, right: 30.h),
       padding: EdgeInsets.symmetric(horizontal: 14.h, vertical: 10.v),
-      decoration: AppDecoration.fillBlueGray
-          .copyWith(borderRadius: BorderRadiusStyle.roundedBorder12),
+      decoration: AppDecoration.fillcontainer.copyWith(borderRadius: BorderRadiusStyle.roundedBorder12),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -313,7 +414,7 @@ class Plan_pageState extends State<Plan_page> {
                 child: Text(
                   "Date:",
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: Colors.black, // Set text color to black
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -324,31 +425,27 @@ class Plan_pageState extends State<Plan_page> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  currentDate,
+                  displayEventDate,
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: Colors.black, // Set text color to black
+                    color: Colors.black,
                   ),
                 ),
               ),
               Container(
                   decoration: BoxDecoration(
-                    color: Colors.white, // Container background color
-                    borderRadius:
-                        BorderRadius.circular(10), // Container border radius
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      // Container background color
                       borderRadius: BorderRadius.circular(10),
-                      // Container border radius
                       boxShadow: [
-                        // Optional: add a shadow effect
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 1,
                           blurRadius: 3,
-                          offset: Offset(0, 1), // Shadow position
+                          offset: Offset(0, 1),
                         ),
                       ],
                     ),
@@ -361,59 +458,65 @@ class Plan_pageState extends State<Plan_page> {
                       },
                       child: Padding(
                         padding: EdgeInsets.all(4.0),
-                        // Optional padding for the SVG
                         child: SvgPicture.asset(
                           'assets/images/img_calendar.svg',
-                          // Adjust asset path if necessary
-                          // Increase the size by 30 units
-                          width: 50.0, // Assuming the original width was 30.0
-                          height: 50.0, // Assuming the original height was 30.0
+                          width: 50.0,
+                          height: 50.0,
                         ),
                       ),
                     ),
-                  ))
+                  )),
+
             ],
-          ),
+          ),          SizedBox(height: 10.h),
+
+
           Expanded(
             child: Container(
-              width: 200.h, // Set your desired width
-              height: 120.h, // Set your desired height
+              width: 200.h,
+              height: 120.h,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius:
-                    BorderRadius.circular(20), // Set border radius to 20
+                borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Make sure topClothingImageWidget and bottomClothingImageWidget are defined to return a widget
-                  topClothingImageWidget,
+                  Flexible(
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: topClothingImageWidget,
+                    ),
+                  ),
                   SizedBox(width: 10.h),
-                  bottomClothingImageWidget,
+                  Flexible(
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: bottomClothingImageWidget,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
+          SizedBox(height: 10.h),
           Align(
             alignment: Alignment.centerRight,
-            // This aligns the container to the right
             child: Container(
-              width: 80.h, // Set the width of the container
-              height: 30.h, // Set the height of the container
+              width: 80.h,
+              height: 30.h,
               decoration: BoxDecoration(
-                color: Colors.white, // Set the container color to white
-                borderRadius:
-                    BorderRadius.circular(20), // Set border radius to 20
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
               ),
               child: Padding(
                 padding: EdgeInsets.only(right: 0.h),
                 child: Center(
-                  // Center the text within the container
                   child: Text(
-                    displayOutfitNumber,
+                    displayOutfitName,
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      fontSize: 16, // Font size 16
-                      color: Colors.black, // Text color black
+                      fontSize: 16,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -422,83 +525,131 @@ class Plan_pageState extends State<Plan_page> {
           ),
         ],
       ),
-    );
+    ));
   }
-
   Widget _buildBottomContainer() {
     return Container(
-      width: 360,
-      // Fixed width set to 250
-      height: 320,
-      // Fixed height set to 300// Takes the full width of the screen
+      width: 400,
+      height: 400,
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-      // Outer padding
       decoration: BoxDecoration(
-        color: appTheme.blueGray100, // Background color
-        borderRadius: BorderRadius.circular(20), // Rounded borders
+        color: Color(0xFF9d9d9d),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        // Aligns children to center horizontally
         children: [
           _buildInfoContainer('Outfit for weather', 18),
-          // Info container for 'Outfit for weather'
+          SizedBox(height: 20),
+          Container(
+            height: 120, // Set height to 40
+            width: 120, // Set width to 40
+            child: TemperatureBasedVideoWidget(temperature: roundedTemp ?? 0.0),
+          ),
           SizedBox(height: 10),
-          _buildPlaceholderIcon(),
-          // Placeholder for the image
-          SizedBox(height: 10),
-          _buildInfoContainer('Recommend:', 14),
-          SizedBox(height: 10),
-          _buildInfoContainer('Weather is Cold, Wear a Longsleeve', 14),
-          // Info container for recommendation
+          Container(
+            padding: EdgeInsets.all(10), // Padding inside the container
+            decoration: BoxDecoration(
+              color: Colors.white, // Background color of the container
+              borderRadius: BorderRadius.circular(10), // Border radius of 10
+              boxShadow: [ // Optional: if you want to add shadow
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 7,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: _buildInfoContainer('Current Temperature:', 14, getTemperatureWidget()),
+                ),
+                SizedBox(height: 5),
+
+                Divider(
+                  thickness: 1.h,
+                  color: appTheme.black900,
+                  indent: 100,
+                  endIndent:100,
+                ),
+                SizedBox(height: 10),
+
+                getRecommendation(),
+                SizedBox(height: 10),
+
+                ElevatedButton(
+                  onPressed: () {
+                    _fetchWeatherData(DateTime.now());
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5), // Adjust padding as needed
+                    child: Text(
+                      'Update Weather',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black, // Text color
+                        // You can add more styling here if required
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+
+              ],
+            ),
+          )
+
         ],
       ),
     );
   }
 
-  Widget _buildInfoContainer(String text, double fontSize) {
+  Widget _buildInfoContainer(String text, double fontSize, [Widget? additionalWidget]) {
     return Container(
-      padding: EdgeInsets.all(10), // Padding inside the container
+      padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.white, // White background for the text container
-        borderRadius: BorderRadius.circular(10), // Rounded corners
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
       ),
-      child: Text(
-        text,
-        textAlign: TextAlign.center, // Centers the text
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: fontSize,
-          color: Colors.black, // Setting text color to black
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: fontSize,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          if (additionalWidget != null) additionalWidget,
+        ],
       ),
     );
   }
 
-  Widget _buildPlaceholderIcon() {
-    return Container(
-      height: 100, // Fixed height for the icon container
-      width: 100, // Fixed width for the icon container
-      decoration: BoxDecoration(
-        color: Colors.grey[300], // Placeholder color
-        borderRadius: BorderRadius.circular(12), // Rounded corners
-      ),
-      child: Icon(
-        Icons.image, // Placeholder icon
-        size: 50, // Icon size
-        color: Colors.grey,
-      ),
-    );
-  }
 }
 
 List<String> _getCurrentWeekDays() {
   DateTime now = DateTime.now();
   int currentDayOfWeek = now.weekday;
-  DateTime monday = now.subtract(Duration(days: currentDayOfWeek - 1));
-  return List.generate(7,
-      (index) => DateFormat('EEE').format(monday.add(Duration(days: index))));
+
+  // Subtract days to get to the start of the week (Monday)
+  DateTime startOfWeek = now.subtract(Duration(days: currentDayOfWeek - 1));
+
+  // Generate a list for the week that starts with the current day
+  return List.generate(7, (index) {
+    DateTime weekDay = startOfWeek.add(Duration(days: index));
+    return DateFormat('EEE').format(weekDay);
+  });
 }
 
 /// Common widget
@@ -531,7 +682,6 @@ Widget _buildFrame(
   ]);
 }
 
-/// Navigates to the frame981Screen when the action is triggered.
 onTapBtnCalendar(BuildContext context) {
   Navigator.pushNamed(context, AppRoutes.calendar_page);
 }

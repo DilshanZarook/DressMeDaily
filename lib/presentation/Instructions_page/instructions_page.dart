@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Loading_page_2/loading_page_2.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Loading_page_2/loading_page_2.dart';
 // Adjust the path as necessary
 
 class Instructions_page extends StatelessWidget {

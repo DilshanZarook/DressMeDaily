@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
 
 class Frame4ItemWidget extends StatefulWidget {
   final Function(String) onSelectionChanged;
@@ -16,7 +16,7 @@ class _Frame4ItemWidgetState extends State<Frame4ItemWidget> {
 
   final allClothesOptions = [
     'All Clothes',
-    'Casual', 'Work', 'Party'
+    'Casual','Party','Work'
   ];
 
 

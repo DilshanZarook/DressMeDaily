@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Loading_page_3(BodyToLanding)/loading_page_3.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Loading_page_3(BodyToLanding)/loading_page_3.dart';
 
 
 class Body_selection_male extends StatelessWidget {
@@ -63,6 +63,7 @@ class Body_selection_male extends StatelessWidget {
           ],
         ),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

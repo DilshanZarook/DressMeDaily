@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
 
 class AppDecoration {
   // Fill decorations
@@ -23,6 +23,11 @@ class AppDecoration {
   );
   static BoxDecoration get fillGray300 => BoxDecoration(
     color: appTheme.gray300,
+  );  static BoxDecoration get fillcontainer => BoxDecoration(
+    color: Color(0xFF9d9d9d),
+  );
+  static BoxDecoration get fillGray100 => BoxDecoration(
+    color: appTheme.gray200,
   );
 
   static BoxDecoration get outlineLightGreenA => BoxDecoration(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/widgets/custom_text_form_field.dart';
 
 // ignore_for_file: must_be_immutable
 class Signup_new_user extends StatelessWidget {
@@ -14,9 +14,8 @@ class Signup_new_user extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
+    return Scaffold(
+            resizeToAvoidBottomInset: true,
             appBar: _buildAppBar(context),
             body: Container(
                 width: double.maxFinite,
@@ -62,7 +61,7 @@ class Signup_new_user extends StatelessWidget {
                   SizedBox(height: 66.v),
                   _buildSubmitButton(context),
                   SizedBox(height: 60.v)
-                ]))));
+                ])));
   }
 
   /// Section Widget
@@ -70,12 +69,11 @@ class Signup_new_user extends StatelessWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Image.asset('assets/images/Line arrow-left.png'), // Replace with your actual arrow image asset path
+        icon: Image.asset('assets/images/Line arrow-left.png'),
         onPressed: () {
           Navigator.of(context).pop();
         },
-      ), // Replace with your screen's title
-      // You can add more AppBar properties if needed
+      ),
     );
   }
 
@@ -106,22 +104,20 @@ class Signup_new_user extends StatelessWidget {
   /// Section Widget
   Widget _buildSubmitButton(BuildContext context, {double borderRadius = 20.0}) {
     return Container(
-      height: 50.v, // Height of the button
-      width: 100.h, // Width of the button
+      height: 50.v,
+      width: 100.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius), // Custom border radius
-        border: Border.all(color: Colors.black), // Border style
-        // Add other decoration properties if needed, like color, boxShadow
+        borderRadius: BorderRadius.circular(borderRadius),
+        border: Border.all(color: Colors.black),
       ),
       child: TextButton(
         onPressed: () {
-          onTapSubmitButton(context); // Your tap handler
+          onTapSubmitButton(context);
         },
         child: const Text(
           "Submit",
           style: TextStyle(
-            color: Colors.black, // Text color
-            // Add other text styling properties if needed
+            color: Colors.black,
           ),
         ),
       ),
@@ -161,7 +157,6 @@ class Signup_new_user extends StatelessWidget {
       return;
     }
 
-    // If email is valid, proceed with navigation
     Navigator.pushNamed(context, AppRoutes.profile_picture);
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
-import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/widgets/custom_outlined_button.dart';
+import 'package:DressMeDaily/widgets/custom_text_form_field.dart';
 
 // ignore_for_file: must_be_immutable
 class Password_change extends StatelessWidget {
@@ -60,12 +60,11 @@ class Password_change extends StatelessWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Image.asset('assets/images/Line arrow-left.png'), // Replace with your actual arrow image asset path
+        icon: Image.asset('assets/images/Line arrow-left.png'),
         onPressed: () {
           Navigator.of(context).pop();
         },
-      ), // Replace with your screen's title
-      // You can add more AppBar properties if needed
+      ),
     );
   }
 bool isValidEmail(String email) {

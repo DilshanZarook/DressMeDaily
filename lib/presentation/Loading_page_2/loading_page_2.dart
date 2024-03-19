@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Gender_selection/gender_selection.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Gender_selection/gender_selection.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Loading_page_2 extends StatefulWidget {

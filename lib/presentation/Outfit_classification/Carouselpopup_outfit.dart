@@ -1,10 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/presentation/Outfit_classification/Causal_wear_page.dart';
-import 'package:sdgp_test01/presentation/Outfit_classification/Party_wear_page.dart';
-import 'package:sdgp_test01/presentation/Outfit_classification/Work_wear_page.dart';
+import 'package:DressMeDaily/presentation/Outfit_classification/Causal_wear_page.dart';
+import 'package:DressMeDaily/presentation/Outfit_classification/Party_wear_page.dart';
+import 'package:DressMeDaily/presentation/Outfit_classification/Work_wear_page.dart';
 
-// Page 1
 
 void showCarouselDialog(BuildContext context) {
   final List<Widget> carouselItems = [
@@ -17,18 +16,18 @@ void showCarouselDialog(BuildContext context) {
     return GestureDetector(
       onTap: () => navigateToPage(context, index + 1),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5),
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         // Add some space between items
         decoration: BoxDecoration(
           color: index == 0
-              ? Colors.red
-              : (index == 1 ? Colors.green : Colors.blue),
+              ? Color(0xFF575757)
+              : (index == 1 ? Color(0xFF575757) : Color(0xFF575757)),
           borderRadius: BorderRadius.circular(20), // Border radius of 20
         ),
         alignment: Alignment.center,
         child: Text(
           text,
-          style: TextStyle(fontSize: 24, color: Colors.white),
+          style: TextStyle(fontSize: 24, color: Color(0xFF9af567)),
         ),
       ),
     );
@@ -84,7 +83,7 @@ void navigateToPage(BuildContext context, int index) {
           child: child,
         );
       },
-      transitionDuration: Duration(milliseconds: 600),
+      transitionDuration: Duration(milliseconds: 1),
     ),
   );
 }

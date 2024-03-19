@@ -1,51 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/presentation/Body_selection_female/body_selection_female.dart';
-import 'package:sdgp_test01/presentation/Body_selection_male/body_selection_male.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/FAQ_Page/faq_page.dart';
-import 'package:sdgp_test01/presentation/Feedback_popup/feedback_popup.dart';
-import 'package:sdgp_test01/presentation/Gender_selection/gender_selection.dart';
-import 'package:sdgp_test01/presentation/Initial_loading_page/initial_loading_page.dart';
-import 'package:sdgp_test01/presentation/Instructions_page/instructions_page.dart';
-import 'package:sdgp_test01/presentation/Invite_friends_page/invite_friends.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/Landing_page_2/landing_page_2.dart';
-import 'package:sdgp_test01/presentation/Loading_page_1/loading_page_1.dart';
-import 'package:sdgp_test01/presentation/Loading_page_2/loading_page_2.dart';
-import 'package:sdgp_test01/presentation/Loading_page_3(BodyToLanding)/loading_page_3.dart';
-import 'package:sdgp_test01/presentation/Loading_page_4(initialLoadingScreen)/loading_page_4.dart';
-import 'package:sdgp_test01/presentation/Login_page_1/login_page_1.dart';
-import 'package:sdgp_test01/presentation/Main_settings_page/main_settings.dart';
-import 'package:sdgp_test01/presentation/Notice_page/notice_page.dart';
-import 'package:sdgp_test01/presentation/Notifications_page/notifications_page.dart';
-import 'package:sdgp_test01/presentation/Password_change/password_change.dart';
-import 'package:sdgp_test01/presentation/Password_mail/password_mail.dart';
-import 'package:sdgp_test01/presentation/Profile_picture/profile_picture.dart';
-import 'package:sdgp_test01/presentation/Settings/settings.dart';
-import 'package:sdgp_test01/presentation/Signin_other_options/signin_other_options.dart';
-import 'package:sdgp_test01/presentation/Signup_new_user/signup_new_user.dart';
-import 'package:sdgp_test01/presentation/Signup_old_user/signup_old_user.dart';
-import 'package:sdgp_test01/presentation/Signup_other_options/signup_other_options.dart';
-import 'package:sdgp_test01/presentation/Starting_page/starting_page.dart';
-import 'package:sdgp_test01/presentation/Subscription_after_purchase/subscription_after_purchase_page.dart';
-import 'package:sdgp_test01/presentation/Subscription_page/subscription_page.dart';
-import 'package:sdgp_test01/presentation/Subscription_page_confirmation/subscription_page_confirmation.dart';
-import 'package:sdgp_test01/presentation/Thank_popup/thank_popup.dart';
-import 'package:sdgp_test01/presentation/Themes_page/themes_page.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/presentation/Washing_reminder_page/Washing_reminder_page.dart';
-import 'package:sdgp_test01/presentation/app_navigation_screen/app_navigation_screen.dart';
-import 'package:sdgp_test01/presentation/frame_293_screen/frame_293_screen.dart';
-import 'package:sdgp_test01/presentation/frame_404_bottomsheet/frame_404_bottomsheet.dart';
-import 'package:sdgp_test01/presentation/frame_405_bottomsheet/frame_405_bottomsheet.dart';
-import 'package:sdgp_test01/presentation/frame_406_bottomsheet/frame_406_bottomsheet.dart';
-import 'package:sdgp_test01/presentation/frame_675_screen/frame_675_screen.dart';
-import 'package:sdgp_test01/presentation/new_file/addtowardrobe_screen.dart';
-import 'package:sdgp_test01/presentation/starting_page_signup/starting_page_signup.dart';
-
+import 'package:DressMeDaily/presentation/Body_selection_female/body_selection_female.dart';
+import 'package:DressMeDaily/presentation/Body_selection_male/body_selection_male.dart';
+import 'package:DressMeDaily/presentation/Bookmark_page/bookmark_page.dart';
+import 'package:DressMeDaily/presentation/FAQ_Page/faq_page.dart';
+import 'package:DressMeDaily/presentation/Feedback_popup/feedback_popup.dart';
+import 'package:DressMeDaily/presentation/Gender_selection/gender_selection.dart';
+import 'package:DressMeDaily/presentation/Initial_loading_page/initial_loading_page.dart';
+import 'package:DressMeDaily/presentation/Instructions_page/instructions_page.dart';
+import 'package:DressMeDaily/presentation/Invite_friends_page/invite_friends.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/presentation/Landing_page_2/landing_page_2.dart';
+import 'package:DressMeDaily/presentation/Loading_page_1/loading_page_1.dart';
+import 'package:DressMeDaily/presentation/Loading_page_2/loading_page_2.dart';
+import 'package:DressMeDaily/presentation/Loading_page_3(BodyToLanding)/loading_page_3.dart';
+import 'package:DressMeDaily/presentation/Loading_page_4(initialLoadingScreen)/loading_page_4.dart';
+import 'package:DressMeDaily/presentation/Login_page_1/login_page_1.dart';
+import 'package:DressMeDaily/presentation/Main_settings_page/main_settings.dart';
+import 'package:DressMeDaily/presentation/Notice_page/notice_page.dart';
+import 'package:DressMeDaily/presentation/Notifications_page/notifications_page.dart';
+import 'package:DressMeDaily/presentation/Password_change/password_change.dart';
+import 'package:DressMeDaily/presentation/Password_mail/password_mail.dart';
+import 'package:DressMeDaily/presentation/Profile_picture/profile_picture.dart';
+import 'package:DressMeDaily/presentation/Settings/settings.dart';
+import 'package:DressMeDaily/presentation/Signin_other_options/signin_other_options.dart';
+import 'package:DressMeDaily/presentation/Signup_new_user/signup_new_user.dart';
+import 'package:DressMeDaily/presentation/Signup_old_user/signup_old_user.dart';
+import 'package:DressMeDaily/presentation/Signup_other_options/signup_other_options.dart';
+import 'package:DressMeDaily/presentation/Starting_page/starting_page.dart';
+import 'package:DressMeDaily/presentation/Subscription_after_purchase/subscription_after_purchase_page.dart';
+import 'package:DressMeDaily/presentation/Subscription_page/subscription_page.dart';
+import 'package:DressMeDaily/presentation/Subscription_page_confirmation/subscription_page_confirmation.dart';
+import 'package:DressMeDaily/presentation/Thank_popup/thank_popup.dart';
+import 'package:DressMeDaily/presentation/Themes_page/themes_page.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/presentation/Washing_reminder_page/Washing_reminder_page.dart';
+import 'package:DressMeDaily/presentation/app_navigation_screen/app_navigation_screen.dart';
+import 'package:DressMeDaily/presentation/frame_293_screen/frame_293_screen.dart';
+import 'package:DressMeDaily/presentation/frame_404_bottomsheet/frame_404_bottomsheet.dart';
+import 'package:DressMeDaily/presentation/frame_405_bottomsheet/frame_405_bottomsheet.dart';
+import 'package:DressMeDaily/presentation/frame_406_bottomsheet/frame_406_bottomsheet.dart';
+import 'package:DressMeDaily/presentation/frame_675_screen/frame_675_screen.dart';
+import 'package:DressMeDaily/presentation/new_file/addtowardrobe_screen.dart';
+import 'package:DressMeDaily/presentation/starting_page_signup/starting_page_signup.dart';
 import '../presentation/Calendar_page/Calendar_page.dart';
 import '../presentation/Event_day_Page/Event_day_page.dart';
 import '../presentation/Main_wardrobe/Main_wardrobe.dart';
+import 'package:DressMeDaily/presentation/Contact_us/contact_us.dart';
 
 class AppRoutes {
   static const String initial_loading_page = '/initial_loading_page';
@@ -55,6 +55,8 @@ class AppRoutes {
   static const String frame851Page = '/frame_851_page';
 
   static const String main_wardrobe = '/Main_wardrobe';
+
+  static const String contact_us = '/contact_us';
 
   static const String calendar_page = '/Calendar_page';
 
@@ -185,8 +187,9 @@ class AppRoutes {
     // This will need to be changed when navigating
     body_selection_female: (context) => const Bodyselectionfemale(),
     loading_page_4: (context) => const Loading_page_4(),
+    contact_us: (context) => const Contact_us(),
     bookmark_page: (context) => Bookmark_page(),
-    user_profile: (context) => const User_profile(),
+    user_profile: (context) =>  User_profile(),
     frame_404_bottomsheet: (context) => const Frame404Bottomsheet(),
     frame_405_bottomsheet: (context) => const Frame405Bottomsheet(),
     frame_406_bottomsheet: (context) => const Frame406Bottomsheet(),

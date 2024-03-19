@@ -3,9 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:DressMeDaily/presentation/Firebase_loader/firebase_loader.dart';
 
 class Casual_wear_outfit extends StatefulWidget {
   final Function(String)? onImageSelected; // Callback for image selection
@@ -54,7 +55,8 @@ class Casual_wear_outfitState extends State<Casual_wear_outfit> {
         future: fetchCasualWearImages(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            // Replace CircularProgressIndicator with SpinningLogo
+            return Center(child: SpinningLogo());
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -63,7 +65,7 @@ class Casual_wear_outfitState extends State<Casual_wear_outfit> {
               width: 280.h, // Set width to 200
               height: 170.h, // Set height to 100
               decoration: BoxDecoration(
-                color: Color(0xFF8B7B7B), // Brown color
+                color: Color(0xFF9d9d9d), // Brown color
                 borderRadius: BorderRadius.circular(
                     20), // Border radius of 20 for the entire container
               ),
@@ -95,10 +97,13 @@ class Casual_wear_outfitState extends State<Casual_wear_outfit> {
                           borderRadius:
                           BorderRadius.circular(20),
                         ),
+                    child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
                         child: Image.network(
                           downloadedURL,
                           fit: BoxFit.cover,
                         ),
+                      ),
                       ),
                     );
                   }).toList(),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/new_file/addtowardrobe_screen.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/presentation/frame_404_bottomsheet/frame_404_bottomsheet.dart';
-import 'package:sdgp_test01/presentation/frame_405_bottomsheet/frame_405_bottomsheet.dart';
-import 'package:sdgp_test01/presentation/frame_406_bottomsheet/frame_406_bottomsheet.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/new_file/addtowardrobe_screen.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/presentation/frame_404_bottomsheet/frame_404_bottomsheet.dart';
+import 'package:DressMeDaily/presentation/frame_405_bottomsheet/frame_405_bottomsheet.dart';
+import 'package:DressMeDaily/presentation/frame_406_bottomsheet/frame_406_bottomsheet.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_title.dart';
+import 'package:DressMeDaily/widgets/app_bar/custom_app_bar.dart';
 
 class FramelistItemWidget extends StatelessWidget {
   final String title;
@@ -248,7 +248,7 @@ class Bookmark_page extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            const User_profile()), // Replace with your actual screen widget
+                             User_profile()), // Replace with your actual screen widget
                   );
                 },
                 child: SvgPicture.asset(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/core/Data_model/item_model.dart'; // Replace with the actual path of your ItemModel file
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/core/Data_model/item_model.dart'; // Replace with the actual path of your ItemModel file
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Frame405Bottomsheet extends StatefulWidget {

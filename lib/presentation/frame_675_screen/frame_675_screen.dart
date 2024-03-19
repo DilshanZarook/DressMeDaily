@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/custom_elevated_button.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/widgets/custom_elevated_button.dart';
+import 'package:DressMeDaily/presentation/Bookmark_page/bookmark_page.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
 
 class Frame675Screen extends StatelessWidget {
   const Frame675Screen({Key? key}) : super(key: key);
@@ -255,7 +255,7 @@ class Frame675Screen extends StatelessWidget {
               _buildIconButton(
                 context,
                 ImageConstant.profile_footer,
-                    () => Navigator.push(context, MaterialPageRoute(builder: (context) => const User_profile())),
+                    () => Navigator.push(context, MaterialPageRoute(builder: (context) =>  User_profile())),
               ),
               // Add more buttons if needed
             ],

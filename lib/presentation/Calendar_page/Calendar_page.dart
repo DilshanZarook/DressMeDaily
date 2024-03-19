@@ -1,16 +1,19 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/new_file/addtowardrobe_screen.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/Event_day_page/Event_day_page.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_trailing_image.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/new_file/addtowardrobe_screen.dart';
+import 'package:DressMeDaily/presentation/Bookmark_page/bookmark_page.dart';
+import 'package:DressMeDaily/presentation/Event_day_page/Event_day_page.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/presentation/Main_wardrobe/Main_wardrobe.dart';
+import 'package:DressMeDaily/presentation/Searchbar_page/Searchbar_page.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_title.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_trailing_image.dart';
+import 'package:DressMeDaily/widgets/app_bar/custom_app_bar.dart';
+import 'package:DressMeDaily/presentation/Nagiavation_animation/Page_animation.dart';
+import 'package:DressMeDaily/presentation/Main_settings_page/Main_settings.dart';
 
 class Calendar_page extends StatelessWidget {
   final List<DateTime?> selectedDatesFromCalendar1 = [];
@@ -59,36 +62,53 @@ class Calendar_page extends StatelessWidget {
 
   /// Section Widget
   PreferredSizeWidget _buildAppBar(BuildContext context) {
-    // Calculate the total height
-    final double totalHeight =
-        kToolbarHeight + 30.h; // Adjust this calculation as needed
-
-    return PreferredSize(
-      preferredSize: Size.fromHeight(totalHeight), // Updated preferred height
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+    return CustomAppBar(
+      centerTitle: true,
+      height: 60.h,
+      title: Column(
         children: [
-          CustomAppBar(
-            title: AppbarTitle(
-              text: "DMD",
-              margin: EdgeInsets.only(left: 21.h),
+          SizedBox(height: 0.v),
+          Padding(
+            padding: EdgeInsets.only(
+              left: 25.h,
+              right: 25.h,
             ),
-            actions: [
-              AppbarTrailingImage(
-                imagePath: ImageConstant.imgMegaphone,
-                margin: EdgeInsets.fromLTRB(26.h, 4.v, 26.h, 3.v),
-              ),
-            ],
-          ),
-          SizedBox(height: 20),
-          SizedBox(
-            width: 360.h,
-            height: 1.h,
-            child: Divider(
-              color: appTheme.black990,
-              thickness: 2.h,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // This will position the children at the start and end of the row
+              children: [
+                AppbarTitle(
+                  text: "DMD",
+                  margin: EdgeInsets.only(bottom: 10.v),
+                ),
+                GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const Main_settings()), // Replace Frame624 with the actual widget class for frame 624
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 10.0),
+                      // Bottom margin of 10
+                      child: SvgPicture.asset(
+                        ImageConstant.imgMegaphone,
+                        // Add appropriate height and width if needed
+                      ),
+                    ))
+              ],
             ),
           ),
+          const SizedBox(height: 30),
+          Divider(
+            thickness: 3.h,
+            color: appTheme.black900,
+            indent: 0,
+            endIndent: 0,
+          ),
+          // Additional content can go here
         ],
       ),
     );
@@ -103,7 +123,8 @@ class Calendar_page extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
                 builder: (context) =>
-                    Main_wardrobe()), // Change to your destination frame
+                    Main_wardrobe(
+                        initialTabIndex: 2)), // Change to your destination frame
           );
         },
         child: Container(
@@ -112,7 +133,7 @@ class Calendar_page extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white, // Background color for the container
             shape:
-                BoxShape.circle, // Circular shape for the back arrow container
+            BoxShape.circle, // Circular shape for the back arrow container
           ),
           child: Icon(
             Icons.arrow_back, // The back arrow icon
@@ -174,7 +195,7 @@ class Calendar_page extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Event_day_page(selectedDate: currentDateTime),
+        builder: (context) => Event_day_page(selectedDate: selectedDate),
       ),
     );
   }
@@ -193,96 +214,105 @@ class Calendar_page extends StatelessWidget {
               thickness: 2.h,
             ),
           ),
-          SizedBox(height: 16.v),
+          SizedBox(height: 10.v),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            // Adjusted for even spacing
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Image button 1
               InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgUser1
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const LandingPage()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page: const LandingPage(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.Home_footer_Unselected_101,
-                  height: 35.v, // Adjust the height as needed
-                  width: 35.v, // Adjust the width as needed
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              // Image button 2
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Bookmark_page()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  Searchbar_page(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.Search_footer,
-                  height: 35.v, // Adjust the height as needed
-                  width: 35.v, // Adjust the width as needed
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const AddtowardrobeScreen()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  AddtowardrobeScreen(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.Camera_footer_101,
-                  height: 30.v, // Adjust the height as needed
-                  width: 30.v, // Adjust the width as needed
+                  height: 30.v,
+                  width: 30.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Main_wardrobe()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  Main_wardrobe(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.Wardrobe_selected_footer_101,
-                  height: 32.v, // Adjust the height as needed
-                  width: 32.v, // Adjust the width as needed
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const User_profile()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  User_profile(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.User_Footer_Unselected_101,
-                  height: 35.v, // Adjust the height as needed
-                  width: 35.v, // Adjust the width as needed
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
               ),

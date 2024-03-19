@@ -2,8 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
 
 class Loading_page_3 extends StatefulWidget {
   const Loading_page_3({Key? key}) : super(key: key);

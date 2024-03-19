@@ -1,21 +1,21 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Calendar_page/Calendar_page.dart';
-import 'package:sdgp_test01/presentation/Landing_page_2/landing_page_2.dart';
-import 'package:sdgp_test01/presentation/Main_settings_page/main_settings.dart';
-import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
-import 'package:sdgp_test01/presentation/Searchbar_page/Searchbar_page.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/presentation/new_file/addtowardrobe_screen.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar_1.dart';
-import 'package:sdgp_test01/widgets/custom_icon_button.dart';
-import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Calendar_page/Calendar_page.dart';
+import 'package:DressMeDaily/presentation/Landing_page_2/landing_page_2.dart';
+import 'package:DressMeDaily/presentation/Main_settings_page/main_settings.dart';
+import 'package:DressMeDaily/presentation/Main_wardrobe/Main_wardrobe.dart';
+import 'package:DressMeDaily/presentation/Searchbar_page/Searchbar_page.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/presentation/new_file/addtowardrobe_screen.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_title.dart';
+import 'package:DressMeDaily/widgets/app_bar/custom_app_bar_1.dart';
+import 'package:DressMeDaily/widgets/custom_icon_button.dart';
+import 'package:DressMeDaily/widgets/custom_outlined_button.dart';
+import 'package:DressMeDaily/presentation/Nagiavation_animation/Page_animation.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key})
@@ -124,31 +124,6 @@ class _Landing_pageState extends State<LandingPage> {
                       opacity: 0.4,
                       child: Align(
                         alignment: Alignment.centerRight,
-                        // child: Container(
-                        //   margin: EdgeInsets.only(left: 232.h),
-                        //   padding: EdgeInsets.symmetric(
-                        //     horizontal: 7.h,
-                        //     vertical: 8.v,
-                        //   ),
-                        //   decoration: AppDecoration.outlineBlack.copyWith(
-                        //     borderRadius: BorderRadiusStyle.roundedBorder20,
-                        //   ),
-                        //   child: Container(
-                        //     height: 43.v,
-                        //     width: 40.h,
-                        //     padding: EdgeInsets.all(4.h),
-                        //     decoration: BoxDecoration(
-                        //       color: Colors.black,
-                        //       borderRadius: BorderRadiusStyle.roundedBorder15,
-                        //     ),
-                        //     child: CustomImageView(
-                        //       imagePath: ImageConstant.imgCalendar,
-                        //       height: 35.v,
-                        //       width: 32.h,
-                        //       alignment: Alignment.center,
-                        //     ),
-                        //   ),
-                        // ),
                       ),
                     ),
                     Align(
@@ -413,7 +388,7 @@ class _Landing_pageState extends State<LandingPage> {
                       bottom: 0
                           .v, // Adjust this value to position the TL100 container over the other container
                     ),
-                    height: 61.v, // Height of the rectangle
+                    height: 64.v, // Height of the rectangle
                     width: 360.h,
                     // Width of the rectangle
                     decoration: BoxDecoration(
@@ -458,7 +433,7 @@ class _Landing_pageState extends State<LandingPage> {
                     ),
                     child: SizedBox(
                       width: 220.h,
-                      height: 101.h,
+                      height: 104.h,
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                           // Add padding inside the SizedBox for the Text
@@ -532,7 +507,7 @@ class _Landing_pageState extends State<LandingPage> {
           ),
           const SizedBox(height: 30),
           Divider(
-            thickness: 6.h,
+            thickness: 3.h,
             color: appTheme.black900,
             indent: 0,
             endIndent: 0,
@@ -553,105 +528,109 @@ class _Landing_pageState extends State<LandingPage> {
             width: 360.h,
             height: 1.h,
             child: Divider(
-              color: appTheme.black900,
-              thickness: 4.h,
+              color: appTheme.black990,
+              thickness: 2.h,
             ),
           ),
           SizedBox(height: 10.v),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            // Adjusted for even spacing
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Image button 1
               InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgUser1
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const LandingPage()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page: const LandingPage(),
+                      origin: position & size,
+                    ),
                   );
                 },
-                child: CustomImageView(
-                  imagePath: ImageConstant.Home_footer_selected,
-                  height: 32.v,
-                  width: 32.h,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              // Image button 2
-              InkWell(
-                onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Searchbar_page()), // Replace with your actual screen widget
-                  );
-                },
-                child: Container(
-                  height: 30.v,
-                  width: 30.h,
-                  child: SvgPicture.asset(
-                    ImageConstant.Search_footer, // The path to your SVG asset
-                    fit: BoxFit.cover, // Adjust the fit as needed
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            AddtowardrobeScreen()), // Replace with your actual screen widget
-                  );
-                },
-                child: Container(
-                  height: 30.v,
-                  width: 30.h,
-                  child: SvgPicture.asset(
-                    ImageConstant.Camera_footer_101,
-                    // The path to your SVG asset
-                    fit: BoxFit.cover, // Adjust the fit as needed
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Main_wardrobe()), // Replace with your actual screen widget
-                  );
-                },
-                child: CustomImageView(
-                  imagePath: ImageConstant.Wardrobe_footer_unselected_1,
+                child: SvgPicture.asset(
+                  ImageConstant.Home_footer_selected,
                   height: 35.v,
-                  width: 35.h,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const User_profile()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  Searchbar_page(),
+                      origin: position & size,
+                    ),
                   );
                 },
-                child: CustomImageView(
-                  imagePath: ImageConstant.User_Footer_Unselected_101,
-                  height: 33.v,
-                  width: 33.h,
+                child: SvgPicture.asset(
+                  ImageConstant.Search_footer,
+                  height: 35.v,
+                  width: 35.v,
+                  fit: BoxFit.cover,
+                ),
+              ),InkWell(
+                onTap: () {
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
+                  Navigator.push(
+                    context,
+                    RadialRevealRoute(
+                      page:  AddtowardrobeScreen(),
+                      origin: position & size,
+                    ),
+                  );
+                },
+                child: SvgPicture.asset(
+                  ImageConstant.Camera_footer_101,
+                  height: 30.v,
+                  width: 30.v,
+                  fit: BoxFit.cover,
+                ),
+              ),InkWell(
+                onTap: () {
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
+                  Navigator.push(
+                    context,
+                    RadialRevealRoute(
+                      page:  Main_wardrobe(),
+                      origin: position & size,
+                    ),
+                  );
+                },
+                child: SvgPicture.asset(
+                  ImageConstant.Wardrobe_footer_unselected_1,
+                  height: 35.v,
+                  width: 35.v,
+                  fit: BoxFit.cover,
+                ),
+              ),InkWell(
+                onTap: () {
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
+                  Navigator.push(
+                    context,
+                    RadialRevealRoute(
+                      page:  User_profile(),
+                      origin: position & size,
+                    ),
+                  );
+                },
+                child: SvgPicture.asset(
+                  ImageConstant.User_Footer_Unselected_101,
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
               ),

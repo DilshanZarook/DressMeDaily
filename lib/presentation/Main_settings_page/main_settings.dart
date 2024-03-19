@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
 
 class Main_settings extends StatelessWidget {
   const Main_settings({Key? key}) : super(key: key);
@@ -9,6 +9,7 @@ class Main_settings extends StatelessWidget {
     return Drawer(
         child: Container(
             width: 226.h,
+            margin: EdgeInsets.only(right: 20),
             padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 50.v),
             decoration: AppDecoration.fillOnError,
             child:Column(
@@ -92,11 +93,16 @@ class Main_settings extends StatelessWidget {
                         height: 23.v,
                         width: 26.h,
                         margin: EdgeInsets.only(top: 1.v)),
-                    Padding(
-                        padding: EdgeInsets.only(left: 15.h, bottom: 2.v),
-                        child: Text("Contact Us",
-                            style: theme.textTheme.bodyLarge))
-                  ])),
+                    GestureDetector(
+                        onTap: () {
+                          onTapContact_us(context);
+                        },
+                        child: Padding(
+                            padding:
+                            EdgeInsets.only(left: 15.h, bottom: 2.v),
+                            child: Text("Contact Us",
+                                style: theme.textTheme.bodyLarge))),
+                                      ])),
               SizedBox(height: 10.v),
               Padding(
                   padding: EdgeInsets.only(left: 11.h),
@@ -157,6 +163,9 @@ class Main_settings extends StatelessWidget {
   /// Navigates to the frame636Screen when the action is triggered.
   onTapTxtTheme(BuildContext context) {
     Navigator.of(context, rootNavigator: true).pushNamed("/themes_page");
+  }
+  onTapContact_us(BuildContext context) {
+    Navigator.of(context).pushNamed("/contact_us");
   }
 
   /// Navigates to the frame639Screen when the action is triggered.

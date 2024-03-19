@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Instructions_page/instructions_page.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Instructions_page/instructions_page.dart';
 
 class AddtowardrobeScreen extends StatefulWidget {
   const AddtowardrobeScreen({Key? key}) : super(key: key);

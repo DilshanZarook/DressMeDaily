@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
 
 class AppNavigationScreen extends StatelessWidget {
   const AppNavigationScreen({Key? key})
@@ -42,6 +42,11 @@ class AppNavigationScreen extends StatelessWidget {
                           screenTitle: "Starting_page",
                           onTapScreenTitle: () => onTapScreenTitle(
                               context, AppRoutes.starting_page),
+                        ),_buildScreenTitle(
+                          context,
+                          screenTitle: "contact_us",
+                          onTapScreenTitle: () => onTapScreenTitle(
+                              context, AppRoutes.contact_us),
                         ),
                         _buildScreenTitle(
                           context,

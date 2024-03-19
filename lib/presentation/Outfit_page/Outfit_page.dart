@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 // Import the respective pages and app theme
-import 'package:sdgp_test01/presentation/Outfit_page/My_selection_page.dart';
-import 'package:sdgp_test01/presentation/Outfit_page/AI_selection_page.dart';
-import 'package:sdgp_test01/presentation/Outfit_page/Favorite_page.dart';
-import 'package:sdgp_test01/core/app_export.dart'; // Assuming this is your theme file
+import 'package:DressMeDaily/presentation/Outfit_page/My_selection_page.dart';
+import 'package:DressMeDaily/presentation/Outfit_page/AI_selection_page.dart';
+import 'package:DressMeDaily/presentation/Outfit_page/Favorite_page.dart';
+import 'package:DressMeDaily/core/app_export.dart'; // Assuming this is your theme file
 
 class Outfit_page extends StatefulWidget {
   Outfit_page({Key? key}) : super(key: key);
@@ -26,7 +26,6 @@ class Outfit_pageState extends State<Outfit_page> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 buildButton(0, "My Selection"),
-                buildButton(1, "AI Selection"),
                 buildButton(2, "Favorites"),
               ],
             ),
@@ -73,8 +72,6 @@ class Outfit_pageState extends State<Outfit_page> {
     switch (selectedIndex) {
       case 0:
         return My_selection_page();
-      case 1:
-        return AI_selection_page();
       case 2:
         return Favorite_page();
       default:

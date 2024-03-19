@@ -12,6 +12,18 @@ class ImageConstant {
 
   static String logo = '$imagePath/logo_start.svg';
 
+  static String logo_fire = '$imagePath/Fire_base_loader.png';
+
+  static String socks_plan = '$imagePath/socks_plan.svg';
+
+  static String logo_w = '$imagePath/White_loader.png';
+
+  static String reset_btn = '$imagePath/reset_btn.jpg';
+
+  static String detail_btn = '$imagePath/detail_btn.png';
+
+  static String Search_S = '$imagePath/Search_selected.svg';
+
   // Frame FiftyNine images
   static String imgVuesaxOutlineArrowLeft =
       '$imagePath/img_vuesax_outline_arrow_left.svg';
@@ -30,6 +42,8 @@ class ImageConstant {
   static String imgVectorGray900 = '$imagePath/img_vector_gray_900.svg';
 
   static String imgVector_1 = '$imagePath/img_vector_1.svg';
+
+  static String white_icon_sm_1 = '$imagePath/white_loader_smaller_1.png';
 
   static String imgOipremovebgpreview1 =
       '$imagePath/img_oipremovebgpreview_1.png';
@@ -279,6 +293,8 @@ class ImageConstant {
   static String imgOip1 = '$imagePath/img_oip_1.png';
 
   static String imgImage1 = '$imagePath/img_image_1.png';
+
+  static String camera_selected = '$imagePath/Camera_selected.png';
 
   static String User_footer_selected_101_f =
       '$imagePath/User_footer_selected_101_f.svg';

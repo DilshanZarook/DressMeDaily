@@ -3,8 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/core/Data_model/item_model.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/core/Data_model/item_model.dart';
+import 'package:DressMeDaily/presentation/Firebase_loader/Full_loader.dart';
 
 class Frame406Bottomsheet extends StatefulWidget {
   const Frame406Bottomsheet({Key? key}) : super(key: key);
@@ -58,14 +59,15 @@ class _Frame406BottomsheetState extends State<Frame406Bottomsheet> {
       ),
     );
   }
-
+  //
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: getFirebaseImages(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+
+            return Center(child: SpinningLogo());
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -73,14 +75,13 @@ class _Frame406BottomsheetState extends State<Frame406Bottomsheet> {
 
             return Scaffold(
                 backgroundColor: Colors
-                    .transparent, // Set the background color of the scaffold to transparent
+                    .white, // Set the background color of the scaffold to transparent
                 body: Container(
                     width: MediaQuery.of(context).size.width,
                     height: 700.h,
                     margin: const EdgeInsets.only(top: 200),
                     decoration: const BoxDecoration(
-                      color: Color(
-                          0xFF8B7B7B), // Keep the main container with brown color
+                      color: Color(0xFF9d9d9d),// Keep the main container with brown color
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(80),
                         topRight: Radius.circular(80),
@@ -94,7 +95,7 @@ class _Frame406BottomsheetState extends State<Frame406Bottomsheet> {
                         child: GestureDetector(
                           onVerticalDragEnd: (details) {
                             // Check the drag velocity or distance to decide if the gesture should trigger navigation
-                            if (details.primaryVelocity! > 1000) {
+                            if (details.primaryVelocity! > 10) {
                               // Adjust this threshold as needed
                               Navigator.of(context).pop();
                             }
@@ -103,7 +104,7 @@ class _Frame406BottomsheetState extends State<Frame406Bottomsheet> {
                             width: 150,
                             height: 20,
                             decoration: BoxDecoration(
-                              color: Colors.brown,
+                              color: Color(0xFF575757),
                               borderRadius: BorderRadius.circular(50),
                             ),
                           ),
@@ -126,18 +127,21 @@ class _Frame406BottomsheetState extends State<Frame406Bottomsheet> {
                                 onTap: () => _launchURL(downloadedURL),
                                 onDoubleTap: () => addToFavos(downloadedURL),
                                 child: Container(
-                                  width: 120,
-                                  height: 120,
+                                  width: 160,
+                                  height: 160,
                                   margin: const EdgeInsets.all(20),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius:
                                     BorderRadius.circular(20),
                                   ),
+                              child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
                                   child: Image.network(
                                     downloadedURL,
                                     fit: BoxFit.cover,
                                   ),
+                                ),
                                 ),
                               );
                             }).toList(),

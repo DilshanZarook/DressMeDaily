@@ -6,6 +6,7 @@ class AnimatedHeader extends StatefulWidget {
   final double startOffset;
   final double endOffset;
   final Color backgroundColor; // Color parameter
+  final TextStyle titleStyle; // Added TextStyle parameter
 
   const AnimatedHeader({
     Key? key,
@@ -14,6 +15,10 @@ class AnimatedHeader extends StatefulWidget {
     this.startOffset = -100.0,
     this.endOffset = 0.0,
     this.backgroundColor = Colors.green, // Default color
+    this.titleStyle = const TextStyle( // Default TextStyle
+      color: Colors.white,
+      fontSize: 24,
+    ),
   }) : super(key: key);
 
   @override
@@ -53,10 +58,7 @@ class _AnimatedHeaderState extends State<AnimatedHeader> {
         ),
         child: Text(
           widget.title,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-          ),
+          style: widget.titleStyle, // Use the passed TextStyle
         ),
       ),
     );

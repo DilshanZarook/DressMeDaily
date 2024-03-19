@@ -1,16 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
-import 'package:sdgp_test01/presentation/new_file/addtowardrobe_screen.dart';
-import 'package:sdgp_test01/presentation/Searchbar_page/Searchbar_page.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
-import 'package:sdgp_test01/widgets/custom_bottom_bar.dart';
-import 'package:sdgp_test01/widgets/custom_elevated_button.dart';
-import 'package:sdgp_test01/widgets/custom_text_form_field_1.dart';
+import 'package:intl/intl.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/presentation/Main_wardrobe/Main_wardrobe.dart';
+import 'package:DressMeDaily/presentation/new_file/addtowardrobe_screen.dart';
+import 'package:DressMeDaily/presentation/Searchbar_page/Searchbar_page.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_title.dart';
+import 'package:DressMeDaily/widgets/app_bar/custom_app_bar.dart';
+import 'package:DressMeDaily/widgets/custom_bottom_bar.dart';
+import 'package:DressMeDaily/widgets/custom_elevated_button.dart';
+import 'package:DressMeDaily/widgets/custom_text_form_field_1.dart';
+import 'package:DressMeDaily/presentation/Nagiavation_animation/Page_animation.dart';
 
 class User_profile extends StatefulWidget {
   const User_profile({Key? key}) : super(key: key);
@@ -19,10 +22,8 @@ class User_profile extends StatefulWidget {
   _User_profileState createState() => _User_profileState();
 }
 
-class _User_profileState extends State<User_profile>
-    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
-  final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>(); // Moved inside the class
+class _User_profileState extends State<User_profile> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(); // Moved inside the class
   TextEditingController nameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController bioController = TextEditingController();
@@ -35,10 +36,15 @@ class _User_profileState extends State<User_profile>
   late FocusNode ageFocusNode;
   late FocusNode bioFocusNode;
   bool isKeyboardOpen = false;
+  final String userId = DateFormat('yyyyMMddHHmmss').format(DateTime.now());
+  final CollectionReference _userProfileCollection =
+  FirebaseFirestore.instance.collection('userProfiles');
+  String? profilePictureUrl;
 
   @override
   void initState() {
     super.initState();
+    _getUserProfile();
     nameController.addListener(_onTextChange);
     ageController.addListener(_onTextChange);
     bioController.addListener(_onTextChange);
@@ -48,6 +54,13 @@ class _User_profileState extends State<User_profile>
     ageFocusNode = FocusNode();
     bioFocusNode = FocusNode();
     WidgetsBinding.instance.addObserver(this);
+    _getImageUrl().then((url) {
+      if (url != null) {
+        setState(() {
+          profilePictureUrl = url;
+        });
+      }
+    });
     Future.delayed(Duration.zero, () {
       if (mounted) {
         setState(() {
@@ -80,10 +93,10 @@ class _User_profileState extends State<User_profile>
         ageController.text.isNotEmpty ||
         bioController.text.isNotEmpty) {
       setState(() =>
-          profileImageOffsetX = 0); // Move right if any text field has input
+      profileImageOffsetX = 0);
     } else {
       setState(() => profileImageOffsetX =
-          100); // Move back to original position if no input
+      100);
     }
   }
 
@@ -127,7 +140,7 @@ class _User_profileState extends State<User_profile>
       // This is important
       appBar: _buildAppBar(context),
       body: SizedBox(
-        height: 700.v, // Adjust height as needed
+        height: 800.v, // Adjust height as needed
         width: double.maxFinite,
         child: Stack(
           alignment: Alignment.topCenter,
@@ -145,7 +158,7 @@ class _User_profileState extends State<User_profile>
                   vertical: 0.v,
                 ),
                 decoration: const BoxDecoration(
-                  color: Colors.lime,
+                  color: Color(0xFFcdfb4a),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(200),
                     topRight: Radius.circular(200),
@@ -156,14 +169,19 @@ class _User_profileState extends State<User_profile>
             ),
             Positioned(
               top: isKeyboardVisible ? -200.v : 30.v,
-              // Push the profile image up when keyboard is visible
               right: MediaQuery.of(context).size.width / 2 - 80.h,
               child: Container(
                 height: 160.v,
                 width: 160.h,
                 decoration: BoxDecoration(
-                  color: appTheme.gray800,
                   borderRadius: BorderRadius.circular(90.h),
+                  image: profilePictureUrl != null
+                      ? DecorationImage(
+                    image: NetworkImage(profilePictureUrl!),
+                    fit: BoxFit.cover,
+                  )
+                      : null,
+                  color: profilePictureUrl == null ? appTheme.gray800 : Colors.transparent,
                 ),
               ),
             ),
@@ -184,25 +202,26 @@ class _User_profileState extends State<User_profile>
           mainAxisAlignment: MainAxisAlignment.center,
           children: isKeyboardVisible
               ? [
-                  GestureDetector(
-                    onTap: () {
-                      // Dismiss the keyboard if it is open
-                      FocusScope.of(context).unfocus();
-                    },
-                    child: Container(
-                      height: 20.adaptSize,
-                      width: 20.adaptSize,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(ImageConstant.imgClose),
-                          // Path to your image
-                          fit: BoxFit
-                              .cover, // Adjusts the image to fit into the container
-                        ),
-                      ),
-                    ),
+            GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+              },
+              child: Container(
+                height: 35.adaptSize,
+                width: 35.adaptSize,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: SvgPicture.asset(
+                    'assets/images/img_close.svg',
+                    fit: BoxFit.cover,
                   ),
-                ]
+                ),
+              ),
+            ),
+          ]
               : [],
         ),
         SizedBox(height: 20.v),
@@ -217,8 +236,14 @@ class _User_profileState extends State<User_profile>
         _buildLabel(context, "BIO"),
         SizedBox(height: 11.v),
         _buildBio(context),
-        SizedBox(height: 22.v),
-        _buildSave(context),
+        SizedBox(height: 29.v),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildlogout(context),
+            _buildSave(context),
+          ],
+        ),
         SizedBox(height: isKeyboardOpen ? 15.5.v : 25.v),
       ],
     );
@@ -234,7 +259,6 @@ class _User_profileState extends State<User_profile>
     );
   }
 
-  /// Section Widget
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return PreferredSize(
       preferredSize: Size.fromHeight(kToolbarHeight + 20.h),
@@ -243,25 +267,13 @@ class _User_profileState extends State<User_profile>
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomAppBar(
-            // leadingWidth: 40.h,
-            // leading: GestureDetector(
-            //   onTap: () {
-            //     Navigator.pop(context); // Navigate back to the previous screen
-            //   },
-            //   // child: Container(
-            //   //   margin: EdgeInsets.only(bottom: 25.v, right: 0.h, left: 5.v), // Adjust the margin as needed
-            //   //   child: SvgPicture.asset(
-            //   //     ImageConstant.imgArrowDown, // Make sure this points to the correct SVG asset
-            //   //     height: 20.v,
-            //   //     width: 20.h,
-            //   //   ),
-            //   // ),
-            // ),
-            // centerTitle: true,
+
             title: Padding(
               padding: EdgeInsets.only(bottom: 25.v),
               // Add padding above the title
-              child: AppbarTitle(text: "User Profile"),
+              child: Center( // Center the AppbarTitle
+                child: AppbarTitle(text: "User Profile"),
+              ),
             ),
           ),
           SizedBox(
@@ -269,7 +281,7 @@ class _User_profileState extends State<User_profile>
             height: 1.h,
             child: Divider(
               color: appTheme.black900,
-              thickness: 4.h,
+              thickness: 2.h,
             ),
           ),
         ],
@@ -277,29 +289,28 @@ class _User_profileState extends State<User_profile>
     );
   }
 
-  /// Section Widget
   Widget _buildName(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 10.h),
       child: CustomTextFormField(
         focusNode: nameFocusNode,
         controller: nameController,
+        hintText: nameController.text.isEmpty ? 'Enter name' : nameController.text,
       ),
     );
   }
 
-  /// Section Widget
   Widget _buildAge(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 10.h),
       child: CustomTextFormField(
         focusNode: ageFocusNode,
         controller: ageController,
+        hintText: ageController.text.isEmpty ? 'Enter age' : ageController.text,
       ),
     );
   }
 
-  /// Section Widget
   Widget _buildBio(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 10.h),
@@ -307,9 +318,11 @@ class _User_profileState extends State<User_profile>
         focusNode: bioFocusNode,
         controller: bioController,
         textInputAction: TextInputAction.done,
+        hintText: bioController.text.isEmpty ? 'Enter bio' : bioController.text,
       ),
     );
   }
+
 
   /// Section Widget
   Widget _buildSave(BuildContext context) {
@@ -317,167 +330,213 @@ class _User_profileState extends State<User_profile>
       width: 64.h,
       text: "Save",
       alignment: Alignment.centerRight,
+      onPressed: _saveUserProfile,
     );
   }
+
+  Widget _buildlogout(BuildContext context) {
+    return CustomElevatedButton(
+      width: 64.h,
+      text: "log out",
+      alignment: Alignment.centerLeft,
+      onPressed: _saveUserProfile,
+    );
+  }
+
+  // get user profile from firestore
+  Future<String?> _getImageUrl() async {
+    try {
+      final storageRef =
+      firebase_storage.FirebaseStorage.instance.ref().child('Profile_Images');
+      final result = await storageRef.listAll();
+      if (result.items.isNotEmpty) {
+        final firstImageRef = result.items.last;
+        final url = await firstImageRef.getDownloadURL();
+        return url;
+      } else {
+        // No images found in the folder
+        return null;
+      }
+    } catch (error) {
+      print('Error getting image: $error');
+      return null;
+    }
+  }
+
+  //get user profile data from firestore
+  void _getUserProfile() async {
+    try {
+      DocumentSnapshot<Object?> snapshot =
+      await _userProfileCollection.doc(userId).get();
+
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data()! as Map<String, dynamic>;
+        setState(() {
+          nameController.text = data['name'] ?? '';
+          ageController.text = data['age'] ?? '';
+          bioController.text = data['bio'] ?? '';
+        });
+      }
+    } catch (error) {
+      print('Error fetching user profile: $error');
+    }
+  }
+
+  // send user profile data to firestore
+  void _saveUserProfile() async {
+    String name = nameController.text;
+    String age = ageController.text;
+    String bio = bioController.text;
+
+    try {
+      await _userProfileCollection.doc(userId).set({
+        'name': name,
+        'age': age,
+        'bio': bio,
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('User profile saved successfully')),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to save user profile: $error')),
+      );
+    }
+  }
+
 }
 
-Widget _buildBottomBar(BuildContext context) {
-  return Container(
-    margin: EdgeInsets.only(left: 0.h),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(
-          width: 360.h,
-          height: 1.h,
-          child: Divider(
-            color: appTheme.black990,
-            thickness: 2.h,
-          ),
-        ),
-        SizedBox(height: 16.v),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          // Adjusted for even spacing
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Image button 1
-            InkWell(
-              onTap: () {
-                // Navigate to the corresponding screen for imgUser1
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const LandingPage()), // Replace with your actual screen widget
-                );
-              },
-              child: SvgPicture.asset(
-                ImageConstant.Home_footer_Unselected_101,
-                height: 35.v, // Adjust the height as needed
-                width: 35.v, // Adjust the width as needed
-                fit: BoxFit.cover,
-              ),
-            ),
-            // Image button 2
-            InkWell(
-              onTap: () {
-                // Navigate to the corresponding screen for imgFrame373
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          Searchbar_page()), // Replace with your actual screen widget
-                );
-              },
-              child: SvgPicture.asset(
-                ImageConstant.Search_footer,
-                height: 35.v, // Adjust the height as needed
-                width: 35.v, // Adjust the width as needed
-                fit: BoxFit.cover,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                // Navigate to the corresponding screen for imgFrame373
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const AddtowardrobeScreen()), // Replace with your actual screen widget
-                );
-              },
-              child: SvgPicture.asset(
-                ImageConstant.Camera_footer_101,
-                height: 30.v, // Adjust the height as needed
-                width: 30.v, // Adjust the width as needed
-                fit: BoxFit.cover,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                // Navigate to the corresponding screen for imgFrame373
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          Main_wardrobe()), // Replace with your actual screen widget
-                );
-              },
-              child: SvgPicture.asset(
-                ImageConstant.Wardrobe_footer_unselected_1,
-                height: 35.v, // Adjust the height as needed
-                width: 35.v, // Adjust the width as needed
-                fit: BoxFit.cover,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                // Navigate to the corresponding screen for imgFrame373
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const User_profile()), // Replace with your actual screen widget
-                );
-              },
-              child: SvgPicture.asset(
-                ImageConstant.User_footer_final,
-                height: 35.v, // Adjust the height as needed
-                width: 35.v, // Adjust the width as needed
-                fit: BoxFit.cover,
-              ),
-            ),
 
-            // Add more buttons if needed
-          ],
-        ),
-        SizedBox(height: 10.v),
-      ],
-    ),
-  );
-}
 
 // ignore_for_file: must_be_immutable
-class Frame395ContainerScreen extends StatelessWidget {
-  Frame395ContainerScreen({Key? key}) : super(key: key);
 
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Navigator(
-            key: navigatorKey,
-            initialRoute: AppRoutes.user_profile,
-            onGenerateRoute: (routeSetting) => PageRouteBuilder(
-                pageBuilder: (ctx, ani, ani1) =>
-                    getCurrentPage(routeSetting.name!),
-                transitionDuration: const Duration(seconds: 0))),
-        bottomNavigationBar: _buildBottomBar(context));
-  }
 
   /// Section Widget
+  Widget _buildBottomBar(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 0.h),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: 360.h,
+            height: 1.h,
+            child: Divider(
+              color: appTheme.black990,
+              thickness: 2.h,
+            ),
+          ),
+          SizedBox(height: 10.v),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Image button 1
+              InkWell(
+                onTap: () {
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
+                  Navigator.push(
+                    context,
+                    RadialRevealRoute(
+                      page: const LandingPage(),
+                      origin: position & size,
+                    ),
+                  );
+                },
+                child: SvgPicture.asset(
+                  ImageConstant.Home_footer_Unselected_101,
+                  height: 35.v,
+                  width: 35.v,
+                  fit: BoxFit.cover,
+                ),
+              ),InkWell(
+                onTap: () {
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
+                  Navigator.push(
+                    context,
+                    RadialRevealRoute(
+                      page:  Searchbar_page(),
+                      origin: position & size,
+                    ),
+                  );
+                },
+                child: SvgPicture.asset(
+                  ImageConstant.Search_footer,
+                  height: 35.v,
+                  width: 35.v,
+                  fit: BoxFit.cover,
+                ),
+              ),InkWell(
+                onTap: () {
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
+                  Navigator.push(
+                    context,
+                    RadialRevealRoute(
+                      page:  AddtowardrobeScreen(),
+                      origin: position & size,
+                    ),
+                  );
+                },
+                child: SvgPicture.asset(
+                  ImageConstant.Camera_footer_101,
+                  height: 30.v,
+                  width: 30.v,
+                  fit: BoxFit.cover,
+                ),
+              ),InkWell(
+                onTap: () {
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
+                  Navigator.push(
+                    context,
+                    RadialRevealRoute(
+                      page:  Main_wardrobe(),
+                      origin: position & size,
+                    ),
+                  );
+                },
+                child: SvgPicture.asset(
+                  ImageConstant.Wardrobe_footer_unselected_1,
+                  height: 35.v,
+                  width: 35.v,
+                  fit: BoxFit.cover,
+                ),
+              ),InkWell(
+                onTap: () {
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
+                  Navigator.push(
+                    context,
+                    RadialRevealRoute(
+                      page:  User_profile(),
+                      origin: position & size,
+                    ),
+                  );
+                },
+                child: SvgPicture.asset(
+                  ImageConstant.User_footer_selected_101_f,
+                  height: 35.v,
+                  width: 35.v,
+                  fit: BoxFit.cover,
+                ),
+              ),
 
+              // Add more buttons if needed
+            ],
+          ),
+          SizedBox(height: 10.v),
+        ],
+      ),
+    );
+  }
   ///Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
-    switch (type) {
-      case BottomBarEnum.Settings:
-        return "/";
-      case BottomBarEnum.Bookmarkssimple:
-        return AppRoutes.user_profile;
-      default:
-        return "/";
-    }
-  }
 
-  ///Handling page based on route
-  Widget getCurrentPage(String currentRoute) {
-    switch (currentRoute) {
-      case AppRoutes.user_profile:
-        return const User_profile();
-      default:
-        return const DefaultWidget();
-    }
-  }
-}

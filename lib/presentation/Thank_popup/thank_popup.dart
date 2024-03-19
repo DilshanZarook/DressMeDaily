@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
 
 // ignore_for_file: must_be_immutable
 class Thank_popup extends StatelessWidget {

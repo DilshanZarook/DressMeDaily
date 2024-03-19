@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/presentation/new_file/addtowardrobe_screen.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/presentation/new_file/addtowardrobe_screen.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/presentation/Main_wardrobe/Main_wardrobe.dart';
 import 'Search_output.dart'; // Import the Search_output class
 import 'dart:async';
+import 'package:DressMeDaily/presentation/Nagiavation_animation/Page_animation.dart';
 
 class Searchbar_page extends StatefulWidget {
   @override
@@ -27,7 +28,6 @@ class _Searchbar_pageState extends State<Searchbar_page> with TickerProviderStat
   }
 
   void _onSearchChanged() {
-    // Logic for debounce if needed, but removed automatic navigation
   }
 
   void _performSearch() {
@@ -58,7 +58,6 @@ class _Searchbar_pageState extends State<Searchbar_page> with TickerProviderStat
     setState(() {
       _selectedIndex = index;
     });
-    // Navigate based on index if needed
   }
 
   @override
@@ -81,7 +80,6 @@ class _Searchbar_pageState extends State<Searchbar_page> with TickerProviderStat
               onSubmitted: (value) => _performSearch(),
             ),
           ),
-          // Additional widget code if necessary...
         ],
       ),
       bottomNavigationBar: _buildBottomBar(context),
@@ -102,96 +100,105 @@ class _Searchbar_pageState extends State<Searchbar_page> with TickerProviderStat
               thickness: 2.h,
             ),
           ),
-          SizedBox(height: 16.v),
+          SizedBox(height: 10.v),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            // Adjusted for even spacing
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Image button 1
               InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgUser1
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                        const LandingPage()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page: const LandingPage(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.Home_footer_Unselected_101,
-                  height: 35.v, // Adjust the height as needed
-                  width: 35.v, // Adjust the width as needed
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              // Image button 2
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Searchbar_page()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  Searchbar_page(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
-                  ImageConstant.Search_footer,
-                  height: 35.v, // Adjust the height as needed
-                  width: 35.v, // Adjust the width as needed
+                  ImageConstant.Search_S,
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                        const AddtowardrobeScreen()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  AddtowardrobeScreen(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.Camera_footer_101,
-                  height: 30.v, // Adjust the height as needed
-                  width: 30.v, // Adjust the width as needed
+                  height: 30.v,
+                  width: 30.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Main_wardrobe()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  Main_wardrobe(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
                   ImageConstant.Wardrobe_footer_unselected_1,
-                  height: 35.v, // Adjust the height as needed
-                  width: 35.v, // Adjust the width as needed
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
-              ),
-              InkWell(
+              ),InkWell(
                 onTap: () {
-                  // Navigate to the corresponding screen for imgFrame373
+                  final renderBox = context.findRenderObject() as RenderBox;
+                  final position = renderBox.localToGlobal(Offset.zero);
+                  final size = renderBox.size;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                        const User_profile()), // Replace with your actual screen widget
+                    RadialRevealRoute(
+                      page:  User_profile(),
+                      origin: position & size,
+                    ),
                   );
                 },
                 child: SvgPicture.asset(
-                  ImageConstant.User_footer_final,
-                  height: 35.v, // Adjust the height as needed
-                  width: 35.v, // Adjust the width as needed
+                  ImageConstant.User_Footer_Unselected_101,
+                  height: 35.v,
+                  width: 35.v,
                   fit: BoxFit.cover,
                 ),
               ),

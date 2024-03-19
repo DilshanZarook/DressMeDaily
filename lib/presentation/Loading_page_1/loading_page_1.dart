@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Signup_new_user/signup_new_user.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Signup_new_user/signup_new_user.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Loading_page_1 extends StatefulWidget {

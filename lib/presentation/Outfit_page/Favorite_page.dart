@@ -1,14 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
+import 'package:DressMeDaily/core/app_export.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Favorite_page extends StatefulWidget {
   const Favorite_page({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   Favorite_pageState createState() => Favorite_pageState();
 }
 
@@ -41,6 +39,7 @@ class Favorite_pageState extends State<Favorite_page> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return FutureBuilder(
         future: getFirestoreImages(),
         builder: (context, snapshot) {
@@ -56,7 +55,7 @@ class Favorite_pageState extends State<Favorite_page> {
                 height: 700.h,
                 margin: const EdgeInsets.only(top: 200),
                 decoration: const BoxDecoration(
-                  color: Color(0xFF8B7B7B),
+                  color: Color(0xFF9d9d9d),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(80),
                     topRight: Radius.circular(80),
@@ -67,12 +66,12 @@ class Favorite_pageState extends State<Favorite_page> {
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: [
-                    // Enlarged GestureDetector for better dragging experience
                     Positioned(
-                      top: 20, // Starts from the very top of the container
+                      top: 40, // Starts from the very top of the container
                       child: GestureDetector(
                         onVerticalDragUpdate: (details) {
-                          if (details.delta.dy > 20) {
+                          // Using 5% of screen height as threshold for gesture sensitivity
+                          if (details.primaryDelta! > screenHeight * 0.05) {
                             Navigator.of(context).pop();
                           }
                         },
@@ -86,7 +85,7 @@ class Favorite_pageState extends State<Favorite_page> {
                             width: 150,
                             height: 20,
                             decoration: BoxDecoration(
-                              color: Colors.brown,
+                              color: Color(0xFF575757),
                               borderRadius: BorderRadius.circular(50),
                             ),
                           ),
@@ -106,17 +105,20 @@ class Favorite_pageState extends State<Favorite_page> {
                             return GestureDetector(
                               onTap: () => _launchURL(downloadedURL),
                               child: Container(
-                                width: 120,
-                                height: 120,
+                                width: 160,
+                                height: 160,
                                 margin: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
+                            child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
                                 child: Image.network(
                                   downloadedURL,
                                   fit: BoxFit.cover,
                                 ),
+                            ),
                               ),
                             );
                           }).toList(),

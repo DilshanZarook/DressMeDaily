@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/widgets/custom_outlined_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../Starting_page/starting_page.dart'; // Adjust the path as necessary
 
@@ -82,7 +82,6 @@ class Login_page_1 extends StatelessWidget {
           );
         },
       ),
-      // Rest of your AppBar properties...
     );
   }
 

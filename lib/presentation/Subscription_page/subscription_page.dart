@@ -2,13 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/Thank_popup/thank_popup.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle_four.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/presentation/Bookmark_page/bookmark_page.dart';
+import 'package:DressMeDaily/presentation/Landing_page/landing_page.dart';
+import 'package:DressMeDaily/presentation/Thank_popup/thank_popup.dart';
+import 'package:DressMeDaily/presentation/User_profile/user_profile.dart';
+import 'package:DressMeDaily/widgets/app_bar/appbar_subtitle_four.dart';
+import 'package:DressMeDaily/widgets/app_bar/custom_app_bar.dart';
 
 class Subscription_page extends StatefulWidget {
   const Subscription_page({Key? key}) : super(key: key);
@@ -18,26 +18,23 @@ class Subscription_page extends StatefulWidget {
 }
 
 class _Subscription_pageState extends State<Subscription_page> {
-  int _currentIndex = 0; // Variable to keep track of the current index
+  int _currentIndex = 0;
   final List<LinearGradient> buttonGradients = [
     const LinearGradient(
       colors: [Color(0xFF3E4E5E), Color(0xFFDBDBDB)],
-      // Corrected gradient colors
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
     const LinearGradient(
       colors: [Color(0xFFCFDD53), Color(0x0ffdada9)],
-      // Gradient for second item
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
     const LinearGradient(
-      colors: [Color(0xFFeecd16), Color(0xFFdbdbdb)], // Gradient for third item
+      colors: [Color(0xFFeecd16), Color(0xFFdbdbdb)],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
-    // Add more gradients if there are more items in the carousel
   ];
 
   @override
@@ -46,7 +43,6 @@ class _Subscription_pageState extends State<Subscription_page> {
       "Subscribe to Plan 1",
       "Subscribe to Plan 2",
       "Subscribe to Plan 3",
-      // Add more button texts corresponding to each carousel item
     ];
 
     return Scaffold(
@@ -86,10 +82,8 @@ class _Subscription_pageState extends State<Subscription_page> {
                         margin: const EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30.h),
-                          // Adjust as needed
                           image: DecorationImage(
                             image: AssetImage(i),
-                            // Assuming 'i' is the path to the image asset
                             fit: BoxFit.cover, // Adjust the fit as needed
                           ),
                         ),
@@ -108,30 +102,26 @@ class _Subscription_pageState extends State<Subscription_page> {
                 child: OutlineGradientButton(
                   gradient: const LinearGradient(
                     colors: [Colors.white, Colors.white],
-                    // Solid black gradient for the outline
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   strokeWidth: 2,
                   radius: const Radius.circular(40),
-                  // Set the border radius for the outline
                   padding: EdgeInsets.zero,
                   child: GestureDetector(
                     onTap: () => onTapSubscribe(context),
-                    // Call the onTapSubscribe function when the Container is tapped
                     child: Container(
                       height: 60.v,
                       decoration: BoxDecoration(
                         gradient: buttonGradients[_currentIndex],
-                        // Use the gradient for the button interior
                         borderRadius: BorderRadius.circular(
-                            40), // Set the border radius for the button
+                            40),
                       ),
                       alignment: Alignment.center,
                       child: Text(
                         "Subscribe",
                         style: CustomTextStyles
-                            .bodySmallOnError, // Apply your text style here
+                            .bodySmallOnError,
                       ),
                     ),
                   ),
@@ -276,7 +266,7 @@ class _Subscription_pageState extends State<Subscription_page> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const User_profile()),
+                        builder: (context) =>  User_profile()),
                   );
                 },
                 child: SizedBox(
@@ -314,9 +304,8 @@ class _Subscription_pageState extends State<Subscription_page> {
         insetPadding: EdgeInsets.only(left: 0),
       ),
     ).then((_) {
-      // This code is executed after the dialog is closed
       Navigator.pushNamed(context,
-          '/subscription_after_purchase_page'); // Replace '/frame680' with your actual route name
+          '/subscription_after_purchase_page');
     });
   }
 }
@@ -348,11 +337,10 @@ class YourWidget extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.symmetric(horizontal: 5.0),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30.h), // Adjust as needed
+                borderRadius: BorderRadius.circular(30.h),
                 image: DecorationImage(
                   image: AssetImage(i),
-                  // Assuming 'i' is the path to the image asset
-                  fit: BoxFit.cover, // Adjust the fit as needed
+                  fit: BoxFit.cover,
                 ),
               ),
               height: 226.v, // Adjust the width as needed

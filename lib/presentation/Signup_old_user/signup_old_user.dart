@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
-import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
+import 'package:DressMeDaily/core/app_export.dart';
+import 'package:DressMeDaily/widgets/custom_outlined_button.dart';
+import 'package:DressMeDaily/widgets/custom_text_form_field.dart';
 import '../Signin_other_options/signin_other_options.dart';
 
-// ignore_for_file: must_be_immutable
 class Signup_old_user extends StatelessWidget {
   Signup_old_user({Key? key}) : super(key: key);
 
@@ -69,7 +68,7 @@ class Signup_old_user extends StatelessWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Image.asset('assets/images/Line arrow-left.png'), // Adjust the path to your asset
+        icon: Image.asset('assets/images/Line arrow-left.png'),
         onPressed: () {
           Navigator.push(
             context,
@@ -77,7 +76,6 @@ class Signup_old_user extends StatelessWidget {
           );
         },
       ),
-      // Rest of your AppBar properties...
     );
   }
 
@@ -116,8 +114,6 @@ class Signup_old_user extends StatelessWidget {
       return;
     }
 
-    // Proceed with the submission if email is valid
-    // Replace the next line with your HTTP request logic if needed
     Navigator.pushNamed(context, AppRoutes.loading_page_2);
   }
 }
