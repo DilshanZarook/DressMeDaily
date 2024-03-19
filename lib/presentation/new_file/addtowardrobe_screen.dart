@@ -1,3 +1,4 @@
+//19th march 11.18 code adjusted.
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -88,7 +89,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
 
     var topPrediction = predictions.first;
     double probability = topPrediction['probability'];
-    TextEditingController customLabelController = TextEditingController();
+    // TextEditingController customLabelController = TextEditingController();
 
   void askUserForLabel() {
     TextEditingController customLabelController = TextEditingController();
@@ -153,7 +154,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
         TextButton(
           child: Text("Save", style: TextStyle(color: Color(0xFF98FF60))),
           onPressed: () {
-            if (dropdownValue == null || customLabelController.text.isEmpty) {
+            // if (dropdownValue == null || customLabelController.text.isEmpty) {
               // Prompt user to select a category and enter a label
               showDialog(
                 context: context,
@@ -173,12 +174,12 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
                  );
                 },
               );
-            } else {
-              String finalLabel = "${customLabelController.text}_$dropdownValue";
-              setState(() { imageLabel = finalLabel; });
-              Navigator.of(context).pop(); // Close the original dialog
-              uploadToFirebase(_selectedImage!);
-            }
+            // } else {
+            //   String finalLabel = "${customLabelController.text}_$dropdownValue";
+            //   setState(() { imageLabel = finalLabel; });
+            //   Navigator.of(context).pop(); // Close the original dialog
+            //   uploadToFirebase(_selectedImage!);
+            // }
           },
         ),
       ],
@@ -190,7 +191,7 @@ class _AddtowardrobeScreenState extends State<AddtowardrobeScreen> {
 
     
 void showDialogForClassification(String message, String label, double probability) {
- TextEditingController customLabelController = TextEditingController();
+//  TextEditingController customLabelController = TextEditingController();
  String dropdownValue = 'work-wear'; // Default value
  
 
@@ -254,15 +255,15 @@ void showDialogForClassification(String message, String label, double probabilit
         TextButton(
           child: Text("Confirm", style: TextStyle(color: Color(0xFF98FF60))),
           onPressed: () {
-            String finalLabel;
-            if (dropdownValue != null) {
-              finalLabel = "${label}_${dropdownValue}";
-            } else {
-              finalLabel = label;
-            }
-            setState(() {
-              imageLabel = finalLabel;
-            });
+            // String finalLabel;
+            // if (dropdownValue != null) {
+            //   finalLabel = "${label}_${dropdownValue}";
+            // } else {
+            //   finalLabel = label;
+            // }
+            // setState(() {
+            //   imageLabel = finalLabel;
+            // });
             Navigator.of(context).pop();
             uploadToFirebase(_selectedImage!);
           },
@@ -399,4 +400,5 @@ Widget build(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
+
 
