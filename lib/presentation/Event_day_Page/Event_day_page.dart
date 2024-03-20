@@ -245,6 +245,7 @@ class _Event_day_pageState extends State<Event_day_page> {
 
     // send details to firestore database
     await FirebaseFirestore.instance.collection('UserEventDetails').add({
+      'EventDate': widget.selectedDate.toIso8601String(),
       'EventTitle': eventTitle,
       'EventDescription': description,
       'NotificatoTime': notificationTime,
