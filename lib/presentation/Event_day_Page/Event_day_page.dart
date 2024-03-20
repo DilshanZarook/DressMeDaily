@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sdgp_test01/core/app_export.dart';
@@ -127,35 +128,35 @@ class _Event_day_pageState extends State<Event_day_page> {
                             SizedBox(height: 15.v),
                             Divider(),
                             SizedBox(height: 27.v),
-                            Padding(
-                                padding:
-                                    EdgeInsets.only(left: 20.h, right: 25.h),
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 2.v),
-                                          child: CustomTextFormField(
-                                              width: 240.h,
-                                              controller:
-                                                  searchnormalController,
-                                              hintText:
-                                                  "Search your clothing..",
-                                              textInputAction:
-                                                  TextInputAction.done,
-                                              suffix: Container(
-                                                  margin: EdgeInsets.fromLTRB(
-                                                      26.h, 3.v, 5.h, 3.v),
-                                                  child: Container(
-                                                      child: SvgPicture.asset(
-                                                          ImageConstant
-                                                              .imgSearchnormal),
-                                                      height: 18.v,
-                                                      width: 13.h)),
-                                              suffixConstraints: BoxConstraints(
-                                                  maxHeight: 24.v))),
+                            // Padding(
+                            //     padding:
+                            //         EdgeInsets.only(left: 20.h, right: 25.h),
+                            //     child: Row(
+                            //         mainAxisAlignment:
+                            //             MainAxisAlignment.spaceBetween,
+                            //         children: [
+                            //           Padding(
+                            //               padding: EdgeInsets.symmetric(
+                            //                   vertical: 2.v),
+                            //               child: CustomTextFormField(
+                            //                   width: 240.h,
+                            //                   controller:
+                            //                       searchnormalController,
+                            //                   hintText:
+                            //                       "Search your clothing..",
+                            //                   textInputAction:
+                            //                       TextInputAction.done,
+                            //                   suffix: Container(
+                            //                       margin: EdgeInsets.fromLTRB(
+                            //                           26.h, 3.v, 5.h, 3.v),
+                            //                       child: Container(
+                            //                           child: SvgPicture.asset(
+                            //                               ImageConstant
+                            //                                   .imgSearchnormal),
+                            //                           height: 18.v,
+                            //                           width: 13.h)),
+                            //                   suffixConstraints: BoxConstraints(
+                            //                       maxHeight: 24.v))),
                                       // CustomSwitch(
                                       //   margin: EdgeInsets.symmetric(vertical: 3.v), // Make sure 'v' is defined or replace with actual value
                                       //   value: isSelectedSwitch1,
@@ -165,7 +166,7 @@ class _Event_day_pageState extends State<Event_day_page> {
                                       //     });
                                       //   },
                                       // ),
-                                    ])),
+                                    // ])),
                             SizedBox(height: 17.v),
                             SizedBox(height: 10.v),
                             _buildFrame5(context),
@@ -220,7 +221,7 @@ class _Event_day_pageState extends State<Event_day_page> {
     );
   }
 
-  void _showSavePopup(BuildContext context) {
+  void _showSavePopup(BuildContext context) async {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -241,6 +242,13 @@ class _Event_day_pageState extends State<Event_day_page> {
         );
       },
     );
+
+    // send details to firestore database
+    await FirebaseFirestore.instance.collection('UserEventDetails').add({
+      'EventTitle': eventTitle,
+      'EventDescription': description,
+      'NotificatoTime': notificationTime,
+    });
   }
 
   Widget _buildEventTitleInput(BuildContext context) {
@@ -289,8 +297,7 @@ class _Event_day_pageState extends State<Event_day_page> {
                   Navigator.pop(dialogContext); // Close the current dialog
                   _showCustomTimeDialog(context, (selectedTime) {
                     setState(() {
-                      notificationTime =
-                          selectedTime; // Update the notification time
+                      notificationTime = selectedTime; // Update the notification time
                     });
                   });
                 },
@@ -335,7 +342,8 @@ class _Event_day_pageState extends State<Event_day_page> {
                         onPressed: () => setState(() => customTimeUnit = unit),
                         // Update the unit and rebuild
                         style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.black, backgroundColor: customTimeUnit == unit
+                          foregroundColor: Colors.black,
+                          backgroundColor: customTimeUnit == unit
                               ? Colors.lightGreenAccent
                               : null, // Text color
                         ),
@@ -563,8 +571,7 @@ class _Event_day_pageState extends State<Event_day_page> {
                   onPressed: () {
                     Navigator.pop(dialogContext); // Close the dialog
                     setState(() {
-                      description =
-                          _descriptionController.text; // Update the description
+                      description = _descriptionController.text; // Update the description
                     });
                   },
                   child: Text(
