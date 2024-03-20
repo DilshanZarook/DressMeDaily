@@ -1,39 +1,41 @@
-on:
-  pull_request:
-    branches:
-      - main
+# Name of the workflow
+name: Build
 
+ # Controls what will trigger the workflow.
+ # Change it to your needs.
+ on:
+ # A new push to the "main" branch. 
   push:
-    branches:
-      - main
-      
-name: "Build & Release"
-jobs:
-  build:
-    name: Build & Release
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '12.x'
-      - uses: subosito/flutter-action@v1
-        with:
-          flutter-version: '2.2.0'
-      - run: flutter pub get
-      - run: flutter test
-      - run: flutter build apk --debug --split-per-abi
-      - run: |
-          flutter build ios --no-codesign
-          cd build/ios/iphoneos
-          mkdir Payload
-          cd Payload
-          ln -s ../Runner.app
-          cd ..
-          zip -r app.ipa Payload
-      - name: Push to Releases
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/apk/debug/*,build/ios/iphoneos/app.ipa"
-          tag: v1.0.${{ github.run_number }}
-          token: ${{ secrets.DRESSMEDAILY }}
+   branches: [ "main" ]
+ # A new pull request to the "main" branch.
+  pull_request:
+   branches: [ "main" ]
+ 
+ # Allows to trigger the workflow from GitHub interfaces.
+   workflow_dispatch:
+ 
+# A single workflow can have multiple jobs.
+jobs: 
+ # 'A new job is defined with the name: "build_android" 
+ build_android:
+   # Defines what operating system will be used for the actions.
+   # For android, we will use Linux GitHub-Hosted Runner.
+   runs-on: ubuntu-22.04
+   # Defines what step should be passed for successful run
+   steps:
+     # Checkout to the selected branch
+     - name: Checkout
+       uses: actions/checkout@v3
+     # Download and install flutter packages
+     - name: Install Flutter
+       uses: subosito/flutter-action@v2
+       with:
+         # Define which stable flutter version should be used
+         flutter-version: "3.7.0"
+         channel: 'stable'
+         # Enables cache for flutter packages              
+         # Speed up the process
+         cache: true
+     # Get Flutter project dependencies
+     - name: Get dependencies
+       run: flutter pub get
