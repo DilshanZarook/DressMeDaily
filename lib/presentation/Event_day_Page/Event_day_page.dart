@@ -439,20 +439,32 @@ class _Event_day_pageState extends State<Event_day_page> {
               padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 11.v),
               decoration: AppDecoration.fillBlueGray
                   .copyWith(borderRadius: BorderRadiusStyle.roundedBorder50),
-              child: Container(
-                  height: 101.v,
-                  width: 98.h,
-                  padding:
-                  EdgeInsets.symmetric(horizontal: 18.h, vertical: 22.v),
-                  decoration: AppDecoration.fillWhiteA.copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder50),
-                  child: SvgPicture.asset(
-                    'assets/images/img_user_gray_500_01.svg',
-                    // Replace with the actual SVG asset
-                    height: 55.v,
-                    width: 60.h,
-                    fit: BoxFit.cover,
-                  )),
+                child: Column(
+                  children: [
+                    Text(
+                      'Select your outfit from here !!!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Container(
+                        height: 101.v,
+                        width: 98.h,
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 18.h, vertical: 22.v),
+                        decoration: AppDecoration.fillWhiteA.copyWith(
+                            borderRadius: BorderRadiusStyle.roundedBorder50),
+                        child: SvgPicture.asset(
+                          'assets/images/img_user_gray_500_01.svg',
+                          // Replace with the actual SVG asset
+                          height: 55.v,
+                          width: 60.h,
+                          fit: BoxFit.cover,
+                        )),
+                  ],
+                ),
             ),
           ),
 
