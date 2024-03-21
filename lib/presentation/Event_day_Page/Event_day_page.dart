@@ -2,13 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sdgp_test01/core/app_export.dart';
+import 'package:sdgp_test01/new_file/addtowardrobe_screen.dart';
 import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
+import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
+import 'package:sdgp_test01/presentation/Searchbar_page/Searchbar_page.dart';
 import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
 import 'package:sdgp_test01/presentation/Washing_reminder_page/Washing_reminder_page.dart';
-import 'package:sdgp_test01/presentation/frame_405_bottomsheet/frame_405_bottomsheet.dart';
 import 'package:sdgp_test01/widgets/custom_switch.dart';
 import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
+import 'package:sdgp_test01/presentation/Event_day_Page/wardrobe_outfits.dart';
+import 'package:sdgp_test01/presentation/frame_404_bottomsheet/frame_404_bottomsheet.dart';
 
 class Event_day_page extends StatefulWidget {
   final DateTime selectedDate;
@@ -71,112 +75,54 @@ class _Event_day_pageState extends State<Event_day_page> {
             child: SingleChildScrollView(
                 child: Container(
                     child: Stack(alignment: Alignment.topCenter, children: [
-              Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 23.v),
-                      child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 33.h, right: 13.h),
-                            ),
-                            SizedBox(height: 42.v),
-                            SizedBox(height: 18.v),
-                            _buildFrame3(context),
-                            SizedBox(height: 13.v),
-                            _buildEventTitleInput(context),
-                            SizedBox(height: 8.v),
-                            Divider(),
-                            SizedBox(height: 15.v),
-                            _buildThirtySix(context),
-                            SizedBox(height: 27.v),
-                            Divider(),
-                            SizedBox(height: 6.v),
-                            _buildFrame4(context),
-                            if (notificationTime.isNotEmpty)
-                              Container(
-                                padding: EdgeInsets.all(16),
-                                child: Text(
-                                  "Notification Time: $notificationTime",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    // Adjust the font size as needed
-                                    color: Colors
-                                        .black, // Change the text color if needed
-                                  ),
-                                ),
-                              ),
-                            SizedBox(height: 10.v),
-                            SizedBox(height: 13.v),
-                            Divider(),
-                            SizedBox(height: 7.v),
-                            _buildDescriptionSection(context),
-
-                            // Display the description text
-                            if (description.isNotEmpty)
-                              Padding(
-                                padding: EdgeInsets.all(25.0),
-                                child: Text(
-                                  description,
-                                  style: TextStyle(
-                                      fontSize:
-                                          16), // Adjust the style as needed
-                                ),
-                              ),
-                            SizedBox(height: 15.v),
-                            Divider(),
-                            SizedBox(height: 27.v),
-                            // Padding(
-                            //     padding:
-                            //         EdgeInsets.only(left: 20.h, right: 25.h),
-                            //     child: Row(
-                            //         mainAxisAlignment:
-                            //             MainAxisAlignment.spaceBetween,
-                            //         children: [
-                            //           Padding(
-                            //               padding: EdgeInsets.symmetric(
-                            //                   vertical: 2.v),
-                            //               child: CustomTextFormField(
-                            //                   width: 240.h,
-                            //                   controller:
-                            //                       searchnormalController,
-                            //                   hintText:
-                            //                       "Search your clothing..",
-                            //                   textInputAction:
-                            //                       TextInputAction.done,
-                            //                   suffix: Container(
-                            //                       margin: EdgeInsets.fromLTRB(
-                            //                           26.h, 3.v, 5.h, 3.v),
-                            //                       child: Container(
-                            //                           child: SvgPicture.asset(
-                            //                               ImageConstant
-                            //                                   .imgSearchnormal),
-                            //                           height: 18.v,
-                            //                           width: 13.h)),
-                            //                   suffixConstraints: BoxConstraints(
-                            //                       maxHeight: 24.v))),
-                                      // CustomSwitch(
-                                      //   margin: EdgeInsets.symmetric(vertical: 3.v), // Make sure 'v' is defined or replace with actual value
-                                      //   value: isSelectedSwitch1,
-                                      //   onChange: (value) {
-                                      //     setState(() {
-                                      //       isSelectedSwitch1 = value; // Update the state when the switch is tapped
-                                      //     });
-                                      //   },
-                                      // ),
-                                    // ])),
-                            SizedBox(height: 17.v),
-                            SizedBox(height: 10.v),
-                            _buildFrame5(context),
-                            SizedBox(height: 64.v),
-                          ])))
-            ])))),
+                      Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 23.v),
+                              child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 33.h, right: 13.h),
+                                    ),
+                                    SizedBox(height: 42.v),
+                                    SizedBox(height: 18.v),
+                                    _buildFrame3(context),
+                                    SizedBox(height: 13.v),
+                                    _buildEventTitleInput(context),
+                                    SizedBox(height: 8.v),
+                                    SizedBox(height: 6.v),
+                                    SizedBox(height: 6.v),
+                                    SizedBox(height: 10.v),
+                                    SizedBox(height: 13.v),
+                                    Divider(),
+                                    SizedBox(height: 7.v),
+                                    _buildDescriptionSection(context),
+                                    // Display the description text
+                                    if (description.isNotEmpty)
+                                      Padding(
+                                        padding: EdgeInsets.all(25.0),
+                                        child: Text(
+                                          description,
+                                          style: TextStyle(
+                                              fontSize:
+                                              16), // Adjust the style as needed
+                                        ),
+                                      ),
+                                    SizedBox(height: 15.v),
+                                    Divider(),
+                                    SizedBox(height: 27.v),
+                                    SizedBox(height: 17.v),
+                                    SizedBox(height: 10.v),
+                                    _buildFrame5(context),
+                                    SizedBox(height: 64.v),
+                                  ])))
+                    ])))),
         bottomNavigationBar: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.h),
         ),
-        floatingActionButton: _buildFloatingActionButton(context));
+);
   }
 
   Widget _buildFrame3(BuildContext context) {
@@ -205,7 +151,7 @@ class _Event_day_pageState extends State<Event_day_page> {
               child: Text(
                 'Save',
                 style:
-                    TextStyle(color: Colors.white), // Add text color if needed
+                TextStyle(color: Colors.white), // Add text color if needed
               ),
               style: TextButton.styleFrom(
                 backgroundColor: Colors.brown, // Setting the background color
@@ -245,10 +191,9 @@ class _Event_day_pageState extends State<Event_day_page> {
 
     // send details to firestore database
     await FirebaseFirestore.instance.collection('UserEventDetails').add({
-      'EventDate': widget.selectedDate.toIso8601String(),
+      'EventDate': widget.selectedDate.toIso8601String().substring(0, 10),
       'EventTitle': eventTitle,
       'EventDescription': description,
-      'NotificatoTime': notificationTime,
     });
   }
 
@@ -389,122 +334,6 @@ class _Event_day_pageState extends State<Event_day_page> {
     );
   }
 
-  /// Section Widget
-  Widget _buildThirtySix(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 19.h, right: 32.h),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Container(
-                child: SvgPicture.asset(ImageConstant.imgVector7),
-                height: 35.adaptSize,
-                width: 35.adaptSize,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 25.h, top: 8.v, bottom: 6.v),
-                child: Text("All-day", style: theme.textTheme.bodyLarge),
-              ),
-              Spacer(),
-              CustomSwitch(
-                margin: EdgeInsets.symmetric(vertical: 3.v),
-                value: isAllDay,
-                onChange: (value) {
-                  setState(() {
-                    isAllDay = value;
-                  });
-                },
-              ),
-            ],
-          ),
-          if (!isAllDay) ...[
-            // Only show this content if the switch is off
-            SizedBox(height: 18.v),
-            Padding(
-              padding: EdgeInsets.only(left: 26.h, right: 0.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Allocated time", style: theme.textTheme.bodyLarge),
-                  SizedBox(height: 18.v),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Fri, Jan 2, 2024",
-                          style: theme.textTheme.bodyLarge),
-                      Text("19:00", style: theme.textTheme.bodyLarge),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Fri, Jan 2, 2024",
-                          style: theme.textTheme.bodyLarge),
-                      Text("21:00", style: theme.textTheme.bodyLarge),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildFrame4(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: GestureDetector(
-        // GestureDetector to handle taps
-        onTap: () {
-          _showNotificationTimeDialog(
-              context); // Open the notification time selection dialog
-        },
-        child: Padding(
-          padding: EdgeInsets.only(left: 35.h, right: 15.h),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    child: Image.asset(
-                        ImageConstant.imgFilledAppointmentReminders),
-                    height: 38.v,
-                    width: 35.h,
-                  ),
-                  SizedBox(width: 12.h),
-                  Text(
-                    notificationTime.isEmpty
-                        ? "Add notification time"
-                        : notificationTime,
-                    style: theme.textTheme.bodyMedium,
-                  ),
-                ],
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    notificationTime = ""; // Reset the notification time
-                  });
-                },
-                child: Container(
-                  child: SvgPicture.asset(ImageConstant.imgClose),
-                  height: 17.adaptSize,
-                  width: 17.adaptSize,
-                  margin: EdgeInsets.symmetric(vertical: 10.v),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _buildDescriptionSection(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 10.h),
@@ -546,7 +375,7 @@ class _Event_day_pageState extends State<Event_day_page> {
   // Method to show the dialog for adding a description
   void _showAddDescriptionDialog(BuildContext context) {
     final TextEditingController _descriptionController =
-        TextEditingController(text: description);
+    TextEditingController(text: description);
 
     showDialog(
       context: context,
@@ -603,7 +432,7 @@ class _Event_day_pageState extends State<Event_day_page> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (context) =>
-                        Frame405Bottomsheet()), // Change to your destination frame
+                        Frame404Bottomsheet()), // Change to your destination frame
               );
             },
             child: Container(
@@ -614,7 +443,7 @@ class _Event_day_pageState extends State<Event_day_page> {
                   height: 101.v,
                   width: 98.h,
                   padding:
-                      EdgeInsets.symmetric(horizontal: 18.h, vertical: 22.v),
+                  EdgeInsets.symmetric(horizontal: 18.h, vertical: 22.v),
                   decoration: AppDecoration.fillWhiteA.copyWith(
                       borderRadius: BorderRadiusStyle.roundedBorder50),
                   child: SvgPicture.asset(
@@ -626,69 +455,8 @@ class _Event_day_pageState extends State<Event_day_page> {
                   )),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) =>
-                        Frame405Bottomsheet()), // Change to your destination frame
-              );
-            },
-            child: Container(
-              margin: EdgeInsets.only(left: 17.h),
-              padding: EdgeInsets.all(11.h),
-              decoration: AppDecoration.fillBlueGray
-                  .copyWith(borderRadius: BorderRadiusStyle.roundedBorder50),
-              child: Card(
-                clipBehavior: Clip.antiAlias,
-                elevation: 0,
-                margin: EdgeInsets.all(0),
-                color: appTheme.whiteA700,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadiusStyle.roundedBorder50),
-                child: Container(
-                  height: 101.v,
-                  width: 98.h,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 19.h, vertical: 18.v),
-                  decoration: AppDecoration.fillWhiteA.copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder50),
-                  child: SvgPicture.asset(
-                    'assets/images/img_user_gray_500_01_55x56.svg',
-                    // Replace with the actual SVG asset
-                    height: 55.v,
-                    width: 56.h,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ]),
-      ),
-    );
-  }
 
-  /// Section Widget
-  Widget _buildFloatingActionButton(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        right: 25.0, // Right padding
-        bottom: 25.0, // Bottom padding
-      ),
-      child: FloatingActionButton(
-        onPressed: () {
-          print("Floating Action Button Pressed"); // Console log for debugging
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Washing_reminder_page()),
-          );
-        },
-        child: Container(
-          child: SvgPicture.asset(ImageConstant.imgAlarm),
-          width: 45.v, // Set width of the image to 25
-          height: 45.v, // Set height of the image to 25
-        ),
+        ]),
       ),
     );
   }
@@ -721,7 +489,7 @@ class _Event_day_pageState extends State<Event_day_page> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            const LandingPage()), // Replace with your actual screen widget
+                        const LandingPage()), // Replace with your actual screen widget
                   );
                 },
                 child: SvgPicture.asset(
@@ -739,7 +507,7 @@ class _Event_day_pageState extends State<Event_day_page> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            Bookmark_page()), // Replace with your actual screen widget
+                            Searchbar_page()), // Replace with your actual screen widget
                   );
                 },
                 child: SvgPicture.asset(
@@ -756,7 +524,7 @@ class _Event_day_pageState extends State<Event_day_page> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            const LandingPage()), // Replace with your actual screen widget
+                        const AddtowardrobeScreen()), // Replace with your actual screen widget
                   );
                 },
                 child: SvgPicture.asset(
@@ -773,7 +541,7 @@ class _Event_day_pageState extends State<Event_day_page> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            const LandingPage()), // Replace with your actual screen widget
+                         Main_wardrobe()), // Replace with your actual screen widget
                   );
                 },
                 child: SvgPicture.asset(
@@ -790,7 +558,7 @@ class _Event_day_pageState extends State<Event_day_page> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            const User_profile()), // Replace with your actual screen widget
+                         User_profile()), // Replace with your actual screen widget
                   );
                 },
                 child: SvgPicture.asset(

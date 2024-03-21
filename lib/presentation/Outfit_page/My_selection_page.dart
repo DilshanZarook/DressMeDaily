@@ -1,4 +1,3 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/presentation/All_clothes_outfit_page/All_clothes_outfit.dart';
@@ -558,114 +557,134 @@ class OutfitSelectionContent extends StatefulWidget {
 }
 
 class OutfitSelectionContentState extends State<OutfitSelectionContent> {
-  // List<ItemModel> items = List.generate(20, (_) => ItemModel());
-  List<ItemModel> items = []; // Initialize an empty list for items
+  List<ItemModel> items = [];
 
   @override
   void initState() {
     super.initState();
-    _fetchOutfits(); // Call method to fetch outfits from Firestore when the widget initializes
+    _fetchOutfits();
   }
 
   Future<void> _fetchOutfits() async {
     try {
-      // Fetch outfits collection from Firestore
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('outfits').get();
-
-      // Loop through documents and populate items list with retrieved data
-      querySnapshot.docs.forEach((doc) {
-        String topWearImageUrl = doc['topWearImageUrl'];
-        String bottomWearImageUrl = doc['bottomWearImageUrl'];
-        
-        // Add retrieved data to the items list
-        items.add(ItemModel(
-          imageUrl: topWearImageUrl,
-          // Add other properties as needed
-        ));
-        items.add(ItemModel(
-          imageUrl: bottomWearImageUrl,
-          // Add other properties as needed
-        ));
+      var newItems = querySnapshot.docs.map((doc) => ItemModel.fromFirestore(doc)).toList();
+      setState(() {
+        items = newItems;
       });
-
-      // Update UI
-      setState(() {});
     } catch (e) {
       print("Error fetching outfits: $e");
     }
   }
 
+  void showImagesDialog(ItemModel item) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView( // To handle overflow if images are large
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (item.topWearImageUrl != null)
+                  Image.network(item.topWearImageUrl!, fit: BoxFit.cover),
+                if (item.bottomWearImageUrl != null)
+                  Image.network(item.bottomWearImageUrl!, fit: BoxFit.cover),
+                SizedBox(height: 10),
+                Text(item.outfitName ?? 'No Outfit Name'),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+
+
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 700.h,
-        margin: const EdgeInsets.only(top: 200),
-        decoration: const BoxDecoration(
-          color: Color(0xFF8B7B7B),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(80),
-            topRight: Radius.circular(80),
-            bottomLeft: Radius.zero,
-            bottomRight: Radius.zero,
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 700, // Replace '700.h' with a MediaQuery or fixed value if needed
+          margin: const EdgeInsets.only(top: 200),
+          decoration: const BoxDecoration(
+            color: Color(0xFF8B7B7B),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(80),
+              topRight: Radius.circular(80),
+              bottomLeft: Radius.zero,
+              bottomRight: Radius.zero,
+            ),
           ),
-        ),
-        child: Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            Positioned(
-              top: 30,
-              child: GestureDetector(
-                onVerticalDragUpdate: (details) {
-                  if (details.delta.dy > 20) {
-                    Navigator.of(context).pop();
-                  }
-                },
-                child: Container(
-                  width: 150,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: Colors.brown,
-                    borderRadius: BorderRadius.circular(50),
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              Positioned(
+                top: 30,
+                child: GestureDetector(
+                  onVerticalDragUpdate: (details) {
+                    if (details.delta.dy > 20) {
+                      Navigator.of(context).pop();
+                    }
+                  },
+                  child: Container(
+                    width: 150,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.brown,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 80),
-              child: SingleChildScrollView(
-                child: Wrap(
-                  spacing: 40,
-                  runSpacing: 40,
-                  alignment: WrapAlignment.center,
-                  children: items.map((item) {
-                    return Container(
-                      width: 120,
-                      height: 120,
-                      margin: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      // child: item.isPlaceholder
-                      //     ? SvgPicture.asset('assets/images/clothing_add.svg') // Update path as needed
-                      //     : (item.imageUrl != null)
-                      //     ? Image.network(item.imageUrl!, fit: BoxFit.cover)
-                      //     : const Center(child: Text('No Image')),
-                      child: item.imageUrl != null
-                          ? Image.network(item.imageUrl!, fit: BoxFit.cover)
-                          : SvgPicture.asset('assets/images/clothing_add.svg'), // Use placeholder widget here
-                    );
-                  }).toList(),
+              Padding(
+                padding: const EdgeInsets.only(top: 80),
+                child: SingleChildScrollView(
+                  child: Wrap(
+                    spacing: 40,
+                    runSpacing: 40,
+                    alignment: WrapAlignment.center,
+                    children: items.map((item) {
+                      return GestureDetector(
+                        onTap: () => showImagesDialog(item),
+                        child: Container(
+                          width: 120,
+                          height: 120,
+                          margin: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
+                            child: Text(item.outfitName ?? 'No Outfit Name'),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        ));
+  }
+}
+class ItemModel {
+  String? topWearImageUrl;
+  String? bottomWearImageUrl;
+  String? outfitName;
+
+  ItemModel({this.topWearImageUrl, this.bottomWearImageUrl, this.outfitName});
+
+  factory ItemModel.fromFirestore(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    return ItemModel(
+      topWearImageUrl: data['topWearImageUrl'],
+      bottomWearImageUrl: data['bottomWearImageUrl'],
+      outfitName: data['outfitName'],
     );
   }
 }
-
-/// Section Widget

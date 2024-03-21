@@ -174,7 +174,7 @@ class Calendar_page extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Event_day_page(selectedDate: currentDateTime),
+        builder: (context) => Event_day_page(selectedDate: selectedDate),
       ),
     );
   }
