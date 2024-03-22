@@ -1,16 +1,16 @@
-name: Build
+name: CI-Build
 
 on:
- push:
+  push:
     branches: 
       - main
- pull_request:
+  pull_request:
     branches: 
       - main
- workflow_dispatch:
+  workflow_dispatch:
 
 jobs: 
- build_android:
+  build_android:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -21,5 +21,9 @@ jobs:
           flutter-version: "3.7.0"
           channel: 'stable'
           cache: true
+      - name: Set up Dart SDK
+        uses: dart-lang/setup-dart@v1.3
+        with:
+          sdk: '3.3.1'
       - name: Get dependencies
         run: flutter pub get
