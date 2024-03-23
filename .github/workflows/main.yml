@@ -12,6 +12,9 @@ jobs:
       with:
         flutter-version: '2.2.2'
         channel: 'stable'
+    - uses: actions/setup-dart@v1
+      with:
+        dart-version: '3.3.0'
     - run: flutter pub get
     - run: flutter test
     - run: flutter build apk
