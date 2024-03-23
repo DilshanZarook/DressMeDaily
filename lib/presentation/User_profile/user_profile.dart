@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
@@ -19,10 +21,8 @@ class User_profile extends StatefulWidget {
   _User_profileState createState() => _User_profileState();
 }
 
-class _User_profileState extends State<User_profile>
-    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
-  final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>(); // Moved inside the class
+class _User_profileState extends State<User_profile> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(); // Moved inside the class
   TextEditingController nameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController bioController = TextEditingController();
@@ -35,10 +35,14 @@ class _User_profileState extends State<User_profile>
   late FocusNode ageFocusNode;
   late FocusNode bioFocusNode;
   bool isKeyboardOpen = false;
+  final String userId = DateFormat('yyyyMMddHHmmss').format(DateTime.now());
+  final CollectionReference _userProfileCollection =
+      FirebaseFirestore.instance.collection('userProfiles');
 
   @override
   void initState() {
     super.initState();
+    _getUserProfile();
     nameController.addListener(_onTextChange);
     ageController.addListener(_onTextChange);
     bioController.addListener(_onTextChange);
@@ -317,7 +321,53 @@ class _User_profileState extends State<User_profile>
       width: 64.h,
       text: "Save",
       alignment: Alignment.centerRight,
+      onPressed: _saveUserProfile,
     );
+  }
+
+  //get user profile data from firestore
+  void _getUserProfile() async {
+    try {
+      DocumentSnapshot<Object?> snapshot =
+          (await _userProfileCollection.doc('userid').get()) as DocumentSnapshot<Object?>;
+
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data()! as Map<String, dynamic>;
+        nameController.text = data['name'] ?? '';
+        ageController.text = data['age'] ?? '';
+        bioController.text = data['bio'] ?? '';
+      }
+    } catch (error) {
+      print('Error fetching user profile: $error');
+    }
+  }
+
+  // send user profile data to firestore
+  void _saveUserProfile() async {
+    String name = nameController.text;
+    String age = ageController.text;
+    String bio = bioController.text;
+
+    try {
+      await _userProfileCollection.add({
+        'userid': userId,
+        'name': name,
+        'age': age,
+        'bio': bio,
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('User profile saved successfully'),
+        ),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to save user profile: $error'),
+        ),
+      );
+    }
   }
 }
 

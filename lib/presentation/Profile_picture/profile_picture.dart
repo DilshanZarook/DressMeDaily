@@ -16,7 +16,7 @@ class Profile_picture extends StatefulWidget {
 class _Profile_pictureState extends State<Profile_picture> {
   File? _selectedImage;
 
-  //
+  // send user's profile picture to database
   Future<void> uploadImageToFirebase(File imageFile) async {
   try {
     // Create a unique filename for the image
