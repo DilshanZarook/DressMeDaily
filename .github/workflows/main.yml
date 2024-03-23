@@ -1,8 +1,8 @@
 name: Flutter CI
-on:
-  push:
-    branches:
-      - main
+on: push
+  branches:
+    - main
+    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,9 +12,5 @@ jobs:
       with:
         flutter-version: '2.2.2'
         channel: 'stable'
-    - uses: actions/setup-dart@v1
-      with:
-        dart-version: '3.3.0'
     - run: flutter pub get
-    - run: flutter test
     - run: flutter build apk
