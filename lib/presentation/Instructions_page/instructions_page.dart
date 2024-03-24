@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
 import 'package:sdgp_test01/presentation/Loading_page_2/loading_page_2.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
-import '../frame_293_screen/frame_293_screen.dart'; // Adjust the path as necessary
-import 'package:sdgp_test01/presentation/Loading_page_2/loading_page_2.dart';
+// Adjust the path as necessary
 
 class Instructions_page extends StatelessWidget {
   const Instructions_page({Key? key})
@@ -36,7 +34,7 @@ class Instructions_page extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Loading_page_2()),
+                          MaterialPageRoute(builder: (context) => const Loading_page_2()),
                         );
                       },
                       child: Text(
@@ -80,7 +78,7 @@ class Instructions_page extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: EdgeInsets.only(bottom: 9.v),
-              child: SizedBox(
+              child: const SizedBox(
                 width: double.maxFinite,
                 child: Divider(),
               ),

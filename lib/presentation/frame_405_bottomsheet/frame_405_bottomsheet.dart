@@ -32,8 +32,9 @@ class _Frame405BottomsheetState extends State<Frame405Bottomsheet> {
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
+            // Enlarged GestureDetector for better dragging experience
             Positioned(
-              top: 30,
+              top: 0,  // Starts from the very top of the container
               child: GestureDetector(
                 onVerticalDragUpdate: (details) {
                   if (details.delta.dy > 20) {
@@ -41,11 +42,16 @@ class _Frame405BottomsheetState extends State<Frame405Bottomsheet> {
                   }
                 },
                 child: Container(
-                  width: 150,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: Colors.brown,
-                    borderRadius: BorderRadius.circular(50),
+                  width: MediaQuery.of(context).size.width, // Full width of the container
+                  height: 60, // Increased height for easier drag
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    width: 150,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.brown,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                   ),
                 ),
               ),

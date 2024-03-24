@@ -28,7 +28,7 @@ class Frame675Screen extends StatelessWidget {
                                 SizedBox(height: 17.v),
                                 _buildFrameColumn(context),
                                 SizedBox(height: 18.v),
-                                Divider(),
+                                const Divider(),
                                 SizedBox(height: 18.v),
                                 Padding(
                                     padding: EdgeInsets.only(left: 15.h),
@@ -46,7 +46,7 @@ class Frame675Screen extends StatelessWidget {
                                               style: theme.textTheme.bodyLarge))
                                     ])),
                                 SizedBox(height: 15.v),
-                                Divider(),
+                                const Divider(),
                                 SizedBox(height: 10.v),
                                 Padding(
                                     padding: EdgeInsets.only(left: 20.h),
@@ -62,7 +62,7 @@ class Frame675Screen extends StatelessWidget {
                                               style: theme.textTheme.bodyLarge))
                                     ])),
                                 SizedBox(height: 10.v),
-                                Divider(),
+                                const Divider(),
                                 SizedBox(height: 10.v),
                                 Padding(
                                     padding: EdgeInsets.only(left: 20.h),
@@ -102,7 +102,7 @@ class Frame675Screen extends StatelessWidget {
                                                   ]))
                                         ])),
                                 SizedBox(height: 10.v),
-                                Divider(),
+                                const Divider(),
                                 SizedBox(height: 10.v),
                                 Padding(
                                     padding: EdgeInsets.only(left: 19.h),
@@ -178,7 +178,7 @@ class Frame675Screen extends StatelessWidget {
                     style: CustomTextStyles.headlineSmallMedium))
           ]),
           SizedBox(height: 15.v),
-          Divider()
+          const Divider()
         ]));
   }
 
@@ -255,7 +255,7 @@ class Frame675Screen extends StatelessWidget {
               _buildIconButton(
                 context,
                 ImageConstant.profile_footer,
-                    () => Navigator.push(context, MaterialPageRoute(builder: (context) => User_profile())),
+                    () => Navigator.push(context, MaterialPageRoute(builder: (context) =>  User_profile())),
               ),
               // Add more buttons if needed
             ],
@@ -269,7 +269,7 @@ class Frame675Screen extends StatelessWidget {
   Widget _buildIconButton(BuildContext context, String imagePath, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
-      child: Container(
+      child: SizedBox(
         height: 30.v,
         width: 30.h,
         child: Image.asset(

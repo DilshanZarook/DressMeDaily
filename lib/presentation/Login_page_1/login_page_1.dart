@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../Starting_page/starting_page.dart'; // Adjust the path as necessary
@@ -31,7 +30,7 @@ class Login_page_1 extends StatelessWidget {
                               TextStyle(fontSize: 24.v), // Provide a default style if bodyLarge is null
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       CustomOutlinedButton(
                           text: "Continue with Google",
                           leftIcon: Container(
@@ -79,11 +78,10 @@ class Login_page_1 extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Starting_page()),
+            MaterialPageRoute(builder: (context) => const Starting_page()),
           );
         },
       ),
-      // Rest of your AppBar properties...
     );
   }
 

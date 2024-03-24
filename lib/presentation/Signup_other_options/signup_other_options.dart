@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
 import '../Login_page_1/login_page_1.dart'; // Adjust the path as necessary
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,8 +18,6 @@ class Signup_other_options extends StatelessWidget {
                 child: Column(children: [
                   CustomOutlinedButton(
                     text: "Continue with Google",
-
-                     // Assuming the widget supports this property
                     leftIcon: Container(
 
                       margin: EdgeInsets.only(right:32.h),
@@ -44,9 +41,9 @@ class Signup_other_options extends StatelessWidget {
                     leftIcon: Container(
                       padding: EdgeInsets.all(2.h),
                       margin: EdgeInsets.only(right: 20.h),
-                      decoration: BoxDecoration(color: Colors.blue),
+                      decoration: const BoxDecoration(color: Colors.blue),
                       child: SvgPicture.asset(
-                        'assets/images/img_facebook.svg', // Replace with your actual asset path
+                        'assets/images/img_facebook.svg',
                         height: 20.adaptSize,
                         width: 20.adaptSize,
                       ),
@@ -83,15 +80,14 @@ class Signup_other_options extends StatelessWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Image.asset('assets/images/Line arrow-left.png'), // Adjust the path to your asset
+        icon: Image.asset('assets/images/Line arrow-left.png'),
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Login_page_1()),
+            MaterialPageRoute(builder: (context) => const Login_page_1()),
           );
         },
       ),
-      // Rest of your AppBar properties...
     );
   }
 

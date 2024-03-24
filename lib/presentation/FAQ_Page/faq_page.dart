@@ -1,241 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sdgp_test01/core/app_export.dart';
+import 'package:sdgp_test01/new_file/addtowardrobe_screen.dart';
+import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:sdgp_test01/presentation/Main_settings_page/main_settings.dart';
+import 'package:sdgp_test01/presentation/Main_wardrobe/Main_wardrobe.dart';
+import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
 import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title_image.dart';
 import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_drop_down.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
-
 
 class FAQ_Page extends StatelessWidget {
-  FAQ_Page({Key? key})
+  const FAQ_Page({Key? key})
       : super(
           key: key,
         );
 
-
-  @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        appBar: _buildAppBar(context),
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(horizontal: 54.h),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
-                    height: 33.v,
-                    width: 25.h,
-                    child: Image.asset(
-                      ImageConstant.imgCheckmarkGray90001,
-                      color: Colors.black,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                hintText: "What is DressMeDaily ?",
-                contentPadding: EdgeInsets.only(
-                  left: 11.h,
-                  top: 17.v,
-                  bottom: 17.v,
-                ),
-                onChanged: (value) {},
-              ),
-              SizedBox(height: 15.v),
-              CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
-                    height: 33.v,
-                    width: 25.h,
-                    child: Image.asset(
-                      ImageConstant.imgCheckmarkGray90001,
-                      color: Colors.black,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                hintText: "What is DressMeDaily ?",
-                contentPadding: EdgeInsets.only(
-                  left: 11.h,
-                  top: 17.v,
-                  bottom: 17.v,
-                ),
-                onChanged: (value) {},
-              ),
-              SizedBox(height: 15.v),
-              CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
-                    height: 33.v,
-                    width: 25.h,
-                    child: Image.asset(
-                      ImageConstant.imgCheckmarkGray90001,
-                      color: Colors.black,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                hintText: "What is DressMeDaily ?",
-                contentPadding: EdgeInsets.only(
-                  left: 11.h,
-                  top: 17.v,
-                  bottom: 17.v,
-                ),
-                onChanged: (value) {},
-              ),
-              SizedBox(height: 15.v),
-              CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
-                    height: 33.v,
-                    width: 25.h,
-                    child: Image.asset(
-                      ImageConstant.imgCheckmarkGray90001,
-                      color: Colors.black,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                hintText: "What is DressMeDaily ?",
-                contentPadding: EdgeInsets.only(
-                  left: 11.h,
-                  top: 17.v,
-                  bottom: 17.v,
-                ),
-                onChanged: (value) {},
-              ),
-              SizedBox(height: 14.v),
-              CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
-                    height: 33.v,
-                    width: 25.h,
-                    child: Image.asset(
-                      ImageConstant.imgCheckmarkGray90001,
-                      color: Colors.black,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                hintText: "What is DressMeDaily ?",
-                contentPadding: EdgeInsets.only(
-                  left: 11.h,
-                  top: 17.v,
-                  bottom: 17.v,
-                ),
-                onChanged: (value) {},
-              ),
-              SizedBox(height: 15.v),
-              CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.fromLTRB(30.h, 8.v, 11.h, 8.v),
-                  child: Container(
-                    height: 33.v,
-                    width: 25.h,
-                    child: Image.asset(
-                      ImageConstant.imgCheckmarkGray90001,
-                      color: Colors.black,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                hintText: "What is DressMeDaily ?",
-                contentPadding: EdgeInsets.only(
-                  left: 11.h,
-                  top: 17.v,
-                  bottom: 17.v,
-                ),
-                onChanged: (value) {},
-              ),
-              SizedBox(height: 15.v),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.h,
-                  vertical: 7.v,
-                ),
-                decoration: AppDecoration.outlinePrimary5.copyWith(
-                  borderRadius: BorderRadiusStyle.roundedBorder20,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        width: 186.h,
-                        margin: EdgeInsets.symmetric(vertical: 1.v),
-                        child: Text(
-                          "Can I use the application without an internet connection?",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodySmall,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 33.v,
-                      width: 25.h,
-                      margin: EdgeInsets.only(left: 17.h),
-                      child: Image.asset(
-                        ImageConstant.imgCheckmarkGray90001,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 15.v),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.h,
-                  vertical: 7.v,
-                ),
-                decoration: AppDecoration.outlinePrimary5.copyWith(
-                  borderRadius: BorderRadiusStyle.roundedBorder20,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        width: 186.h,
-                        margin: EdgeInsets.symmetric(vertical: 1.v),
-                        child: Text(
-                          "Can I use the application without an internet connection?",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodySmall,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 33.v,
-                      width: 25.h,
-                      margin: EdgeInsets.only(left: 17.h),
-                      child: Image.asset(
-                        ImageConstant.imgCheckmarkGray90001,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 5.v),
-            ],
-          ),
+    return Scaffold(
+      appBar: _buildAppBar(context),
+      body: Container(
+        width: double.maxFinite,
+        padding: EdgeInsets.symmetric(horizontal: 54.h),
+        child: ListView(
+          children: [
+            _buildRoundedExpansionTile(
+              title: "What is DressMeDaily ?",
+              content: "It is an AI wardrobe application.",
+              titleFontSize: 16.0, // Font size for the main title
+              contentFontSize: 14.0, // Font size for the content
+            ),
+            _buildRoundedExpansionTile(
+              title: "How do I add clothing items to my virtual wardrobe ?",
+              content: "To add an item to the app, simply tap on the \"Add Item\" button, and then either take a photo of the clothing item using your device's camera or upload an existing photo from your gallery. Additionally, you can manually enter details such as the color, brand, and category of the item.",
+              titleFontSize: 16.0, // Font size for the main title
+              contentFontSize: 14.0, // Font size for the content
+            ),_buildRoundedExpansionTile(
+              title: "Can I organize my clothing items into categories?",
+              content: "With DressMeDaily, you have the option to organize your clothes by different categories such as type, color, season, and more. This feature simplifies the process of finding the ideal outfit for any event.",
+              titleFontSize: 16.0, // Font size for the main title
+              contentFontSize: 14.0, // Font size for the content
+            ),
+            _buildRoundedExpansionTile(
+              title: "How does the AI styling feature work ?",
+              content: "Our AI styling feature analyzes your wardrobe and provides outfit suggestions based on your preferences, the occasion, and the weather. You can fine-tune the suggestions to match your style.",
+              titleFontSize: 16.0, // Font size for the main title
+              contentFontSize: 14.0, // Font size for the content
+            ),
+            _buildRoundedExpansionTile(
+              title: "Can I plan my outfits in advance?",
+              content: "Absolutely!, using DressMeDaily, you can conveniently plan your outfits by choosing clothes from your digital closet and assigning them to specific days. This approach can assist in keeping you well-organized and also saves you time during your morning routine.",
+              titleFontSize: 16.0, // Font size for the main title
+              contentFontSize: 14.0, // Font size for the content
+            ),
+           _buildRoundedExpansionTile(
+              title: "Is my data secure with DressMeDaily ?",
+              content: "Ensuring the privacy and security of your data is our top priority. We encrypt all your information and strictly adhere to our privacy policies. You have control over what you share and with whom.",
+              titleFontSize: 16.0, // Font size for the main title
+              contentFontSize: 14.0, // Font size for the content
+            ),
+            _buildRoundedExpansionTile(
+              title: "Can I use the application without an internet connection?",
+              content: "Although DressMeDaily can be used offline to view and plan outfits, some features require an active internet connection for the best experience.",
+              titleFontSize: 16.0, // Font size for the main title
+              contentFontSize: 14.0, // Font size for the content
+            ),_buildRoundedExpansionTile(
+              title: "How do I get support if I encounter issues or have questions?",
+              content: "If you need any assistance or have any questions, please don't hesitate to contact our support team through either the in-app help center or by emailing support@DressMeDaily.com. We are always here to help!",
+              titleFontSize: 16.0, // Font size for the main title
+              contentFontSize: 14.0, // Font size for the content
+            ),
+            SizedBox(height: 15.v),
+            SizedBox(height: 5.v),
+          ],
         ),
-        bottomNavigationBar: _buildBottomBar(context),
+      ),
 
     );
   }
@@ -255,19 +94,22 @@ class FAQ_Page extends StatelessWidget {
                   margin: EdgeInsets.only(top: 20.v),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pop(context); // Navigate back to the previous screen
+                      Navigator.pop(
+                          context); // Navigate back to the previous screen
                     },
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 20.v, right: 0.h, left: 15.v), // Adjust the margin as needed
+                      margin:
+                          EdgeInsets.only(bottom: 20.v, right: 0.h, left: 15.v),
+                      // Adjust the margin as needed
                       child: SvgPicture.asset(
-                        ImageConstant.imgArrowDown, // Make sure this points to the correct SVG asset
+                        ImageConstant.imgArrowDown,
+                        // Make sure this points to the correct SVG asset
                         height: 25.v,
                         width: 25.h,
                       ),
                     ),
                   ),
                 ),
-
                 AppbarSubtitle(
                   text: "FAQ",
                   margin: EdgeInsets.only(left: 110.h),
@@ -285,6 +127,36 @@ class FAQ_Page extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }Widget _buildRoundedExpansionTile({
+    required String title,
+    required String content,
+    required double titleFontSize,
+    required double contentFontSize,
+  }) {
+    return Container(
+      margin: EdgeInsets.only(top: 8.v, bottom: 8.v),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: ExpansionTile(
+          title: Text(
+            title,
+            style: TextStyle(fontSize: titleFontSize, color: Colors.black), // Title font style
+          ),
+          children: <Widget>[
+            ListTile(
+              title: Text(
+                content,
+                style: TextStyle(fontSize: contentFontSize, color: Colors.grey), // Content font style
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -314,10 +186,11 @@ class FAQ_Page extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()),
+                    MaterialPageRoute(
+                        builder: (context) => const LandingPage()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -334,7 +207,7 @@ class FAQ_Page extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -342,14 +215,16 @@ class FAQ_Page extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),InkWell(
+              ),
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Bookmark_page()),
+                    MaterialPageRoute(
+                        builder: (context) => AddtowardrobeScreen()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -357,14 +232,15 @@ class FAQ_Page extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),InkWell(
+              ),
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Bookmark_page()),
+                    MaterialPageRoute(builder: (context) => Main_wardrobe()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -372,14 +248,16 @@ class FAQ_Page extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),InkWell(
+              ),
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => User_profile()),
+                    MaterialPageRoute(
+                        builder: (context) =>  User_profile()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -393,7 +271,6 @@ class FAQ_Page extends StatelessWidget {
             ],
           ),
           SizedBox(height: 10.v),
-
         ],
       ),
     );

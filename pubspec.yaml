@@ -3,36 +3,60 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.3.0
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   outline_gradient_button: ^2.0.1+1
+  provider: ^6.1.2
   shared_preferences: ^2.0.6
   cached_network_image: ^3.3.0
   flutter_svg: ^2.0.9
   pin_code_fields: ^8.0.1
-  flutter_svg_provider: ^1.0.4
+  flutter_svg_provider: ^1.0.7
   intl: ^0.19.0
-  image_picker: ^1.0.5
+  image_picker: ^1.0.7
   carousel_slider: ^4.0.0
-  http: ^1.2.1
   firebase_storage: ^11.6.7
-  firebase_core: ^2.27.0
+  firebase_core: ^2.25.5
+  cloud_firestore: ^4.15.6
+  http: ^1.2.0
+  dotted_border: ^2.1.0
+  google_sign_in: ^6.2.1  # Use the latest version
+  googleapis: ^13.1.0
+  calendar_date_picker2: ^0.5.3
+  theme_provider: ^0.6.0
+  url_launcher: ^6.2.5
+  table_calendar: ^3.1.0
   rename_app: ^1.3.2
-  # cloud_firestore: ^4.15.7
-
+  video_player: ^2.8.3
 
 dev_dependencies:
+  flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#ffff00"
+  adaptive_icon_foreground: "assets/icon/icon.png"
+
 
 flutter:
   uses-material-design: true
   assets:
     - assets/
     - assets/images/
+    - assets/videos/
+    - assets/videos/1.mp4
+    - assets/videos/2.mp4
+    - assets/videos/3.mp4
+    - assets/videos/4.mp4
+    - assets/videos/5.mp4
   fonts:
     - family: Inter
       fonts:

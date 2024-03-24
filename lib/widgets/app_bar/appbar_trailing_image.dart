@@ -6,7 +6,7 @@ class AppbarTrailingImage extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final Function? onTap;
 
-  AppbarTrailingImage({
+  const AppbarTrailingImage({
     Key? key,
     this.imagePath,
     this.margin,

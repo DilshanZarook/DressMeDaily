@@ -9,13 +9,14 @@ class Body_selection_male extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: _buildAppBar(context), // Add the AppBar here
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            SizedBox( height:100),
+            const SizedBox( height:100),
             const Padding(
               padding: EdgeInsets.only(top: 20.0), // Adjust padding as needed
               child: Text(
@@ -23,7 +24,7 @@ class Body_selection_male extends StatelessWidget {
                 style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -70,7 +71,7 @@ class Body_selection_male extends StatelessWidget {
 void navigateToLoadingPage3(BuildContext context) {
   Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => Loading_page_3()),
+    MaterialPageRoute(builder: (context) => const Loading_page_3()),
   );
 }
 PreferredSizeWidget _buildAppBar(BuildContext context) {

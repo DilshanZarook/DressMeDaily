@@ -3,7 +3,7 @@ import '../core/app_export.dart';  // Ensure this import is correct and necessar
 import 'base_button.dart';  // Ensure this import is correct and necessary
 
 class CustomElevatedButton extends BaseButton {
-  CustomElevatedButton({
+  const CustomElevatedButton({
     Key? key,
     this.decoration,
     this.leftIcon,
@@ -66,7 +66,7 @@ class CustomElevatedButton extends BaseButton {
         children: [
           leftIcon ?? const SizedBox.shrink(),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8), // For spacing between text and icons
+            padding: const EdgeInsets.symmetric(horizontal: 8), // For spacing between text and icons
             child: Text(
               text,
               style: buttonTextStyle ?? CustomTextStyles.bodySmallGray500,

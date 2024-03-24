@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
 import 'package:sdgp_test01/widgets/custom_text_form_field.dart';
 
@@ -30,7 +29,7 @@ class Password_change extends StatelessWidget {
                           backgroundColor: appTheme.black900,
                           valueColor: AlwaysStoppedAnimation<Color>(
                               appTheme.lime400))),
-                  Spacer(),
+                  const Spacer(),
                   SizedBox(height: 150.v),
                   Align(
                       alignment: Alignment.centerLeft,
@@ -44,7 +43,7 @@ class Password_change extends StatelessWidget {
                       child: CustomTextFormField(
                           controller: emailController,
                           textInputAction: TextInputAction.done)),
-                  Spacer(flex: 27),
+                  const Spacer(flex: 27),
                   CustomOutlinedButton(
                       height: 44.v,
                       width: 83.h,
@@ -53,7 +52,7 @@ class Password_change extends StatelessWidget {
                       onPressed: () {
                         onTapSubmit(context);
                       }),
-                  Spacer(flex: 43)
+                  const Spacer(flex: 43)
                 ]))));
   }
 
@@ -61,12 +60,11 @@ class Password_change extends StatelessWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Image.asset('assets/images/Line arrow-left.png'), // Replace with your actual arrow image asset path
+        icon: Image.asset('assets/images/Line arrow-left.png'),
         onPressed: () {
           Navigator.of(context).pop();
         },
-      ), // Replace with your screen's title
-      // You can add more AppBar properties if needed
+      ),
     );
   }
 bool isValidEmail(String email) {
@@ -85,11 +83,11 @@ return emailRegex.hasMatch(email);
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Invalid Email"),
-            content: Text("Please enter a valid email address."),
+            title: const Text("Invalid Email"),
+            content: const Text("Please enter a valid email address."),
             actions: <Widget>[
               TextButton(
-                child: Text("Close"),
+                child: const Text("Close"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

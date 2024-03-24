@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_leading_image.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
 import '../Starting_page/starting_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,7 +24,7 @@ class Starting_page_signup extends StatelessWidget {
                           height: 70.v,
                           width: 300.v,
                           text: "Continue with Google",
-                          buttonTextStyle: TextStyle(
+                          buttonTextStyle: const TextStyle(
                             fontSize: 22,
                             color: Colors.black,
                             fontWeight: FontWeight.w300,
@@ -49,7 +47,7 @@ class Starting_page_signup extends StatelessWidget {
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center, // Aligns the icon vertically with the text
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               "Other options",
@@ -57,9 +55,9 @@ class Starting_page_signup extends StatelessWidget {
                               style: CustomTextStyles.titleLargeGray70002,
                             ),
                             SvgPicture.asset(
-                              'assets/images/img_arrow_right.svg', // Use your actual asset path
-                              height: theme.textTheme.titleLarge!.fontSize, // Match the text size
-                              width: theme.textTheme.titleLarge!.fontSize, // Match the text size
+                              'assets/images/img_arrow_right.svg',
+                              height: theme.textTheme.titleLarge!.fontSize,
+                              width: theme.textTheme.titleLarge!.fontSize,
                             ),
                           ],
                         ),
@@ -71,15 +69,14 @@ class Starting_page_signup extends StatelessWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Image.asset('assets/images/Line arrow-left.png'), // Adjust the path to your asset
+        icon: Image.asset('assets/images/Line arrow-left.png'),
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Starting_page()),
+            MaterialPageRoute(builder: (context) => const Starting_page()),
           );
         },
       ),
-      // Rest of your AppBar properties...
     );
   }
 

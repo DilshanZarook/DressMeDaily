@@ -65,7 +65,7 @@ class CustomRadioButton extends StatelessWidget {
               style: textStyle ?? CustomTextStyles.bodyLarge16,
             ),
           ),
-          SizedBox(width: 200), // 200px distance
+          const SizedBox(width: 200), // 200px distance
           GestureDetector(
             onTap: () => onChange(value ?? ""),
             child: Radio<String>(

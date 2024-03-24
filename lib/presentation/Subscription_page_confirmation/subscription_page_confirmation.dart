@@ -13,9 +13,9 @@ class Subscription_page_confirmation extends StatelessWidget {
       decoration: AppDecoration.fillGray
           .copyWith(borderRadius: BorderRadiusStyle.roundedBorder20),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
-        Text(
+        const Text(
           "Are you sure, you want to cancel ? ",
-          style: TextStyle(fontSize: 20.0), // Change the font size here
+          style: TextStyle(fontSize: 20.0),
         ),
         SizedBox(height: 43.v),
         Row(
@@ -23,19 +23,19 @@ class Subscription_page_confirmation extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
-              child: Text(
+              child: const Text(
                 'No',
-                style: TextStyle(fontSize: 16.0,color: Colors.black), // Change the font size here
+                style: TextStyle(fontSize: 16.0,color: Colors.black),
               ),
             ),
             ElevatedButton(
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Subscription_page()),
+                MaterialPageRoute(builder: (context) => const Subscription_page()),
               ),
-              child: Text(
+              child: const Text(
                 'Yes',
-                style: TextStyle(fontSize: 16.0,color: Colors.black), // Change the font size here
+                style: TextStyle(fontSize: 16.0,color: Colors.black),
               ),
             ),
           ],

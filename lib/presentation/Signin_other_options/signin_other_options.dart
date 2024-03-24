@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
 import '../Starting_page_signup/starting_page_signup.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,7 +19,6 @@ class Signin_other_options extends StatelessWidget {
                   CustomOutlinedButton(
                     text: "Continue with Google",
 
-                    // Assuming the widget supports this property
                     leftIcon: Container(
 
                       margin: EdgeInsets.only(right:32.h),
@@ -31,7 +29,7 @@ class Signin_other_options extends StatelessWidget {
                       ),
                     ),
                     buttonTextStyle: CustomTextStyles.bodyLarge16.copyWith(
-                      color: Colors.black, // Text color - white
+                      color: Colors.black,
                     ),
                     onPressed: () {
                       onTapContinueWithGoogle(context);
@@ -43,21 +41,21 @@ class Signin_other_options extends StatelessWidget {
                     leftIcon: Container(
                       padding: EdgeInsets.all(2.h),
                       margin: EdgeInsets.only(right: 20.h),
-                      decoration: BoxDecoration(color: Colors.blue),
+                      decoration: const BoxDecoration(color: Colors.blue),
                       child: SvgPicture.asset(
-                        'assets/images/img_facebook.svg', // Replace with your actual asset path
+                        'assets/images/img_facebook.svg',
                         height: 20.adaptSize,
                         width: 20.adaptSize,
                       ),
                     ),
                     buttonStyle: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue, // Button color - blue
+                      backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20), // BorderRadius of 20
+                        borderRadius: BorderRadius.circular(20),
                       ),
                     ),
                     buttonTextStyle: CustomTextStyles.bodyLarge16.copyWith(
-                      color: Colors.white, // Text color - white
+                      color: Colors.white,
                     ),
                     onPressed: () {
                       onTapContinueWithFacebook(context);
@@ -67,7 +65,7 @@ class Signin_other_options extends StatelessWidget {
                   CustomOutlinedButton(
                       text: "Continue with email",
                       buttonTextStyle: CustomTextStyles.bodyLarge16.copyWith(
-                        color: Colors.black, // Text color - white
+                        color: Colors.black,
                       ),
                       onPressed: () {
                         onTapContinueWithEmail(context);
@@ -80,15 +78,14 @@ class Signin_other_options extends StatelessWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Image.asset('assets/images/Line arrow-left.png'), // Adjust the path to your asset
+        icon: Image.asset('assets/images/Line arrow-left.png'),
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Starting_page_signup()),
+            MaterialPageRoute(builder: (context) => const Starting_page_signup()),
           );
         },
       ),
-      // Rest of your AppBar properties...
     );
   }
 

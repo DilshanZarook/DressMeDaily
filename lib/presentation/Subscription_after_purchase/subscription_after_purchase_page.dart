@@ -1,44 +1,44 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 import 'package:sdgp_test01/core/app_export.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle_four.dart';
-import 'package:sdgp_test01/widgets/app_bar/appbar_title_image.dart';
-import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
-import 'package:sdgp_test01/widgets/custom_outlined_button.dart';
-import 'package:sdgp_test01/presentation/Subscription_page_confirmation/subscription_page_confirmation.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sdgp_test01/presentation/Bookmark_page/bookmark_page.dart';
-import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
 import 'package:sdgp_test01/presentation/Landing_page/landing_page.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sdgp_test01/presentation/Subscription_page_confirmation/subscription_page_confirmation.dart';
+import 'package:sdgp_test01/presentation/User_profile/user_profile.dart';
+import 'package:sdgp_test01/widgets/app_bar/appbar_subtitle_four.dart';
+import 'package:sdgp_test01/widgets/app_bar/custom_app_bar.dart';
 
 class Subscription_after_purchase extends StatefulWidget {
   const Subscription_after_purchase({Key? key}) : super(key: key);
 
-
   @override
-  _Subscription_after_purchaseState createState() => _Subscription_after_purchaseState();
+  _Subscription_after_purchaseState createState() =>
+      _Subscription_after_purchaseState();
 }
 
-class _Subscription_after_purchaseState extends State<Subscription_after_purchase> {
-  int _currentIndex = 0; // Variable to keep track of the current index
+class _Subscription_after_purchaseState
+    extends State<Subscription_after_purchase> {
+  int _currentIndex = 0;
   final List<LinearGradient> buttonGradients = [
-    LinearGradient(
-      colors: [Color(0xFF3E4E5E), Color(0xFFDBDBDB)], // Corrected gradient colors
+    const LinearGradient(
+      colors: [Color(0xFF3E4E5E), Color(0xFFDBDBDB)],
+      // Corrected gradient colors
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
-    LinearGradient(
-      colors: [Color(0xFFCFDD53), Color(0xFFDADA9)], // Gradient for second item
+    const LinearGradient(
+      colors: [Color(0xFFCFDD53), Color(0x0ffdada9)],
+      // Gradient for second item
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
-    LinearGradient(
-      colors: [Color(0xFFeecd16), Color(0xFFdbdbdb)], // Gradient for third item
+    const LinearGradient(
+      colors: [Color(0xFFeecd16), Color(0xFFdbdbdb)],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
-    // Add more gradients if there are more items in the carousel
   ];
 
   @override
@@ -47,7 +47,6 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
       "Subscribe to Plan 1",
       "Subscribe to Plan 2",
       "Subscribe to Plan 3",
-      // Add more button texts corresponding to each carousel item
     ];
 
     return Scaffold(
@@ -57,8 +56,7 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
             padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 31.v),
             child: Column(children: [
               SizedBox(height: 5.v),
-              Text("Select your plan",
-                  style: theme.textTheme.headlineSmall),
+              Text("Select your plan", style: theme.textTheme.headlineSmall),
               SizedBox(height: 40.v),
               CarouselSlider(
                 options: CarouselOptions(
@@ -68,11 +66,11 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
                   aspectRatio: 16 / 9,
                   autoPlayCurve: Curves.fastOutSlowIn,
                   enableInfiniteScroll: true,
-                  autoPlayAnimationDuration: Duration(milliseconds: 700),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 700),
                   viewportFraction: 0.7,
                   onPageChanged: (index, reason) {
                     setState(() {
-                      _currentIndex = index; // Update the current index
+                      _currentIndex = index;
                     });
                   },
                 ),
@@ -85,11 +83,13 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
                     builder: (BuildContext context) {
                       return Container(
                         width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.h), // Adjust as needed
+                          borderRadius: BorderRadius.circular(30.h),
+                          // Adjust as needed
                           image: DecorationImage(
-                            image: AssetImage(i), // Assuming 'i' is the path to the image asset
+                            image: AssetImage(i),
+                            // Assuming 'i' is the path to the image asset
                             fit: BoxFit.cover, // Adjust the fit as needed
                           ),
                         ),
@@ -106,26 +106,29 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 28.h),
                 child: OutlineGradientButton(
-                  gradient: LinearGradient(
-                    colors: [Colors.white, Colors.white], // Solid black gradient for the outline
+                  gradient: const LinearGradient(
+                    colors: [Colors.white, Colors.white],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   strokeWidth: 2,
-                  radius: Radius.circular(40), // Set the border radius for the outline
+                  radius: const Radius.circular(40),
                   padding: EdgeInsets.zero,
                   child: GestureDetector(
-                    onTap: () => onTapSubscribe(context), // Call the onTapSubscribe function when the Container is tapped
+                    onTap: () => onTapSubscribe(context),
                     child: Container(
                       height: 60.v,
                       decoration: BoxDecoration(
-                        gradient: buttonGradients[_currentIndex], // Use the gradient for the button interior
-                        borderRadius: BorderRadius.circular(40), // Set the border radius for the button
+                        gradient: buttonGradients[_currentIndex],
+                        // Use the gradient for the button interior
+                        borderRadius: BorderRadius.circular(
+                            40),
                       ),
                       alignment: Alignment.center,
                       child: Text(
                         "Cancel",
-                        style: CustomTextStyles.bodySmallOnError, // Apply your text style here
+                        style: CustomTextStyles
+                            .bodySmallOnError,
                       ),
                     ),
                   ),
@@ -145,18 +148,18 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
             child: Row(children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed("/settings");
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed("/settings");
                 },
                 child: Container(
-                  margin: EdgeInsets.only(top: 10.v, right: 10.h, left: 15.v), // Adjust the margin as needed
+                  margin: EdgeInsets.only(top: 10.v, right: 10.h, left: 15.v),
                   child: SvgPicture.asset(
-                    ImageConstant.imgArrowDown, // Replace with your SVG asset path
+                    ImageConstant.imgArrowDown,
                     height: 25.v,
                     width: 25.h,
                   ),
                 ),
               ),
-
               AppbarSubtitleFour(
                   text: "Subscription",
                   margin: EdgeInsets.only(left: 70.h, top: 10.v, bottom: 0.v))
@@ -176,7 +179,6 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
 
   /// Section Widget
 
-  /// Section Widget
   Widget _buildBottomBar(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 0.h),
@@ -201,10 +203,11 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Landing_page()),
+                    MaterialPageRoute(
+                        builder: (context) => const LandingPage()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -221,7 +224,7 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 21.h,
                   child: Image.asset(
@@ -229,14 +232,15 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),InkWell(
+              ),
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -244,14 +248,15 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),InkWell(
+              ),
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Bookmark_page()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -259,14 +264,16 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),InkWell(
+              ),
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => User_profile()),
+                    MaterialPageRoute(
+                        builder: (context) =>  User_profile()),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: 30.v,
                   width: 30.h,
                   child: Image.asset(
@@ -280,7 +287,6 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
             ],
           ),
           SizedBox(height: 10.v),
-
         ],
       ),
     );
@@ -295,16 +301,18 @@ class _Subscription_after_purchaseState extends State<Subscription_after_purchas
   onTapSubscribe(BuildContext context) {
     showDialog(
         context: context,
-        builder: (_) =>
-            AlertDialog(
+        builder: (_) => const AlertDialog(
               content: Subscription_page_confirmation(),
               backgroundColor: Colors.transparent,
               contentPadding: EdgeInsets.zero,
-              insetPadding: const EdgeInsets.only(left: 0),
+              insetPadding: EdgeInsets.only(left: 0),
             ));
   }
 }
+
 class YourWidget extends StatelessWidget {
+  const YourWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
@@ -315,7 +323,7 @@ class YourWidget extends StatelessWidget {
         aspectRatio: 16 / 9,
         autoPlayCurve: Curves.fastOutSlowIn,
         enableInfiniteScroll: true,
-        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        autoPlayAnimationDuration: const Duration(milliseconds: 800),
         viewportFraction: 0.8,
       ),
       items: [
@@ -326,26 +334,20 @@ class YourWidget extends StatelessWidget {
         return Builder(
           builder: (BuildContext context) {
             return Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.h), // Adjust as needed
                 image: DecorationImage(
                   image: AssetImage(i),
-                  // Assuming 'i' is the path to the image asset
-                  fit: BoxFit.cover, // Adjust the fit as needed
+                  fit: BoxFit.cover,
                 ),
               ),
-              height: 226.v, // Adjust the width as needed
+              height: 226.v,
             );
           },
         );
       }).toList(),
     );
   }
-
-
 }
